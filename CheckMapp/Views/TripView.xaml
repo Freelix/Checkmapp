@@ -1,0 +1,80 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CheckMapp.Views.TripView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+      xmlns:myControl="clr-namespace:CheckMapp.Controls"
+    shell:SystemTray.IsVisible="True"
+     xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls">
+
+
+    <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
+    <Grid x:Name="LayoutRoot" >
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Canvas Grid.Row="0" Background="White"  Height="180">
+            <myControl:LiveTilePicture Margin="0,0,0,0" Name="livetileImage"  VerticalAlignment="Top"  Height="180"/>
+            <TextBlock FontSize="40" Text="{Binding CurrentTrip.Name}" Canvas.Top="10" Canvas.Left="30"/>
+        </Canvas>
+
+
+        <!--ContentPanel - placez tout contenu supplémentaire ici-->
+        <Grid x:Name="ContentPanel" Canvas.ZIndex="100" Grid.Row="1" Margin="12,50,12,0">
+            <Grid.Background>
+                <ImageBrush AlignmentY="Bottom"   Opacity="0.1" Stretch="Uniform" ImageSource="/Images/rose2.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="0,20,0,0" Width="200">
+                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.flag.wavy.png"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Détours (3)</TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,20,0,0" Grid.Column="1" Width="200">
+                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/map.png"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Location</TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,40,0,0" Grid.Row="1" Width="200">
+                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/feature.camera.png"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Médias (10)</TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,40,0,0" Grid.Column="1" Grid.Row="1" Width="200">
+                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.clipboard.variant.png"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Notes (5)</TextBlock>
+            </StackPanel>
+
+
+        </Grid>
+        
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsMenuEnabled="False" IsVisible="True">
+            <shell:ApplicationBarIconButton  x:Name="IconButtonMedia"  IconUri="/Images/feature.camera.png" Text="add media"/>
+            <shell:ApplicationBarIconButton  x:Name="IconButtonNotes"  IconUri="/Images/appbar.clipboard.variant.png" Text="Write Note"/>
+            <shell:ApplicationBarIconButton  x:Name="IconButtonFlag"  IconUri="/Images/appbar.flag.png" Text="add point"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
