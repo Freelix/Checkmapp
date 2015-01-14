@@ -126,6 +126,18 @@
   <data name="AddTrip" xml:space="preserve">
     <value>Add a trip</value>
   </data>
+  <data name="AddTripArrival" xml:space="preserve">
+    <value>Trip Arrival</value>
+  </data>
+  <data name="AddTripDate" xml:space="preserve">
+    <value>Schedule Date</value>
+  </data>
+  <data name="AddTripDeparture" xml:space="preserve">
+    <value>Trip Departure</value>
+  </data>
+  <data name="AddTripName" xml:space="preserve">
+    <value>Trip Name</value>
+  </data>
   <data name="AllTime" xml:space="preserve">
     <value>All Time</value>
   </data>
@@ -134,6 +146,9 @@
   </data>
   <data name="ConfirmButton" xml:space="preserve">
     <value>Confirm</value>
+  </data>
+  <data name="ConfirmNewTrip" xml:space="preserve">
+    <value>Confirm Trip</value>
   </data>
   <data name="ContinueTrip" xml:space="preserve">
     <value>Continue Trip</value>
@@ -189,8 +204,23 @@
   <data name="ModifyNote" xml:space="preserve">
     <value>Modify note</value>
   </data>
+  <data name="NoteContent" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="NoteDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="NoteInterestPoint" xml:space="preserve">
+    <value>Point of Interest</value>
+  </data>
+  <data name="NoteName" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="OldTrip" xml:space="preserve">
     <value>older trips</value>
+  </data>
+  <data name="POITitle" xml:space="preserve">
+    <value>Points of Interest</value>
   </data>
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>

@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="CheckMapp.Views.TripView"
+    x:Class="CheckMapp.Views.TripViews.TripView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -27,14 +27,14 @@
 
         <Canvas Grid.Row="0" Background="White"  Height="180">
             <myControl:LiveTilePicture Margin="0,0,0,0" Name="livetileImage"  VerticalAlignment="Top"  Height="180"/>
-            <TextBlock FontSize="40" Text="{Binding CurrentTrip.Name}" Canvas.Top="10" Canvas.Left="30"/>
+            <TextBlock FontSize="40" Text="{Binding CurrentTrip.Name}" Canvas.Top="110" Canvas.Left="30" />
         </Canvas>
 
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Canvas.ZIndex="100" Grid.Row="1" Margin="12,50,12,0">
             <Grid.Background>
-                <ImageBrush AlignmentY="Bottom"   Opacity="0.1" Stretch="Uniform" ImageSource="/Images/rose2.png"/>
+                <ImageBrush AlignmentY="Bottom"   Opacity="0.2" Stretch="Uniform" ImageSource="/Images/rose2.png"/>
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -46,13 +46,13 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="0,20,0,0" Width="200">
-                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.flag.wavy.png"/>
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Détours (3)</TextBlock>
+                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.flag.wavy.png" Click="RoundButton_Click"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Points d'intérêt (3)</TextBlock>
             </StackPanel>
 
             <StackPanel Margin="0,20,0,0" Grid.Column="1" Width="200">
                 <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/map.png"/>
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Location</TextBlock>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Statistiques</TextBlock>
             </StackPanel>
 
             <StackPanel Margin="0,40,0,0" Grid.Row="1" Width="200">

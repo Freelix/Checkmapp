@@ -66,6 +66,11 @@ namespace CheckMapp
             
         }
 
+        private void IconButtonEdit_Click(object sender, EventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
+        }
+
 
     }
 }

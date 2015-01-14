@@ -5,7 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-     xmlns:vw="clr-namespace:CheckMapp.Views" 
+     xmlns:vw="clr-namespace:CheckMapp.Views.ArchivesViews" 
     xmlns:Controls="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls"
     >
 

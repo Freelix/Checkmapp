@@ -7,14 +7,16 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using CheckMapp.ViewModels.POIViewModels;
 
-namespace CheckMapp.Views
+namespace CheckMapp.Views.POIViews
 {
-    public partial class TimelineView : UserControl
+    public partial class POIView : PhoneApplicationPage
     {
-        public TimelineView()
+        public POIView()
         {
             InitializeComponent();
+            this.DataContext = new POIViewModel();
         }
     }
 }

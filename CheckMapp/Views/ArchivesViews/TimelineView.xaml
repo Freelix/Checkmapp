@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CheckMapp.Views.TimelineView"
+﻿<UserControl x:Class="CheckMapp.Views.ArchivesViews.TimelineView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,7 +24,7 @@
                     <GradientStop Color="Transparent" Offset="1" />
                 </LinearGradientBrush>
             </ScrollViewer.OpacityMask>
-            <myControl:TimelineControl>
+            <myControl:TimelineControl x:Name="timelineControl">
 
             </myControl:TimelineControl>
         </ScrollViewer>

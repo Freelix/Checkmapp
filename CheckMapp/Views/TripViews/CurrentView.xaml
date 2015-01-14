@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CheckMapp.Views.CurrentView"
+﻿<UserControl x:Class="CheckMapp.Views.TripViews.CurrentView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -45,7 +45,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Image Height="80" Width="80" Source="/Images/appbar.flag.wavy.png"></Image>
                     <Border Height="25" Width="2" Background="White"></Border>
-                    <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="Détours : 2"></TextBlock>
+                    <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="P. intérêts : 2"></TextBlock>
                 </StackPanel>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" >

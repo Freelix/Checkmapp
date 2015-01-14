@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight;
 using System;
 
-namespace CheckMapp.ViewModel
+namespace CheckMapp.ViewModels.TripViewModels
 {
     /// <summary>
     /// This class contains properties that a View can data bind to.

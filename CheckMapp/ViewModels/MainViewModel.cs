@@ -32,8 +32,8 @@ namespace CheckMapp.ViewModel
         public MainViewModel()
         {
             // Add available pages
-            PageViewModels.Add(new ArchivesViewModel());
-            PageViewModels.Add(new TimelineViewModel());
+            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel());
+            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel());
             // Set starting page
             ShowUserControlTrip();
         }
@@ -86,14 +86,14 @@ namespace CheckMapp.ViewModel
 
         public void ShowUserControlTrip()
         {
-            CurrentPageViewModel = PageViewModels[0] as ArchivesViewModel;
+            CurrentPageViewModel = PageViewModels[0] as CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel;
             IsTimeline = false;
             IsList = true;
         }
 
         public void ShowUserControlTimeline()
         {
-            CurrentPageViewModel = PageViewModels[1] as TimelineViewModel;
+            CurrentPageViewModel = PageViewModels[1] as CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel;
             IsTimeline = true;
             IsList = false;
         }

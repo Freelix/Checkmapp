@@ -11,14 +11,15 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    xmlns:vw="clr-namespace:CheckMapp.Views"   
+    xmlns:vw="clr-namespace:CheckMapp.Views"  
+    xmlns:vwTrip="clr-namespace:CheckMapp.Views.TripViews"
      xmlns:vm="clr-namespace:CheckMapp.ViewModel" 
     shell:SystemTray.IsVisible="False">
 
     <phone:PhoneApplicationPage.Resources>
 
         <shell:ApplicationBar x:Key="currentTripApplicationBar" IsMenuEnabled="True">
-                <shell:ApplicationBarIconButton x:Name="IconButtonEdit"  IconUri="/Images/edit.png" Text="Edit"/>
+                <shell:ApplicationBarIconButton x:Name="IconButtonEdit"  IconUri="/Images/edit.png" Text="Edit" Click="IconButtonEdit_Click"/>
             </shell:ApplicationBar>
 
         <shell:ApplicationBar x:Key="dashboardApplicationBar" Mode="Minimized" IsMenuEnabled="True">
@@ -90,7 +91,7 @@
             </phone:PanoramaItem>
 
             <phone:PanoramaItem x:Name="CurrentTripItem" Header="{Binding Path=LocalizedResources.CurrentTrip, Source={StaticResource LocalizedStrings}}">
-                <vw:CurrentView x:Name="CurrentView" />
+                <vwTrip:CurrentView x:Name="CurrentView" />
             </phone:PanoramaItem>
 
             <phone:PanoramaItem x:Name="ArchiveItem" HeaderTemplate="{StaticResource TripPageTitle}" Header="archives">

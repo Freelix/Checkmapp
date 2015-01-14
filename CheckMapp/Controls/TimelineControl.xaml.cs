@@ -173,7 +173,7 @@ namespace CheckMapp.Controls
 
                         //Le contrôle affichant les détails d'un event
                         TimelineElementControl control = new TimelineElementControl(rect.Fill);
-                       // control.Tap += control_Tap;
+                        control.Tap += control_Tap;
                         control.Trip = activites;
                         canvas.Children.Add(control);
                         Canvas.SetTop(control, Canvas.GetTop(rect) - control.Height / 2);
@@ -191,9 +191,19 @@ namespace CheckMapp.Controls
             LayoutRoot.Children.Add(canvas);
         }
 
-        void control_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        public event EventHandler UserControlElementTap;
+
+        private void OnUserControlElementTap(Trip trip)
         {
-            Console.WriteLine("Ouvrir voyage");
+            if (UserControlElementTap != null)
+            {
+                UserControlElementTap(trip, EventArgs.Empty);
+            }
+        }
+
+        public void control_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            OnUserControlElementTap((sender as TimelineElementControl).Trip);
         }
 
     }

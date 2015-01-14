@@ -35,17 +35,17 @@ namespace CheckMapp.Views
 
         private void pinButtonCurrentTrip_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripView.xaml", UriKind.Relative));
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
 
         private void pinButtonAddTrip_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddTripView.xaml", UriKind.Relative));
         }
 
         private void pinButtonSettings_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/SettingsView.xaml", UriKind.Relative));
         }
     }
 }

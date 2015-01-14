@@ -7,16 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CheckMapp.ViewModel;
 
 namespace CheckMapp.Views
 {
-    public partial class TripView : PhoneApplicationPage
+    public partial class SettingsView : PhoneApplicationPage
     {
-        public TripView()
+        public SettingsView()
         {
             InitializeComponent();
-            this.DataContext = new TripViewModel();
         }
     }
 }

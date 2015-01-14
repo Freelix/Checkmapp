@@ -14,6 +14,22 @@
           <source>Add a trip</source>
           <target state="new">Add a trip</target>
         </trans-unit>
+        <trans-unit id="Resx/AddTripName" translate="yes" xml:space="preserve">
+          <source>Trip Name</source>
+          <target state="new">Trip Name</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddTripDeparture" translate="yes" xml:space="preserve">
+          <source>Trip Departure</source>
+          <target state="new">Trip Departure</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddTripDate" translate="yes" xml:space="preserve">
+          <source>Schedule Date</source>
+          <target state="new">Schedule Date</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddTripArrival" translate="yes" xml:space="preserve">
+          <source>Trip Arrival</source>
+          <target state="new">Trip Arrival</target>
+        </trans-unit>
         <trans-unit id="Resx/AddNote" translate="yes" xml:space="preserve">
           <source>New note</source>
           <target state="new">New note</target>
@@ -29,6 +45,10 @@
         <trans-unit id="Resx/ConfirmButton" translate="yes" xml:space="preserve">
           <source>Confirm</source>
           <target state="new">Confirm</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmNewTrip" translate="yes" xml:space="preserve">
+          <source>Confirm Trip</source>
+          <target state="new">Confirm Trip</target>
         </trans-unit>
         <trans-unit id="Resx/ContinueTrip" translate="yes" xml:space="preserve">
           <source>Continue Trip</source>
@@ -102,9 +122,29 @@
           <source>Modify note</source>
           <target state="new">Modify note</target>
         </trans-unit>
+        <trans-unit id="Resx/NoteName" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target state="new">Name</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteInterestPoint" translate="yes" xml:space="preserve">
+          <source>Point of Interest</source>
+          <target state="new">Point of Interest</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteDate" translate="yes" xml:space="preserve">
+          <source>Date</source>
+          <target state="new">Date</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteContent" translate="yes" xml:space="preserve">
+          <source>Content</source>
+          <target state="new">Content</target>
+        </trans-unit>
         <trans-unit id="Resx/OldTrip" translate="yes" xml:space="preserve">
           <source>older trips</source>
           <target state="new">older trips</target>
+        </trans-unit>
+        <trans-unit id="Resx/POITitle" translate="yes" xml:space="preserve">
+          <source>Points of Interest</source>
+          <target state="new">Points of Interest</target>
         </trans-unit>
         <trans-unit id="Resx/Rename" translate="yes" xml:space="preserve">
           <source>Rename</source>

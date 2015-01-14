@@ -7,18 +7,16 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CheckMapp.ViewModel;
-using System.Windows.Markup;
-using System.Threading;
+using CheckMapp.ViewModels.TripViewModels;
 
-namespace CheckMapp.Views
+namespace CheckMapp.Views.TripViews
 {
-    public partial class CurrentView : UserControl
+    public partial class AddTripView : PhoneApplicationPage
     {
-        public CurrentView()
+        public AddTripView()
         {
             InitializeComponent();
-            this.DataContext = new CurrentViewModel();
+            this.DataContext = new AddTripViewModel();
         }
     }
 }

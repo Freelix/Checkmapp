@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CheckMapp.ViewModel
+namespace CheckMapp.ViewModels.ArchivesViewModels
 {
     public class ArchivesViewModel : ViewModelBase
     {

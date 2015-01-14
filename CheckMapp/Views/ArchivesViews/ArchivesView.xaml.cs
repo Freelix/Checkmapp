@@ -7,10 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CheckMapp.ViewModel;
+using CheckMapp.ViewModels.ArchivesViewModels;
 using CheckMapp.Resources;
 
-namespace CheckMapp.Views
+namespace CheckMapp.Views.ArchivesViews
 {
     public partial class ArchivesView : UserControl
     {
@@ -41,7 +41,7 @@ namespace CheckMapp.Views
 
         private void listArchiveTrips_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripView.xaml", UriKind.Relative));
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
 
     }
