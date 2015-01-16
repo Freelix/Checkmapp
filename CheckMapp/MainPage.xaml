@@ -18,14 +18,14 @@
 
     <phone:PhoneApplicationPage.Resources>
 
-        <shell:ApplicationBar x:Key="currentTripApplicationBar" IsMenuEnabled="True">
-                <shell:ApplicationBarIconButton x:Name="IconButtonEdit"  IconUri="/Images/edit.png" Text="Edit" Click="IconButtonEdit_Click"/>
-            </shell:ApplicationBar>
-
-        <shell:ApplicationBar x:Key="dashboardApplicationBar" Mode="Minimized" IsMenuEnabled="True">
+        <shell:ApplicationBar  x:Key="dashboardApplicationBar" Mode="Minimized" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="à propos..."/>
+                <shell:ApplicationBarMenuItem Text="[about]"/>
             </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="currentTripApplicationBar" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="IconButtonEdit"  IconUri="/Images/edit.png" Text="[edit]" Click="IconButtonEdit_Click"/>
         </shell:ApplicationBar>
 
         <DataTemplate x:Key="SmallPanoramaTitle">
@@ -80,7 +80,7 @@
             CurrentUICulture de l'application au moment de l'exécution.
          -->
 
-        <phone:Panorama  x:Name="MainPanorama" TitleTemplate="{StaticResource SmallPanoramaTitle}" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+        <phone:Panorama   x:Name="MainPanorama" TitleTemplate="{StaticResource SmallPanoramaTitle}" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
 
             <phone:Panorama.Background>
                 <ImageBrush ImageSource="Images/background.png"></ImageBrush>

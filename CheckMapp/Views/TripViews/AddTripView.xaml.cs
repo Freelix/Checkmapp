@@ -18,5 +18,10 @@ namespace CheckMapp.Views.TripViews
             InitializeComponent();
             this.DataContext = new AddTripViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //redirection vers la page du voyage
+        }
     }
 }

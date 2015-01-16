@@ -13,12 +13,13 @@
     mc:Ignorable="d"
       xmlns:myControl="clr-namespace:CheckMapp.Controls"
     shell:SystemTray.IsVisible="True"
-     xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls">
+     xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    Loaded="PhoneApplicationPage_Loaded">
 
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" >
-       
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -46,35 +47,40 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="0,20,0,0" Width="200">
-                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.flag.wavy.png" Click="RoundButton_Click"/>
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Points d'intérêt (3)</TextBlock>
+                <c4f:RoundButton x:Name="btnPOI" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.flag.wavy.png" Click="btnPOI_Click"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding POITitle}"></TextBlock>
             </StackPanel>
 
             <StackPanel Margin="0,20,0,0" Grid.Column="1" Width="200">
-                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/map.png"/>
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Statistiques</TextBlock>
+                <c4f:RoundButton x:Name="btnStats" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/map.png" Click="btnStats_Click"/>
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"></TextBlock>
             </StackPanel>
 
             <StackPanel Margin="0,40,0,0" Grid.Row="1" Width="200">
-                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/feature.camera.png"/>
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Médias (10)</TextBlock>
+                <c4f:RoundButton x:Name="btnPhoto" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/feature.camera.png" Click="btnPhoto_Click" />
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding PhotoTitle}"></TextBlock>
             </StackPanel>
 
             <StackPanel Margin="0,40,0,0" Grid.Column="1" Grid.Row="1" Width="200">
-                <c4f:RoundButton ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.clipboard.variant.png"/>
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap">Notes (5)</TextBlock>
+                <c4f:RoundButton x:Name="btnNote" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.clipboard.variant.png" Click="btnNote_Click" />
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding NoteTitle}"></TextBlock>
             </StackPanel>
 
 
         </Grid>
-        
+
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsMenuEnabled="False" IsVisible="True">
-            <shell:ApplicationBarIconButton  x:Name="IconButtonMedia"  IconUri="/Images/feature.camera.png" Text="add media"/>
-            <shell:ApplicationBarIconButton  x:Name="IconButtonNotes"  IconUri="/Images/appbar.clipboard.variant.png" Text="Write Note"/>
-            <shell:ApplicationBarIconButton  x:Name="IconButtonFlag"  IconUri="/Images/appbar.flag.png" Text="add point"/>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+                <shell:ApplicationBarIconButton  x:Name="IconButtonAddMedia" Click="IconButtonAddMedia_Click"  IconUri="/Images/feature.camera.png" Text="[add picture]"/>
+                <shell:ApplicationBarIconButton  x:Name="IconButtonAddNotes" Click="IconButtonAddNotes_Click"  IconUri="/Images/appbar.clipboard.variant.png" Text="[add note]"/>
+                <shell:ApplicationBarIconButton  x:Name="IconButtonAddPOI"  Click="IconButtonAddPOI_Click" IconUri="/Images/appbar.flag.png" Text="[add poi]"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="DeleteTrip"  Text="[delete]"></shell:ApplicationBarMenuItem>
+                <shell:ApplicationBarMenuItem x:Name="EditTrip"  Text="[edit]"></shell:ApplicationBarMenuItem>
+                <shell:ApplicationBarMenuItem x:Name="FinisTrip"  Text="[finish trip]"></shell:ApplicationBarMenuItem>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

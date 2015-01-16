@@ -29,6 +29,11 @@ namespace CheckMapp
             ApplicationBar = (ApplicationBar)Resources["dashboardApplicationBar"];
             ApplicationBar.IsVisible = true;
 
+            if (ApplicationBar.MenuItems[0] != null)
+            {
+                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.About;
+            }
+
         }
 
 
@@ -43,10 +48,18 @@ namespace CheckMapp
                     case 0:
                         ApplicationBar.IsVisible = true;
                         ApplicationBar = (ApplicationBar)Resources["dashboardApplicationBar"];
+                        if (ApplicationBar.MenuItems[0] != null)
+                        {
+                            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.About;
+                        }
                         break;
                     case 1:
                         ApplicationBar.IsVisible = true;
                         ApplicationBar = (ApplicationBar)Resources["currentTripApplicationBar"];
+                        if (ApplicationBar.Buttons[0] != null)
+                        {
+                            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Edit;
+                        }
                         break;
                     case 2:
                         ApplicationBar.IsVisible = false;
@@ -59,16 +72,23 @@ namespace CheckMapp
         }
 
 
+
+
         // Charger les données pour les éléments ViewModel
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Console.WriteLine("Change");
+            
             
         }
 
         private void IconButtonEdit_Click(object sender, EventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBar_StateChanged(object sender, ApplicationBarStateChangedEventArgs e)
+        {
+            
         }
 
 

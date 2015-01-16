@@ -1,4 +1,5 @@
 ﻿using CheckMapp.Model;
+using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
 using System.Windows.Input;
@@ -45,5 +46,32 @@ namespace CheckMapp.ViewModels.TripViewModels
                 return (int)elapsed.TotalDays;
             }
         }
+
+        /// <summary>
+        /// Nombre de notes
+        /// </summary>
+        public string CountNotes
+        {
+            get { return String.Format(AppResources.CountNotes,43); }
+        }
+
+        /// <summary>
+        /// Nombres de points d'intérêts
+        /// </summary>
+        public string CountPOI
+        {
+            get { return String.Format(AppResources.CountPOI, 3); }
+        }
+
+        /// <summary>
+        /// Nombre de photos
+        /// </summary>
+        public string CountPhotos
+        {
+            get { return String.Format(AppResources.CountPhotos, 40); }
+        }
+
+
+        
     }
 }

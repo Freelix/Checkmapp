@@ -43,8 +43,7 @@
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteContent, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 <TextBox Height="224"></TextBox>
                 
-                <Button Content="{Binding Path=LocalizedResources.ConfirmButton, Source={StaticResource LocalizedStrings}}"></Button>
-
+                <Button Command="{Binding AddNote}" Content="{Binding Path=LocalizedResources.ConfirmButton, Source={StaticResource LocalizedStrings}}"></Button>
                 
             </StackPanel>
             </ScrollViewer>

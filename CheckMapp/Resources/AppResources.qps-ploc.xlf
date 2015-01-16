@@ -6,13 +6,17 @@
     </header>
     <body>
       <group id="Resx">
+        <trans-unit id="Resx/About" translate="yes" xml:space="preserve">
+          <source>About</source>
+          <target state="new">About</target>
+        </trans-unit>
         <trans-unit id="Resx/AddPicture" translate="yes" xml:space="preserve">
           <source>Add picture</source>
           <target state="new">Add picture</target>
         </trans-unit>
         <trans-unit id="Resx/AddTrip" translate="yes" xml:space="preserve">
-          <source>Add a trip</source>
-          <target state="new">Add a trip</target>
+          <source>New trip</source>
+          <target state="new">New trip</target>
         </trans-unit>
         <trans-unit id="Resx/AddTripName" translate="yes" xml:space="preserve">
           <source>Trip Name</source>
@@ -54,6 +58,18 @@
           <source>Continue Trip</source>
           <target state="new">Continue Trip</target>
         </trans-unit>
+        <trans-unit id="Resx/CountPhotos" translate="yes" xml:space="preserve">
+          <source>Photos : {0}</source>
+          <target state="new">Photos : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/CountPOI" translate="yes" xml:space="preserve">
+          <source>P.o. Interest : {0}</source>
+          <target state="new">P.o. Interest : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/CountNotes" translate="yes" xml:space="preserve">
+          <source>Notes : {0}</source>
+          <target state="new">Notes : {0}</target>
+        </trans-unit>
         <trans-unit id="Resx/CurrentTrip" translate="yes" xml:space="preserve">
           <source>current trip</source>
           <target state="new">current trip</target>
@@ -69,6 +85,10 @@
         <trans-unit id="Resx/Delete" translate="yes" xml:space="preserve">
           <source>Delete</source>
           <target state="new">Delete</target>
+        </trans-unit>
+        <trans-unit id="Resx/Edit" translate="yes" xml:space="preserve">
+          <source>Edit</source>
+          <target state="new">Edit</target>
         </trans-unit>
         <trans-unit id="Resx/Home" translate="yes" xml:space="preserve">
           <source>dashboard</source>
@@ -113,10 +133,6 @@
         <trans-unit id="Resx/Message" translate="yes" xml:space="preserve">
           <source>Message :</source>
           <target state="new">Message :</target>
-        </trans-unit>
-        <trans-unit id="Resx/Modify" translate="yes" xml:space="preserve">
-          <source>Modifier</source>
-          <target state="new">Modifier</target>
         </trans-unit>
         <trans-unit id="Resx/ModifyNote" translate="yes" xml:space="preserve">
           <source>Modify note</source>
@@ -215,6 +231,34 @@
         <trans-unit id="Resx/YourTravels" translate="yes" xml:space="preserve">
           <source>your travels</source>
           <target state="new">your travels</target>
+        </trans-unit>
+        <trans-unit id="Resx/FinishTrip" translate="yes" xml:space="preserve">
+          <source>Finish the trip</source>
+          <target state="new">Finish the trip</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddPOI" translate="yes" xml:space="preserve">
+          <source>Add p.o. interest</source>
+          <target state="new">Add p.o. interest</target>
+        </trans-unit>
+        <trans-unit id="Resx/Statistic" translate="yes" xml:space="preserve">
+          <source>Statistic</source>
+          <target state="new">Statistic</target>
+        </trans-unit>
+        <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
+          <source>My Notes</source>
+          <target state="new">My Notes</target>
+        </trans-unit>
+        <trans-unit id="Resx/POITripTitle" translate="yes" xml:space="preserve">
+          <source>Points of interest ({0})</source>
+          <target state="new">Points of interest ({0})</target>
+        </trans-unit>
+        <trans-unit id="Resx/PhotoTripTitle" translate="yes" xml:space="preserve">
+          <source>Photos ({0})</source>
+          <target state="new">Photos ({0})</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteTripTitle" translate="yes" xml:space="preserve">
+          <source>Notes ({0})</source>
+          <target state="new">Notes ({0})</target>
         </trans-unit>
       </group>
     </body>

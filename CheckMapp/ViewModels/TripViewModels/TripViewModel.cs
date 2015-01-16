@@ -1,4 +1,5 @@
 ﻿using CheckMapp.Model;
+using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
 
@@ -39,5 +40,31 @@ namespace CheckMapp.ViewModels.TripViewModels
                 return CurrentTrip.BeginDate.ToShortDateString() + " - " + CurrentTrip.EndDate.Value.ToShortDateString();
             }
         }
+
+        /// <summary>
+        /// Le titre des notes dans le voyage
+        /// </summary>
+        public string NoteTitle
+        {
+            get { return String.Format(AppResources.NoteTripTitle, 2); }
+        }
+
+        /// <summary>
+        /// Le titre des photos dans le voyage
+        /// </summary>
+        public string PhotoTitle
+        {
+            get { return String.Format(AppResources.PhotoTripTitle, 6); }
+        }
+
+        /// <summary>
+        /// Le titre des points d'intérets dans le voyage
+        /// </summary>
+        public string POITitle
+        {
+            get { return String.Format(AppResources.POITripTitle, 40); }
+        }
+
+
     }
 }

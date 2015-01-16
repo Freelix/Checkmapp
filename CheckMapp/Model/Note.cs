@@ -20,6 +20,7 @@ namespace CheckMapp.Model
         DateTime _date;
         string _message;
         string _place;
+        string _titre;
         #endregion
 
         #region Properties
@@ -73,6 +74,20 @@ namespace CheckMapp.Model
                 if (value == _message) return;
                 _message = value;
                 OnPropertyChanged("Message");
+            }
+        }
+
+        /// <summary>
+        /// Le message du statut
+        /// </summary>
+        public string Titre
+        {
+            get { return _titre; }
+            set
+            {
+                if (value == _titre) return;
+                _titre = value;
+                OnPropertyChanged("Titre");
             }
         }
 

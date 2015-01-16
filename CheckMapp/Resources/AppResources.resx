@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="AddNote" xml:space="preserve">
     <value>New note</value>
   </data>
@@ -124,7 +127,7 @@
     <value>Add picture</value>
   </data>
   <data name="AddTrip" xml:space="preserve">
-    <value>Add a trip</value>
+    <value>New trip</value>
   </data>
   <data name="AddTripArrival" xml:space="preserve">
     <value>Trip Arrival</value>
@@ -153,6 +156,15 @@
   <data name="ContinueTrip" xml:space="preserve">
     <value>Continue Trip</value>
   </data>
+  <data name="CountNotes" xml:space="preserve">
+    <value>Notes : {0}</value>
+  </data>
+  <data name="CountPhotos" xml:space="preserve">
+    <value>Photos : {0}</value>
+  </data>
+  <data name="CountPOI" xml:space="preserve">
+    <value>P.o. Interest : {0}</value>
+  </data>
   <data name="CurrentTrip" xml:space="preserve">
     <value>current trip</value>
   </data>
@@ -164,6 +176,9 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>dashboard</value>
@@ -197,9 +212,6 @@
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message :</value>
-  </data>
-  <data name="Modify" xml:space="preserve">
-    <value>Modifier</value>
   </data>
   <data name="ModifyNote" xml:space="preserve">
     <value>Modify note</value>
@@ -274,5 +286,26 @@
   </data>
   <data name="YourTravels" xml:space="preserve">
     <value>your travels</value>
+  </data>
+  <data name="FinishTrip" xml:space="preserve">
+    <value>Finish the trip</value>
+  </data>
+  <data name="AddPOI" xml:space="preserve">
+    <value>Add p.o. interest</value>
+  </data>
+  <data name="NoteTripTitle" xml:space="preserve">
+    <value>Notes ({0})</value>
+  </data>
+  <data name="PhotoTripTitle" xml:space="preserve">
+    <value>Photos ({0})</value>
+  </data>
+  <data name="POITripTitle" xml:space="preserve">
+    <value>Points of interest ({0})</value>
+  </data>
+  <data name="Statistic" xml:space="preserve">
+    <value>Statistic</value>
+  </data>
+  <data name="MyNotes" xml:space="preserve">
+    <value>My Notes</value>
   </data>
 </root>

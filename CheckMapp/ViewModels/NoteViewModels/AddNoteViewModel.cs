@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
@@ -10,10 +12,32 @@ namespace CheckMapp.ViewModels.NoteViewModels
     /// </summary>
     public class AddNoteViewModel : ViewModelBase
     {
+        private ICommand _addNoteCommand;
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
         /// </summary>
         public AddNoteViewModel()
+        {
+
+        }
+
+        /// <summary>
+        /// Cache/Affiche le voyage courant
+        /// </summary>
+        public ICommand AddNoteCommand
+        {
+            get
+            {
+                if (_addNoteCommand == null)
+                {
+                    _addNoteCommand = new RelayCommand(() => AddNote());
+                }
+                return _addNoteCommand;
+            }
+
+        }
+
+        public void AddNote()
         {
 
         }
