@@ -43,5 +43,10 @@ namespace CheckMapp.ViewModels.NoteViewModels
                 return false;
             }
         }
+
+        public string TripName
+        {
+            get { return "Africa 2014"; }
+        }
     }
 }

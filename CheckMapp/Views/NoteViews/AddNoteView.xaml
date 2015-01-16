@@ -23,7 +23,7 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="{Binding Path=LocalizedResources.AddNote, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 

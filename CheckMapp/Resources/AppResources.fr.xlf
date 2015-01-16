@@ -64,7 +64,7 @@
         </trans-unit>
         <trans-unit id="Resx/CountPOI" translate="yes" xml:space="preserve">
           <source>P.o. Interest : {0}</source>
-          <target state="new">P.o. Interest : {0}</target>
+          <target state="translated">P. d'intérêt : {0}</target>
         </trans-unit>
         <trans-unit id="Resx/CountNotes" translate="yes" xml:space="preserve">
           <source>Notes : {0}</source>
@@ -249,6 +249,21 @@
         <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
           <source>My Notes</source>
           <target state="translated">Mes notes</target>
+        </trans-unit>
+        <trans-unit id="Resx/SeePhotos" translate="yes" xml:space="preserve">
+          <source>see photos...</source>
+          <target state="translated">voir les photos...</target>
+        </trans-unit>
+        <trans-unit id="Resx/String1" translate="yes" xml:space="preserve">
+          <source />
+          <target state="new" />
+        </trans-unit><trans-unit id="Resx/MyPhoto" translate="yes" xml:space="preserve">
+          <source>My Photos</source>
+          <target state="translated">Mes photos</target>
+        </trans-unit>
+        <trans-unit id="Resx/SeeNotes" translate="yes" xml:space="preserve">
+          <source>see notes...</source>
+          <target state="translated">voir les notes...</target>
         </trans-unit>
         <trans-unit id="Resx/POITripTitle" translate="yes" xml:space="preserve">
           <source>Points of interest ({0})</source>

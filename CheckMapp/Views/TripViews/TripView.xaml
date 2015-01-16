@@ -52,7 +52,7 @@
             </StackPanel>
 
             <StackPanel Margin="0,20,0,0" Grid.Column="1" Width="200">
-                <c4f:RoundButton x:Name="btnStats" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/map.png" Click="btnStats_Click"/>
+                <c4f:RoundButton x:Name="btnStats" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.graph.line.up.png" Click="btnStats_Click"/>
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"></TextBlock>
             </StackPanel>
 
@@ -73,9 +73,9 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-                <shell:ApplicationBarIconButton  x:Name="IconButtonAddMedia" Click="IconButtonAddMedia_Click"  IconUri="/Images/feature.camera.png" Text="[add picture]"/>
-                <shell:ApplicationBarIconButton  x:Name="IconButtonAddNotes" Click="IconButtonAddNotes_Click"  IconUri="/Images/appbar.clipboard.variant.png" Text="[add note]"/>
-                <shell:ApplicationBarIconButton  x:Name="IconButtonAddPOI"  Click="IconButtonAddPOI_Click" IconUri="/Images/appbar.flag.png" Text="[add poi]"/>
+                <shell:ApplicationBarIconButton  x:Name="IconButtonAddMedia" Click="IconButtonAddMedia_Click"  IconUri="/Images/feature.addcamera.png" Text="[add picture]"/>
+                <shell:ApplicationBarIconButton  x:Name="IconButtonAddNotes" Click="IconButtonAddNotes_Click"  IconUri="/Images/appbar.addclipboard.variant.png" Text="[add note]"/>
+                <shell:ApplicationBarIconButton  x:Name="IconButtonAddPOI"  Click="IconButtonAddPOI_Click" IconUri="/Images/appbar.addflag.png" Text="[add poi]"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="DeleteTrip"  Text="[delete]"></shell:ApplicationBarMenuItem>
                 <shell:ApplicationBarMenuItem x:Name="EditTrip"  Text="[edit]"></shell:ApplicationBarMenuItem>

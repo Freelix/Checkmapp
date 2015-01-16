@@ -308,4 +308,16 @@
   <data name="MyNotes" xml:space="preserve">
     <value>My Notes</value>
   </data>
+  <data name="SeeNotes" xml:space="preserve">
+    <value>see notes...</value>
+  </data>
+  <data name="SeePhotos" xml:space="preserve">
+    <value>see photos...</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MyPhoto" xml:space="preserve">
+    <value>My Photos</value>
+  </data>
 </root>

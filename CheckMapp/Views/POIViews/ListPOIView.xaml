@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="CheckMapp.Views.NoteViews.ListNoteView"
+    x:Class="CheckMapp.Views.POIViews.ListPOIView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -12,9 +12,9 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    Loaded="PhoneApplicationPage_Loaded"
-    >
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -25,34 +25,38 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.MyNotes, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}"   Style="{StaticResource PhoneTextNormalStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox Name="ListboxNote" ItemsSource="{Binding}">
+        <StackPanel Grid.Row="1" Grid.RowSpan="2">
+            <Controls:Map Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
+            <ListBox Name="ListboxPOI" ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="10">
+                        <StackPanel Orientation="Horizontal" Margin="10">
                             <toolkit:ContextMenuService.ContextMenu >
                                 <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
-                                    <toolkit:MenuItem x:Name="EditNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="DeleteNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
+                                    <toolkit:MenuItem x:Name="POIPictures" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeePhotos, Source={StaticResource LocalizedStrings}}" />
+                                    <toolkit:MenuItem x:Name="POINotes" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeeNotes, Source={StaticResource LocalizedStrings}}" />
+                                    <toolkit:MenuItem x:Name="DeletePOI" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                                 </toolkit:ContextMenu>
                             </toolkit:ContextMenuService.ContextMenu>
-                            <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Titre}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Message, Converter={StaticResource NoteMessage}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"></TextBlock>
+                            <Image Height="100" Width="100" Source="/Images/appbar.location.png"></Image>
+                            <TextBlock  Margin="-58,25,0,0" Text="1" Foreground="Black"  Style="{StaticResource PhoneTextNormalStyle}" ></TextBlock>
+                            <StackPanel Margin="10">
+                                <TextBlock Text="{Binding Nom}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Ville}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </Grid>
-    </Grid>
+        </StackPanel>
 
+    </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="False">
             <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

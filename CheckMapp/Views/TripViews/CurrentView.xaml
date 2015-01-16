@@ -26,7 +26,7 @@
                 <TextBlock Margin="15,-10,0,0"  x:Name="textblockVertical"  VerticalAlignment="Top" Text="{Binding CurrentTrip.Name}"
          Foreground="White" FontSize="40"  Width="240"   TextWrapping="Wrap"   >
                 </TextBlock>
-                <TextBlock  TextWrapping="NoWrap" Text="{Binding CurrentTrip.BeginDate, Converter={StaticResource DateConverter}}" Margin="15,15,0,0" Height="74"></TextBlock>
+                <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentTrip.BeginDate, Converter={StaticResource DateConverter}}" Margin="0,15,0,0" Height="74" Width="208"></TextBlock>
             </StackPanel>
         </StackPanel>
 

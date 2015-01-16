@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace CheckMapp.ViewModels.POIViewModels
+namespace CheckMapp.ViewModels
 {
     /// <summary>
     /// This class contains properties that a View can data bind to.
@@ -8,14 +8,18 @@ namespace CheckMapp.ViewModels.POIViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class POIViewModel : ViewModelBase
+    public class StatisticViewModel : ViewModelBase
     {
         /// <summary>
-        /// Initializes a new instance of the POIViewModel class.
+        /// Initializes a new instance of the StatisticViewModel class.
         /// </summary>
-        public POIViewModel()
+        public StatisticViewModel()
         {
-            
+        }
+
+        public string TripName
+        {
+            get { return "Africa 2014"; }
         }
     }
 }

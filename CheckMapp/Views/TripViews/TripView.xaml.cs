@@ -27,7 +27,6 @@ namespace CheckMapp.Views.TripViews
 
         private void IconButtonAddMedia_Click(object sender, EventArgs e)
         {
-            // (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/POIView.xaml", UriKind.Relative));
         }
 
         private void IconButtonAddNotes_Click(object sender, EventArgs e)
@@ -37,7 +36,7 @@ namespace CheckMapp.Views.TripViews
 
         private void IconButtonAddPOI_Click(object sender, EventArgs e)
         {
-            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/POIView.xaml", UriKind.Relative));
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddPOIView.xaml", UriKind.Relative));
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -61,17 +60,17 @@ namespace CheckMapp.Views.TripViews
 
         private void btnPOI_Click(object sender, RoutedEventArgs e)
         {
-
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/ListPOIView.xaml", UriKind.Relative));
         }
 
         private void btnStats_Click(object sender, RoutedEventArgs e)
         {
-
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/StatisticView.xaml", UriKind.Relative));
         }
 
         private void btnPhoto_Click(object sender, RoutedEventArgs e)
         {
-
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));
         }
     }
 }

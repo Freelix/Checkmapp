@@ -37,6 +37,11 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         }
 
+        public string TripName
+        {
+            get { return "Africa 2014"; }
+        }
+
         public void AddNote()
         {
 

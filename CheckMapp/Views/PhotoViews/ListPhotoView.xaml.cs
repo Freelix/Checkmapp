@@ -7,16 +7,16 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using CheckMapp.ViewModels.POIViewModels;
+using CheckMapp.ViewModels.PhotoViewModels;
 
-namespace CheckMapp.Views.POIViews
+namespace CheckMapp.Views.PhotoViews
 {
-    public partial class POIView : PhoneApplicationPage
+    public partial class ListPhotoView : PhoneApplicationPage
     {
-        public POIView()
+        public ListPhotoView()
         {
             InitializeComponent();
-            this.DataContext = new POIViewModel();
+            this.DataContext = new ListPhotoViewModel();
         }
     }
 }

@@ -115,6 +115,8 @@
     </Compile>
     <Compile Include="Converter\BoldConverter.cs" />
     <Compile Include="Converter\ButtonExtendConverter.cs" />
+    <Compile Include="Converter\RowNumberConverter.cs" />
+    <Compile Include="Converter\NoteMessage.cs" />
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="KeyGroup\AlphaKeyGroup.cs" />
@@ -146,7 +148,11 @@
     <Compile Include="ViewModels\NoteViewModels\AddNoteViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModels\ListNoteViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModels\NoteViewModel.cs" />
-    <Compile Include="ViewModels\POIViewModels\POIViewModel.cs" />
+    <Compile Include="ViewModels\PhotoViewModels\ListPhotoViewModel.cs" />
+    <Compile Include="ViewModels\PhotoViewModels\PhotoViewModel.cs" />
+    <Compile Include="ViewModels\POIViewModels\AddPOIViewModel.cs" />
+    <Compile Include="ViewModels\POIViewModels\ListPOIViewModel.cs" />
+    <Compile Include="ViewModels\StatisticViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\AddTripViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\TripViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\CurrentViewModel.cs" />
@@ -164,8 +170,20 @@
     <Compile Include="Views\NoteViews\NoteView.xaml.cs">
       <DependentUpon>NoteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\POIViews\POIView.xaml.cs">
-      <DependentUpon>POIView.xaml</DependentUpon>
+    <Compile Include="Views\PhotoViews\ListPhotoView.xaml.cs">
+      <DependentUpon>ListPhotoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhotoViews\PhotoView.xaml.cs">
+      <DependentUpon>PhotoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\POIViews\AddPOIView.xaml.cs">
+      <DependentUpon>AddPOIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\POIViews\ListPOIView.xaml.cs">
+      <DependentUpon>ListPOIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticView.xaml.cs">
+      <DependentUpon>StatisticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TripViews\AddTripView.xaml.cs">
       <DependentUpon>AddTripView.xaml</DependentUpon>
@@ -231,7 +249,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\POIViews\POIView.xaml">
+    <Page Include="Views\PhotoViews\ListPhotoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PhotoViews\PhotoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\POIViews\AddPOIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\POIViews\ListPOIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,13 +340,19 @@
     <Content Include="Assets\WideLogo.png" />
     <Content Include="Images\add.png" />
     <Content Include="Images\AddTripPin.png" />
+    <Content Include="Images\appbar.addclipboard.variant.png" />
+    <Content Include="Images\appbar.addflag.png" />
     <Content Include="Images\appbar.clipboard.variant.png" />
+    <Content Include="Images\appbar.delete.png" />
     <Content Include="Images\appbar.flag.png" />
     <Content Include="Images\appbar.flag.wavy.png" />
+    <Content Include="Images\appbar.graph.line.up.png" />
+    <Content Include="Images\appbar.location.png" />
     <Content Include="Images\cancel.png" />
     <Content Include="Images\check.png" />
     <Content Include="Images\ContinueTripPin.png" />
     <Content Include="Images\edit.png" />
+    <Content Include="Images\feature.addcamera.png" />
     <Content Include="Images\feature.camera.png" />
     <Content Include="Images\feature.search.png" />
     <Content Include="Images\feature.settings.png" />
@@ -341,10 +381,12 @@
     <Reference Include="Coding4Fun.Toolkit.Storage">
       <HintPath>..\packages\Coding4Fun.Toolkit.Storage.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Storage.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
+    <Reference Include="GalaSoft.MvvmLight.Extras.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.WP8">
+    <Reference Include="GalaSoft.MvvmLight.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
@@ -388,10 +430,7 @@
       <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>
     </XliffResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\PhotoViewModels\" />
-    <Folder Include="Views\PhotoViews\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

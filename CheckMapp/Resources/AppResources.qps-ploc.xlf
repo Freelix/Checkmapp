@@ -248,6 +248,21 @@
           <source>My Notes</source>
           <target state="new">My Notes</target>
         </trans-unit>
+        <trans-unit id="Resx/SeePhotos" translate="yes" xml:space="preserve">
+          <source>see photos...</source>
+          <target state="new">see photos...</target>
+        </trans-unit>
+        <trans-unit id="Resx/String1" translate="yes" xml:space="preserve">
+          <source />
+          <target state="new" />
+        </trans-unit><trans-unit id="Resx/MyPhoto" translate="yes" xml:space="preserve">
+          <source>My Photos</source>
+          <target state="new">My Photos</target>
+        </trans-unit>
+        <trans-unit id="Resx/SeeNotes" translate="yes" xml:space="preserve">
+          <source>see notes...</source>
+          <target state="new">see notes...</target>
+        </trans-unit>
         <trans-unit id="Resx/POITripTitle" translate="yes" xml:space="preserve">
           <source>Points of interest ({0})</source>
           <target state="new">Points of interest ({0})</target>

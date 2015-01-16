@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="CheckMapp.Views.NoteViews.NoteView"
+    x:Class="CheckMapp.Views.POIViews.AddPOIView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -12,8 +12,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
-    Loaded="PhoneApplicationPage_Loaded">
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -25,25 +24,17 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Note.Titre}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.AddPOI, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <TextBlock Margin="10" Text="{Binding Note.Date}"></TextBlock>
-
-                <TextBlock  Margin="10" x:Name="pointdinteret"></TextBlock>
+                <TextBox Height="100" ></TextBox>
                 <Controls:Map  Margin="10" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
-
-                <TextBlock  Margin="10" TextWrapping="Wrap" Text="{Binding Note.Message}"></TextBlock>
+                <Button Height="100" Content="{Binding Path=LocalizedResources.ConfirmButton, Source={StaticResource LocalizedStrings}}"></Button>
             </StackPanel>
         </Grid>
     </Grid>
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="False">
-            <shell:ApplicationBarIconButton  x:Name="IconEdit"  Click="IconEdit_Click"  IconUri="/Images/edit.png" Text="[edit]"/>
-            <shell:ApplicationBarIconButton  x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

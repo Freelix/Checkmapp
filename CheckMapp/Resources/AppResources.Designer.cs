@@ -385,6 +385,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à My Photos.
+        /// </summary>
+        public static string MyPhoto {
+            get {
+                return ResourceManager.GetString("MyPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Content.
         /// </summary>
         public static string NoteContent {
@@ -502,6 +511,24 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à see notes....
+        /// </summary>
+        public static string SeeNotes {
+            get {
+                return ResourceManager.GetString("SeeNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à see photos....
+        /// </summary>
+        public static string SeePhotos {
+            get {
+                return ResourceManager.GetString("SeePhotos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select a country : .
         /// </summary>
         public static string SelectCountry {
@@ -579,6 +606,15 @@ namespace CheckMapp.Resources {
         public static string Statistic {
             get {
                 return ResourceManager.GetString("Statistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
