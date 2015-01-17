@@ -23,7 +23,6 @@ namespace CheckMapp.ViewModel
         private List<ViewModelBase> _pageViewModels;
 
         private bool _isList;
-
         private bool _isTimeline;
 
         /// <summary>
@@ -38,7 +37,9 @@ namespace CheckMapp.ViewModel
             ShowUserControlTrip();
         }
 
-
+        /// <summary>
+        /// Si c'est affiché en tableau
+        /// </summary>
         public bool IsList
         {
             get { return _isList; }
@@ -49,7 +50,9 @@ namespace CheckMapp.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// Si c'est affiché en ligne de temps
+        /// </summary>
         public bool IsTimeline
         {
             get { return _isTimeline; }
@@ -84,6 +87,9 @@ namespace CheckMapp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Afficher en tableau
+        /// </summary>
         public void ShowUserControlTrip()
         {
             CurrentPageViewModel = PageViewModels[0] as CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel;
@@ -91,6 +97,9 @@ namespace CheckMapp.ViewModel
             IsList = true;
         }
 
+        /// <summary>
+        /// Afficher en ligne de temps
+        /// </summary>
         public void ShowUserControlTimeline()
         {
             CurrentPageViewModel = PageViewModels[1] as CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel;

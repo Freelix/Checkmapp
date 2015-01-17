@@ -19,7 +19,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         public string TripName
         {
-            get { return "TripName"; }
+            get { return "Africa 2014"; }
         }
     }
 }

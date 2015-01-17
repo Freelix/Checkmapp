@@ -18,12 +18,6 @@
 
     <phone:PhoneApplicationPage.Resources>
 
-        <shell:ApplicationBar  x:Key="dashboardApplicationBar" Mode="Minimized" IsMenuEnabled="True">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="[about]"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-
         <shell:ApplicationBar x:Key="currentTripApplicationBar" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="IconButtonEdit"  IconUri="/Images/edit.png" Text="[edit]" Click="IconButtonEdit_Click"/>
         </shell:ApplicationBar>

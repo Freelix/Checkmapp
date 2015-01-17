@@ -261,6 +261,14 @@
           <source>My Photos</source>
           <target state="translated">Mes photos</target>
         </trans-unit>
+        <trans-unit id="Resx/Save" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="translated">Enregistrer</target>
+        </trans-unit>
+        <trans-unit id="Resx/Cancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="translated">Annuler</target>
+        </trans-unit>
         <trans-unit id="Resx/SeeNotes" translate="yes" xml:space="preserve">
           <source>see notes...</source>
           <target state="translated">voir les notes...</target>

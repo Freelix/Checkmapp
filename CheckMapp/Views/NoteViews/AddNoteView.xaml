@@ -12,7 +12,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -43,11 +44,16 @@
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteContent, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 <TextBox Height="224"></TextBox>
                 
-                <Button Command="{Binding AddNote}" Content="{Binding Path=LocalizedResources.ConfirmButton, Source={StaticResource LocalizedStrings}}"></Button>
                 
             </StackPanel>
             </ScrollViewer>
         </Grid>
     </Grid>
-
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton  x:Name="IconSave"  Click="IconSave_Click"  IconUri="/Images/save.png" Text="[save]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconCancel"  Click="IconCancel_Click"  IconUri="/Images/cancel.png" Text="[cancel]"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

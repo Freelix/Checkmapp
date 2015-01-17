@@ -50,5 +50,10 @@ namespace CheckMapp.ViewModels.POIViewModels
             POIList.Add(poi1);
             POIList.Add(poi2);
         }
+
+        public string TripName
+        {
+            get { return "Africa 2014"; }
+        }
     }
 }

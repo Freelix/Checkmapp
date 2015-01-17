@@ -22,16 +22,32 @@ namespace CheckMapp.Views.NoteViews
             ListboxNote.SelectionChanged += ListboxNote_SelectionChanged;
         }
 
+        /// <summary>
+        /// Click sur les notes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ListboxNote_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
+            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        /// Ajout d'une note
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IconAdd_Click(object sender, EventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddNoteView.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        /// On assigne les titres des boutons au démarrage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (ApplicationBar.Buttons != null)
@@ -40,6 +56,11 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
+        /// <summary>
+        /// Click sur les options du menu contextuel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContextMenu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;

@@ -27,6 +27,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
             _note = note;
         }
 
+        /// <summary>
+        /// La note du voyage
+        /// </summary>
         public Note Note
         {
             get { return _note; }

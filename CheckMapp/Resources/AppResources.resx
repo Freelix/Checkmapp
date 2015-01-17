@@ -320,4 +320,10 @@
   <data name="MyPhoto" xml:space="preserve">
     <value>My Photos</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

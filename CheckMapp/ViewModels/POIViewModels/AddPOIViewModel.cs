@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
@@ -10,6 +12,7 @@ namespace CheckMapp.ViewModels.POIViewModels
     /// </summary>
     public class AddPOIViewModel : ViewModelBase
     {
+        private ICommand _addPOICommand;
         /// <summary>
         /// Initializes a new instance of the AddPOIViewModel class.
         /// </summary>
@@ -17,6 +20,33 @@ namespace CheckMapp.ViewModels.POIViewModels
         {
         }
 
+        /// <summary>
+        /// Cache/Affiche le voyage courant
+        /// </summary>
+        public ICommand AddPOICommand
+        {
+            get
+            {
+                if (_addPOICommand == null)
+                {
+                    _addPOICommand = new RelayCommand(() => AddPOI());
+                }
+                return _addPOICommand;
+            }
+
+        }
+
+        /// <summary>
+        /// Ajout d'un point d'intérêt
+        /// </summary>
+        public void AddPOI()
+        {
+
+        }
+
+        /// <summary>
+        /// Nom du voyage
+        /// </summary>
         public string TripName
         {
             get { return "Africa 2014"; }

@@ -23,72 +23,41 @@ namespace CheckMapp
             InitializeComponent();
 
             this.DataContext = new MainViewModel();
-            // Affecter l'exemple de données au contexte de données du contrôle ListBox
             MainPanorama.SelectionChanged += MainPanorama_SelectionChanged;
-            
-            ApplicationBar = (ApplicationBar)Resources["dashboardApplicationBar"];
-            ApplicationBar.IsVisible = true;
-
-            if (ApplicationBar.MenuItems[0] != null)
-            {
-                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.About;
-            }
-
         }
 
-
+        /// <summary>
+        /// Quand le panorama change, la barre d'application aussi, on doit l,updater
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void MainPanorama_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ApplicationBar != null)
+            switch (MainPanorama.SelectedIndex)
             {
-                string pivotResource = String.Empty;
-                
-                switch (MainPanorama.SelectedIndex)
-                {
-                    case 0:
-                        ApplicationBar.IsVisible = true;
-                        ApplicationBar = (ApplicationBar)Resources["dashboardApplicationBar"];
-                        if (ApplicationBar.MenuItems[0] != null)
-                        {
-                            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.About;
-                        }
-                        break;
-                    case 1:
-                        ApplicationBar.IsVisible = true;
-                        ApplicationBar = (ApplicationBar)Resources["currentTripApplicationBar"];
-                        if (ApplicationBar.Buttons[0] != null)
-                        {
-                            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Edit;
-                        }
-                        break;
-                    case 2:
+                case 1:
+                    ApplicationBar = (ApplicationBar)Resources["currentTripApplicationBar"];
+                    ApplicationBar.IsVisible = true;
+                    if (ApplicationBar.Buttons[0] != null)
+                    {
+                        (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Edit;
+                    }
+                    break;
+                default:
+                    if(ApplicationBar!=null)
                         ApplicationBar.IsVisible = false;
-                        break;
-                    default:
-                        ApplicationBar.IsVisible = false;
-                        break;
-                }
+                    break;
             }
         }
 
-
-
-
-        // Charger les données pour les éléments ViewModel
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-            
-        }
-
+        /// <summary>
+        /// Edition du voyage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IconButtonEdit_Click(object sender, EventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
-        }
-
-        private void ApplicationBar_StateChanged(object sender, ApplicationBarStateChangedEventArgs e)
-        {
-            
         }
 
 

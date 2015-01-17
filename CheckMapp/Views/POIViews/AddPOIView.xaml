@@ -12,7 +12,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps">
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+    Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -32,9 +33,13 @@
             <StackPanel>
                 <TextBox Height="100" ></TextBox>
                 <Controls:Map  Margin="10" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
-                <Button Height="100" Content="{Binding Path=LocalizedResources.ConfirmButton, Source={StaticResource LocalizedStrings}}"></Button>
             </StackPanel>
         </Grid>
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton  x:Name="IconSave"  Click="IconSave_Click"  IconUri="/Images/save.png" Text="[save]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconCancel"  Click="IconCancel_Click"  IconUri="/Images/cancel.png" Text="[cancel]"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
