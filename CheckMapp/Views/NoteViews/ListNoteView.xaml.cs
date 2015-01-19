@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
+using CheckMapp.Model;
 
 namespace CheckMapp.Views.NoteViews
 {
@@ -17,9 +18,14 @@ namespace CheckMapp.Views.NoteViews
         public ListNoteView()
         {
             InitializeComponent();
+            loadData();
+            ListboxNote.SelectionChanged += ListboxNote_SelectionChanged;
+        }
+
+        private void loadData()
+        {
             this.DataContext = new ListNoteViewModel();
             ListboxNote.DataContext = (this.DataContext as ListNoteViewModel).NoteList;
-            ListboxNote.SelectionChanged += ListboxNote_SelectionChanged;
         }
 
         /// <summary>
@@ -29,8 +35,15 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         void ListboxNote_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
-            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
+            List<Note> noteList = (this.DataContext as ListNoteViewModel).NoteList.ToList();
+            int index = ListboxNote.SelectedIndex;
+
+            if (index > -1)
+            {
+                int noteId = noteList[index].Id;
+                PhoneApplicationService.Current.State["id"] = noteId;
+                NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
+            }
         }
 
         /// <summary>
@@ -77,5 +90,11 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+                loadData();
+        }
     }
 }

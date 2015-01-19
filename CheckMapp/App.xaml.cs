@@ -12,6 +12,8 @@ using CheckMapp.ViewModel;
 using System.Globalization;
 using System.Threading;
 using SQLite;
+using CheckMapp.Model;
+using System.Linq;
 
 namespace CheckMapp
 {
@@ -24,6 +26,10 @@ namespace CheckMapp
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         public static SQLiteAsyncConnection Connection { get; set; }
+
+        // Specify the local database connection string.
+        public static string DBConnectionString = "Data Source=isostore:/Checkmapp.sdf";
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -59,6 +65,21 @@ namespace CheckMapp
                 // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+            }
+
+            // Create the database if it does not exist.
+            using (DatabaseDataContext db = new DatabaseDataContext(DBConnectionString))
+            {
+                if (db.DatabaseExists() == false)
+                {
+                    // Create the local database.
+                    db.CreateDatabase();
+
+                    /*db.notes.InsertOnSubmit(new Note { Title = "Test1", Message = "Un message", Date = DateTime.Now });
+                    db.notes.InsertOnSubmit(new Note { Title = "Test2", Message = "Un autre message", Date = DateTime.Now });
+
+                    db.SubmitChanges();*/
+                }
             }
 
         }

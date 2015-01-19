@@ -28,15 +28,12 @@ namespace CheckMapp.Controls
             InitializeComponent();
             Country country = new Country();
             country.Name = "Canada";
-            country.ColorHex = new SolidColorBrush(Colors.Yellow).Color.ToString();
 
             Country country1 = new Country();
             country1.Name = "United States";
-            country1.ColorHex = new SolidColorBrush(Colors.Brown).Color.ToString();
 
             Country country2 = new Country();
             country2.Name = "Gabon";
-            country2.ColorHex = new SolidColorBrush(Colors.Purple).Color.ToString();
             Trips = new List<Trip>();
             Trips.Add(new Trip { Name="Test1", BeginDate = DateTime.Now, EndDate = DateTime.Now });
             Trips.Add(new Trip { Name = "Test2", BeginDate = DateTime.Now.AddMonths(-2), EndDate = DateTime.Now });

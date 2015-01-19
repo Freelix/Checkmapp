@@ -1,31 +1,24 @@
-﻿using CheckMapp.Model;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using CheckMapp.Model;
 using GalaSoft.MvvmLight;
 using System;
+using System.Linq;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class NoteViewModel : ViewModelBase
+    public class NoteViewModel : INotifyPropertyChanged
     {
-        Note _note;
+        private Note _note;
 
-        /// <summary>
-        /// Initializes a new instance of the NoteViewModel class.
-        /// </summary>
-        public NoteViewModel()
+        public NoteViewModel(int id)
         {
-            Note note = new Note();
-            note.Titre = "Au resto";
-            note.Date = DateTime.Now;
-            note.Message = "Note exemple il fait beau dehors ehe he";
-
-            _note = note;
+            LoadNoteFromDatabase(id);
         }
+
+        #region Properties
 
         /// <summary>
         /// La note du voyage
@@ -33,6 +26,11 @@ namespace CheckMapp.ViewModels.NoteViewModels
         public Note Note
         {
             get { return _note; }
+            set
+            {
+                _note = value;
+                NotifyPropertyChanged("Note");
+            }
         }
 
         /// <summary>
@@ -51,5 +49,56 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             get { return "Africa 2014"; }
         }
+
+        #endregion
+
+        #region Buttons
+
+        private ICommand _deleteNoteCommand;
+        public ICommand DeleteNoteCommand
+        {
+            get
+            {
+                if (_deleteNoteCommand == null)
+                {
+                    _deleteNoteCommand = new RelayCommand(() => DeleteNote());
+                }
+                return _deleteNoteCommand;
+            }
+
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region DBMethods
+
+        public void LoadNoteFromDatabase(int id)
+        {
+            DataServiceNote dsNote = new DataServiceNote();
+            _note = dsNote.getNoteById(id);
+        }
+
+        public void DeleteNote()
+        {
+            DataServiceNote dsNote = new DataServiceNote();
+            dsNote.DeleteNote(Note);
+        }
+
+        #endregion
     }
 }

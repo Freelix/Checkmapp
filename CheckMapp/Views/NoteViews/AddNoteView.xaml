@@ -33,16 +33,16 @@
             <ScrollViewer>
             <StackPanel Grid.Row="0" Margin="12,17,0,28">
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                <TextBox></TextBox>
+                    <TextBox Text="{Binding NoteName, Mode=TwoWay}"></TextBox>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 <toolkit:DatePicker></toolkit:DatePicker>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteInterestPoint, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                <TextBox></TextBox>
+                    <TextBox Text="{Binding POI, Mode=TwoWay}"></TextBox>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteContent, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                <TextBox Height="224"></TextBox>
+                <TextBox Height="224" Text="{Binding Message, Mode=TwoWay}"></TextBox>
                 
                 
             </StackPanel>

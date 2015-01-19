@@ -25,7 +25,7 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Note.Titre}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Note.Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
