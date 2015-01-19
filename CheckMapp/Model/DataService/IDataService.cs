@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CheckMapp.Model.Tables;
 
-namespace CheckMapp.Model
+namespace CheckMapp.Model.DataService
 {
     public interface IDataServiceCountry
     {
-        Country SaveCountry(Model.Country newCountry);
-        IList<Model.Country> LoadCountries();
-        Country UpdateCountry(Model.Country selectedCountry);
-        Country DeleteCountry(Model.Country selectedCountry);
+        Country SaveCountry(Country newCountry);
+        IList<Country> LoadCountries();
+        Country UpdateCountry(Country selectedCountry);
+        Country DeleteCountry(Country selectedCountry);
     }
 
     public interface IDataServiceNote
@@ -24,9 +25,9 @@ namespace CheckMapp.Model
 
     public interface IDataServiceTrip
     {
-        Trip SaveTrip(Model.Trip newTrip);
-        IList<Model.Trip> LoadTrip();
-        Trip UpdateTrip(Model.Trip selectedTrip);
-        Trip DeleteTrip(Model.Trip selectedTrip);
+        Trip SaveTrip(Trip newTrip);
+        IList<Trip> LoadTrip();
+        Trip UpdateTrip(Trip selectedTrip);
+        Trip DeleteTrip(Trip selectedTrip);
     }
 }

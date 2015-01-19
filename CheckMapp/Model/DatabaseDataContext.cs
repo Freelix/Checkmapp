@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Model
 {

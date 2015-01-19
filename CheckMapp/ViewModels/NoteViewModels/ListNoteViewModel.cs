@@ -1,9 +1,10 @@
-﻿using CheckMapp.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System;
+using CheckMapp.Model.Tables;
+using CheckMapp.Model.DataService;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {

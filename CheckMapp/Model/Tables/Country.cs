@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using CheckMapp.Model.Utils;
 
-namespace CheckMapp.Model
+namespace CheckMapp.Model.Tables
 {
     [Table(Name = "Country")]
     public class Country : INotifyPropertyChanged, INotifyPropertyChanging

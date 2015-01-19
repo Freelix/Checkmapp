@@ -1,4 +1,4 @@
-﻿using CheckMapp.Model;
+﻿using CheckMapp.Model.Utils;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;

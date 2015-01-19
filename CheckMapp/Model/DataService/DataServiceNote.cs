@@ -3,8 +3,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System;
+using CheckMapp.Model.Tables;
 
-namespace CheckMapp.Model
+namespace CheckMapp.Model.DataService
 {
     public class DataServiceNote : IDataServiceNote
     {

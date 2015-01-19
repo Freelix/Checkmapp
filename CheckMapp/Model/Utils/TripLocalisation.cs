@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CheckMapp.Model
+namespace CheckMapp.Model.Utils
 {
     public class TripLocalisation
     {

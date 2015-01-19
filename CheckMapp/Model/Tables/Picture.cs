@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 
-namespace CheckMapp.Model
+namespace CheckMapp.Model.Tables
 {
     [Table(Name = "Picture")]
     public class Picture : INotifyPropertyChanged, INotifyPropertyChanging

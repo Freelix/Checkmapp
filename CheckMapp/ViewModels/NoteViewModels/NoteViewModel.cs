@@ -1,11 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using CheckMapp.Model;
-using GalaSoft.MvvmLight;
 using System;
 using System.Linq;
 using System.ComponentModel;
 using System.Windows.Input;
+using CheckMapp.Model.Tables;
+using CheckMapp.Model.DataService;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {

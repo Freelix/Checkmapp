@@ -2,6 +2,7 @@
 using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.ViewModels.TripViewModels
 {

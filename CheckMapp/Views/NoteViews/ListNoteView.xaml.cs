@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
-using CheckMapp.Model;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.NoteViews
 {

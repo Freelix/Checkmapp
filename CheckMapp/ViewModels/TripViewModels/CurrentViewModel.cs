@@ -1,4 +1,4 @@
-﻿using CheckMapp.Model;
+﻿using CheckMapp.Model.Tables;
 using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;

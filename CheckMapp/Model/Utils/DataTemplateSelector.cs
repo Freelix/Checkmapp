@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CheckMapp.Model
+namespace CheckMapp.Model.Utils
 {
     public static class DataTemplateSelector
     {

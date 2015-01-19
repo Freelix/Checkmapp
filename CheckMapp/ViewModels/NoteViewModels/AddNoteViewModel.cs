@@ -2,7 +2,8 @@
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 using System.ComponentModel;
-using CheckMapp.Model;
+using CheckMapp.Model.Tables;
+using CheckMapp.Model.DataService;
 using System;
 using System.Windows.Controls;
 using System.Windows;

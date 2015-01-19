@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using CheckMapp.Model;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Controls
 {
