@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -124,15 +125,20 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Country.cs" />
-    <Compile Include="Model\DataServiceStatus.cs" />
-    <Compile Include="Model\DataServiceTimelineEvent.cs" />
-    <Compile Include="Model\DataServiceCountry.cs" />
-    <Compile Include="Model\DataTemplateSelector.cs" />
-    <Compile Include="Model\IDataService.cs" />
-    <Compile Include="Model\LocalisationMap.cs" />
-    <Compile Include="Model\Note.cs" />
-    <Compile Include="Model\Trip.cs" />
+    <Compile Include="Model\DatabaseDataContext.cs" />
+    <Compile Include="Model\DataService\DataServiceCountry.cs" />
+    <Compile Include="Model\DataService\DataServiceNote.cs" />
+    <Compile Include="Model\DataService\DataServiceTrip.cs" />
+    <Compile Include="Model\DataService\IDataService.cs" />
+    <Compile Include="Model\Tables\Country.cs" />
+    <Compile Include="Model\Tables\Note.cs" />
+    <Compile Include="Model\Tables\Picture.cs" />
+    <Compile Include="Model\Tables\PointOfInterest.cs" />
+    <Compile Include="Model\Tables\Trip.cs" />
+    <Compile Include="Model\Utils\DataTemplateSelector.cs" />
+    <Compile Include="Model\Utils\Language.cs" />
+    <Compile Include="Model\Utils\LocalisationMap.cs" />
+    <Compile Include="Model\Utils\TripLocalisation.cs" />
     <Compile Include="Pages\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
