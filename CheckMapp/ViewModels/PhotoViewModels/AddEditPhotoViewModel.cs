@@ -12,7 +12,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
     /// </summary>
     public class AddEditPhotoViewModel : ViewModelBase
     {
-        private ICommand _addPhotoCommand;
+        private ICommand _addEditPhotoCommand;
         /// <summary>
         /// Initializes a new instance of the AddEditPhotoViewModel class.
         /// </summary>
@@ -27,22 +27,29 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set;
         }
 
-        public ICommand AddPhotoCommand
+        public ICommand AddEditPhotoCommand
         {
             get
             {
-                if (_addPhotoCommand == null)
+                if (_addEditPhotoCommand == null)
                 {
-                    _addPhotoCommand = new RelayCommand(() => AddPhoto());
+                    _addEditPhotoCommand = new RelayCommand(() => AddEditPhoto());
                 }
-                return _addPhotoCommand;
+                return _addEditPhotoCommand;
             }
 
         }
 
-        public void AddPhoto()
+        public void AddEditPhoto()
         {
-            
+            if (Mode == Mode.add)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>

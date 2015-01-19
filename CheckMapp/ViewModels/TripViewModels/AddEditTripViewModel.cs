@@ -14,7 +14,7 @@ namespace CheckMapp.ViewModels.TripViewModels
     {
 
 
-        private ICommand _addTripCommand;
+        private ICommand _addEditTripCommand;
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
         /// </summary>
@@ -32,22 +32,29 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Commande pour ajouter un voyage
         /// </summary>
-        public ICommand AddTripCommand
+        public ICommand AddEditTripCommand
         {
             get
             {
-                if (_addTripCommand == null)
+                if (_addEditTripCommand == null)
                 {
-                    _addTripCommand = new RelayCommand(() => AddTrip());
+                    _addEditTripCommand = new RelayCommand(() => AddEditTrip());
                 }
-                return _addTripCommand;
+                return _addEditTripCommand;
             }
 
         }
 
-        public void AddTrip()
+        public void AddEditTrip()
         {
-           
+            if (Mode == Mode.add)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

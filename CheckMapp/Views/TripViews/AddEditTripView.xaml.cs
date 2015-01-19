@@ -67,7 +67,7 @@ namespace CheckMapp.Views.TripViews
             var vm = DataContext as AddEditTripViewModel;
             if (vm != null)
             {
-                vm.AddTripCommand.Execute(null);
+                vm.AddEditTripCommand.Execute(null);
             }
         }
 

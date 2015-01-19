@@ -54,7 +54,7 @@ namespace CheckMapp.Views.PhotoViews
             var vm = DataContext as AddEditPhotoViewModel;
             if (vm != null)
             {
-                vm.AddPhotoCommand.Execute(null);
+                vm.AddEditPhotoCommand.Execute(null);
             }
         }
 

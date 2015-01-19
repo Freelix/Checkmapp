@@ -50,7 +50,7 @@ namespace CheckMapp.Views.NoteViews
             var vm = DataContext as AddEditNoteViewModel;
             if (vm != null)
             {
-                vm.AddNoteCommand.Execute(null);
+                vm.AddEditNoteCommand.Execute(null);
             }
         }
 

@@ -21,16 +21,16 @@ namespace CheckMapp.ViewModels.NoteViewModels
             this.Mode = mode;
         }
 
-        private ICommand _addNoteCommand;
-        public ICommand AddNoteCommand
+        private ICommand _addEditNoteCommand;
+        public ICommand AddEditNoteCommand
         {
             get
             {
-                if (_addNoteCommand == null)
+                if (_addEditNoteCommand == null)
                 {
-                    _addNoteCommand = new RelayCommand(() => AddNote());
+                    _addEditNoteCommand = new RelayCommand(() => AddEditNote());
                 }
-                return _addNoteCommand;
+                return _addEditNoteCommand;
             }
 
         }
@@ -100,24 +100,31 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region DBMethods
 
-        public void AddNote()
+        public void AddEditNote()
         {
-            if (!string.IsNullOrWhiteSpace(_name) && !string.IsNullOrWhiteSpace(_message))
+            if (Mode == Mode.add)
             {
-                Note newNote = new Note
+                if (!string.IsNullOrWhiteSpace(_name) && !string.IsNullOrWhiteSpace(_message))
                 {
-                    Title = _name,
-                    Message = _message,
-                    Date = DateTime.Now
-                };
+                    Note newNote = new Note
+                    {
+                        Title = _name,
+                        Message = _message,
+                        Date = DateTime.Now
+                    };
 
-                AddNoteInDB(newNote);
+                    AddNoteInDB(newNote);
 
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                }
+                else
+                {
+                    // Show an appropriate message
+                }
             }
             else
             {
-                // Show an appropriate message
+                //Edition
             }
         }
 
