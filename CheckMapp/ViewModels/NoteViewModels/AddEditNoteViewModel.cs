@@ -12,11 +12,13 @@ using Microsoft.Phone.Controls;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
-    public class AddNoteViewModel : PhoneApplicationPage, INotifyPropertyChanged
-    {      
-        public AddNoteViewModel()
+    public class AddEditNoteViewModel : PhoneApplicationPage, INotifyPropertyChanged
+    {
+
+
+        public AddEditNoteViewModel(Mode mode)
         {
-            
+            this.Mode = mode;
         }
 
         private ICommand _addNoteCommand;
@@ -34,6 +36,12 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         #region Properties
+
+        public Mode Mode
+        {
+            get;
+            set;
+        }
 
         private string _name;
         public string NoteName

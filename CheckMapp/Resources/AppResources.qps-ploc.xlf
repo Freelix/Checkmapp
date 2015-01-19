@@ -83,12 +83,12 @@
           <target state="new">Day :</target>
         </trans-unit>
         <trans-unit id="Resx/Delete" translate="yes" xml:space="preserve">
-          <source>Delete</source>
-          <target state="new">Delete</target>
+          <source>delete</source>
+          <target state="new">delete</target>
         </trans-unit>
         <trans-unit id="Resx/Edit" translate="yes" xml:space="preserve">
-          <source>Edit</source>
-          <target state="new">Edit</target>
+          <source>edit</source>
+          <target state="new">edit</target>
         </trans-unit>
         <trans-unit id="Resx/Home" translate="yes" xml:space="preserve">
           <source>dashboard</source>
@@ -134,9 +134,9 @@
           <source>Message :</source>
           <target state="new">Message :</target>
         </trans-unit>
-        <trans-unit id="Resx/ModifyNote" translate="yes" xml:space="preserve">
-          <source>Modify note</source>
-          <target state="new">Modify note</target>
+        <trans-unit id="Resx/EditNote" translate="yes" xml:space="preserve">
+          <source>Edit note</source>
+          <target state="new">Edit note</target>
         </trans-unit>
         <trans-unit id="Resx/NoteName" translate="yes" xml:space="preserve">
           <source>Name</source>
@@ -262,6 +262,22 @@
         <trans-unit id="Resx/Save" translate="yes" xml:space="preserve">
           <source>Save</source>
           <target state="new">Save</target>
+        </trans-unit>
+        <trans-unit id="Resx/Description" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target state="new">Description</target>
+        </trans-unit>
+        <trans-unit id="Resx/EditTrip" translate="yes" xml:space="preserve">
+          <source>Edit trip</source>
+          <target state="new">Edit trip</target>
+        </trans-unit>
+        <trans-unit id="Resx/ChoosePicture" translate="yes" xml:space="preserve">
+          <source>Choose picture</source>
+          <target state="new">Choose picture</target>
+        </trans-unit>
+        <trans-unit id="Resx/EditPicture" translate="yes" xml:space="preserve">
+          <source>Edit picture</source>
+          <target state="new">Edit picture</target>
         </trans-unit>
         <trans-unit id="Resx/Cancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>

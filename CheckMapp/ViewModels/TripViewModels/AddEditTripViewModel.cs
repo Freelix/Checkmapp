@@ -10,15 +10,23 @@ namespace CheckMapp.ViewModels.TripViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class AddTripViewModel : ViewModelBase
+    public class AddEditTripViewModel : ViewModelBase
     {
+
+
         private ICommand _addTripCommand;
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
         /// </summary>
-        public AddTripViewModel()
+        public AddEditTripViewModel(Mode mode)
         {
+            this.Mode = mode;
+        }
 
+        public Mode Mode
+        {
+            get;
+            set;
         }
 
         /// <summary>

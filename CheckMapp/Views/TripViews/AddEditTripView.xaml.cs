@@ -9,15 +9,35 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.TripViewModels;
 using CheckMapp.Resources;
+using CheckMapp.ViewModels;
+using Microsoft.Phone.Tasks;
 
 namespace CheckMapp.Views.TripViews
 {
-    public partial class AddTripView : PhoneApplicationPage
+    public partial class AddEditTripView : PhoneApplicationPage
     {
-        public AddTripView()
+        public AddEditTripView()
         {
             InitializeComponent();
-            this.DataContext = new AddTripViewModel();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+            this.DataContext = new AddEditTripViewModel(mode);
+
+            //Assigne le titre de la page
+            var vm = this.DataContext as AddEditTripViewModel;
+            if (vm.Mode == Mode.add)
+            {
+                TitleTextblock.Text = AppResources.AddTrip;
+            }
+            else
+            {
+                TitleTextblock.Text = AppResources.EditTrip;
+            }
+
+            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -32,6 +52,8 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Save;
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Cancel;
             }
+
+            
         }
 
         /// <summary>
@@ -41,7 +63,8 @@ namespace CheckMapp.Views.TripViews
         /// <param name="e"></param>
         private void IconSave_Click(object sender, EventArgs e)
         {
-            var vm = DataContext as AddTripViewModel;
+            this.Focus();
+            var vm = DataContext as AddEditTripViewModel;
             if (vm != null)
             {
                 vm.AddTripCommand.Execute(null);
@@ -54,6 +77,19 @@ namespace CheckMapp.Views.TripViews
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void IconCancel_Click(object sender, EventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+        }
+
+        private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PhotoChooserTask photoChooserTask = new PhotoChooserTask();
+            photoChooserTask.Completed += photoChooserTask_Completed;
+            photoChooserTask.ShowCamera = true;
+            photoChooserTask.Show();
+        }
+
+        void photoChooserTask_Completed(object sender, PhotoResult e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }

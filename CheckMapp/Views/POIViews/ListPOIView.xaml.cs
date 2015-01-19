@@ -34,11 +34,11 @@ namespace CheckMapp.Views.POIViews
             {
                 switch (menuItem.Name)
                 {
-                    case "POIPhotos":
+                    case "POIPictures":
                         break;
                     case "POINotes":
                         break;
-                    case "Delete":
+                    case "DeletePOI":
                         MessageBox.Show("Are you sure you want to delete this trip?");
                         break;
                 }

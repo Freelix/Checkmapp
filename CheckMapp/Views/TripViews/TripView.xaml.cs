@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.TripViewModels;
 using CheckMapp.Resources;
+using Microsoft.Phone.Tasks;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -27,11 +29,22 @@ namespace CheckMapp.Views.TripViews
 
         private void IconButtonAddMedia_Click(object sender, EventArgs e)
         {
+            PhotoChooserTask photoChooserTask = new PhotoChooserTask();
+            photoChooserTask.Completed += photoChooserTask_Completed;
+            photoChooserTask.ShowCamera = true;
+            photoChooserTask.Show();
+        }
+
+        void photoChooserTask_Completed(object sender, PhotoResult e)
+        {
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }
 
         private void IconButtonAddNotes_Click(object sender, EventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddNoteView.xaml", UriKind.Relative));
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
         }
 
         private void IconButtonAddPOI_Click(object sender, EventArgs e)
@@ -71,6 +84,12 @@ namespace CheckMapp.Views.TripViews
         private void btnPhoto_Click(object sender, RoutedEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));
+        }
+
+        private void EditTrip_Click(object sender, EventArgs e)
+        {
+            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddEditTripView.xaml", UriKind.Relative));
         }
     }
 }

@@ -169,6 +169,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose picture.
+        /// </summary>
+        public static string ChoosePicture {
+            get {
+                return ResourceManager.GetString("ChoosePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm.
         /// </summary>
         public static string ConfirmButton {
@@ -250,7 +259,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delete.
+        ///   Recherche une chaîne localisée semblable à delete.
         /// </summary>
         public static string Delete {
             get {
@@ -259,11 +268,47 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit.
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à edit.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit note.
+        /// </summary>
+        public static string EditNote {
+            get {
+                return ResourceManager.GetString("EditNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit picture.
+        /// </summary>
+        public static string EditPicture {
+            get {
+                return ResourceManager.GetString("EditPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit trip.
+        /// </summary>
+        public static string EditTrip {
+            get {
+                return ResourceManager.GetString("EditTrip", resourceCulture);
             }
         }
         
@@ -372,15 +417,6 @@ namespace CheckMapp.Resources {
         public static string Message {
             get {
                 return ResourceManager.GetString("Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Modify note.
-        /// </summary>
-        public static string ModifyNote {
-            get {
-                return ResourceManager.GetString("ModifyNote", resourceCulture);
             }
         }
         

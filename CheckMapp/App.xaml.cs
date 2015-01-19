@@ -11,7 +11,6 @@ using CheckMapp.Resources;
 using CheckMapp.ViewModel;
 using System.Globalization;
 using System.Threading;
-using SQLite;
 using CheckMapp.Model;
 using System.Linq;
 
@@ -24,8 +23,6 @@ namespace CheckMapp
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
-
-        public static SQLiteAsyncConnection Connection { get; set; }
 
         // Specify the local database connection string.
         public static string DBConnectionString = "Data Source=isostore:/Checkmapp.sdf";

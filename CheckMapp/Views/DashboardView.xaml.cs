@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.Controls;
 using CheckMapp.ViewModel;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views
 {
@@ -40,7 +41,8 @@ namespace CheckMapp.Views
 
         private void pinButtonAddTrip_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddTripView.xaml", UriKind.Relative));
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddEditTripView.xaml", UriKind.Relative));
         }
 
         private void pinButtonSettings_Tap(object sender, System.Windows.Input.GestureEventArgs e)

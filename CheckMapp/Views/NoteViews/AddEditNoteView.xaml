@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="CheckMapp.Views.NoteViews.AddNoteView"
+    x:Class="CheckMapp.Views.NoteViews.AddEditNoteView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -13,7 +13,8 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    Loaded="PhoneApplicationPage_Loaded">
+    Loaded="PhoneApplicationPage_Loaded"
+    >
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -25,7 +26,8 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.AddNote, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="TitleTextblock" Text="[add/edit note]" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}">
+            </TextBlock>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->

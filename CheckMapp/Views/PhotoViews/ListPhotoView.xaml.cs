@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.PhotoViewModels;
+using CheckMapp.Resources;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -17,6 +19,20 @@ namespace CheckMapp.Views.PhotoViews
         {
             InitializeComponent();
             this.DataContext = new ListPhotoViewModel();
+        }
+
+        private void IconAdd_Click(object sender, EventArgs e)
+        {
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ApplicationBar.Buttons != null)
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddPicture;
+            }
         }
     }
 }

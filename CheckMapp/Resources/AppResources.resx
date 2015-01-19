@@ -175,10 +175,10 @@
     <value>Day :</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>delete</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>edit</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>dashboard</value>
@@ -213,8 +213,8 @@
   <data name="Message" xml:space="preserve">
     <value>Message :</value>
   </data>
-  <data name="ModifyNote" xml:space="preserve">
-    <value>Modify note</value>
+  <data name="EditNote" xml:space="preserve">
+    <value>Edit note</value>
   </data>
   <data name="NoteContent" xml:space="preserve">
     <value>Content</value>
@@ -325,5 +325,17 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EditPicture" xml:space="preserve">
+    <value>Edit picture</value>
+  </data>
+  <data name="EditTrip" xml:space="preserve">
+    <value>Edit trip</value>
+  </data>
+  <data name="ChoosePicture" xml:space="preserve">
+    <value>Choose picture</value>
   </data>
 </root>

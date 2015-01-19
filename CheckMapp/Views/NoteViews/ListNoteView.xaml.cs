@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
 using CheckMapp.Model.Tables;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.NoteViews
 {
@@ -53,7 +54,8 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         private void IconAdd_Click(object sender, EventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddNoteView.xaml", UriKind.Relative));
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
         }
 
         /// <summary>
@@ -81,9 +83,11 @@ namespace CheckMapp.Views.NoteViews
             {
                 switch (menuItem.Name)
                 {
-                    case "Edit":
+                    case "EditNote":
+                        PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
                         break;
-                    case "Delete":
+                    case "DeleteNote":
                         MessageBox.Show("Are you sure you want to delete this trip?");
                         break;
                 }

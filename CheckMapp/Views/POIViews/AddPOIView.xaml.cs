@@ -41,6 +41,7 @@ namespace CheckMapp.Views.POIViews
         /// <param name="e"></param>
         private void IconSave_Click(object sender, EventArgs e)
         {
+            this.Focus();
             var vm = DataContext as AddPOIViewModel;
             if (vm != null)
             {

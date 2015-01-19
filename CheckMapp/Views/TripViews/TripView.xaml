@@ -78,7 +78,7 @@
                 <shell:ApplicationBarIconButton  x:Name="IconButtonAddPOI"  Click="IconButtonAddPOI_Click" IconUri="/Images/appbar.addflag.png" Text="[add poi]"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="DeleteTrip"  Text="[delete]"></shell:ApplicationBarMenuItem>
-                <shell:ApplicationBarMenuItem x:Name="EditTrip"  Text="[edit]"></shell:ApplicationBarMenuItem>
+                <shell:ApplicationBarMenuItem x:Name="EditTrip"  Click="EditTrip_Click" Text="[edit]"></shell:ApplicationBarMenuItem>
                 <shell:ApplicationBarMenuItem x:Name="FinisTrip"  Text="[finish trip]"></shell:ApplicationBarMenuItem>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

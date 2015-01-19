@@ -148,17 +148,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
-    <Compile Include="ViewModels\NoteViewModels\AddNoteViewModel.cs" />
+    <Compile Include="ViewModels\Mode.cs" />
+    <Compile Include="ViewModels\NoteViewModels\AddEditNoteViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModels\ListNoteViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModels\NoteViewModel.cs" />
+    <Compile Include="ViewModels\PhotoViewModels\AddEditPhotoViewModel.cs" />
     <Compile Include="ViewModels\PhotoViewModels\ListPhotoViewModel.cs" />
     <Compile Include="ViewModels\PhotoViewModels\PhotoViewModel.cs" />
     <Compile Include="ViewModels\POIViewModels\AddPOIViewModel.cs" />
     <Compile Include="ViewModels\POIViewModels\ListPOIViewModel.cs" />
     <Compile Include="ViewModels\StatisticViewModel.cs" />
-    <Compile Include="ViewModels\TripViewModels\AddTripViewModel.cs" />
+    <Compile Include="ViewModels\TripViewModels\AddEditTripViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\TripViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\CurrentViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -166,14 +166,17 @@
     <Compile Include="ViewModels\ArchivesViewModels\TimelineViewModel.cs" />
     <Compile Include="ViewModels\ArchivesViewModels\ArchivesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\NoteViews\AddNoteView.xaml.cs">
-      <DependentUpon>AddNoteView.xaml</DependentUpon>
+    <Compile Include="Views\NoteViews\AddEditNoteView.xaml.cs">
+      <DependentUpon>AddEditNoteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoteViews\ListNoteView.xaml.cs">
       <DependentUpon>ListNoteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoteViews\NoteView.xaml.cs">
       <DependentUpon>NoteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhotoViews\AddEditPhotoView.xaml.cs">
+      <DependentUpon>AddEditPhotoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PhotoViews\ListPhotoView.xaml.cs">
       <DependentUpon>ListPhotoView.xaml</DependentUpon>
@@ -190,8 +193,8 @@
     <Compile Include="Views\StatisticView.xaml.cs">
       <DependentUpon>StatisticView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TripViews\AddTripView.xaml.cs">
-      <DependentUpon>AddTripView.xaml</DependentUpon>
+    <Compile Include="Views\TripViews\AddEditTripView.xaml.cs">
+      <DependentUpon>AddEditTripView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -242,7 +245,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\NoteViews\AddNoteView.xaml">
+    <Page Include="Views\NoteViews\AddEditNoteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NoteViews\NoteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PhotoViews\AddEditPhotoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,7 +281,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TripViews\AddTripView.xaml">
+    <Page Include="Views\TripViews\AddEditTripView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,9 +406,6 @@
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Sqlite">
-      <HintPath>..\packages\sqlite-net-wp8.3.8.4.3\lib\windowsphone8\Sqlite.winmd</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>

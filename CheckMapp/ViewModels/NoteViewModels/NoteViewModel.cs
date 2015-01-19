@@ -21,6 +21,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region Properties
 
+      
         /// <summary>
         /// La note du voyage
         /// </summary>

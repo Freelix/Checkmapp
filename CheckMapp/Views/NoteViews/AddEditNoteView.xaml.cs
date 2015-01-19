@@ -9,15 +9,34 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.NoteViews
 {
-    public partial class AddNoteView : PhoneApplicationPage
+    public partial class AddEditNoteView : PhoneApplicationPage
     {
-        public AddNoteView()
+        public AddEditNoteView()
         {
             InitializeComponent();
-            this.DataContext = new AddNoteViewModel();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+            this.DataContext = new AddEditNoteViewModel(mode);
+
+            //Assigne le titre de la page
+            AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
+            if (vm.Mode == Mode.add)
+            {
+                TitleTextblock.Text = AppResources.AddNote;
+            }
+            else
+            {
+                TitleTextblock.Text = AppResources.EditNote;
+            }
+
+            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -27,7 +46,8 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         private void IconSave_Click(object sender, EventArgs e)
         {
-            var vm = DataContext as AddNoteViewModel;
+            this.Focus();
+            var vm = DataContext as AddEditNoteViewModel;
             if (vm != null)
             {
                 vm.AddNoteCommand.Execute(null);
@@ -57,5 +77,7 @@ namespace CheckMapp.Views.NoteViews
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Cancel;
             }
         }
+
+        
     }
 }
