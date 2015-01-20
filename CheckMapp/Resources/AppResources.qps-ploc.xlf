@@ -272,8 +272,8 @@
           <target state="new">Edit trip</target>
         </trans-unit>
         <trans-unit id="Resx/ChoosePicture" translate="yes" xml:space="preserve">
-          <source>Choose picture</source>
-          <target state="new">Choose picture</target>
+          <source>choose picture</source>
+          <target state="new">choose picture</target>
         </trans-unit>
         <trans-unit id="Resx/EditPicture" translate="yes" xml:space="preserve">
           <source>Edit picture</source>

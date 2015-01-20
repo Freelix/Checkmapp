@@ -39,8 +39,8 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <toolkit:HubTile  IsFrozen="True" Grid.RowSpan="2" Height="200" Width="200"></toolkit:HubTile>
-                        <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"  Text="{Binding Path=LocalizedResources.ChoosePicture, Source={StaticResource LocalizedStrings}}" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,0,0"></TextBlock>
+                        <toolkit:HubTile x:Name="hubTile" IsFrozen="True" Grid.RowSpan="2" Height="200" Width="200"></toolkit:HubTile>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"  Text="{Binding Path=LocalizedResources.ChoosePicture, Source={StaticResource LocalizedStrings}}" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,20,0"></TextBlock>
                     </Grid>
                     
                     <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>

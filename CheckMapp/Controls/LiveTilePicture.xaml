@@ -8,7 +8,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:local="clr-namespace:CheckMapp"
-    d:DesignHeight="200" d:DesignWidth="500">
+    d:DesignHeight="500" d:DesignWidth="500">
 
     <UserControl.Resources>
 
@@ -16,7 +16,7 @@
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:01" 
                                    Storyboard.TargetName="panel1" Storyboard.TargetProperty="Y">
 
-                <SplineDoubleKeyFrame KeyTime="00:00:04.00" Value="-50"/>
+                <SplineDoubleKeyFrame x:Name="splineDouble" KeyTime="00:00:15.00" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -24,18 +24,18 @@
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:01" 
                                    Storyboard.TargetName="panel1" Storyboard.TargetProperty="Y">
 
-                <SplineDoubleKeyFrame KeyTime="00:00:03.50" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:15.00" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
     </UserControl.Resources>
 
-    <StackPanel Width="500" Height="200">
-        <StackPanel Name="grid2" Width="Auto" Height="255">
+    <StackPanel Width="500">
+        <StackPanel Name="grid2" Width="Auto" >
             <StackPanel.RenderTransform>
                 <TranslateTransform x:Name="panel1" Y="0" X="0"/>
             </StackPanel.RenderTransform>
-            <Image x:Name="imgPhoto" Height="250" Margin="0,0,-21,0" Source="/Images/vacance.jpg" Stretch="UniformToFill" />
+            <Image x:Name="imgPhoto" Loaded="imgPhoto_Loaded"  Source="{Binding SourceImage}" Stretch="UniformToFill" />
        
         </StackPanel>
 

@@ -16,6 +16,7 @@ namespace CheckMapp.Controls
         public LiveTilePicture()
         {
             InitializeComponent();
+            this.DataContext = this;
             Storyboard anim = (Storyboard)FindName("liveTileAnimTop");
             anim.Begin();
         }
@@ -30,6 +31,27 @@ namespace CheckMapp.Controls
         {
             Storyboard anim = (Storyboard)FindName("liveTileAnimTop");
             anim.Begin();
+        }
+
+        public static readonly DependencyProperty SourceImageProperty =
+           DependencyProperty.Register("Images", typeof(string), typeof(LiveTilePicture), null);
+
+        /// <summary>
+        /// La source de l'image
+        /// </summary>
+        public string SourceImage
+        {
+            get { return GetValue(SourceImageProperty) as string; }
+            set
+            {
+                SetValue(SourceImageProperty, value);
+            }
+        }
+
+        private void imgPhoto_Loaded(object sender, RoutedEventArgs e)
+        {
+            splineDouble.Value = -imgPhoto.ActualHeight + 200;
+
         }
     }
 }

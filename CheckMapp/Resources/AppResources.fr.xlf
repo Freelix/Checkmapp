@@ -272,8 +272,8 @@
           <target state="translated">Modifier le voyage</target>
         </trans-unit>
         <trans-unit id="Resx/ChoosePicture" translate="yes" xml:space="preserve">
-          <source>Choose picture</source>
-          <target state="translated">Choisir photo</target>
+          <source>choose picture</source>
+          <target state="needs-review-translation">choisir photo</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/EditPicture" translate="yes" xml:space="preserve">
           <source>Edit picture</source>

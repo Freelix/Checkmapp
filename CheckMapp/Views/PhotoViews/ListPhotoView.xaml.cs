@@ -34,5 +34,10 @@ namespace CheckMapp.Views.PhotoViews
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddPicture;
             }
         }
+
+        private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
+        }
     }
 }

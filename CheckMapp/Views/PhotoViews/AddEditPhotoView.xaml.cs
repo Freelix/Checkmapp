@@ -73,6 +73,12 @@ namespace CheckMapp.Views.PhotoViews
 
         void photoChooserTask_Completed(object sender, PhotoResult e)
         {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                var img = new BitmapImage();
+                img.SetSource(e.ChosenPhoto);
+                hubTile.Source = img;
+            }
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
     }
