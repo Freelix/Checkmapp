@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using CheckMapp.Model.Tables;
 using CheckMapp.Model.DataService;
+using CheckMapp.KeyGroup;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
@@ -29,6 +30,20 @@ namespace CheckMapp.ViewModels.NoteViewModels
         public string TripName
         {
             get { return "Afrique 2014"; }
+        }
+
+        public List<KeyedList<string, Note>> GroupedNotes
+        {
+            get
+            {
+                var groupedNotes =
+                    from note in NoteList
+                    orderby note.Date
+                    group note by note.Date.ToString("m") into notesByDay
+                    select new KeyedList<string, Note>(notesByDay);
+
+                return new List<KeyedList<string, Note>>(groupedNotes);
+            }
         }
 
         #region INotifyPropertyChanged Members

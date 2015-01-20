@@ -19,6 +19,7 @@ namespace CheckMapp.Views.PhotoViews
         {
             InitializeComponent();
             this.DataContext = new ListPhotoViewModel();
+            PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
         private void IconAdd_Click(object sender, EventArgs e)
@@ -38,6 +39,13 @@ namespace CheckMapp.Views.PhotoViews
         private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+                PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
     }
 }

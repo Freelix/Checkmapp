@@ -28,17 +28,19 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             get { return "Africa 2014"; }
         }
+
+        //EXEMPLES
         public static List<Picture> GetPhotos()
         {
             List<Picture> imageList = new List<Picture>();
             Random _rnd = new Random(42 * 42);
             DateTime start = new DateTime(2010, 1, 1);
 
-            for (int i = 1; i <= 148; i++)
+            for (int i = 1; i <= 30; i++)
             {
                 BitmapImage image = new BitmapImage();
                 image.CreateOptions = BitmapCreateOptions.None;
-                image.UriSource = new Uri(String.Format("/Images/AddTripPin.png", i), UriKind.Relative);
+                image.UriSource = new Uri(String.Format("/Images/vacance.jpg", i), UriKind.Relative);
                 WriteableBitmap wbmp = new WriteableBitmap(image);
                 MemoryStream ms = new MemoryStream();
                 wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);

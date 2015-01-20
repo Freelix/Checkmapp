@@ -20,13 +20,13 @@ namespace CheckMapp.Views.NoteViews
         {
             InitializeComponent();
             loadData();
-            ListboxNote.SelectionChanged += ListboxNote_SelectionChanged;
+            NoteLLS.SelectionChanged += ListboxNote_SelectionChanged;
         }
 
         private void loadData()
         {
             this.DataContext = new ListNoteViewModel();
-            ListboxNote.DataContext = (this.DataContext as ListNoteViewModel).NoteList;
+            NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
         }
 
         /// <summary>
@@ -37,11 +37,10 @@ namespace CheckMapp.Views.NoteViews
         void ListboxNote_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             List<Note> noteList = (this.DataContext as ListNoteViewModel).NoteList.ToList();
-            int index = ListboxNote.SelectedIndex;
 
-            if (index > -1)
+            if (NoteLLS.SelectedItem != null)
             {
-                int noteId = noteList[index].Id;
+                int noteId = (NoteLLS.SelectedItem as Note).Id;
                 PhoneApplicationService.Current.State["id"] = noteId;
                 NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
             }

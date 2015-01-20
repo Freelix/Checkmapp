@@ -15,7 +15,65 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Loaded="PhoneApplicationPage_Loaded"
     >
+    <phone:PhoneApplicationPage.Resources>
 
+        <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
+        <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+
+        <Style x:Key="JumpListStyle" TargetType="phone:LongListSelector">
+            <Setter Property="LayoutMode" Value="List" />
+            <Setter Property="Margin" Value="12,12,0,0"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" 
+                                Width="470" 
+                                Height="70" 
+                                Margin="6">
+                            <TextBlock Text="{Binding Key}"
+                                       Foreground="{Binding Converter={StaticResource ForegroundConverter}}"                                       
+                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                       FontSize="28"  
+                                       Padding="2"
+                                       VerticalAlignment="Bottom"/>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="GroupHeader">
+            <Border Background="Transparent">
+                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="1"	
+                        Width="400" Height="90" 				 
+                        HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding Key}" 
+                               Foreground="{StaticResource PhoneAccentBrush}" 
+                               FontSize="28"
+                               Padding="2"                                
+                               FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ItemTemplate">
+            <StackPanel Margin="0,0,0,30">
+                <toolkit:ContextMenuService.ContextMenu >
+                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
+                        <toolkit:MenuItem x:Name="EditNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
+                        <toolkit:MenuItem x:Name="DeleteNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <TextBlock Tag="{Binding Id}" Visibility="Collapsed"/>
+                <TextBlock Text="{Binding Date, StringFormat=t}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Title}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Message, Converter={StaticResource NoteMessage}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -31,24 +89,13 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox Name="ListboxNote" ItemsSource="{Binding}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="10">
-                            <toolkit:ContextMenuService.ContextMenu >
-                                <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
-                                    <toolkit:MenuItem x:Name="EditNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="DeleteNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
-                                </toolkit:ContextMenu>
-                            </toolkit:ContextMenuService.ContextMenu>
-                            <TextBlock Tag="{Binding Id}" Visibility="Collapsed"/>
-                            <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Title}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Message, Converter={StaticResource NoteMessage}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <phone:LongListSelector Name="NoteLLS" Margin="13,-30,0,0"
+                                        ItemsSource="{Binding GroupedNotes}"
+                                        ItemTemplate="{StaticResource ItemTemplate}"                     
+                                        GroupHeaderTemplate="{StaticResource GroupHeader}"
+                                        JumpListStyle="{StaticResource JumpListStyle}" 
+                                        IsGroupingEnabled="True"
+                                        SelectionChanged="ListboxNote_SelectionChanged"/>
         </Grid>
     </Grid>
 

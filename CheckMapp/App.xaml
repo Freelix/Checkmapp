@@ -24,7 +24,8 @@
             <converter:DateConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="DateConverter"></converter:DateConverter>
             <converter:NoteMessage xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="NoteMessage"></converter:NoteMessage>
             <converter:RowNumberConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="RowNumberConverter"></converter:RowNumberConverter>
-            <sys:String x:Key="CurrentTripName">null</sys:String>
+            <converter:ByteToImageConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="ByteToImageConverter"></converter:ByteToImageConverter>
+                <sys:String x:Key="CurrentTripName">null</sys:String>
             <local:LocalizedStrings xmlns:local="clr-namespace:CheckMapp" x:Key="LocalizedStrings"/>
 
             <Style x:Key="PanoramaItemHeaderTextStyle" TargetType="TextBlock">
