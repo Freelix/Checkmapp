@@ -15,8 +15,7 @@
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-
-        <Controls:Map  ZoomLevelChanged="Map_ZoomLevelChanged"  LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
+        <Controls:Map Loaded="Map_Loaded" x:Name="MyMap"  ZoomLevelChanged="Map_ZoomLevelChanged"  LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
     </Grid>
 
 </phone:PhoneApplicationPage>

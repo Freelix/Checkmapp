@@ -7,32 +7,18 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Width="260" Height="100">
+    Width="135" Height="115"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
-    <Grid x:Name="LayoutRoot" Background="Black" >
-        <Border BorderThickness="8,3,3,3" BorderBrush="White">
-            <StackPanel  Orientation="Horizontal">
-                <Image HorizontalAlignment="Left" x:Name="img" Source="/Images/vacance.jpg" ></Image>
-                <StackPanel x:Name="stackpanel" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical">
-                    <TextBlock Text="{Binding Trip.Name}" Foreground="White" TextWrapping="Wrap" FontSize="20" Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <TextBlock  Text="{Binding Trip.BeginDate, StringFormat='{}Début: {0:d}'}"  FontSize="15" Style="{StaticResource PhoneTextNormalStyle}">
-                    </TextBlock>
-                    <TextBlock  Text="{Binding Trip.EndDate, StringFormat='{}Fin: {0:d}'}"  FontSize="15" Style="{StaticResource PhoneTextNormalStyle}">
-                    </TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="12,0,0,0" Orientation="Horizontal">
-                            <Image Height="30" Width="30" Source="/Images/feature.camera.png"></Image>
-                            <Border Height="20" Width="1" Background="White"></Border>
-                            <TextBlock Margin="10,0,0,3"  FontSize="15" VerticalAlignment="Center" Text="13"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Margin="12,0,0,0" Orientation="Horizontal">
-                            <Image Height="30" Width="30" Source="/Images/appbar.flag.wavy.png"></Image>
-                            <Border Height="20" Width="1" Background="White"></Border>
-                            <TextBlock Margin="10,0,0,3"  FontSize="15"  VerticalAlignment="Center" Text="2"></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-        </Border>
+    <Grid x:Name="LayoutRoot" Background="Transparent" >
+        
+        <StackPanel Orientation="Horizontal">
+            <Polygon x:Name="left" Points="8,0 0,5, 8,10" Stroke="White" Fill="White" />
+            <Border BorderThickness="8,8,8,8" BorderBrush="White" Margin="-1,0,0,0">
+                <toolkit:HubTile Source="/Images/vacance.jpg" Title="Africa" Message="voyage"   Size="Small">
+                </toolkit:HubTile>
+            </Border>
+            <Polygon x:Name="right" Points="0,0 8,5, 0,10" Stroke="White" Fill="White" />
+        </StackPanel>
     </Grid>
 </UserControl>

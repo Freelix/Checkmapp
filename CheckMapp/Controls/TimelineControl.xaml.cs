@@ -26,16 +26,8 @@ namespace CheckMapp.Controls
         public TimelineControl()
         {
             InitializeComponent();
-            Country country = new Country();
-            country.Name = "Canada";
-
-            Country country1 = new Country();
-            country1.Name = "United States";
-
-            Country country2 = new Country();
-            country2.Name = "Gabon";
             Trips = new List<Trip>();
-            Trips.Add(new Trip { Name="Test1", BeginDate = DateTime.Now, EndDate = DateTime.Now });
+            Trips.Add(new Trip { Name = "Test1", BeginDate = DateTime.Now, EndDate = DateTime.Now });
             Trips.Add(new Trip { Name = "Test2", BeginDate = DateTime.Now.AddMonths(-2), EndDate = DateTime.Now });
             Trips.Add(new Trip { Name = "Test3", BeginDate = DateTime.Now.AddMonths(-3).AddDays(10), EndDate = DateTime.Now });
             Trips.Add(new Trip { Name = "Test4", BeginDate = DateTime.Now.AddMonths(-6), EndDate = DateTime.Now });
@@ -53,6 +45,7 @@ namespace CheckMapp.Controls
             get { return base.GetValue(TripsProperty) as List<Trip>; }
             set { base.SetValue(TripsProperty, value); }
         }
+
 
         /// <summary>
         /// Type de date (mois, année)
@@ -80,22 +73,13 @@ namespace CheckMapp.Controls
             textBlock.Foreground = new SolidColorBrush(Colors.White);
             textBlock.Text = text;
             border.Child = textBlock;
-            border.Width = date == TypeDate.Annee ? 140 : 100;
-            border.Height = date == TypeDate.Annee ? 80 : 60;
+            border.Width = date == TypeDate.Annee ? 120 : 80;
+            border.Height = date == TypeDate.Annee ? 60 : 40;
             border.BorderThickness = new Thickness(date == TypeDate.Annee ? 6 : 4);
             border.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            textBlock.FontSize = date == TypeDate.Annee ? 28 : 22;
+            textBlock.FontSize = date == TypeDate.Annee ? 26 : 20;
             canvas.Children.Add(border);
             return border;
-        }
-
-        /// <summary>
-        /// Obtient le décalage de l'élément pour être au milieu
-        /// </summary>
-        /// <returns></returns>
-        public double MiddleLeft(FrameworkElement canvas, FrameworkElement targetElement)
-        {
-            return (canvas.Width - targetElement.Width) / 2;
         }
 
         /// <summary>
@@ -104,7 +88,7 @@ namespace CheckMapp.Controls
         public void AdjustTimeLine()
         {
             canvas = new Canvas();
-            canvas.Width = 400;
+            canvas.Width = 450;
             canvas.Opacity = 0.9;
 
             mainRectangle = new Rectangle();
@@ -114,17 +98,19 @@ namespace CheckMapp.Controls
 
             canvas.Children.Add(mainRectangle);
 
-            Canvas.SetLeft(mainRectangle, 0);
+            Canvas.SetLeft(mainRectangle, (canvas.Width / 2) - mainRectangle.Width / 2);
 
             //Obtient la liste des années
             var yearList = Trips.Select(item => new List<string>() { item.BeginDate.Year.ToString(), item.EndDate.Value.Year.ToString() })
                 .SelectMany(group => group).Distinct();
-
+            bool left = true;
             double previousBorderTop = 0;
+
             foreach (string year in yearList.OrderByDescending(x => x))
             {
                 Border borderYear = CreateBorder(TypeDate.Annee, year);
                 Canvas.SetTop(borderYear, previousBorderTop == 0 ? 0 : previousBorderTop + 250);
+                Canvas.SetLeft(borderYear, (canvas.Width / 2) - borderYear.Width / 2);
                 previousBorderTop = Canvas.GetTop(borderYear);
 
                 bool firstMonth = true;
@@ -134,12 +120,12 @@ namespace CheckMapp.Controls
                     .Select(item => new List<int>() { item.BeginDate.Month/*, item.EndDate.Month*/ })
                     .SelectMany(group => group).Distinct().OrderBy(x => x);
 
-                //TODO : implanter base de données
                 foreach (int month in monthList)
                 {
                     DateTimeFormatInfo info = new DateTimeFormatInfo();
                     string monthStr = info.GetAbbreviatedMonthName(month);
                     Border borderMonth = CreateBorder(TypeDate.Mois, monthStr.Substring(0, 3));
+                    Canvas.SetLeft(borderMonth, (canvas.Width / 2) - borderMonth.Width / 2);
                     //Si c'est le premier mois, alors plus près du border année
                     if (firstMonth)
                         Canvas.SetTop(borderMonth, Canvas.GetTop(borderYear) + borderYear.Height + 10);
@@ -149,44 +135,43 @@ namespace CheckMapp.Controls
                     firstMonth = false;
                     previousBorderTop = Canvas.GetTop(borderMonth);
 
-                    foreach (Trip activites in Trips.Where(x => x.BeginDate.Month == month && x.BeginDate.Year.ToString() == year))
+                    foreach (Trip activites in Trips.Where(x => x.BeginDate.Year.ToString() == year))
                     {
                         //Crée le cercle indiquant la position dans le mois¸¸
                         Ellipse ellipse = new Ellipse();
                         ellipse.Fill = new SolidColorBrush(Colors.White);
-                        ellipse.Height = mainRectangle.Width + 10;
-                        ellipse.Width = mainRectangle.Width + 10;
+                        ellipse.Height = 20;
+                        ellipse.Width = 20;
+                        int numMonth = activites.BeginDate.Month;
                         Canvas.SetTop(ellipse, Canvas.GetTop(borderMonth) + borderMonth.Height + (activites.BeginDate.Day * 3));
-                        Canvas.SetLeft(ellipse, -5);
-
-                        //Le rectangle relié au control de détail des éléments
-                        Rectangle rect = new Rectangle();
-                        rect.Width = 120;
-                        rect.Height = 7;
-                        rect.Fill = new SolidColorBrush(Colors.White);
-                        Canvas.SetTop(rect, Canvas.GetTop(ellipse) + rect.Height);
-                        double leftRecta = MiddleLeft(canvas, rect);
-                        Canvas.SetLeft(rect, 0);
+                        Canvas.SetLeft(ellipse, (canvas.Width / 2) - ellipse.Width / 2);
+                        canvas.Children.Add(ellipse);
 
                         //Le contrôle affichant les détails d'un event
-                        TimelineElementControl control = new TimelineElementControl(rect.Fill);
+                        TimelineElementControl control = new TimelineElementControl(null, left);
+                        left = !left;
                         control.Tap += control_Tap;
                         control.Trip = activites;
+                        Canvas.SetTop(control, Canvas.GetTop(ellipse) + ellipse.Height / 4);
+                        if (left)
+                            Canvas.SetLeft(control, (canvas.Width / 2) - control.Width - 20);
+                        else
+                            Canvas.SetLeft(control, (canvas.Width / 2) + 30);
+
                         canvas.Children.Add(control);
-                        Canvas.SetTop(control, Canvas.GetTop(rect) - control.Height / 2);
-                        Canvas.SetLeft(control, rect.Width);
 
-                        canvas.Children.Add(rect);
-                        canvas.Children.Add(ellipse);
                     }
-                }
 
+
+                }
             }
 
             mainRectangle.Height = previousBorderTop + 200;
             canvas.Height = mainRectangle.Height + 100;
             LayoutRoot.Children.Add(canvas);
         }
+
+
 
         public event EventHandler UserControlElementTap;
 

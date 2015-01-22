@@ -17,10 +17,21 @@ namespace CheckMapp.Controls
     {
 
 
-        public TimelineElementControl(Brush color)
+        public TimelineElementControl(Brush color, bool left)
         {
             this.DataContext = this;
+            
             InitializeComponent();
+            if (left)
+            {
+                this.left.Visibility = System.Windows.Visibility.Visible;
+                this.right.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.right.Visibility = System.Windows.Visibility.Visible;
+                this.left.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         public static readonly DependencyProperty TripProperty =
