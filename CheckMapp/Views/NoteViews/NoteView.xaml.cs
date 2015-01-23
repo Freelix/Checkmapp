@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
+using CheckMapp.Model.Tables;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.NoteViews
 {
@@ -34,7 +36,15 @@ namespace CheckMapp.Views.NoteViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
+            Note currentNote = new Note();
+            currentNote.Title = TitleTextBlock.Text;
+            //currentNote.PointOfInterest.Name = poiTextBlock.Text;
+            currentNote.Id = (int) idNoteTextBlock.Tag;
+            currentNote.Message = messageTextBlock.Text;
 
+            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+            PhoneApplicationService.Current.State["noteToModify"] = currentNote;
+            NavigationService.Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

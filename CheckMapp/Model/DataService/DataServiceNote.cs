@@ -32,9 +32,23 @@ namespace CheckMapp.Model.DataService
             return from Note note in db.notes select note;
         }
 
-        public Note UpdateNote(Note note)
+        public void UpdateNote(Note note)
         {
-            throw new NotImplementedException();
+            Note noteToUpdate = db.notes.Where(x => x.Id == note.Id).First();
+
+            noteToUpdate.Date = DateTime.Now;
+            noteToUpdate.Message = note.Message;
+            //query.PointOfInterest = note.PointOfInterest;
+            noteToUpdate.Title = note.Title;
+
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while trying to save a note" + e);
+            }
         }
 
         public void DeleteNote(Note note)

@@ -25,7 +25,8 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Note.Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="TitleTextBlock" Text="{Binding Note.Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="idNoteTextBlock" Tag="{Binding Note.Id}" Visibility="Collapsed"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
@@ -33,10 +34,10 @@
             <StackPanel>
                 <TextBlock Margin="10" Text="{Binding Note.Date}"></TextBlock>
 
-                <TextBlock  Margin="10" x:Name="pointdinteret"></TextBlock>
+                <TextBlock Margin="10" x:Name="poiTextBlock" Text=""></TextBlock>
                 <Controls:Map  Margin="10" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
 
-                <TextBlock  Margin="10" TextWrapping="Wrap" Text="{Binding Note.Message}"></TextBlock>
+                <TextBlock x:Name="messageTextBlock" Margin="10" TextWrapping="Wrap" Text="{Binding Note.Message}"></TextBlock>
             </StackPanel>
         </Grid>
     </Grid>

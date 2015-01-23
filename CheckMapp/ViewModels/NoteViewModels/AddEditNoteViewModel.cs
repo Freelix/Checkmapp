@@ -21,6 +21,15 @@ namespace CheckMapp.ViewModels.NoteViewModels
             this.Mode = mode;
         }
 
+        public void showInfo(Note noteToModify)
+        {
+            NoteId = noteToModify.Id;
+            NoteName = noteToModify.Title;
+            NoteDate = DateTime.Now;
+            //POI = noteToModify.PointOfInterest.Name;
+            Message = noteToModify.Message;
+        }
+
         private ICommand _addEditNoteCommand;
         public ICommand AddEditNoteCommand
         {
@@ -41,6 +50,17 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             get;
             set;
+        }
+
+        private int _id;
+        public int NoteId
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                NotifyPropertyChanged("NoteId");
+            }
         }
 
         private string _name;
@@ -76,6 +96,17 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
+        private DateTime _noteDate;
+        public DateTime NoteDate
+        {
+            get { return _noteDate; }
+            set
+            {
+                _noteDate = value;
+                NotifyPropertyChanged("NoteDate");
+            }
+        }
+
         public string TripName
         {
             get { return "Africa 2014"; }
@@ -102,6 +133,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         public void AddEditNote()
         {
+            // Adding a note
             if (Mode == Mode.add)
             {
                 if (!string.IsNullOrWhiteSpace(_name) && !string.IsNullOrWhiteSpace(_message))
@@ -122,9 +154,19 @@ namespace CheckMapp.ViewModels.NoteViewModels
                     // Show an appropriate message
                 }
             }
-            else
+            else if (Mode == Mode.edit)
             {
-                //Edition
+                // Edit a note
+                if (!string.IsNullOrWhiteSpace(_name) && !string.IsNullOrWhiteSpace(_message))
+                {
+                    UpdateExistingNote();
+
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                }
+                else
+                {
+                    // Show an appropriate message
+                }
             }
         }
 
@@ -132,6 +174,18 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             DataServiceNote dsNote = new DataServiceNote();
             dsNote.addNote(note);
+        }
+
+        public void UpdateExistingNote()
+        {
+            DataServiceNote dsNote = new DataServiceNote();
+
+            Note updatedNote = new Note();
+            updatedNote.Title = _name;
+            updatedNote.Message = _message;
+            updatedNote.Id = _id;
+
+            dsNote.UpdateNote(updatedNote);
         }
 
         #endregion

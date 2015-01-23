@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
 using CheckMapp.ViewModels;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.NoteViews
 {
@@ -31,9 +32,21 @@ namespace CheckMapp.Views.NoteViews
             {
                 TitleTextblock.Text = AppResources.AddNote;
             }
-            else
+            else if (vm.Mode == Mode.edit)
             {
+
                 TitleTextblock.Text = AppResources.EditNote;
+
+                // Retrieve the data from the calling page
+                Note currentNote = (Note)PhoneApplicationService.Current.State["noteToModify"];
+                vm.showInfo(currentNote);
+
+                // Fill fields with current note data
+                /*NameTextBox.Text = currentNote.Title;
+                idNoteTextBlock.Tag = currentNote.Id;
+                DateTextBlock.Text = DateTime.Now.ToString();
+                //poiTextBox.Text = currentNote.PointOfInterest.Name;
+                messageTextBox.Text = currentNote.Message;*/
             }
 
             base.OnNavigatedTo(e);

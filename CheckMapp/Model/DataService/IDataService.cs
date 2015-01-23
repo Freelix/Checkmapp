@@ -19,7 +19,7 @@ namespace CheckMapp.Model.DataService
         void addNote(Note newNote);
         Note getNoteById(int id);
         IQueryable<Note> LoadNote();
-        Note UpdateNote(Note note);
+        void UpdateNote(Note note);
         void DeleteNote(Note note);
     }
 
