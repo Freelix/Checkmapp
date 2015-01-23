@@ -36,7 +36,7 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         void ListboxNote_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<Note> noteList = (this.DataContext as ListNoteViewModel).NoteList.ToList();
+            //List<Note> noteList = (this.DataContext as ListNoteViewModel).NoteList.ToList();
 
             if (NoteLLS.SelectedItem != null)
             {

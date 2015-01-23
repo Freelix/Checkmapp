@@ -95,7 +95,7 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _notes;
+        /*private EntitySet<Note> _notes;
 
         [Association(Storage = "_notes", OtherKey = "_pointOfInterestId")]
         public EntitySet<Note> Notes
@@ -110,9 +110,9 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Notes");
                 }
             }
-        }
+        }*/
 
-        private EntitySet<Note> _pictures;
+        /*private EntitySet<Note> _pictures;
 
         [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId")]
         public EntitySet<Note> Pictures
@@ -127,7 +127,7 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Pictures");
                 }
             }
-        }
+        }*/
 
         // Version column aids update performance.
         [Column(IsVersion = true)]

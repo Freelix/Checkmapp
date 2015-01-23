@@ -18,7 +18,7 @@ namespace CheckMapp.Model.DataService
     {
         void addNote(Note newNote);
         Note getNoteById(int id);
-        IQueryable<Note> LoadNote();
+        IQueryable<Note> LoadNotes();
         void UpdateNote(Note note);
         void DeleteNote(Note note);
     }
@@ -29,5 +29,11 @@ namespace CheckMapp.Model.DataService
         IList<Trip> LoadTrip();
         Trip UpdateTrip(Trip selectedTrip);
         Trip DeleteTrip(Trip selectedTrip);
+    }
+
+    public interface IDataServicePoi
+    {
+        void addPoi(PointOfInterest poi);
+        IQueryable<PointOfInterest> LoadPointOfInterests();
     }
 }

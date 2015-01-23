@@ -66,7 +66,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         public void LoadAllNotesFromDatabase()
         {
             DataServiceNote dsNote = new DataServiceNote();
-            var allNotesInDB = dsNote.LoadNote();
+            var allNotesInDB = dsNote.LoadNotes();
 
             NoteList = new ObservableCollection<Note>(allNotesInDB);
         }

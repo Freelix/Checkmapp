@@ -31,7 +31,7 @@
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <TextBox Height="100" ></TextBox>
+                <TextBox Height="100" Text="{Binding PoiName, Mode=TwoWay}"></TextBox>
                 <Controls:Map  Margin="10" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
             </StackPanel>
         </Grid>

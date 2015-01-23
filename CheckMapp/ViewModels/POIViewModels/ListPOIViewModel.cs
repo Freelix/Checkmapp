@@ -1,43 +1,20 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using CheckMapp.Model.DataService;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class ListPOIViewModel : ViewModelBase
+    public class ListPOIViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<POI> POIList = new ObservableCollection<POI>();
-        public class POI
-        {
-            public string nom;
-            public string ville;
-            public DateTime date;
-            public String Nom
-            {
-                get { return nom; }
-            }
-            public String Ville
-            {
-                get { return ville; }
-            }
-            public DateTime Date
-            {
-                get { return date; }
-            }
-
-        }
         /// <summary>
         /// Initializes a new instance of the POIViewModel class.
         /// </summary>
         public ListPOIViewModel()
         {
-            POI poi1 = new POI();
+            /*POI poi1 = new POI();
             poi1.date = DateTime.Now.AddDays(-2);
             poi1.nom = "Tour effeil";
             poi1.ville = "Paris";
@@ -48,12 +25,56 @@ namespace CheckMapp.ViewModels.POIViewModels
             poi2.ville = "Paris";
 
             POIList.Add(poi1);
-            POIList.Add(poi2);
+            POIList.Add(poi2);*/
+
+            LoadAllPoiFromDatabase();
+        }
+
+        #region Properties
+
+        private ObservableCollection<PointOfInterest> _pointOfInterestList;
+        public ObservableCollection<PointOfInterest> PointOfInterestList
+        {
+            get { return _pointOfInterestList; }
+            set
+            {
+                _pointOfInterestList = value;
+                NotifyPropertyChanged("PointOfInterestList");
+            }
         }
 
         public string TripName
         {
             get { return "Africa 2014"; }
         }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region DBMethods
+
+        public void LoadAllPoiFromDatabase()
+        {
+            DataServicePoi dsPoi = new DataServicePoi();
+            var allPoiInDB = dsPoi.LoadPointOfInterests();
+
+            PointOfInterestList = new ObservableCollection<PointOfInterest>(allPoiInDB);
+        }
+
+        #endregion
     }
 }

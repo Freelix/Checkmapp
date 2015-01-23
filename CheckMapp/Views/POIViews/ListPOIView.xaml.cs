@@ -17,9 +17,14 @@ namespace CheckMapp.Views.POIViews
         public ListPOIView()
         {
             InitializeComponent();
-            this.DataContext = new ListPOIViewModel();
-            ListboxPOI.DataContext = (this.DataContext as ListPOIViewModel).POIList;
+            loadData();
             ListboxPOI.SelectionChanged += ListboxPOI_SelectionChanged;
+        }
+
+        private void loadData()
+        {
+            this.DataContext = new ListPOIViewModel();
+            ListboxPOI.DataContext = (this.DataContext as ListPOIViewModel).PointOfInterestList;
         }
 
         void ListboxPOI_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,6 +61,13 @@ namespace CheckMapp.Views.POIViews
             {
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddPOI;
             }
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+                loadData();
         }
     }
 }

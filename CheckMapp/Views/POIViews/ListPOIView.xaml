@@ -46,8 +46,8 @@
                             <Image Height="100" Width="100" Source="/Images/appbar.location.png"></Image>
                             <TextBlock  Margin="-58,25,0,0" Text="1" Foreground="Black"  Style="{StaticResource PhoneTextNormalStyle}" ></TextBlock>
                             <StackPanel Margin="10">
-                                <TextBlock Text="{Binding Nom}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding Ville}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding City}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
