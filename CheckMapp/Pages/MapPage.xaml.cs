@@ -32,10 +32,7 @@ namespace CheckMapp.Pages
 
         private void Map_ZoomLevelChanged(object sender, Microsoft.Phone.Maps.Controls.MapZoomLevelChangedEventArgs e)
         {
-            if (((Map)sender).ZoomLevel > 5)
-            {
-                ((Map)sender).ZoomLevel = 5;
-            }
+            
         }
 
         private void Map_Loaded(object sender, RoutedEventArgs e)
