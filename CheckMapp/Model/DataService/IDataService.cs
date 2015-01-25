@@ -34,6 +34,7 @@ namespace CheckMapp.Model.DataService
     public interface IDataServicePoi
     {
         void addPoi(PointOfInterest poi);
-        IQueryable<PointOfInterest> LoadPointOfInterests();
+        List<PointOfInterest> LoadPointOfInterests();
+        PointOfInterest getPOIById(int id);
     }
 }

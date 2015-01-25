@@ -8,6 +8,15 @@ namespace CheckMapp.Model.Tables
     [Table(Name = "PointOfInterest")]
     public class PointOfInterest : INotifyPropertyChanged, INotifyPropertyChanging
     {
+        #region Constructors
+
+        public PointOfInterest()
+        {
+            _notes = new EntitySet<Note>();
+        }
+
+        #endregion
+
         #region Members
 
         private int _id;
@@ -95,13 +104,13 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        /*private EntitySet<Note> _notes;
+        private EntitySet<Note> _notes;
 
-        [Association(Storage = "_notes", OtherKey = "_pointOfInterestId")]
+        [Association(Storage = "_notes", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
         public EntitySet<Note> Notes
         {
             get { return _notes; }
-            set 
+            set
             {
                 if (_notes != value)
                 {
@@ -110,7 +119,7 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Notes");
                 }
             }
-        }*/
+        }
 
         /*private EntitySet<Note> _pictures;
 

@@ -9,25 +9,36 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class AddEditNoteViewModel : PhoneApplicationPage, INotifyPropertyChanged
     {
-
-
         public AddEditNoteViewModel(Mode mode)
         {
             this.Mode = mode;
+            LoadAllPOIFromDatabase();
         }
 
+        /// <summary>
+        /// Show info on when updating
+        /// </summary>
+        /// <param name="noteToModify"></param>
         public void showInfo(Note noteToModify)
         {
-            NoteId = noteToModify.Id;
-            NoteName = noteToModify.Title;
-            NoteDate = DateTime.Now;
-            //POI = noteToModify.PointOfInterest.Name;
-            Message = noteToModify.Message;
+            _id = noteToModify.Id;
+            _name = noteToModify.Title;
+            _noteDate = DateTime.Now;
+            _message = noteToModify.Message;
+
+            if (noteToModify.PointOfInterest != null)
+            {
+                _poiId = noteToModify.PointOfInterest.Id.ToString();
+                _poiSelected = getPOIById(noteToModify.PointOfInterest.Id);
+            }
         }
 
         private ICommand _addEditNoteCommand;
@@ -74,14 +85,36 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
-        private string _poi;
-        public string POI
+        private string _poiId;
+        public string POIID
         {
-            get { return _poi; }
+            get { return _poiId; }
             set
             {
-                _poi = value;
-                NotifyPropertyChanged("POI");
+                _poiId = value;
+                NotifyPropertyChanged("POIID");
+            }
+        }
+
+        private List<PointOfInterest> _poiList;
+        public List<PointOfInterest> PoiList
+        {
+            get { return _poiList; }
+            set
+            {
+                _poiList = value;
+                NotifyPropertyChanged("PoiList");
+            }
+        }
+
+        private PointOfInterest _poiSelected;
+        public PointOfInterest POISelected
+        {
+            get { return _poiSelected; }
+            set
+            {
+                _poiSelected = value;
+                NotifyPropertyChanged("POISelected");
             }
         }
 
@@ -142,7 +175,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
                     {
                         Title = _name,
                         Message = _message,
-                        Date = DateTime.Now
+                        Date = DateTime.Now,
+                        PointOfInterest = RetrievePOI()
                     };
 
                     AddNoteInDB(newNote);
@@ -170,13 +204,29 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
-        public void AddNoteInDB(Note note)
+        private PointOfInterest RetrievePOI()
+        {
+            PointOfInterest p = new PointOfInterest();
+
+            // If the point of interest is set
+            if (!string.IsNullOrWhiteSpace(_poiId))
+            {
+                int id = Utility.StringToNumber(_poiId);
+
+                if (id > -1)
+                    p = getPOIById(id);
+            }
+
+            return p;
+        }
+
+        private void AddNoteInDB(Note note)
         {
             DataServiceNote dsNote = new DataServiceNote();
             dsNote.addNote(note);
         }
 
-        public void UpdateExistingNote()
+        private void UpdateExistingNote()
         {
             DataServiceNote dsNote = new DataServiceNote();
 
@@ -184,8 +234,21 @@ namespace CheckMapp.ViewModels.NoteViewModels
             updatedNote.Title = _name;
             updatedNote.Message = _message;
             updatedNote.Id = _id;
+            updatedNote.PointOfInterest = RetrievePOI();
 
             dsNote.UpdateNote(updatedNote);
+        }
+
+        private void LoadAllPOIFromDatabase()
+        {
+            DataServicePoi dsPoi = new DataServicePoi();
+            PoiList = dsPoi.LoadListBoxPointOfInterests();
+        }
+
+        private PointOfInterest getPOIById(int id)
+        {
+            DataServicePoi dsPoi = new DataServicePoi();
+            return dsPoi.getPOIById(id);
         }
 
         #endregion

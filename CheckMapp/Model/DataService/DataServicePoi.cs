@@ -13,7 +13,7 @@ namespace CheckMapp.Model.DataService
 
         public DataServicePoi()
         {
-            db = new DatabaseDataContext(App.DBConnectionString);
+            db = App.db;
         }
 
         public void addPoi(PointOfInterest poi)
@@ -22,9 +22,31 @@ namespace CheckMapp.Model.DataService
             db.SubmitChanges();
         }
 
-        public IQueryable<PointOfInterest> LoadPointOfInterests()
+        /// <summary>
+        /// Load all the poi except "None"
+        /// "None" is a quick fix to be able to add Notes without
+        /// adding a blank poi in ListPOIView
+        /// </summary>
+        /// <returns></returns>
+        public List<PointOfInterest> LoadPointOfInterests()
         {
-            return from PointOfInterest pointOfInterest in db.pointsOfInterests select pointOfInterest;
+            return db.pointsOfInterests.Where(x => x.Name != "None").ToList();
+        }
+
+        /// <summary>
+        /// Load all the poi for including "None"
+        /// "None" is a quick fix to be able to add Notes without
+        /// adding a blank poi in ListPOIView
+        /// </summary>
+        /// <returns></returns>
+        public List<PointOfInterest> LoadListBoxPointOfInterests()
+        {
+            return db.pointsOfInterests.ToList();
+        }
+
+        public PointOfInterest getPOIById(int id)
+        {
+            return db.pointsOfInterests.Where(x => x.Id == id).First();
         }
     }
 }

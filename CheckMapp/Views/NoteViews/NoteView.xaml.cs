@@ -11,6 +11,7 @@ using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
 using CheckMapp.Model.Tables;
 using CheckMapp.ViewModels;
+using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.Views.NoteViews
 {
@@ -31,16 +32,23 @@ namespace CheckMapp.Views.NoteViews
             }
 
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/ListNoteView.xaml", UriKind.Relative));
         }
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
             Note currentNote = new Note();
             currentNote.Title = TitleTextBlock.Text;
-            //currentNote.PointOfInterest.Name = poiTextBlock.Text;
             currentNote.Id = (int) idNoteTextBlock.Tag;
             currentNote.Message = messageTextBlock.Text;
+
+            string s = poiTextBlock.Text;
+            int id = Utility.StringToNumber(POIIDTextBlock.Text);
+
+            if (id > -1)
+            {
+                currentNote.PointOfInterest = new PointOfInterest();
+                currentNote.PointOfInterest.Id = id;
+            }
 
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             PhoneApplicationService.Current.State["noteToModify"] = currentNote;

@@ -34,19 +34,12 @@ namespace CheckMapp.Views.NoteViews
             }
             else if (vm.Mode == Mode.edit)
             {
-
                 TitleTextblock.Text = AppResources.EditNote;
 
                 // Retrieve the data from the calling page
                 Note currentNote = (Note)PhoneApplicationService.Current.State["noteToModify"];
-                vm.showInfo(currentNote);
 
-                // Fill fields with current note data
-                /*NameTextBox.Text = currentNote.Title;
-                idNoteTextBlock.Tag = currentNote.Id;
-                DateTextBlock.Text = DateTime.Now.ToString();
-                //poiTextBox.Text = currentNote.PointOfInterest.Name;
-                messageTextBox.Text = currentNote.Message;*/
+                vm.showInfo(currentNote);
             }
 
             base.OnNavigatedTo(e);
@@ -60,6 +53,10 @@ namespace CheckMapp.Views.NoteViews
         private void IconSave_Click(object sender, EventArgs e)
         {
             this.Focus();
+
+            if (((PointOfInterest)poiListPicker.SelectedItem) != null)
+                poiTextBox.Text = ((PointOfInterest)poiListPicker.SelectedItem).Id.ToString();
+
             var vm = DataContext as AddEditNoteViewModel;
             if (vm != null)
             {

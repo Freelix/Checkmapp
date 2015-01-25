@@ -128,6 +128,7 @@
     <Compile Include="Model\DatabaseDataContext.cs" />
     <Compile Include="Model\DataService\DataServiceCountry.cs" />
     <Compile Include="Model\DataService\DataServiceNote.cs" />
+    <Compile Include="Model\DataService\DataServicePoi.cs" />
     <Compile Include="Model\DataService\DataServiceTrip.cs" />
     <Compile Include="Model\DataService\IDataService.cs" />
     <Compile Include="Model\Tables\Country.cs" />
@@ -148,6 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Utils.cs" />
     <Compile Include="ViewModels\Mode.cs" />
     <Compile Include="ViewModels\NoteViewModels\AddEditNoteViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModels\ListNoteViewModel.cs" />

@@ -20,13 +20,14 @@ namespace CheckMapp.Views.NoteViews
         {
             InitializeComponent();
             loadData();
-            NoteLLS.SelectionChanged += ListboxNote_SelectionChanged;
         }
 
         private void loadData()
         {
             this.DataContext = new ListNoteViewModel();
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
+            NoteLLS.SelectionChanged += ListboxNote_SelectionChanged;
+            NoteLLS.SelectedItem = null;
         }
 
         /// <summary>

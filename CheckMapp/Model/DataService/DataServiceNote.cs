@@ -13,7 +13,7 @@ namespace CheckMapp.Model.DataService
 
         public DataServiceNote()
         {
-            db = new DatabaseDataContext(App.DBConnectionString);
+            db = App.db;
         }
 
         public void addNote(Note newNote)
@@ -38,7 +38,7 @@ namespace CheckMapp.Model.DataService
 
             noteToUpdate.Date = DateTime.Now;
             noteToUpdate.Message = note.Message;
-            //query.PointOfInterest = note.PointOfInterest;
+            noteToUpdate.PointOfInterest = note.PointOfInterest;
             noteToUpdate.Title = note.Title;
 
             try

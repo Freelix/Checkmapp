@@ -18,13 +18,13 @@ namespace CheckMapp.Views.POIViews
         {
             InitializeComponent();
             loadData();
-            ListboxPOI.SelectionChanged += ListboxPOI_SelectionChanged;
         }
 
         private void loadData()
         {
             this.DataContext = new ListPOIViewModel();
             ListboxPOI.DataContext = (this.DataContext as ListPOIViewModel).PointOfInterestList;
+            ListboxPOI.SelectionChanged += ListboxPOI_SelectionChanged;
         }
 
         void ListboxPOI_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -12,6 +12,7 @@ using CheckMapp.ViewModel;
 using System.Globalization;
 using System.Threading;
 using CheckMapp.Model;
+using CheckMapp.Model.Tables;
 using System.Linq;
 
 namespace CheckMapp
@@ -25,7 +26,9 @@ namespace CheckMapp
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         // Specify the local database connection string.
-        public static string DBConnectionString = "Data Source=isostore:/Checkmapp.sdf";
+        private static string DBConnectionString = "Data Source=isostore:/Checkmapp.sdf";
+
+        public static DatabaseDataContext db = new DatabaseDataContext(App.DBConnectionString);
 
         /// <summary>
         /// Constructor for the Application object.
@@ -72,10 +75,9 @@ namespace CheckMapp
                     // Create the local database.
                     db.CreateDatabase();
 
-                    /*db.notes.InsertOnSubmit(new Note { Title = "Test1", Message = "Un message", Date = DateTime.Now });
-                    db.notes.InsertOnSubmit(new Note { Title = "Test2", Message = "Un autre message", Date = DateTime.Now });
+                    db.pointsOfInterests.InsertOnSubmit(new PointOfInterest { Name = "None" });
 
-                    db.SubmitChanges();*/
+                    db.SubmitChanges();
                 }
             }
 

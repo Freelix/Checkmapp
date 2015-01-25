@@ -34,7 +34,8 @@
             <StackPanel>
                 <TextBlock Margin="10" Text="{Binding Note.Date}"></TextBlock>
 
-                <TextBlock Margin="10" x:Name="poiTextBlock" Text=""></TextBlock>
+                <TextBlock Margin="10" x:Name="poiTextBlock" Text="{Binding Note.PointOfInterest.Name}"/>
+                <TextBlock x:Name="POIIDTextBlock" Text="{Binding Note.PointOfInterest.Id}" Visibility="Collapsed"/>
                 <Controls:Map  Margin="10" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
 
                 <TextBlock x:Name="messageTextBlock" Margin="10" TextWrapping="Wrap" Text="{Binding Note.Message}"></TextBlock>
