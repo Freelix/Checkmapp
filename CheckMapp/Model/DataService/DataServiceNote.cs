@@ -27,9 +27,9 @@ namespace CheckMapp.Model.DataService
             return db.notes.Where(x => x.Id == id).First();
         }
 
-        public IQueryable<Note> LoadNotes()
+        public List<Note> LoadNotes()
         {
-            return from Note note in db.notes select note;
+            return db.notes.ToList();
         }
 
         public void UpdateNote(Note note)

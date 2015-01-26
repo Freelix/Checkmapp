@@ -22,12 +22,20 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <Image Name="myImage" Source="/Images/vacance.jpg" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform">
+            <Image Name="myImage" HorizontalAlignment="Stretch"
+                   Source="{Binding PhotoToShow}"
+                   VerticalAlignment="Stretch" Stretch="Uniform">
                 <toolkit:GestureService.GestureListener>
                     <toolkit:GestureListener Flick="OnFlick"/>
                 </toolkit:GestureService.GestureListener>
             </Image>
-            <TextBlock Text="{Binding PhotoMessage}"></TextBlock>
+
+            <TextBlock x:Name="IDPictureTextBlock" Tag="{Binding Picture.Id}" Visibility="Collapsed"/>
+            <TextBlock x:Name="POIIDTextBlock" Text="{Binding Picture.PointOfInterest.Id}" Visibility="Collapsed"/>
+            
+            <TextBlock Text="{Binding Picture.Date}"/>
+            <TextBlock Margin="10" Text="{Binding Picture.PointOfInterest.Name}"/>
+            <TextBlock Text="{Binding Picture.Description}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->

@@ -1,26 +1,100 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using CheckMapp.Model.Tables;
+using System.ComponentModel;
+using System.Windows.Input;
+using CheckMapp.Model.DataService;
+using System.Windows.Media.Imaging;
+using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class PhotoViewModel : ViewModelBase
+    public class PhotoViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Initializes a new instance of the PhotoViewModel class.
-        /// </summary>
-        public PhotoViewModel()
+        public PhotoViewModel(int id)
         {
+            LoadPictureFromDatabase(id);
+        }
+
+        #region Properties
+
+        private Picture _picture;
+        public Picture Picture
+        {
+            get { return _picture; }
+            set
+            {
+                _picture = value;
+                NotifyPropertyChanged("Picture");
+            }
+        }
+
+        private BitmapImage _photoToShow;
+        public BitmapImage PhotoToShow
+        {
+            get { return _photoToShow; }
+            set
+            {
+                _photoToShow = value;
+                NotifyPropertyChanged("PhotoToShow");
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region Buttons
+
+        private ICommand _deletePictureCommand;
+        public ICommand DeletePictureCommand
+        {
+            get
+            {
+                if (_deletePictureCommand == null)
+                {
+                    _deletePictureCommand = new RelayCommand(() => DeletePicture());
+                }
+                return _deletePictureCommand;
+            }
 
         }
 
-        public string PhotoMessage
+        #endregion
+
+        #region DBMethods
+
+        public void LoadPictureFromDatabase(int id)
         {
-            get { return "C'Est ca la photo `;a éétét pris la"; }
+            if (id > 0)
+            {
+                DataServicePicture dsPicture = new DataServicePicture();
+                _picture = dsPicture.getPictureById(id);
+
+                // Set the picture to the view
+                _photoToShow = Utility.ByteArrayToImage(_picture.PictureData);
+            }
         }
+
+        public void DeletePicture()
+        {
+            DataServicePicture dsPicture = new DataServicePicture();
+            dsPicture.DeletePicture(_picture);
+        }
+
+        #endregion
     }
 }

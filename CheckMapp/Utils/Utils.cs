@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace CheckMapp.Utils
 {
     public static class Utility
     {
+        #region Numbers Functions
+
         public static int StringToNumber(string str)
         {
             try
@@ -25,5 +29,34 @@ namespace CheckMapp.Utils
 
             return -1;
         }
+
+        #endregion
+
+        #region Images Functions
+
+        public static MemoryStream ImageToByteArray(string imagePath)
+        {
+            BitmapImage image = new BitmapImage();
+            image.CreateOptions = BitmapCreateOptions.None;
+            image.UriSource = new Uri(String.Format(imagePath), UriKind.Relative);
+            WriteableBitmap wbmp = new WriteableBitmap(image);
+            MemoryStream ms = new MemoryStream();
+            wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
+
+            return ms;
+        }
+
+        public static BitmapImage ByteArrayToImage(byte[] imageByteArray)
+        {
+            BitmapImage img = new BitmapImage();
+            using (MemoryStream memStream = new MemoryStream(imageByteArray))
+            {
+                img.SetSource(memStream);
+            }
+
+            return img;
+        }
+
+        #endregion
     }
 }

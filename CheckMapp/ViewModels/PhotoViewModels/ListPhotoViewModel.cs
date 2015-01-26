@@ -6,28 +6,41 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Linq;
+using CheckMapp.Model.DataService;
+using System.ComponentModel;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class ListPhotoViewModel : ViewModelBase
+    public class ListPhotoViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Initializes a new instance of the ListPhotoViewModel class.
-        /// </summary>
         public ListPhotoViewModel()
         {
+            
         }
+
+        #region Properties
 
         public string TripName
         {
             get { return "Africa 2014"; }
         }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
 
         //EXEMPLES
         public static List<Picture> GetPhotos()
@@ -62,7 +75,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             get
             {
-                var photos = GetPhotos();
+                //var photos = GetPhotos();
+                List<Picture> photos = LoadAllPicturesFromDatabase();
 
                 var groupedPhotos =
                     from photo in photos
@@ -73,6 +87,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                 return new List<KeyedList<string,Picture>>(groupedPhotos);
             }
         }
+
+        #region DBMethods
+
+        public List<Picture> LoadAllPicturesFromDatabase()
+        {
+            DataServicePicture dsPicture = new DataServicePicture();
+            //_pictureList = dsPicture.LoadPictures();
+            return dsPicture.LoadPictures();
+        }
+
+        #endregion
 
     }
 }

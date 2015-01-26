@@ -14,5 +14,6 @@ namespace CheckMapp.Model
 
         public Table<Note> notes;
         public Table<PointOfInterest> pointsOfInterests;
+        public Table<Picture> pictures;
     }
 }

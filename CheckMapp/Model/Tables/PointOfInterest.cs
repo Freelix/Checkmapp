@@ -13,6 +13,7 @@ namespace CheckMapp.Model.Tables
         public PointOfInterest()
         {
             _notes = new EntitySet<Note>();
+            _pictures = new EntitySet<Picture>();
         }
 
         #endregion
@@ -117,6 +118,23 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanging("Notes");
                     _notes.Assign(value);
                     NotifyPropertyChanged("Notes");
+                }
+            }
+        }
+
+        private EntitySet<Picture> _pictures;
+
+        [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
+        public EntitySet<Picture> Pictures
+        {
+            get { return _pictures; }
+            set
+            {
+                if (_pictures != value)
+                {
+                    NotifyPropertyChanging("Pictures");
+                    _pictures.Assign(value);
+                    NotifyPropertyChanged("Pictures");
                 }
             }
         }

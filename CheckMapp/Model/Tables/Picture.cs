@@ -28,20 +28,23 @@ namespace CheckMapp.Model.Tables
         }
 
         [Column]
-        public string _pointOfInterestId;
+        private int _pointOfInterestId;
         private EntityRef<PointOfInterest> _pointOfInterest;
-        [Association(Storage = "_pointOfInterest", ThisKey = "_pointOfInterestId")]
+        [Association(Storage = "_pointOfInterest", ThisKey = "_pointOfInterestId", OtherKey = "Id", IsForeignKey = true)]
         public PointOfInterest PointOfInterest
         {
             get { return _pointOfInterest.Entity; }
             set
             {
-                if (_pointOfInterest.Entity != value)
+                NotifyPropertyChanging("PointOfInterest");
+                _pointOfInterest.Entity = value;
+
+                if (value != null)
                 {
-                    NotifyPropertyChanging("PointOfInterest");
-                    _pointOfInterest.Entity = value;
-                    NotifyPropertyChanged("PointOfInterest");
+                    _pointOfInterestId = value.Id;
                 }
+
+                NotifyPropertyChanging("PointOfInterest");
             }
         }
 
@@ -81,7 +84,7 @@ namespace CheckMapp.Model.Tables
 
         private byte[] _pictureData;
 
-        [Column]
+        [Column (DbType = "image")]
         public byte[] PictureData
         {
             get { return _pictureData; }

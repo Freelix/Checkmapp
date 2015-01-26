@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.PhotoViewModels;
 using CheckMapp.Resources;
 using CheckMapp.ViewModels;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -18,8 +19,15 @@ namespace CheckMapp.Views.PhotoViews
         public ListPhotoView()
         {
             InitializeComponent();
+            loadData();
+        }
+
+        private void loadData()
+        {
             this.DataContext = new ListPhotoViewModel();
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
+            PhotoHubLLS.SelectionChanged += PhotoHubLLS_SelectionChanged;
+            PhotoHubLLS.SelectedItem = null;
         }
 
         private void IconAdd_Click(object sender, EventArgs e)
@@ -38,14 +46,19 @@ namespace CheckMapp.Views.PhotoViews
 
         private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
+            if (PhotoHubLLS.SelectedItem != null)
+            {
+                int pictureId = (PhotoHubLLS.SelectedItem as Picture).Id;
+                PhoneApplicationService.Current.State["id"] = pictureId;
+                NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
+            }
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
-                PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
+                loadData();
         }
     }
 }

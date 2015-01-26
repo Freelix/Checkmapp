@@ -1,31 +1,115 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
+using Microsoft.Phone.Controls;
+using System.ComponentModel;
+using System;
+using CheckMapp.Model.Tables;
+using CheckMapp.Model.DataService;
+using Utility = CheckMapp.Utils.Utility;
+using System.Windows;
+using System.Collections.Generic;
+using System.IO;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class AddEditPhotoViewModel : ViewModelBase
+    public class AddEditPhotoViewModel : PhoneApplicationPage, INotifyPropertyChanged
     {
         private ICommand _addEditPhotoCommand;
-        /// <summary>
-        /// Initializes a new instance of the AddEditPhotoViewModel class.
-        /// </summary>
+
         public AddEditPhotoViewModel(Mode mode)
         {
             this.Mode = mode;
+            LoadAllPOIFromDatabase();
         }
+
+        #region Properties
 
         public Mode Mode
         {
             get;
             set;
         }
+
+        private string _poiId;
+        public string POIID
+        {
+            get { return _poiId; }
+            set
+            {
+                _poiId = value;
+                NotifyPropertyChanged("POIID");
+            }
+        }
+
+        private List<PointOfInterest> _poiList;
+        public List<PointOfInterest> PoiList
+        {
+            get { return _poiList; }
+            set
+            {
+                _poiList = value;
+                NotifyPropertyChanged("PoiList");
+            }
+        }
+
+        private PointOfInterest _poiSelected;
+        public PointOfInterest POISelected
+        {
+            get { return _poiSelected; }
+            set
+            {
+                _poiSelected = value;
+                NotifyPropertyChanged("POISelected");
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                NotifyPropertyChanged("Description");
+            }
+        }
+
+        private string _imageSource;
+        public string ImageSource
+        {
+            get { return _imageSource; }
+            set
+            {
+                _imageSource = value;
+                NotifyPropertyChanged("ImageSource");
+            }
+        }
+
+        /// <summary>
+        /// Nom du voyage
+        /// </summary>
+        public string TripName
+        {
+            get { return "Africa 2014"; }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
 
         public ICommand AddEditPhotoCommand
         {
@@ -40,25 +124,77 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         }
 
+        #region DBMethods
+
         public void AddEditPhoto()
         {
             if (Mode == Mode.add)
             {
+                if (!string.IsNullOrWhiteSpace(_description) /*&& !string.IsNullOrWhiteSpace(_imageSource)*/)
+                {
+                    // Retrieve image path from source
+                    string imagePath = "/Images/vacance.jpg";
 
+                    MemoryStream ms = Utility.ImageToByteArray(imagePath);
+
+                    // Create the picture
+                    Picture picture = new Picture
+                    {
+                        Description = _description,
+                        Date = DateTime.Now,
+                        PictureData = ms.ToArray(),
+                        PointOfInterest = RetrievePOI()
+                    };
+
+                    AddPictureInDB(picture);
+
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                }
+                else
+                {
+                    // Show an appropriate message
+                }
             }
-            else
+            else if (Mode == Mode.edit)
             {
 
             }
         }
 
-        /// <summary>
-        /// Nom du voyage
-        /// </summary>
-        public string TripName
+        private void AddPictureInDB(Picture picture)
         {
-            get { return "Africa 2014"; }
+            DataServicePicture dsPicture = new DataServicePicture();
+            dsPicture.addPicture(picture);
         }
 
+        private PointOfInterest RetrievePOI()
+        {
+            PointOfInterest p = new PointOfInterest();
+
+            // If the point of interest is set
+            if (!string.IsNullOrWhiteSpace(_poiId))
+            {
+                int id = Utility.StringToNumber(_poiId);
+
+                if (id > -1)
+                    p = getPOIById(id);
+            }
+
+            return p;
+        }
+
+        private PointOfInterest getPOIById(int id)
+        {
+            DataServicePoi dsPoi = new DataServicePoi();
+            return dsPoi.getPOIById(id);
+        }
+
+        private void LoadAllPOIFromDatabase()
+        {
+            DataServicePoi dsPoi = new DataServicePoi();
+            PoiList = dsPoi.LoadListBoxPointOfInterests();
+        }
+
+        #endregion
     }
 }

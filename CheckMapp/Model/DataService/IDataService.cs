@@ -8,17 +8,22 @@ namespace CheckMapp.Model.DataService
 {
     public interface IDataServiceCountry
     {
-        Country SaveCountry(Country newCountry);
-        IList<Country> LoadCountries();
-        Country UpdateCountry(Country selectedCountry);
-        Country DeleteCountry(Country selectedCountry);
+        
+    }
+
+    public interface IDataServicePicture
+    {
+        void addPicture(Picture newPicture);
+        List<Picture> LoadPictures();
+        Picture getPictureById(int id);
+        void DeletePicture(Picture picture);
     }
 
     public interface IDataServiceNote
     {
         void addNote(Note newNote);
         Note getNoteById(int id);
-        IQueryable<Note> LoadNotes();
+        List<Note> LoadNotes();
         void UpdateNote(Note note);
         void DeleteNote(Note note);
     }

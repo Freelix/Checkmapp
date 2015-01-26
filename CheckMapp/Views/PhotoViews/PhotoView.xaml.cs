@@ -16,7 +16,13 @@ namespace CheckMapp.Views.PhotoViews
         public PhotoView()
         {
             InitializeComponent();
-            this.DataContext = new PhotoViewModel();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            int id = (int)PhoneApplicationService.Current.State["id"];
+            this.DataContext = new PhotoViewModel(id);
+            base.OnNavigatedTo(e);
         }
 
         private void OnFlick(object sender, FlickGestureEventArgs e)

@@ -12,6 +12,7 @@ using CheckMapp.ViewModels;
 using CheckMapp.Resources;
 using Microsoft.Phone.Tasks;
 using System.Windows.Media.Imaging;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -51,6 +52,10 @@ namespace CheckMapp.Views.PhotoViews
         private void IconSave_Click(object sender, EventArgs e)
         {
             this.Focus();
+
+            if (((PointOfInterest)poiListPicker.SelectedItem) != null)
+                poiTextBox.Text = ((PointOfInterest)poiListPicker.SelectedItem).Id.ToString();
+
             var vm = DataContext as AddEditPhotoViewModel;
             if (vm != null)
             {

@@ -16,8 +16,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
             LoadAllNotesFromDatabase();
         }
 
-        private ObservableCollection<Note> _noteList;
-        public ObservableCollection<Note> NoteList
+        private List<Note> _noteList;
+        public List<Note> NoteList
         {
             get { return _noteList; }
             set
@@ -66,9 +66,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         public void LoadAllNotesFromDatabase()
         {
             DataServiceNote dsNote = new DataServiceNote();
-            var allNotesInDB = dsNote.LoadNotes();
-
-            NoteList = new ObservableCollection<Note>(allNotesInDB);
+            _noteList = dsNote.LoadNotes();
         }
 
         #endregion
