@@ -12,6 +12,8 @@ using CheckMapp.Resources;
 using CheckMapp.ViewModels;
 using Microsoft.Phone.Tasks;
 using System.Windows.Media.Imaging;
+using System.IO;
+using CheckMapp.Utils;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -38,6 +40,7 @@ namespace CheckMapp.Views.TripViews
                 TitleTextblock.Text = AppResources.EditTrip;
             }
 
+           
             base.OnNavigatedTo(e);
         }
 
@@ -96,9 +99,7 @@ namespace CheckMapp.Views.TripViews
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                var img = new BitmapImage();
-                img.SetSource(e.ChosenPhoto);
-                hubTile.Source = img;
+                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
             }
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }

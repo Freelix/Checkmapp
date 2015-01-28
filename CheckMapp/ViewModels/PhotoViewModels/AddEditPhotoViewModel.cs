@@ -17,9 +17,12 @@ namespace CheckMapp.ViewModels.PhotoViewModels
     {
         private ICommand _addEditPhotoCommand;
 
-        public AddEditPhotoViewModel(Mode mode)
+        public AddEditPhotoViewModel(Mode mode, byte[] picture)
         {
             this.Mode = mode;
+            if (picture != null)
+                this.ImageSource = picture;
+
             LoadAllPOIFromDatabase();
         }
 
@@ -75,8 +78,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
         }
 
-        private string _imageSource;
-        public string ImageSource
+        private byte[] _imageSource;
+        public byte[] ImageSource
         {
             get { return _imageSource; }
             set
@@ -132,17 +135,12 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 if (!string.IsNullOrWhiteSpace(_description) /*&& !string.IsNullOrWhiteSpace(_imageSource)*/)
                 {
-                    // Retrieve image path from source
-                    string imagePath = "/Images/vacance.jpg";
-
-                    MemoryStream ms = Utility.ImageToByteArray(imagePath);
-
                     // Create the picture
                     Picture picture = new Picture
                     {
                         Description = _description,
                         Date = DateTime.Now,
-                        PictureData = ms.ToArray(),
+                        PictureData = ImageSource,
                         PointOfInterest = RetrievePOI()
                     };
 

@@ -17,7 +17,10 @@ namespace CheckMapp.Converter
             BitmapImage img = new BitmapImage();
             using (MemoryStream memStream = new MemoryStream(imageByteArray))
             {
-                img.SetSource(memStream);
+                if (memStream.Length > 0)
+                {
+                    img.SetSource(memStream);
+                }
             }
             return img;
         }
