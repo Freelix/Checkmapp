@@ -20,6 +20,9 @@ namespace CheckMapp.Views
             InitializeComponent();
             TiltEffect.TiltableItems.Add(typeof(PinButton));
             this.DataContext = new MapViewModel();
+
+            //Création de la clé
+            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

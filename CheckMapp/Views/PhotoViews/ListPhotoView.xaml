@@ -12,7 +12,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    Loaded="PhoneApplicationPage_Loaded">
+    Loaded="PhoneApplicationPage_Loaded"
+      xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
     <phone:PhoneApplicationPage.Resources>
 
@@ -59,6 +60,12 @@
 
         <DataTemplate x:Key="ItemTemplate">
             <StackPanel Height="108" Width="108" Margin="6,6">
+                <toolkit:ContextMenuService.ContextMenu >
+                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
+                        <toolkit:MenuItem x:Name="EditPhoto" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
+                        <toolkit:MenuItem x:Name="DeletePhoto" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
                 <Image Source="{Binding PictureData,Converter={StaticResource ByteToImageConverter}}" 
                        Width="108" Height="108" Stretch="UniformToFill">
                 </Image>

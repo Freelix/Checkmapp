@@ -13,6 +13,8 @@ using CheckMapp.Resources;
 using Microsoft.Phone.Tasks;
 using System.Windows.Media.Imaging;
 using CheckMapp.Model.Tables;
+using System.IO;
+using CheckMapp.Utils;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -26,7 +28,7 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            this.DataContext = new AddEditPhotoViewModel(mode);
+            this.DataContext = new AddEditPhotoViewModel(mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
 
             //Assigne le titre de la page
             var vm = this.DataContext as AddEditPhotoViewModel;
@@ -87,11 +89,8 @@ namespace CheckMapp.Views.PhotoViews
         void photoChooserTask_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
-            {
-                var img = new BitmapImage();
-                img.SetSource(e.ChosenPhoto);
-                hubTile.Source = img;
-            }
+                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
     }

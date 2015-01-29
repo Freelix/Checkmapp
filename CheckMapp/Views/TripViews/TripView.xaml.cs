@@ -11,6 +11,7 @@ using CheckMapp.ViewModels.TripViewModels;
 using CheckMapp.Resources;
 using Microsoft.Phone.Tasks;
 using CheckMapp.ViewModels;
+using CheckMapp.Utils;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -37,8 +38,12 @@ namespace CheckMapp.Views.TripViews
 
         void photoChooserTask_Completed(object sender, PhotoResult e)
         {
-            PhoneApplicationService.Current.State["Mode"] = Mode.add;
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+            if (e.TaskResult == TaskResult.OK)
+            {
+                PhoneApplicationService.Current.State["Mode"] = Mode.add;
+                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+            }
         }
 
         private void IconButtonAddNotes_Click(object sender, EventArgs e)

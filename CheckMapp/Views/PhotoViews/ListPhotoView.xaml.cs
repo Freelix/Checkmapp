@@ -60,5 +60,28 @@ namespace CheckMapp.Views.PhotoViews
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
         }
+
+        /// <summary>
+        /// Click sur les options du menu contextuel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                switch (menuItem.Name)
+                {
+                    case "EditPhoto":
+                        PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+                        break;
+                    case "DeletePhoto":
+                        MessageBox.Show("Are you sure you want to delete this picture?");
+                        break;
+                }
+            }
+        }
     }
 }
