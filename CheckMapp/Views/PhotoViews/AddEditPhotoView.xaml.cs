@@ -42,9 +42,9 @@ namespace CheckMapp.Views.PhotoViews
                 TitleTextblock.Text = AppResources.EditPicture;
 
                 // Retrieve the data from the calling page
-                Picture currentPicture = (Picture)PhoneApplicationService.Current.State["pictureToModify"];
+                int id = (int)PhoneApplicationService.Current.State["id"];
 
-                vm.ShowInfo(currentPicture);
+                vm.ShowInfo(id);
             }
 
             base.OnNavigatedTo(e);
@@ -63,8 +63,8 @@ namespace CheckMapp.Views.PhotoViews
         {
             this.Focus();
 
-            if (((PointOfInterest)poiListPicker.SelectedItem) != null)
-                poiTextBox.Text = ((PointOfInterest)poiListPicker.SelectedItem).Id.ToString();
+            /*if (((PointOfInterest)poiListPicker.SelectedItem) != null)
+                poiTextBox.Text = ((PointOfInterest)poiListPicker.SelectedItem).Id.ToString();*/
 
             var vm = DataContext as AddEditPhotoViewModel;
             if (vm != null)
@@ -89,7 +89,16 @@ namespace CheckMapp.Views.PhotoViews
         void photoChooserTask_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
+            {
                 PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+
+                // If in edit mode, we cannot pass the ChosenPhoto as a constructor's parameter
+                /*if (mode == Mode.edit)
+                {
+                    var vm = DataContext as AddEditPhotoViewModel;
+                    vm.setNewPictureInEditMode(Utility.ReadFully(e.ChosenPhoto));
+                }*/
+            }
 
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }

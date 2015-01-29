@@ -65,23 +65,14 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
-            Picture currentPicture = new Picture();
-            currentPicture.Description = DescriptionTextBlock.Text;
-            currentPicture.Id = (int) IDPictureTextBlock.Tag;
-            //currentPicture.PictureData = 
+            int id = (int)IDPictureTextBlock.Tag;
 
-            string s = POIIDTextBlock.Text;
-            int id = Utility.StringToNumber(POIIDTextBlock.Text);
-
-            if (id > -1)
+            if (id != 0)
             {
-                currentPicture.PointOfInterest = new PointOfInterest();
-                currentPicture.PointOfInterest.Id = id;
+                PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                PhoneApplicationService.Current.State["id"] = id;
+                NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
             }
-
-            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-            PhoneApplicationService.Current.State["pictureToModify"] = currentPicture;
-            NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }
 
         #endregion

@@ -22,7 +22,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             this.Mode = mode;
             if (picture != null)
-                this.ImageSource = picture;
+                this._imageSource = picture;
 
             LoadAllPOIFromDatabase();
         }
@@ -65,6 +65,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 _poiList = value;
                 NotifyPropertyChanged("PoiList");
+            }
+        }
+
+        private int _poiIndex;
+        public int PoiIndex
+        {
+            get { return _poiIndex; }
+            set
+            {
+                _poiIndex = value;
+                NotifyPropertyChanged("PoiIndex");
             }
         }
 
@@ -189,18 +200,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         private PointOfInterest RetrievePOI()
         {
-            PointOfInterest p = new PointOfInterest();
-
-            // If the point of interest is set
-            if (!string.IsNullOrWhiteSpace(_poiId))
-            {
-                int id = Utility.StringToNumber(_poiId);
-
-                if (id > -1)
-                    p = getPOIById(id);
-            }
-
-            return p;
+            //PointOfInterest p = new PointOfInterest();
+            return _poiList[_poiIndex];
         }
 
         private PointOfInterest getPOIById(int id)
@@ -216,15 +217,21 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             _poiId = dsPoi.getDefaultPOI().Id.ToString();
         }
 
-        public void ShowInfo(Picture pictureToModify)
+        private Picture getPictureById(int id) 
         {
-            if (pictureToModify != null)
+            DataServicePicture dsPicture = new DataServicePicture();
+            return dsPicture.getPictureById(id);
+        }
+
+        public void ShowInfo(int idPictureToModify)
+        {
+            if (idPictureToModify != 0)
             {
+                Picture pictureToModify = getPictureById(idPictureToModify);
+                
                 _description = pictureToModify.Description;
                 _pictureId = pictureToModify.Id;
-
-                // Set the picture to the view
-                //_imageSource = Utility.ByteArrayToImage(pictureToModify.PictureData);
+                _imageSource = pictureToModify.PictureData;
 
                 if (pictureToModify.PointOfInterest != null)
                 {
@@ -234,17 +241,20 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
         }
 
+        public void setNewPictureInEditMode(byte[] newPicture)
+        {
+            if (newPicture != null)
+                _imageSource = newPicture;
+        }
+
         private void UpdateExistingPicture()
         {
             DataServicePicture dsPicture = new DataServicePicture();
 
             Picture updatedPicture = new Picture();
 
-            string imagePath = "/Images/vacance.jpg";
-            MemoryStream ms = Utility.ImageToByteArray(imagePath);
-
             updatedPicture.Id = _pictureId;
-            updatedPicture.PictureData = ms.ToArray();
+            updatedPicture.PictureData = _imageSource;
             updatedPicture.PointOfInterest = RetrievePOI();
             updatedPicture.Description = _description;
 
