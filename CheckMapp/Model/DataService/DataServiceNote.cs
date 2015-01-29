@@ -47,7 +47,7 @@ namespace CheckMapp.Model.DataService
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error while trying to save a note" + e);
+                Console.WriteLine("Error while trying to save a note : " + e);
             }
         }
 

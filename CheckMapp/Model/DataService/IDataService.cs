@@ -17,6 +17,7 @@ namespace CheckMapp.Model.DataService
         List<Picture> LoadPictures();
         Picture getPictureById(int id);
         void DeletePicture(Picture picture);
+        void UpdatePicture(Picture picture);
     }
 
     public interface IDataServiceNote
@@ -40,6 +41,8 @@ namespace CheckMapp.Model.DataService
     {
         void addPoi(PointOfInterest poi);
         List<PointOfInterest> LoadPointOfInterests();
+        List<PointOfInterest> LoadListBoxPointOfInterests();
         PointOfInterest getPOIById(int id);
+        PointOfInterest getDefaultPOI();
     }
 }

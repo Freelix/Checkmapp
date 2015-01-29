@@ -35,10 +35,17 @@
             
             <TextBlock Text="{Binding Picture.Date}"/>
             <TextBlock Margin="10" Text="{Binding Picture.PointOfInterest.Name}"/>
-            <TextBlock Text="{Binding Picture.Description}"/>
+            <TextBlock x:Name="DescriptionTextBlock" Text="{Binding Picture.Description}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton  x:Name="IconEdit"  Click="IconEdit_Click"  IconUri="/Images/edit.png" Text="[edit]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

@@ -30,16 +30,24 @@ namespace CheckMapp.Views.PhotoViews
 
             //Assigne le titre de la page
             var vm = this.DataContext as AddEditPhotoViewModel;
+
             if (vm.Mode == Mode.add)
             {
                 TitleTextblock.Text = AppResources.AddPicture;
             }
-            else
+            else if (vm.Mode == Mode.edit)
             {
                 TitleTextblock.Text = AppResources.EditPicture;
+
+                // Retrieve the data from the calling page
+                Picture currentPicture = (Picture)PhoneApplicationService.Current.State["pictureToModify"];
+
+                vm.ShowInfo(currentPicture);
             }
+
             base.OnNavigatedTo(e);
         }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (ApplicationBar.Buttons != null)

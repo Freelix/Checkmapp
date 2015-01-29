@@ -8,6 +8,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.PhotoViewModels;
+using CheckMapp.Model.Tables;
+using CheckMapp.ViewModels;
+using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -45,5 +48,42 @@ namespace CheckMapp.Views.PhotoViews
                 }
             }
         }
+
+        #region Buttons
+
+        private void IconDelete_Click(object sender, EventArgs e)
+        {
+            // Call the appropriate function in ViewModel
+            var vm = DataContext as PhotoViewModel;
+            if (vm != null)
+            {
+                vm.DeletePictureCommand.Execute(null);
+            }
+
+            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+        }
+
+        private void IconEdit_Click(object sender, EventArgs e)
+        {
+            Picture currentPicture = new Picture();
+            currentPicture.Description = DescriptionTextBlock.Text;
+            currentPicture.Id = (int) IDPictureTextBlock.Tag;
+            //currentPicture.PictureData = 
+
+            string s = POIIDTextBlock.Text;
+            int id = Utility.StringToNumber(POIIDTextBlock.Text);
+
+            if (id > -1)
+            {
+                currentPicture.PointOfInterest = new PointOfInterest();
+                currentPicture.PointOfInterest.Id = id;
+            }
+
+            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+            PhoneApplicationService.Current.State["pictureToModify"] = currentPicture;
+            NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+        }
+
+        #endregion
     }
 }

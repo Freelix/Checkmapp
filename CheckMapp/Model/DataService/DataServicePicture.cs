@@ -42,5 +42,25 @@ namespace CheckMapp.Model.DataService
                 db.SubmitChanges();
             }
         }
+
+        public void UpdatePicture(Picture picture)
+        {
+            Picture pictureToUpdate = db.pictures.Where(x => x.Id == picture.Id).First();
+
+            pictureToUpdate.Id = picture.Id;
+            pictureToUpdate.PictureData = picture.PictureData;
+            pictureToUpdate.PointOfInterest = picture.PointOfInterest;
+            pictureToUpdate.Date = DateTime.Now;
+            pictureToUpdate.Description = picture.Description;
+
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while trying to save a picture : " + e);
+            }
+        }
     }
 }

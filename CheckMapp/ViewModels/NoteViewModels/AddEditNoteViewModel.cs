@@ -24,7 +24,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         /// <summary>
-        /// Show info on when updating
+        /// Show info when updating
         /// </summary>
         /// <param name="noteToModify"></param>
         public void showInfo(Note noteToModify)
@@ -242,7 +242,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
         private void LoadAllPOIFromDatabase()
         {
             DataServicePoi dsPoi = new DataServicePoi();
-            PoiList = dsPoi.LoadListBoxPointOfInterests();
+            _poiList = dsPoi.LoadListBoxPointOfInterests();
+            _poiId = dsPoi.getDefaultPOI().Id.ToString();
         }
 
         private PointOfInterest getPOIById(int id)

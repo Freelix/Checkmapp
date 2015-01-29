@@ -10,6 +10,7 @@ using Utility = CheckMapp.Utils.Utility;
 using System.Windows;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
@@ -29,6 +30,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             get;
             set;
+        }
+
+        private int _pictureId;
+        public int PictureId
+        {
+            get { return _pictureId; }
+            set
+            {
+                _pictureId = value;
+                NotifyPropertyChanged("PictureId");
+            }
         }
 
         private string _poiId;
@@ -157,7 +169,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
             else if (Mode == Mode.edit)
             {
+                // Edit a picture
+                if (!string.IsNullOrWhiteSpace(_description) /*&& !string.IsNullOrWhiteSpace(_imageSource)*/)
+                {
+                    UpdateExistingPicture();
 
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                }
+                else
+                {
+                    // Show an appropriate message
+                }
             }
         }
 
@@ -192,7 +214,43 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         private void LoadAllPOIFromDatabase()
         {
             DataServicePoi dsPoi = new DataServicePoi();
-            PoiList = dsPoi.LoadListBoxPointOfInterests();
+            _poiList = dsPoi.LoadListBoxPointOfInterests();
+            _poiId = dsPoi.getDefaultPOI().Id.ToString();
+        }
+
+        public void ShowInfo(Picture pictureToModify)
+        {
+            if (pictureToModify != null)
+            {
+                _description = pictureToModify.Description;
+                _pictureId = pictureToModify.Id;
+
+                // Set the picture to the view
+                //_imageSource = Utility.ByteArrayToImage(pictureToModify.PictureData);
+
+                if (pictureToModify.PointOfInterest != null)
+                {
+                    _poiId = pictureToModify.PointOfInterest.Id.ToString();
+                    _poiSelected = getPOIById(pictureToModify.PointOfInterest.Id);
+                }
+            }
+        }
+
+        private void UpdateExistingPicture()
+        {
+            DataServicePicture dsPicture = new DataServicePicture();
+
+            Picture updatedPicture = new Picture();
+
+            string imagePath = "/Images/vacance.jpg";
+            MemoryStream ms = Utility.ImageToByteArray(imagePath);
+
+            updatedPicture.Id = _pictureId;
+            updatedPicture.PictureData = ms.ToArray();
+            updatedPicture.PointOfInterest = RetrievePOI();
+            updatedPicture.Description = _description;
+
+            dsPicture.UpdatePicture(updatedPicture);
         }
 
         #endregion

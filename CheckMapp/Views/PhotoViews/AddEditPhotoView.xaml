@@ -26,6 +26,7 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="TitleTextblock" Text="[add/edit photo]" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="idNoteTextBlock" Tag="{Binding PictureId, Mode=TwoWay}" Visibility="Collapsed"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->

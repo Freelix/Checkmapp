@@ -84,7 +84,7 @@ namespace CheckMapp.Model.Tables
 
         private byte[] _pictureData;
 
-        [Column (DbType = "image")]
+        [Column (DbType = "image", UpdateCheck = UpdateCheck.Never)]
         public byte[] PictureData
         {
             get { return _pictureData; }
