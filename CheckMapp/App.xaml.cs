@@ -34,7 +34,7 @@ namespace CheckMapp
         /// Constructor for the Application object.
         /// </summary>
         public App()
-        {
+        {            
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -80,6 +80,11 @@ namespace CheckMapp
                     db.SubmitChanges();
                 }
             }
+
+            //Création des  clés
+            PhoneApplicationService.Current.State["Note"] = null;
+            PhoneApplicationService.Current.State["Picture"] = null;
+            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
 
         }
 

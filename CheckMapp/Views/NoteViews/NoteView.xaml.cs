@@ -36,29 +36,14 @@ namespace CheckMapp.Views.NoteViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
-            Note currentNote = new Note();
-            currentNote.Title = TitleTextBlock.Text;
-            currentNote.Id = (int) idNoteTextBlock.Tag;
-            currentNote.Message = messageTextBlock.Text;
-
-            string s = poiTextBlock.Text;
-            int id = Utility.StringToNumber(POIIDTextBlock.Text);
-
-            if (id > -1)
-            {
-                currentNote.PointOfInterest = new PointOfInterest();
-                currentNote.PointOfInterest.Id = id;
-            }
-
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-            PhoneApplicationService.Current.State["noteToModify"] = currentNote;
             NavigationService.Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            int id = (int)PhoneApplicationService.Current.State["id"];
-            this.DataContext = new NoteViewModel(id);
+            Note myNote = (Note)PhoneApplicationService.Current.State["Note"];
+            this.DataContext = new NoteViewModel(myNote);
             base.OnNavigatedTo(e);
         }
 

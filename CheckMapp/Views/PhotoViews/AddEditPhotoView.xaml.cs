@@ -28,24 +28,20 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            this.DataContext = new AddEditPhotoViewModel(mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
+            Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
+
+            this.DataContext = new AddEditPhotoViewModel(myPicture, mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
+
+            //On vide la mémoire plus possible
+            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
 
             //Assigne le titre de la page
             var vm = this.DataContext as AddEditPhotoViewModel;
 
             if (vm.Mode == Mode.add)
-            {
                 TitleTextblock.Text = AppResources.AddPicture;
-            }
             else if (vm.Mode == Mode.edit)
-            {
                 TitleTextblock.Text = AppResources.EditPicture;
-
-                // Retrieve the data from the calling page
-                int id = (int)PhoneApplicationService.Current.State["id"];
-
-                vm.ShowInfo(id);
-            }
 
             base.OnNavigatedTo(e);
         }
@@ -63,14 +59,18 @@ namespace CheckMapp.Views.PhotoViews
         {
             this.Focus();
 
-            /*if (((PointOfInterest)poiListPicker.SelectedItem) != null)
-                poiTextBox.Text = ((PointOfInterest)poiListPicker.SelectedItem).Id.ToString();*/
-
-            var vm = DataContext as AddEditPhotoViewModel;
-            if (vm != null)
+            // wait till the next UI thread tick so that the binding gets updated
+            Dispatcher.BeginInvoke(() =>
             {
-                vm.AddEditPhotoCommand.Execute(null);
-            }
+                var vm = DataContext as AddEditPhotoViewModel;
+                if (vm != null)
+                {
+                    vm.AddEditPhotoCommand.Execute(null);
+                }
+
+                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+            });
+
         }
 
         private void IconCancel_Click(object sender, EventArgs e)
@@ -89,18 +89,10 @@ namespace CheckMapp.Views.PhotoViews
         void photoChooserTask_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
-            {
                 PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
 
-                // If in edit mode, we cannot pass the ChosenPhoto as a constructor's parameter
-                /*if (mode == Mode.edit)
-                {
-                    var vm = DataContext as AddEditPhotoViewModel;
-                    vm.setNewPictureInEditMode(Utility.ReadFully(e.ChosenPhoto));
-                }*/
-            }
-
-            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+            //TODO : Pour une raison obscure le state de Picture se mettais a null... A voir...
+            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as AddEditPhotoViewModel).Picture;
         }
     }
 }

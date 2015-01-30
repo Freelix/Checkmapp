@@ -2,10 +2,12 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Runtime.Serialization;
 
 namespace CheckMapp.Model.Tables
 {
     [Table(Name = "Picture")]
+    [DataContract(IsReference = true)] 
     public class Picture : INotifyPropertyChanged, INotifyPropertyChanging
     {
         #region Members

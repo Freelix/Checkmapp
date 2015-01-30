@@ -87,6 +87,8 @@ namespace CheckMapp.Views.TripViews
 
         private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
+
             PhotoChooserTask photoChooserTask = new PhotoChooserTask();
             photoChooserTask.Completed += photoChooserTask_Completed;
             photoChooserTask.ShowCamera = true;

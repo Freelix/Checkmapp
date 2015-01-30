@@ -61,7 +61,7 @@
         <DataTemplate x:Key="ItemTemplate">
             <StackPanel Height="108" Width="108" Margin="6,6">
                 <toolkit:ContextMenuService.ContextMenu >
-                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
+                    <toolkit:ContextMenu Opened="ContextMenu_Opened" IsZoomEnabled="True" x:Name="ContextMenu" >
                         <toolkit:MenuItem x:Name="EditPhoto" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
                         <toolkit:MenuItem x:Name="DeletePhoto" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                     </toolkit:ContextMenu>

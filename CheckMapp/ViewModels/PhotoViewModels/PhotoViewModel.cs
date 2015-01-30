@@ -11,14 +11,14 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 {
     public class PhotoViewModel : INotifyPropertyChanged
     {
-        public PhotoViewModel(int id)
+        private Picture _picture;
+        public PhotoViewModel(Picture picture)
         {
-            LoadPictureFromDatabase(id);
+            this.Picture = picture;
         }
 
         #region Properties
 
-        private Picture _picture;
         public Picture Picture
         {
             get { return _picture; }
@@ -26,17 +26,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 _picture = value;
                 NotifyPropertyChanged("Picture");
-            }
-        }
-
-        private BitmapImage _photoToShow;
-        public BitmapImage PhotoToShow
-        {
-            get { return _photoToShow; }
-            set
-            {
-                _photoToShow = value;
-                NotifyPropertyChanged("PhotoToShow");
             }
         }
 
@@ -77,18 +66,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         #region DBMethods
 
-        public void LoadPictureFromDatabase(int id)
-        {
-            if (id > 0)
-            {
-                DataServicePicture dsPicture = new DataServicePicture();
-                _picture = dsPicture.getPictureById(id);
-
-                // Set the picture to the view
-                _photoToShow = Utility.ByteArrayToImage(_picture.PictureData);
-            }
-        }
-
+        /// <summary>
+        /// Suppression d'une photo
+        /// </summary>
         public void DeletePicture()
         {
             DataServicePicture dsPicture = new DataServicePicture();

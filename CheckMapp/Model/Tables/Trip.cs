@@ -3,11 +3,13 @@ using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using CheckMapp.Model.Utils;
+using System.Runtime.Serialization;
 
 namespace CheckMapp.Model.Tables
 {
 
     [Table(Name = "Trip")]
+    [DataContract(IsReference = true)] 
     public class Trip : INotifyPropertyChanged, INotifyPropertyChanging
     {
         #region Members

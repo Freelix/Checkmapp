@@ -52,7 +52,7 @@
                     <toolkit:ListPicker
                     x:Name="poiListPicker"
                     ItemsSource="{Binding PoiList}"
-                    SelectedIndex="{Binding PoiIndex, Mode=TwoWay}"
+                    SelectedItem="{Binding POISelected, Mode=TwoWay}"
                     DisplayMemberPath="Name">
                     </toolkit:ListPicker>
 

@@ -12,14 +12,15 @@ namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class NoteViewModel : INotifyPropertyChanged
     {
-        public NoteViewModel(int id)
+        private Note _note;
+
+        public NoteViewModel(Note note)
         {
-            LoadNoteFromDatabase(id);
+            this.Note = note;
         }
 
         #region Properties
 
-        private Note _note;
         public Note Note
         {
             get { return _note; }
@@ -84,19 +85,10 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region DBMethods
 
-        public void LoadNoteFromDatabase(int id)
-        {
-            if (id > 0)
-            {
-                DataServiceNote dsNote = new DataServiceNote();
-                _note = dsNote.getNoteById(id);
-            }
-        }
-
         public void DeleteNote()
         {
             DataServiceNote dsNote = new DataServiceNote();
-            dsNote.DeleteNote(_note);
+            dsNote.DeleteNote(Note);
         }
 
         #endregion

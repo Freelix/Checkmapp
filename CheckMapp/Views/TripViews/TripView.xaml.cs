@@ -12,6 +12,8 @@ using CheckMapp.Resources;
 using Microsoft.Phone.Tasks;
 using CheckMapp.ViewModels;
 using CheckMapp.Utils;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace CheckMapp.Views.TripViews
 {

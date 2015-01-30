@@ -11,6 +11,7 @@ using CheckMapp.ViewModels.PhotoViewModels;
 using CheckMapp.Model.Tables;
 using CheckMapp.ViewModels;
 using Utility = CheckMapp.Utils.Utility;
+using CheckMapp.Resources;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -23,8 +24,8 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            int id = (int)PhoneApplicationService.Current.State["id"];
-            this.DataContext = new PhotoViewModel(id);
+            Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
+            this.DataContext = new PhotoViewModel(myPicture);
             base.OnNavigatedTo(e);
         }
 
@@ -65,13 +66,16 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
-            int id = (int)IDPictureTextBlock.Tag;
+            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+            NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+        }
 
-            if (id != 0)
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ApplicationBar.Buttons != null)
             {
-                PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-                PhoneApplicationService.Current.State["id"] = id;
-                NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Edit;
+                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Delete;
             }
         }
 

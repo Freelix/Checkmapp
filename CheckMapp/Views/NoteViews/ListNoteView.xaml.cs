@@ -37,12 +37,9 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         void ListboxNote_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //List<Note> noteList = (this.DataContext as ListNoteViewModel).NoteList.ToList();
-
             if (NoteLLS.SelectedItem != null)
             {
-                int noteId = (NoteLLS.SelectedItem as Note).Id;
-                PhoneApplicationService.Current.State["id"] = noteId;
+                PhoneApplicationService.Current.State["Note"] = (NoteLLS.SelectedItem as Note);
                 NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
             }
         }
@@ -84,14 +81,31 @@ namespace CheckMapp.Views.NoteViews
                 switch (menuItem.Name)
                 {
                     case "EditNote":
-                        PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
+                        if (((sender as MenuItem).DataContext is Note))
+                        {
+                            PhoneApplicationService.Current.State["Note"] = ((sender as MenuItem).DataContext as Note);
+                            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
+                        }
                         break;
                     case "DeleteNote":
                         MessageBox.Show("Are you sure you want to delete this trip?");
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// J'ai besoin de ça pour mettre à jour mon ContextMenu lorsque je reviens à un changement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            var menu = (ContextMenu)sender;
+            var owner = (FrameworkElement)menu.Owner;
+            if (owner.DataContext != menu.DataContext)
+                menu.DataContext = owner.DataContext;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

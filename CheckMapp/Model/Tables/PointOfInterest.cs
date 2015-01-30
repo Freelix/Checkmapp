@@ -2,10 +2,12 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Runtime.Serialization;
 
 namespace CheckMapp.Model.Tables
 {
     [Table(Name = "PointOfInterest")]
+    [DataContract(IsReference = true)] 
     public class PointOfInterest : INotifyPropertyChanged, INotifyPropertyChanging
     {
         #region Constructors

@@ -34,11 +34,12 @@ namespace CheckMapp.Utils
 
         #region Images Functions
 
+       
         public static MemoryStream ImageToByteArray(string imagePath)
         {
             BitmapImage image = new BitmapImage();
-            image.CreateOptions = BitmapCreateOptions.None;
-            image.UriSource = new Uri(String.Format(imagePath), UriKind.Relative);
+            image.CreateOptions = BitmapCreateOptions.BackgroundCreation;
+            image.UriSource = new Uri(@imagePath, UriKind.Relative);
             WriteableBitmap wbmp = new WriteableBitmap(image);
             MemoryStream ms = new MemoryStream();
             wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);

@@ -17,29 +17,23 @@ namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class AddEditNoteViewModel : PhoneApplicationPage, INotifyPropertyChanged
     {
-        public AddEditNoteViewModel(Mode mode)
+        private Note _note;
+
+        public AddEditNoteViewModel(Note note, Mode mode)
         {
             this.Mode = mode;
+
+            if (this.Mode == Mode.add)
+            {
+                Note = new Note();
+                Note.Date = DateTime.Now;
+            }
+            else
+                Note = note;
+
             LoadAllPOIFromDatabase();
         }
 
-        /// <summary>
-        /// Show info when updating
-        /// </summary>
-        /// <param name="noteToModify"></param>
-        public void showInfo(Note noteToModify)
-        {
-            _id = noteToModify.Id;
-            _name = noteToModify.Title;
-            _noteDate = DateTime.Now;
-            _message = noteToModify.Message;
-
-            if (noteToModify.PointOfInterest != null)
-            {
-                _poiId = noteToModify.PointOfInterest.Id.ToString();
-                _poiSelected = getPOIById(noteToModify.PointOfInterest.Id);
-            }
-        }
 
         private ICommand _addEditNoteCommand;
         public ICommand AddEditNoteCommand
@@ -56,43 +50,46 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         #region Properties
-
+        /// <summary>
+        /// Ma note
+        /// </summary>
+        public Note Note
+        {
+            get { return _note; }
+            set
+            {
+                _note = value;
+            }
+        }
         public Mode Mode
         {
             get;
             set;
         }
 
-        private int _id;
+        /// <summary>
+        /// Le id de ma note
+        /// </summary>
         public int NoteId
         {
-            get { return _id; }
+            get { return Note.Id; }
             set
             {
-                _id = value;
+                Note.Id = value;
                 NotifyPropertyChanged("NoteId");
             }
         }
 
-        private string _name;
+        /// <summary>
+        /// Le titre de ma note
+        /// </summary>
         public string NoteName
         {
-            get { return _name; }
+            get { return Note.Title; }
             set
             {
-                _name = value;
+                Note.Title = value;
                 NotifyPropertyChanged("NoteName");
-            }
-        }
-
-        private string _poiId;
-        public string POIID
-        {
-            get { return _poiId; }
-            set
-            {
-                _poiId = value;
-                NotifyPropertyChanged("POIID");
             }
         }
 
@@ -107,35 +104,41 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
-        private PointOfInterest _poiSelected;
+        /// <summary>
+        /// Le point d'intérêt
+        /// </summary>
         public PointOfInterest POISelected
         {
-            get { return _poiSelected; }
+            get { return Note.PointOfInterest; }
             set
             {
-                _poiSelected = value;
+                Note.PointOfInterest = value;
                 NotifyPropertyChanged("POISelected");
             }
         }
 
-        private string _message;
+        /// <summary>
+        /// Le contenu de ma note
+        /// </summary>
         public string Message
         {
-            get { return _message; }
+            get { return Note.Message; }
             set
             {
-                _message = value;
+                Note.Message = value;
                 NotifyPropertyChanged("Message");
             }
         }
 
-        private DateTime _noteDate;
+        /// <summary>
+        /// La date de ma note
+        /// </summary>
         public DateTime NoteDate
         {
-            get { return _noteDate; }
+            get { return Note.Date; }
             set
             {
-                _noteDate = value;
+                Note.Date = value;
                 NotifyPropertyChanged("NoteDate");
             }
         }
@@ -164,61 +167,26 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region DBMethods
 
+        /// <summary>
+        /// Ajouter ou modifier une note
+        /// </summary>
         public void AddEditNote()
         {
             // Adding a note
-            if (Mode == Mode.add)
-            {
-                if (!string.IsNullOrWhiteSpace(_name) && !string.IsNullOrWhiteSpace(_message))
-                {
-                    Note newNote = new Note
-                    {
-                        Title = _name,
-                        Message = _message,
-                        Date = DateTime.Now,
-                        PointOfInterest = RetrievePOI()
-                    };
 
-                    AddNoteInDB(newNote);
-
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-                }
-                else
-                {
-                    // Show an appropriate message
-                }
-            }
-            else if (Mode == Mode.edit)
+            if (!string.IsNullOrWhiteSpace(NoteName) && !string.IsNullOrWhiteSpace(Message))
             {
-                // Edit a note
-                if (!string.IsNullOrWhiteSpace(_name) && !string.IsNullOrWhiteSpace(_message))
-                {
+                if (Mode == Mode.add)
+                    AddNoteInDB(Note);
+                else if (Mode == Mode.edit)
                     UpdateExistingNote();
-
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-                }
-                else
-                {
-                    // Show an appropriate message
-                }
             }
-        }
-
-        private PointOfInterest RetrievePOI()
-        {
-            PointOfInterest p = new PointOfInterest();
-
-            // If the point of interest is set
-            if (!string.IsNullOrWhiteSpace(_poiId))
+            else
             {
-                int id = Utility.StringToNumber(_poiId);
-
-                if (id > -1)
-                    p = getPOIById(id);
+                // Show an appropriate message
             }
-
-            return p;
         }
+
 
         private void AddNoteInDB(Note note)
         {
@@ -229,28 +197,16 @@ namespace CheckMapp.ViewModels.NoteViewModels
         private void UpdateExistingNote()
         {
             DataServiceNote dsNote = new DataServiceNote();
-
-            Note updatedNote = new Note();
-            updatedNote.Title = _name;
-            updatedNote.Message = _message;
-            updatedNote.Id = _id;
-            updatedNote.PointOfInterest = RetrievePOI();
-
-            dsNote.UpdateNote(updatedNote);
+            dsNote.UpdateNote(Note);
         }
 
         private void LoadAllPOIFromDatabase()
         {
             DataServicePoi dsPoi = new DataServicePoi();
             _poiList = dsPoi.LoadListBoxPointOfInterests();
-            _poiId = dsPoi.getDefaultPOI().Id.ToString();
+            POISelected = dsPoi.getDefaultPOI();
         }
 
-        private PointOfInterest getPOIById(int id)
-        {
-            DataServicePoi dsPoi = new DataServicePoi();
-            return dsPoi.getPOIById(id);
-        }
 
         #endregion
     }

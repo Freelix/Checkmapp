@@ -42,12 +42,9 @@
 
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteInterestPoint, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 
-                <!-- Use to store the value of the ListPicker -->
-                <TextBox x:Name="poiTextBox" Text="{Binding POIID, Mode=TwoWay}"  Visibility="Collapsed"/>
-
                 <toolkit:ListPicker
                     x:Name="poiListPicker"
-                    ItemsSource="{Binding PoiList, Mode=TwoWay}"
+                    ItemsSource="{Binding PoiList}"
                     SelectedItem="{Binding POISelected, Mode=TwoWay}"
                     DisplayMemberPath="Name">
                 </toolkit:ListPicker>

@@ -17,17 +17,39 @@ namespace CheckMapp.ViewModels.PhotoViewModels
     public class AddEditPhotoViewModel : PhoneApplicationPage, INotifyPropertyChanged
     {
         private ICommand _addEditPhotoCommand;
+        private Picture _picture;
 
-        public AddEditPhotoViewModel(Mode mode, byte[] picture)
+        public AddEditPhotoViewModel(Picture picture, Mode mode, byte[] photoArray)
         {
             this.Mode = mode;
-            if (picture != null)
-                this._imageSource = picture;
+
+            if (this.Mode == Mode.add)
+            {
+                Picture = new Picture();
+                Picture.Date = DateTime.Now;
+            }
+            else
+                Picture = picture;
 
             LoadAllPOIFromDatabase();
+
+            if (photoArray != null)
+                this.ImageSource = photoArray;
         }
 
         #region Properties
+
+        /// <summary>
+        /// Ma photo
+        /// </summary>
+        public Picture Picture
+        {
+            get { return _picture; }
+            set
+            {
+                _picture = value;
+            }
+        }
 
         public Mode Mode
         {
@@ -35,79 +57,68 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set;
         }
 
-        private int _pictureId;
-        public int PictureId
-        {
-            get { return _pictureId; }
-            set
-            {
-                _pictureId = value;
-                NotifyPropertyChanged("PictureId");
-            }
-        }
-
-        private string _poiId;
-        public string POIID
-        {
-            get { return _poiId; }
-            set
-            {
-                _poiId = value;
-                NotifyPropertyChanged("POIID");
-            }
-        }
 
         private List<PointOfInterest> _poiList;
+        /// <summary>
+        /// Ma liste de points d'intérêt
+        /// </summary>
         public List<PointOfInterest> PoiList
         {
             get { return _poiList; }
             set
             {
                 _poiList = value;
-                NotifyPropertyChanged("PoiList");
             }
         }
 
-        private int _poiIndex;
-        public int PoiIndex
+        /// <summary>
+        /// Le id de mon image
+        /// </summary>
+        public int PictureId
         {
-            get { return _poiIndex; }
+            get { return Picture.Id; }
             set
             {
-                _poiIndex = value;
-                NotifyPropertyChanged("PoiIndex");
+                Picture.Id = value;
+                NotifyPropertyChanged("PictureId");
             }
         }
 
-        private PointOfInterest _poiSelected;
+        /// <summary>
+        /// Le point d'intérêt sélectionné
+        /// </summary>
         public PointOfInterest POISelected
         {
-            get { return _poiSelected; }
+            get { return Picture.PointOfInterest; }
             set
             {
-                _poiSelected = value;
+                Picture.PointOfInterest = value;
                 NotifyPropertyChanged("POISelected");
             }
         }
 
-        private string _description;
+        /// <summary>
+        /// La description de ma photo
+        /// </summary>
         public string Description
         {
-            get { return _description; }
+            get { return Picture.Description; }
             set
             {
-                _description = value;
+                Picture.Description = value;
                 NotifyPropertyChanged("Description");
             }
         }
 
-        private byte[] _imageSource;
+        /// <summary>
+        /// L'image en tableau de byte
+        /// </summary>
         public byte[] ImageSource
         {
-            get { return _imageSource; }
+            get { return Picture.PictureData; }
             set
             {
-                _imageSource = value;
+                Picture.PictureData = value;
                 NotifyPropertyChanged("ImageSource");
             }
         }
@@ -151,44 +162,26 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
         #region DBMethods
-
+        /// <summary>
+        /// Ajout ou modification d'une photo
+        /// </summary>
         public void AddEditPhoto()
         {
-            if (Mode == Mode.add)
+            if (!string.IsNullOrWhiteSpace(Description) && ImageSource != null)
             {
-                if (!string.IsNullOrWhiteSpace(_description) /*&& !string.IsNullOrWhiteSpace(_imageSource)*/)
+                if (Mode == Mode.add)
                 {
                     // Create the picture
-                    Picture picture = new Picture
-                    {
-                        Description = _description,
-                        Date = DateTime.Now,
-                        PictureData = ImageSource,
-                        PointOfInterest = RetrievePOI()
-                    };
-
-                    AddPictureInDB(picture);
-
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                    AddPictureInDB(Picture);
                 }
-                else
-                {
-                    // Show an appropriate message
-                }
-            }
-            else if (Mode == Mode.edit)
-            {
-                // Edit a picture
-                if (!string.IsNullOrWhiteSpace(_description) /*&& !string.IsNullOrWhiteSpace(_imageSource)*/)
+                else if (Mode == Mode.edit)
                 {
                     UpdateExistingPicture();
-
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
                 }
-                else
-                {
-                    // Show an appropriate message
-                }
+            }
+            else
+            {
+                // Show an appropriate message
             }
         }
 
@@ -198,67 +191,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             dsPicture.addPicture(picture);
         }
 
-        private PointOfInterest RetrievePOI()
-        {
-            //PointOfInterest p = new PointOfInterest();
-            return _poiList[_poiIndex];
-        }
-
-        private PointOfInterest getPOIById(int id)
-        {
-            DataServicePoi dsPoi = new DataServicePoi();
-            return dsPoi.getPOIById(id);
-        }
-
         private void LoadAllPOIFromDatabase()
         {
             DataServicePoi dsPoi = new DataServicePoi();
             _poiList = dsPoi.LoadListBoxPointOfInterests();
-            _poiId = dsPoi.getDefaultPOI().Id.ToString();
-        }
-
-        private Picture getPictureById(int id) 
-        {
-            DataServicePicture dsPicture = new DataServicePicture();
-            return dsPicture.getPictureById(id);
-        }
-
-        public void ShowInfo(int idPictureToModify)
-        {
-            if (idPictureToModify != 0)
-            {
-                Picture pictureToModify = getPictureById(idPictureToModify);
-                
-                _description = pictureToModify.Description;
-                _pictureId = pictureToModify.Id;
-                _imageSource = pictureToModify.PictureData;
-
-                if (pictureToModify.PointOfInterest != null)
-                {
-                    _poiId = pictureToModify.PointOfInterest.Id.ToString();
-                    _poiSelected = getPOIById(pictureToModify.PointOfInterest.Id);
-                }
-            }
-        }
-
-        public void setNewPictureInEditMode(byte[] newPicture)
-        {
-            if (newPicture != null)
-                _imageSource = newPicture;
+            POISelected = dsPoi.getDefaultPOI();
         }
 
         private void UpdateExistingPicture()
         {
             DataServicePicture dsPicture = new DataServicePicture();
-
-            Picture updatedPicture = new Picture();
-
-            updatedPicture.Id = _pictureId;
-            updatedPicture.PictureData = _imageSource;
-            updatedPicture.PointOfInterest = RetrievePOI();
-            updatedPicture.Description = _description;
-
-            dsPicture.UpdatePicture(updatedPicture);
+            dsPicture.UpdatePicture(Picture);
         }
 
         #endregion
