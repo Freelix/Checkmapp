@@ -17,6 +17,15 @@
     >
     <phone:PhoneApplicationPage.Resources>
 
+        <shell:ApplicationBar x:Key="AppBarList" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton  x:Name="IconMultiSelect"  Click="IconMultiSelect_Click"  IconUri="/Images/appbar.list.check.png" Text="[select]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="AppBarListSelect" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton    x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
+        </shell:ApplicationBar>
+        
         <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
         <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
 
@@ -59,7 +68,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate">
-            <StackPanel Margin="0,0,0,30">
+            <StackPanel Margin="0,-10,0,30" Tap="StackPanel_Tap">
                 <toolkit:ContextMenuService.ContextMenu >
                     <toolkit:ContextMenu IsZoomEnabled="True" Opened="ContextMenu_Opened" x:Name="ContextMenuNote" >
                         <toolkit:MenuItem x:Name="EditNote" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
@@ -67,8 +76,8 @@
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
                 <TextBlock Tag="{Binding Id}" Visibility="Collapsed"/>
-                <TextBlock Text="{Binding Date, StringFormat=t}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
                 <TextBlock Text="{Binding Title}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Date, StringFormat=t}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
                 <TextBlock Text="{Binding Message, Converter={StaticResource NoteMessage}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"></TextBlock>
             </StackPanel>
         </DataTemplate>
@@ -89,19 +98,16 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector Name="NoteLLS" Margin="13,-30,0,0"
+            <toolkit:LongListMultiSelector Name="NoteLLS" Margin="13,-30,0,0"
                                         ItemsSource="{Binding GroupedNotes}"
                                         ItemTemplate="{StaticResource ItemTemplate}"                     
                                         GroupHeaderTemplate="{StaticResource GroupHeader}"
                                         JumpListStyle="{StaticResource JumpListStyle}" 
                                         IsGroupingEnabled="True"
-                                        SelectionChanged="ListboxNote_SelectionChanged"/>
+                                           SelectionChanged="NoteLLS_SelectionChanged"
+                                           IsSelectionEnabledChanged="NoteLLS_IsSelectionEnabledChanged"
+                                        />
         </Grid>
     </Grid>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

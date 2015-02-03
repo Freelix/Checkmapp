@@ -178,6 +178,51 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this note?.
+        /// </summary>
+        public static string ConfirmationDeleteNote {
+            get {
+                return ResourceManager.GetString("ConfirmationDeleteNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete theses notes?.
+        /// </summary>
+        public static string ConfirmationDeleteNotes {
+            get {
+                return ResourceManager.GetString("ConfirmationDeleteNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this photo?.
+        /// </summary>
+        public static string ConfirmationDeletePicture {
+            get {
+                return ResourceManager.GetString("ConfirmationDeletePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete these photos?.
+        /// </summary>
+        public static string ConfirmationDeletePictures {
+            get {
+                return ResourceManager.GetString("ConfirmationDeletePictures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this trip?.
+        /// </summary>
+        public static string ConfirmationDeleteTrip {
+            get {
+                return ResourceManager.GetString("ConfirmationDeleteTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm.
         /// </summary>
         public static string ConfirmButton {
@@ -579,6 +624,15 @@ namespace CheckMapp.Resources {
         public static string SeePhotos {
             get {
                 return ResourceManager.GetString("SeePhotos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à select.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
             }
         }
         

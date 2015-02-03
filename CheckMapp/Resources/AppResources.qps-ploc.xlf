@@ -275,6 +275,30 @@
           <source>choose picture</source>
           <target state="new">choose picture</target>
         </trans-unit>
+        <trans-unit id="Resx/ConfirmationDeleteTrip" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete this trip?</source>
+          <target state="new">Are you sure you want to delete this trip?</target>
+        </trans-unit>
+        <trans-unit id="Resx/Select" translate="yes" xml:space="preserve">
+          <source>select</source>
+          <target state="new">select</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmationDeletePictures" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete these photos?</source>
+          <target state="new">Are you sure you want to delete these photos?</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmationDeletePicture" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete this photo?</source>
+          <target state="new">Are you sure you want to delete this photo?</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmationDeleteNotes" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete theses notes?</source>
+          <target state="new">Are you sure you want to delete theses notes?</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmationDeleteNote" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete this note?</source>
+          <target state="new">Are you sure you want to delete this note?</target>
+        </trans-unit>
         <trans-unit id="Resx/EditPicture" translate="yes" xml:space="preserve">
           <source>Edit picture</source>
           <target state="new">Edit picture</target>

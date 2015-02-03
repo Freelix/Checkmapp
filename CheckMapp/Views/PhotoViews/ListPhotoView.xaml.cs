@@ -26,8 +26,6 @@ namespace CheckMapp.Views.PhotoViews
         {
             this.DataContext = new ListPhotoViewModel();
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
-            PhotoHubLLS.SelectionChanged += PhotoHubLLS_SelectionChanged;
-            PhotoHubLLS.SelectedItem = null;
         }
 
         private void IconAdd_Click(object sender, EventArgs e)
@@ -38,17 +36,21 @@ namespace CheckMapp.Views.PhotoViews
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApplicationBar.Buttons != null)
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddPicture;
-        }
-
-        private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (PhotoHubLLS.SelectedItem != null)
+            var appbar = this.Resources["AppBarList"] as ApplicationBar;
+            if (appbar.Buttons != null)
             {
-                PhoneApplicationService.Current.State["Picture"] = (PhotoHubLLS.SelectedItem as Picture);
-                NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
+                (appbar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Select;
+                (appbar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddPicture;
             }
+
+            var appbarSelect = this.Resources["AppBarListSelect"] as ApplicationBar;
+            if (appbarSelect.Buttons != null)
+            {
+                (appbarSelect.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Delete;
+            }
+            ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
+
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -56,6 +58,16 @@ namespace CheckMapp.Views.PhotoViews
             base.OnNavigatedTo(e);
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back && PhotoHubLLS.IsSelectionEnabled)
+            {
+                PhotoHubLLS.IsSelectionEnabled = false;
+                e.Cancel = true;
+            }
         }
 
         /// <summary>
@@ -66,20 +78,28 @@ namespace CheckMapp.Views.PhotoViews
         private void ContextMenu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            if (menuItem != null)
+            if (menuItem != null && ((sender as MenuItem).DataContext is Picture))
             {
+                Picture pictureSelected = (sender as MenuItem).DataContext as Picture;
                 switch (menuItem.Name)
                 {
                     case "EditPhoto":
-                        if (((sender as MenuItem).DataContext is Picture))
-                        {
-                            PhoneApplicationService.Current.State["Picture"] = ((sender as MenuItem).DataContext as Picture);
+                            PhoneApplicationService.Current.State["Picture"] = pictureSelected;
                             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
                             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
-                        }
                         break;
                     case "DeletePhoto":
-                        MessageBox.Show("Are you sure you want to delete this picture?");
+                        if (MessageBox.Show(AppResources.ConfirmationDeletePicture, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                        {
+                            var vm = DataContext as ListPhotoViewModel;
+                            if (vm != null)
+                                vm.DeletePictureCommand.Execute(pictureSelected);
+
+                            vm.PictureList.Remove(pictureSelected);
+                            PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
+
+                            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
+                        }
                         break;
                 }
             }
@@ -96,6 +116,60 @@ namespace CheckMapp.Views.PhotoViews
             var owner = (FrameworkElement)menu.Owner;
             if (owner.DataContext != menu.DataContext)
                 menu.DataContext = owner.DataContext;
+        }
+
+        private void IconMultiSelect_Click(object sender, EventArgs e)
+        {
+            PhotoHubLLS.IsSelectionEnabled = !PhotoHubLLS.IsSelectionEnabled;
+        }
+
+        private void PhotoHubLLS_IsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (PhotoHubLLS.IsSelectionEnabled)
+                ApplicationBar = this.Resources["AppBarListSelect"] as ApplicationBar;
+            else
+                ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !PhotoHubLLS.IsSelectionEnabled;
+        }
+
+        private void IconDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(AppResources.ConfirmationDeletePictures, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                var vm = DataContext as ListPhotoViewModel;
+                List<Picture> pictureList = new List<Picture>();
+                for (int i = 0; i < PhotoHubLLS.SelectedItems.Count; i++)
+                {
+                    pictureList.Add(PhotoHubLLS.SelectedItems[i] as Picture);
+                    vm.PictureList.Remove(PhotoHubLLS.SelectedItems[i] as Picture);
+                }
+
+                if (vm != null)
+                    vm.DeletePicturesCommand.Execute(pictureList);
+
+                PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
+
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
+            }
+        }
+
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PhotoHubLLS.IsSelectionEnabled = false;
+
+            if (!PhotoHubLLS.IsSelectionEnabled)
+            {
+                Picture itemTapped = (sender as FrameworkElement).DataContext as Picture;
+                PhoneApplicationService.Current.State["Picture"] = itemTapped;
+                NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
+            }
+        }
+
+        private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PhotoHubLLS.IsSelectionEnabled)
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.SelectedItems.Count > 0);
         }
     }
 }

@@ -338,4 +338,22 @@
   <data name="ChoosePicture" xml:space="preserve">
     <value>choose picture</value>
   </data>
+  <data name="ConfirmationDeleteNote" xml:space="preserve">
+    <value>Are you sure you want to delete this note?</value>
+  </data>
+  <data name="ConfirmationDeleteNotes" xml:space="preserve">
+    <value>Are you sure you want to delete theses notes?</value>
+  </data>
+  <data name="ConfirmationDeletePicture" xml:space="preserve">
+    <value>Are you sure you want to delete this photo?</value>
+  </data>
+  <data name="ConfirmationDeletePictures" xml:space="preserve">
+    <value>Are you sure you want to delete these photos?</value>
+  </data>
+  <data name="ConfirmationDeleteTrip" xml:space="preserve">
+    <value>Are you sure you want to delete this trip?</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>select</value>
+  </data>
 </root>

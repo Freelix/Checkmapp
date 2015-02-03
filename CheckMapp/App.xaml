@@ -42,7 +42,12 @@
             <DataTemplate x:Key="ArchivesViewModel" >
                 <vw:ArchivesView />
             </DataTemplate>
+
+
+          
         </ResourceDictionary>
+
+
 
 
 

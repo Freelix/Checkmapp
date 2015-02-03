@@ -26,22 +26,6 @@ namespace CheckMapp.Views.NoteViews
         {
             this.DataContext = new ListNoteViewModel();
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
-            NoteLLS.SelectionChanged += ListboxNote_SelectionChanged;
-            NoteLLS.SelectedItem = null;
-        }
-
-        /// <summary>
-        /// Click sur les notes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void ListboxNote_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (NoteLLS.SelectedItem != null)
-            {
-                PhoneApplicationService.Current.State["Note"] = (NoteLLS.SelectedItem as Note);
-                NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
-            }
         }
 
         /// <summary>
@@ -62,10 +46,21 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApplicationBar.Buttons != null)
+            var appbar = this.Resources["AppBarList"] as ApplicationBar;
+            if (appbar.Buttons != null)
             {
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddNote;
+                (appbar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Select;
+                (appbar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddPicture;
             }
+
+            var appbarSelect = this.Resources["AppBarListSelect"] as ApplicationBar;
+            if (appbarSelect.Buttons != null)
+            {
+                (appbarSelect.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Delete;
+            }
+
+            ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
         }
 
         /// <summary>
@@ -76,20 +71,29 @@ namespace CheckMapp.Views.NoteViews
         private void ContextMenu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            if (menuItem != null)
+            if (menuItem != null && ((sender as MenuItem).DataContext is Note))
             {
+                Note noteSelected = ((sender as MenuItem).DataContext as Note);
                 switch (menuItem.Name)
                 {
                     case "EditNote":
-                        if (((sender as MenuItem).DataContext is Note))
-                        {
-                            PhoneApplicationService.Current.State["Note"] = ((sender as MenuItem).DataContext as Note);
-                            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-                            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
-                        }
+                        PhoneApplicationService.Current.State["Note"] = noteSelected;
+                        PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
                         break;
                     case "DeleteNote":
-                        MessageBox.Show("Are you sure you want to delete this trip?");
+                        if (MessageBox.Show(AppResources.ConfirmationDeleteNote, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                        {
+                            var vm = DataContext as ListNoteViewModel;
+                            if (vm != null)
+                                vm.DeleteNoteCommand.Execute(noteSelected);
+
+                            vm.NoteList.Remove(noteSelected);
+                            NoteLLS.ItemsSource = vm.GroupedNotes;
+
+                            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
+                        }
+
                         break;
                 }
             }
@@ -113,6 +117,69 @@ namespace CheckMapp.Views.NoteViews
             base.OnNavigatedTo(e);
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back && NoteLLS.IsSelectionEnabled)
+            {
+                NoteLLS.IsSelectionEnabled = false;
+                e.Cancel = true;
+            }
+        }
+
+        private void IconMultiSelect_Click(object sender, EventArgs e)
+        {
+            NoteLLS.IsSelectionEnabled = !NoteLLS.IsSelectionEnabled;
+        }
+
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NoteLLS.IsSelectionEnabled = false;
+
+            if (!NoteLLS.IsSelectionEnabled)
+            {
+                Note itemTapped = (sender as FrameworkElement).DataContext as Note;
+                PhoneApplicationService.Current.State["Note"] = itemTapped;
+                NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
+            }
+        }
+
+        private void IconDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(AppResources.ConfirmationDeleteNotes, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                var vm = DataContext as ListNoteViewModel;
+                List<Note> noteList = new List<Note>();
+                for (int i = 0; i < NoteLLS.SelectedItems.Count; i++)
+                {
+                    noteList.Add(NoteLLS.SelectedItems[i] as Note);
+                    vm.NoteList.Remove(NoteLLS.SelectedItems[i] as Note);
+                }
+
+                if (vm != null)
+                    vm.DeleteNotesCommand.Execute(noteList);
+
+                NoteLLS.ItemsSource = vm.GroupedNotes;
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
+            }
+        }
+
+        private void NoteLLS_IsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (NoteLLS.IsSelectionEnabled)
+                ApplicationBar = this.Resources["AppBarListSelect"] as ApplicationBar;
+            else
+                ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !NoteLLS.IsSelectionEnabled;
+        }
+
+        private void NoteLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(NoteLLS.IsSelectionEnabled)
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.SelectedItems.Count > 0);
         }
     }
 }

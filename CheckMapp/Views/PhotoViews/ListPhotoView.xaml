@@ -17,6 +17,15 @@
 
     <phone:PhoneApplicationPage.Resources>
 
+        <shell:ApplicationBar x:Key="AppBarList" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton  x:Name="IconMultiSelect"  Click="IconMultiSelect_Click"  IconUri="/Images/appbar.list.check.png" Text="[select]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="AppBarListSelect" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton    x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
+        </shell:ApplicationBar>
+        
         <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter"/>
         <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
 
@@ -59,7 +68,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate">
-            <StackPanel Height="108" Width="108" Margin="6,6">
+            <StackPanel Tap="StackPanel_Tap" Height="108" Width="108" Margin="6,6">
                 <toolkit:ContextMenuService.ContextMenu >
                     <toolkit:ContextMenu Opened="ContextMenu_Opened" IsZoomEnabled="True" x:Name="ContextMenu" >
                         <toolkit:MenuItem x:Name="EditPhoto" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
@@ -89,21 +98,17 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector Name="PhotoHubLLS" Margin="13,-30,0,0"
+            <toolkit:LongListMultiSelector Name="PhotoHubLLS" Margin="13,-30,0,0"
                                         ItemsSource="{Binding GroupedPhotos}"
                                         ItemTemplate="{StaticResource ItemTemplate}"                     
                                         GroupHeaderTemplate="{StaticResource GroupHeader}"
                                         JumpListStyle="{StaticResource JumpListStyle}" 
                                         IsGroupingEnabled="True"
-                                        SelectionChanged="PhotoHubLLS_SelectionChanged"
                                         LayoutMode="Grid" 
+                                           SelectionChanged="PhotoHubLLS_SelectionChanged"
+                                           IsSelectionEnabledChanged="PhotoHubLLS_IsSelectionEnabledChanged"
                                         GridCellSize="108,108"/>
         </Grid>
     </Grid>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True"  Mode="Minimized">
-            <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
