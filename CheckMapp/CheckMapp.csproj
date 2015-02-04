@@ -14,8 +14,7 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion>
-    </SilverlightVersion>
+    <SilverlightVersion></SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -377,6 +376,7 @@
     <Content Include="Images\map.png" />
     <Content Include="Images\MapPin.png" />
     <Content Include="Images\minus.png" />
+    <Content Include="Images\poiLogo.png" />
     <Content Include="Images\rose.png" />
     <Content Include="Images\rose2.png" />
     <Content Include="Images\save.png" />

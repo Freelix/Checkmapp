@@ -283,6 +283,14 @@
           <source>select</source>
           <target state="new">select</target>
         </trans-unit>
+        <trans-unit id="Resx/ConfirmDeletePOIs" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete theses point of interests?</source>
+          <target state="new">Are you sure you want to delete theses point of interests?</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmDeletePOI" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete this point of interest?</source>
+          <target state="new">Are you sure you want to delete this point of interest?</target>
+        </trans-unit>
         <trans-unit id="Resx/ConfirmationDeletePictures" translate="yes" xml:space="preserve">
           <source>Are you sure you want to delete these photos?</source>
           <target state="new">Are you sure you want to delete these photos?</target>
