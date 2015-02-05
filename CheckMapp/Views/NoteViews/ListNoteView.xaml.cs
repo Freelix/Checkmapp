@@ -86,10 +86,12 @@ namespace CheckMapp.Views.NoteViews
                         {
                             var vm = DataContext as ListNoteViewModel;
                             if (vm != null)
+                            {
                                 vm.DeleteNoteCommand.Execute(noteSelected);
 
-                            vm.NoteList.Remove(noteSelected);
-                            NoteLLS.ItemsSource = vm.GroupedNotes;
+                                vm.NoteList.Remove(noteSelected);
+                                NoteLLS.ItemsSource = vm.GroupedNotes;
+                            }
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
                         }
@@ -159,9 +161,11 @@ namespace CheckMapp.Views.NoteViews
                 }
 
                 if (vm != null)
+                {
                     vm.DeleteNotesCommand.Execute(noteList);
+                    NoteLLS.ItemsSource = vm.GroupedNotes;
+                }
 
-                NoteLLS.ItemsSource = vm.GroupedNotes;
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
             }
         }

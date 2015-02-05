@@ -45,5 +45,6 @@ namespace CheckMapp.Model.DataService
         List<PointOfInterest> LoadListBoxPointOfInterests();
         PointOfInterest getPOIById(int id);
         PointOfInterest getDefaultPOI();
+        void DeletePoi(PointOfInterest poi);
     }
 }

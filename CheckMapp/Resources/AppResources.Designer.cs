@@ -232,6 +232,24 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this point of interest?.
+        /// </summary>
+        public static string ConfirmDeletePOI {
+            get {
+                return ResourceManager.GetString("ConfirmDeletePOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete theses point of interests?.
+        /// </summary>
+        public static string ConfirmDeletePOIs {
+            get {
+                return ResourceManager.GetString("ConfirmDeletePOIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm Trip.
         /// </summary>
         public static string ConfirmNewTrip {

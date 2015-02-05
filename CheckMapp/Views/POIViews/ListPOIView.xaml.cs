@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.POIViewModels;
 using CheckMapp.Resources;
+using CheckMapp.Model.Tables;
+using System.Collections.ObjectModel;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -23,20 +25,15 @@ namespace CheckMapp.Views.POIViews
         private void loadData()
         {
             this.DataContext = new ListPOIViewModel();
-            ListboxPOI.DataContext = (this.DataContext as ListPOIViewModel).PointOfInterestList;
-            ListboxPOI.SelectionChanged += ListboxPOI_SelectionChanged;
-        }
-
-        void ListboxPOI_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Montre le POI dans la carte
+            POILLS.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
         }
 
         private void ContextMenu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            if (menuItem != null)
+            if (menuItem != null && ((sender as MenuItem).DataContext is PointOfInterest))
             {
+                PointOfInterest poiSelected = (sender as MenuItem).DataContext as PointOfInterest;
                 switch (menuItem.Name)
                 {
                     case "POIPictures":
@@ -44,7 +41,19 @@ namespace CheckMapp.Views.POIViews
                     case "POINotes":
                         break;
                     case "DeletePOI":
-                        MessageBox.Show("Are you sure you want to delete this trip?");
+                        if (MessageBox.Show(AppResources.ConfirmDeletePOI, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                        {
+                            var vm = DataContext as ListPOIViewModel;
+                            if (vm != null)
+                            {
+                                vm.DeletePOICommand.Execute(poiSelected);
+
+                                vm.PointOfInterestList.Remove(poiSelected);
+                                POILLS.ItemsSource = vm.PointOfInterestList;
+                            }
+
+                            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
+                        }
                         break;
                 }
             }
@@ -57,10 +66,20 @@ namespace CheckMapp.Views.POIViews
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApplicationBar.Buttons != null)
+            var appbar = this.Resources["AppBarList"] as ApplicationBar;
+            if (appbar.Buttons != null)
             {
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddPOI;
+                (appbar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Select;
+                (appbar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddPicture;
             }
+
+            var appbarSelect = this.Resources["AppBarListSelect"] as ApplicationBar;
+            if (appbarSelect.Buttons != null)
+            {
+                (appbarSelect.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Delete;
+            }
+            ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -68,6 +87,68 @@ namespace CheckMapp.Views.POIViews
             base.OnNavigatedTo(e);
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back && POILLS.IsSelectionEnabled)
+            {
+                POILLS.IsSelectionEnabled = false;
+                e.Cancel = true;
+            }
+        }
+
+        private void POILLS_IsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (POILLS.IsSelectionEnabled)
+                ApplicationBar = this.Resources["AppBarListSelect"] as ApplicationBar;
+            else
+                ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !POILLS.IsSelectionEnabled;
+        }
+
+        private void POILLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (POILLS.IsSelectionEnabled)
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.SelectedItems.Count > 0);
+        }
+
+        private void IconMultiSelect_Click(object sender, EventArgs e)
+        {
+            POILLS.IsSelectionEnabled = !POILLS.IsSelectionEnabled;
+        }
+
+        private void IconDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(AppResources.ConfirmDeletePOIs, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                var vm = DataContext as ListPOIViewModel;
+                List<PointOfInterest> poiList = new List<PointOfInterest>();
+
+                if (vm != null)
+                {
+                    var copy = new ObservableCollection<PointOfInterest>(vm.PointOfInterestList);
+
+                    for (int i = 0; i < POILLS.SelectedItems.Count; i++)
+                    {
+                        poiList.Add(POILLS.SelectedItems[i] as PointOfInterest);
+                    }
+
+                    vm.DeletePOIsCommand.Execute(poiList);
+                    POILLS.ItemsSource = vm.PointOfInterestList;
+                }
+
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
+            }
+        }
+
+        private void POILLS_ItemRealized(object sender, ItemRealizationEventArgs e)
+        {
+            //LongListMultiSelectorItem item = (sender as LongListMultiSelectorItem);
+            //TextBlock textBlock = item.FindName("RowNumber") as TextBlock;
+            //textBlock.Text = 
         }
     }
 }
