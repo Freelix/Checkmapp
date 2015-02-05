@@ -1,4 +1,4 @@
-﻿using CheckMapp.Model.DataService;
+﻿/*using CheckMapp.Model.DataService;
 using CheckMapp.Model.Tables;
 using CheckMapp.Utils;
 using GalaSoft.MvvmLight;
@@ -298,11 +298,11 @@ namespace CheckMapp.ViewModels.TripViewModels
         #endregion
 
     }
-}
+}*/
 
 
 
-/*using CheckMapp.Model.DataService;
+using CheckMapp.Model.DataService;
 using CheckMapp.Model.Tables;
 using CheckMapp.Utils;
 using GalaSoft.MvvmLight;
@@ -336,19 +336,17 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
         /// </summary>
-        public AddEditTripViewModel(Mode mode)
+        public AddEditTripViewModel(Trip trip, Mode mode)
         {
             this.Mode = mode;
-        }
 
-        public void showInfo(Trip TripToModify)
-        {
-            TripId = TripToModify.Id;
-            TripName = TripToModify.Name;
-            TripBeginDate = TripToModify.BeginDate;
-            TripEndDate = TripToModify.EndDate;
-            TripDeparture = TripToModify.Departure;
-            TripDestination = TripToModify.Destination;
+            if (this.Mode == Mode.add)
+            {
+                Trip = new Trip();
+                Trip.BeginDate = DateTime.Now;
+            }
+            else
+                Trip = trip;
         }
 
         private ICommand _addEditTripCommand;
@@ -454,31 +452,6 @@ namespace CheckMapp.ViewModels.TripViewModels
         }
 
 
-        
-        public TripLocalisation TripDeparture
-        {
-            get { return Trip.Departure; }
-            set
-            {
-                if (Trip.Departure != value)
-                {
-                    Trip.Departure = value;
-                }
-            }
-        }
-
-        public TripLocalisation TripDestination
-        {
-            get { return Trip.Destination; }
-            set
-            {
-                if (Trip.Destination != value)
-                {
-                    Trip.Destination = value;
-                }
-            }
-        }
-
         private string _destination;
         public string Destination
         {
@@ -511,17 +484,16 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         #region DBMethods
 
-        public async void AddEditTrip()
+        public void AddEditTrip()
         {
-            // Adding a note
+            // Adding a Trip
             if (Mode == Mode.add)
             {
                 if (!string.IsNullOrWhiteSpace(Trip.Name) &&
                     !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
                 {
-                   await SetCoordinate();
+                 //  await SetCoordinate();
                    AddTripInDB(Trip);
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
                 }
                 else
                 {
@@ -530,13 +502,11 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
             else if (Mode == Mode.edit)
             {
-                // Edit a note
+                // Edit a Trip
                 if (!string.IsNullOrWhiteSpace(Trip.Name) &&
                     !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
                 {
                     UpdateExistingTrip();
-
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
                 }
                 else
                 {
@@ -565,14 +535,14 @@ namespace CheckMapp.ViewModels.TripViewModels
         private async Task SetCoordinate()
         {
 
-            await SetCoordinateAsync(_departure, Trip.Departure);
+          /*  await SetCoordinateAsync(_departure, Trip.Departure);
             Trip.Departure.SetPosition(TripLocalisation.Position.Departure);
 
             await SetCoordinateAsync(_destination, Trip.Destination);
-            Trip.Destination.SetPosition(TripLocalisation.Position.Destination);
+            Trip.Destination.SetPosition(TripLocalisation.Position.Destination);*/
         }
 
-        private async Task SetCoordinateAsync(string searchString, TripLocalisation tripLocalisation)
+        private async Task SetCoordinateAsync(string searchString)
         {
             string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
             var _Helper = new MapHelper(_Key);
@@ -582,10 +552,11 @@ namespace CheckMapp.ViewModels.TripViewModels
             var _Address = _Location.First().address;
             var _Coordinate = _Location.First().point;
 
-            tripLocalisation.Latitude =_Coordinate.coordinates[0];
-            tripLocalisation.Longitude = _Coordinate.coordinates[1];
+            //Ajout de la longitude et de la latitude
+           // tripLocalisation.Latitude =_Coordinate.coordinates[0];
+           // tripLocalisation.Longitude = _Coordinate.coordinates[1];
         }
         #endregion
 
     }
-}*/
+}

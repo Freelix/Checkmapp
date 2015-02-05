@@ -33,7 +33,7 @@ namespace CheckMapp.Model.DataService
     {
         void addTrip(Trip newTrip);
         Trip getTripById(int id);
-        IQueryable<Trip> LoadTrip();
+        List<Trip> LoadTrip();
         void UpdateTrip(Trip selectedTrip);
         void DeleteTrip(Trip selectedTrip);
     }

@@ -82,6 +82,7 @@ namespace CheckMapp
             }
 
             //Création des  clés
+            PhoneApplicationService.Current.State["Trip"] = null;
             PhoneApplicationService.Current.State["Note"] = null;
             PhoneApplicationService.Current.State["Picture"] = null;
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;

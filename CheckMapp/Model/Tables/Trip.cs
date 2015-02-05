@@ -82,39 +82,73 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        /* private TripLocalisation _departure;
+        private double _departureLongitude;
+      
+        [Column]
+        public double DepartureLongitude
+        {
+            get { return _departureLongitude; }
+            set
+            {
+                if (_departureLongitude != value)
+                {
+                    NotifyPropertyChanging("DepartureLongitude");
+                    _departureLongitude = value;
+                    NotifyPropertyChanged("DepartureLongitude");
+                }
+            }
+        }
 
-         [Column]
-         public TripLocalisation Departure
-         {
-             get { return _departure; }
-             set
-             {
-                 if (_departure != value)
-                 {
-                     NotifyPropertyChanging("Departure");
-                     _departure = value;
-                     NotifyPropertyChanged("Departure");
-                 }
-             }
-         }
+        private double _departureLatitude;
+       
+        [Column]
+        public double DepartureLatitude
+        {
+            get { return _departureLatitude; }
+            set
+            {
+                if (_departureLatitude != value)
+                {
+                    NotifyPropertyChanging("DepartureLatitude");
+                    _departureLatitude = value;
+                    NotifyPropertyChanged("DepartureLatitude");
+                }
+            }
+        }
 
-         private TripLocalisation _destination;
+        private double _destinationLongitude;
 
-         [Column]
-         public TripLocalisation Destination
-         {
-             get { return _destination; }
-             set
-             {
-                 if (_destination != value)
-                 {
-                     NotifyPropertyChanging("Destination");
-                     _destination = value;
-                     NotifyPropertyChanged("Destination");
-                 }
-             }
-         }*/
+        [Column]
+        public double DestinationLongitude
+        {
+            get { return _destinationLongitude; }
+            set
+            {
+                if (_destinationLongitude != value)
+                {
+                    NotifyPropertyChanging("DestinationLongitude");
+                    _destinationLongitude = value;
+                    NotifyPropertyChanged("DestinationLongitude");
+                }
+            }
+        }
+
+        private double _destinationLatitude;
+
+        [Column]
+        public double DestinationLatitude
+        {
+            get { return _destinationLatitude; }
+            set
+            {
+                if (_destinationLatitude != value)
+                {
+                    NotifyPropertyChanging("DestinationLatitude");
+                    _destinationLatitude = value;
+                    NotifyPropertyChanged("DestinationLatitude");
+                }
+            }
+        }
 
         private byte[] _mainPictureData;
 

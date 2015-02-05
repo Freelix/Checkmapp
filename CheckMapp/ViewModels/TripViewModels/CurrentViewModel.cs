@@ -14,7 +14,6 @@ namespace CheckMapp.ViewModels.TripViewModels
     /// </summary>
     public class CurrentViewModel : ViewModelBase
     {
-        private ICommand _showCurrentTripCommand;
         private Trip _currentTrip;
 
         /// <summary>

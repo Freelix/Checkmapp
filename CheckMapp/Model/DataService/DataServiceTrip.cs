@@ -1,6 +1,7 @@
 ﻿using System;
 using CheckMapp.Model.Tables;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace CheckMapp.Model.DataService
 {
@@ -24,9 +25,9 @@ namespace CheckMapp.Model.DataService
             return db.trips.Where(x => x.Id == id).First();
         }
 
-        public IQueryable<Trip> LoadTrip()
+        public List<Trip> LoadTrip()
         {
-            return from Trip trip in db.trips select trip;
+            return db.trips.ToList();
         }
 
         public void UpdateTrip(Trip trip)

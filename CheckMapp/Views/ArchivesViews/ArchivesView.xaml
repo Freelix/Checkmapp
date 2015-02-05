@@ -29,7 +29,7 @@
                 <Border Padding="0,10,0,0" Height="160" Width="130" Background="White">
                     <StackPanel VerticalAlignment="Top" >
                         <Image x:Name="img" Source="/Images/vacance.jpg" Height="120" Width="120"></Image>
-                        <TextBlock   HorizontalAlignment="Center" Foreground="Black">Africa</TextBlock>
+                        <TextBlock  HorizontalAlignment="Center" Foreground="Black">Africa</TextBlock>
                     </StackPanel>
                 </Border>
             </StackPanel>
