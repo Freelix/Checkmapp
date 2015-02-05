@@ -116,6 +116,23 @@ namespace CheckMapp.Model.Tables
             }
         }
 
+        private byte[] _mainPictureData;
+
+        [Column(DbType = "image", UpdateCheck = UpdateCheck.Never)]
+        public byte[] MainPictureData
+        {
+            get { return _mainPictureData; }
+            set
+            {
+                if (_mainPictureData != value)
+                {
+                    NotifyPropertyChanging("MainPictureData");
+                    _mainPictureData = value;
+                    NotifyPropertyChanged("MainPictureData");
+                }
+            }
+        }
+
         /*private EntitySet<Note> _notes;
 
         [Association(Storage = "_notes", OtherKey = "_tripId")]
@@ -168,7 +185,6 @@ namespace CheckMapp.Model.Tables
         }*/
 
         #endregion
-
 
         #region INotifyPropertyChanged Members
 

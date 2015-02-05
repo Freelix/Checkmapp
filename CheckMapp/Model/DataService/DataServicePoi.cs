@@ -53,5 +53,16 @@ namespace CheckMapp.Model.DataService
         {
             return db.pointsOfInterests.Where(x => x.Id == id).First();
         }
+
+        public void DeletePoi(PointOfInterest poi)
+        {
+            var existing = db.pointsOfInterests.Single(x => x.Id == poi.Id);
+
+            if (existing != null)
+            {
+                db.pointsOfInterests.DeleteOnSubmit(existing);
+                db.SubmitChanges();
+            }
+        }
     }
 }

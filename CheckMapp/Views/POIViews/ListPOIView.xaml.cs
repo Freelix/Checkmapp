@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.POIViewModels;
 using CheckMapp.Resources;
 using CheckMapp.Model.Tables;
+using System.Collections.ObjectModel;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -44,10 +45,12 @@ namespace CheckMapp.Views.POIViews
                         {
                             var vm = DataContext as ListPOIViewModel;
                             if (vm != null)
+                            {
                                 vm.DeletePOICommand.Execute(poiSelected);
 
-                            vm.PointOfInterestList.Remove(poiSelected);
-                            POILLS.ItemsSource = vm.PointOfInterestList;
+                                vm.PointOfInterestList.Remove(poiSelected);
+                                POILLS.ItemsSource = vm.PointOfInterestList;
+                            }
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
                         }
@@ -123,16 +126,19 @@ namespace CheckMapp.Views.POIViews
             {
                 var vm = DataContext as ListPOIViewModel;
                 List<PointOfInterest> poiList = new List<PointOfInterest>();
-                for (int i = 0; i < POILLS.SelectedItems.Count; i++)
-                {
-                    poiList.Add(POILLS.SelectedItems[i] as PointOfInterest);
-                    vm.PointOfInterestList.Remove(POILLS.SelectedItems[i] as PointOfInterest);
-                }
 
                 if (vm != null)
-                    vm.DeletePOIsCommand.Execute(poiList);
+                {
+                    var copy = new ObservableCollection<PointOfInterest>(vm.PointOfInterestList);
 
-                POILLS.ItemsSource = vm.PointOfInterestList;
+                    for (int i = 0; i < POILLS.SelectedItems.Count; i++)
+                    {
+                        poiList.Add(POILLS.SelectedItems[i] as PointOfInterest);
+                    }
+
+                    vm.DeletePOIsCommand.Execute(poiList);
+                    POILLS.ItemsSource = vm.PointOfInterestList;
+                }
 
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
             }
