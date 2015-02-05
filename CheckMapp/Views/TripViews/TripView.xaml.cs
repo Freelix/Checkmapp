@@ -22,7 +22,7 @@ namespace CheckMapp.Views.TripViews
         public TripView()
         {
             InitializeComponent();
-            this.DataContext = new TripViewModel();
+            this.DataContext = new TripViewModel(1);
         }
 
         private void RoundButton_Click(object sender, RoutedEventArgs e)
@@ -97,6 +97,13 @@ namespace CheckMapp.Views.TripViews
         {
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddEditTripView.xaml", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+           // int id = (int)PhoneApplicationService.Current.State["id"];
+            //this.DataContext = new TripViewModel(id);
+            base.OnNavigatedTo(e);
         }
     }
 }

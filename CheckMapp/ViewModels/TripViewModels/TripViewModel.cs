@@ -3,6 +3,10 @@ using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
 using CheckMapp.Model.Tables;
+using CheckMapp.Model.DataService;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
+using System.ComponentModel;
 
 namespace CheckMapp.ViewModels.TripViewModels
 {
@@ -19,8 +23,9 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the TripViewModel class.
         /// </summary>
-        public TripViewModel()
+        public TripViewModel(int id)
         {
+           // LoadTripFromDatabase(id);
             Trip trip = new Trip();
             trip.Name = "Belgique - Suisse 2012";
             trip.BeginDate = DateTime.Now.AddDays(-20);
@@ -31,7 +36,11 @@ namespace CheckMapp.ViewModels.TripViewModels
         public Trip CurrentTrip
         {
             get { return _currentTrip; }
-            set { _currentTrip = value; }
+            set
+            {
+                _currentTrip = value;
+                NotifyPropertyChanged("CurrentTrip");
+            }
         }
 
         public string FormatDate
@@ -66,6 +75,54 @@ namespace CheckMapp.ViewModels.TripViewModels
             get { return String.Format(AppResources.POITripTitle, 40); }
         }
 
+        #region Buttons
+
+        private ICommand _deleteTripCommand;
+        public ICommand DeleteTripCommand
+        {
+            get
+            {
+                if (_deleteTripCommand == null)
+                {
+                    _deleteTripCommand = new RelayCommand(() => DeleteTrip());
+                }
+                return _deleteTripCommand;
+            }
+
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region DBMethods
+
+        public void LoadTripFromDatabase(int id)
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            _currentTrip = dsTrip.getTripById(id);
+        }
+
+        public void DeleteTrip()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            dsTrip.DeleteTrip(CurrentTrip);
+        }
+
+        #endregion
 
     }
 }

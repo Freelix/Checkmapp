@@ -25,7 +25,7 @@ namespace CheckMapp.ViewModels.ArchivesViewModels
         {
             this.ArchiveTripList = new ObservableCollection<Trip>();
 
-            Trip trip = new Trip();
+          /*  Trip trip = new Trip();
             trip.Name = "Voyage 1";
             trip.BeginDate = DateTime.Now.AddDays(-10);
             trip.EndDate = DateTime.Now.AddDays(-2);
@@ -55,7 +55,7 @@ namespace CheckMapp.ViewModels.ArchivesViewModels
             ArchiveTripList.Add(trip);
             ArchiveTripList.Add(trip2);
             ArchiveTripList.Add(trip2);
-            ArchiveTripList.Add(trip5);
+            ArchiveTripList.Add(trip5);*/
 
             ShowTrip = true;
         }

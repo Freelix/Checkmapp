@@ -82,39 +82,39 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private TripLocalisation _departure;
+        /* private TripLocalisation _departure;
 
-        [Column]
-        public TripLocalisation Departure
-        {
-            get { return _departure; }
-            set
-            {
-                if (_departure != value)
-                {
-                    NotifyPropertyChanging("Departure");
-                    _departure = value;
-                    NotifyPropertyChanged("Departure");
-                }
-            }
-        }
+         [Column]
+         public TripLocalisation Departure
+         {
+             get { return _departure; }
+             set
+             {
+                 if (_departure != value)
+                 {
+                     NotifyPropertyChanging("Departure");
+                     _departure = value;
+                     NotifyPropertyChanged("Departure");
+                 }
+             }
+         }
 
-        private TripLocalisation _destination;
+         private TripLocalisation _destination;
 
-        [Column]
-        public TripLocalisation Destination
-        {
-            get { return _destination; }
-            set
-            {
-                if (_destination != value)
-                {
-                    NotifyPropertyChanging("Destination");
-                    _destination = value;
-                    NotifyPropertyChanged("Destination");
-                }
-            }
-        }
+         [Column]
+         public TripLocalisation Destination
+         {
+             get { return _destination; }
+             set
+             {
+                 if (_destination != value)
+                 {
+                     NotifyPropertyChanging("Destination");
+                     _destination = value;
+                     NotifyPropertyChanged("Destination");
+                 }
+             }
+         }*/
 
         /*private EntitySet<Note> _notes;
 

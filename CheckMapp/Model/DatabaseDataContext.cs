@@ -12,6 +12,7 @@ namespace CheckMapp.Model
             : base(connectionString)
         { }
 
+        public Table<Trip> trips;
         public Table<Note> notes;
         public Table<PointOfInterest> pointsOfInterests;
         public Table<Picture> pictures;

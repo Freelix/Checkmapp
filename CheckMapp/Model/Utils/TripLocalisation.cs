@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace CheckMapp.Model.Utils
 {
+    [DataContract]
     public class TripLocalisation
     {
+        [DataMember]
         private double longitude;
+        [DataMember]
         private double latitude;
+        [DataMember]
         private Position position;
 
         public enum Position
