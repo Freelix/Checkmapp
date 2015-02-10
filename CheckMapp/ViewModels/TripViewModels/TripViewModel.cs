@@ -128,7 +128,6 @@ namespace CheckMapp.ViewModels.TripViewModels
         public void FinishTrip()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            CurrentTrip.IsActif = false;
             CurrentTrip.EndDate = DateTime.Now;
             dsTrip.UpdateTrip(CurrentTrip);
         }
