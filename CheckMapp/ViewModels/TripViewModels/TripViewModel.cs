@@ -23,14 +23,9 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the TripViewModel class.
         /// </summary>
-        public TripViewModel(int id)
+        public TripViewModel(Trip trip)
         {
-           // LoadTripFromDatabase(id);
-            Trip trip = new Trip();
-            trip.Name = "Belgique - Suisse 2012";
-            trip.BeginDate = DateTime.Now.AddDays(-20);
-            trip.EndDate = DateTime.Now.AddDays(-12);
-            CurrentTrip = trip;
+            this.CurrentTrip = trip;
         }
 
         public Trip CurrentTrip
@@ -56,7 +51,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string NoteTitle
         {
-            get { return String.Format(AppResources.NoteTripTitle, 2); }
+            get { return String.Format(AppResources.NoteTripTitle, CurrentTrip.Notes.Count); }
         }
 
         /// <summary>
@@ -64,7 +59,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string PhotoTitle
         {
-            get { return String.Format(AppResources.PhotoTripTitle, 6); }
+            get { return String.Format(AppResources.PhotoTripTitle, CurrentTrip.Pictures.Count); }
         }
 
         /// <summary>
@@ -91,6 +86,20 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         }
 
+        private ICommand _finishTripCommand;
+        public ICommand FinishTripCommand
+        {
+            get
+            {
+                if (_finishTripCommand == null)
+                {
+                    _finishTripCommand = new RelayCommand(() => FinishTrip());
+                }
+                return _finishTripCommand;
+            }
+
+        }
+
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -110,16 +119,18 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         #region DBMethods
 
-        public void LoadTripFromDatabase(int id)
-        {
-            DataServiceTrip dsTrip = new DataServiceTrip();
-            _currentTrip = dsTrip.getTripById(id);
-        }
-
         public void DeleteTrip()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
             dsTrip.DeleteTrip(CurrentTrip);
+        }
+
+        public void FinishTrip()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            CurrentTrip.IsActif = false;
+            CurrentTrip.EndDate = DateTime.Now;
+            dsTrip.UpdateTrip(CurrentTrip);
         }
 
         #endregion

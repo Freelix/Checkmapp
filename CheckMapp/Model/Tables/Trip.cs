@@ -12,6 +12,18 @@ namespace CheckMapp.Model.Tables
     [DataContract(IsReference = true)] 
     public class Trip : INotifyPropertyChanged, INotifyPropertyChanging
     {
+
+        #region Constructors
+        
+        public Trip()
+        {
+            _notes = new EntitySet<Note>();
+            _pictures = new EntitySet<Picture>();
+            //_pointsOfInterests = new EntitySet<PointOfInterest>();
+        }
+
+        #endregion
+
         #region Members
 
         private int _id;
@@ -167,9 +179,9 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        /*private EntitySet<Note> _notes;
+        private EntitySet<Note> _notes;
 
-        [Association(Storage = "_notes", OtherKey = "_tripId")]
+        [Association(Storage = "_notes", OtherKey = "_tripId", ThisKey = "Id")]
         public EntitySet<Note> Notes
         {
             get { return _notes; }
@@ -184,10 +196,10 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _pictures;
+        private EntitySet<Picture> _pictures;
 
-        [Association(Storage = "_pictures", OtherKey = "_tripId")]
-        public EntitySet<Note> Pictures
+        [Association(Storage = "_pictures", OtherKey = "_tripId", ThisKey = "Id")]
+        public EntitySet<Picture> Pictures
         {
             get { return _pictures; }
             set
@@ -201,10 +213,10 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _pointsOfInterests;
+       /* private EntitySet<PointOfInterest> _pointsOfInterests;
 
-        [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId")]
-        public EntitySet<Note> PointsOfInterests
+        [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId", ThisKey = "Id")]
+        public EntitySet<PointOfInterest> PointsOfInterests
         {
             get { return _pointsOfInterests; }
             set
@@ -217,6 +229,7 @@ namespace CheckMapp.Model.Tables
                 }
             }
         }*/
+
 
         #endregion
 

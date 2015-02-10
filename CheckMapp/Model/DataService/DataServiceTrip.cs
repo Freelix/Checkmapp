@@ -30,6 +30,16 @@ namespace CheckMapp.Model.DataService
             return db.trips.ToList();
         }
 
+        public List<Trip> LoadArchiveTrip()
+        {
+            return db.trips.Where( x => x.EndDate != null).ToList();
+        }
+
+        public Trip getCurrentTrip()
+        {
+           return db.trips.Where(x => !x.EndDate.HasValue).FirstOrDefault(); 
+        }
+
         public void UpdateTrip(Trip trip)
         {
             Trip tripToUpdate = db.trips.Where(x => x.Id == trip.Id).First();

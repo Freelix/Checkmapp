@@ -34,6 +34,8 @@ namespace CheckMapp.Model.DataService
         void addTrip(Trip newTrip);
         Trip getTripById(int id);
         List<Trip> LoadTrip();
+        List<Trip> LoadArchiveTrip();
+        Trip getCurrentTrip();
         void UpdateTrip(Trip selectedTrip);
         void DeleteTrip(Trip selectedTrip);
     }

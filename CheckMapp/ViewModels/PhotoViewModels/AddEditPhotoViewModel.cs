@@ -128,7 +128,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         /// </summary>
         public string TripName
         {
-            get { return "Africa 2014"; }
+            get { return Picture.trip.Name; }
         }
 
         #endregion

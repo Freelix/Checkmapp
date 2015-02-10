@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Globalization;
+using CheckMapp.Model.DataService;
 
 namespace CheckMapp.Controls
 {
@@ -26,14 +27,7 @@ namespace CheckMapp.Controls
         public TimelineControl()
         {
             InitializeComponent();
-            Trips = new List<Trip>();
-            Trips.Add(new Trip { Name = "Test1", BeginDate = DateTime.Now, EndDate = DateTime.Now });
-            Trips.Add(new Trip { Name = "Test2", BeginDate = DateTime.Now.AddMonths(-2), EndDate = DateTime.Now });
-            Trips.Add(new Trip { Name = "Test3", BeginDate = DateTime.Now.AddMonths(-3).AddDays(10), EndDate = DateTime.Now });
-            Trips.Add(new Trip { Name = "Test4", BeginDate = DateTime.Now.AddMonths(-6), EndDate = DateTime.Now });
-            Trips.Add(new Trip { Name = "Test5", BeginDate = DateTime.Now.AddYears(-3), EndDate = DateTime.Now });
-            Trips.Add(new Trip { Name = "Test6", BeginDate = DateTime.Now.AddYears(-3).AddDays(20).AddMonths(-1), EndDate = DateTime.Now });
-
+            LoadAllArchiveTripFromDatabase();
             AdjustTimeLine();
         }
 
@@ -188,5 +182,17 @@ namespace CheckMapp.Controls
             OnUserControlElementTap((sender as TimelineElementControl).Trip);
         }
 
+          /// <summary>
+        /// Collection de voyage archives
+        /// </summary>
+      
+          
+        
+
+        public void LoadAllArchiveTripFromDatabase()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            Trips = new List<Trip>(dsTrip.LoadArchiveTrip());
+        }
     }
 }

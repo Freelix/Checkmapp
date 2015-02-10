@@ -27,7 +27,7 @@ namespace CheckMapp.ViewModels.ArchivesViewModels
         public void LoadAllTripFromDatabase()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            ArchiveTripList = new ObservableCollection<Trip>(dsTrip.LoadTrip());
+            ArchiveTripList = new ObservableCollection<Trip>(dsTrip.LoadArchiveTrip());
         }
 
     }

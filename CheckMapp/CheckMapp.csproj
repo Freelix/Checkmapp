@@ -431,6 +431,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.fr.xlf</DependentUpon>
       <culture>fr</culture>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.qps-ploc.resx">
       <AutoGen>True</AutoGen>
@@ -441,6 +442,7 @@
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@ using CheckMapp.ViewModel;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Threading;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp
 {
@@ -59,7 +60,6 @@ namespace CheckMapp
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
-
 
     }
 }

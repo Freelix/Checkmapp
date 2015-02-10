@@ -76,8 +76,10 @@ namespace CheckMapp.Views.TripViews
                 if (vm != null)
                 {
                     vm.AddEditTripCommand.Execute(null);
+                    PhoneApplicationService.Current.State["Trip"] = vm.Trip;
                 }
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));  
             });
         }
 
