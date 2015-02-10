@@ -18,6 +18,23 @@ namespace CheckMapp.Views
         public MapView()
         {
             InitializeComponent();
+            //Si il existe un voyage en cours
+            if (PhoneApplicationService.Current.State["Trip"] != null)
+            {
+                pinButtonAddTrip.IsEnabled = false;
+                pinButtonAddTrip.Opacity = 0.4;
+
+                pinButtonCurrentTrip.IsEnabled = true;
+                pinButtonCurrentTrip.Opacity = 1.0;
+            }
+            else
+            { 
+                pinButtonAddTrip.IsEnabled = true;
+                pinButtonAddTrip.Opacity = 1.0;
+
+                pinButtonCurrentTrip.IsEnabled = false;
+                pinButtonCurrentTrip.Opacity = 0.4;
+            }
             TiltEffect.TiltableItems.Add(typeof(PinButton));
             this.DataContext = new MapViewModel();
         }

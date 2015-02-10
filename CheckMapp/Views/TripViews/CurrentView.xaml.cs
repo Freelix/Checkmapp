@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.TripViewModels;
 using System.Windows.Markup;
 using System.Threading;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -18,7 +19,9 @@ namespace CheckMapp.Views.TripViews
         public CurrentView()
         {
             InitializeComponent();
-            this.DataContext = new CurrentViewModel();
+            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new CurrentViewModel(trip);
         }
+
     }
 }

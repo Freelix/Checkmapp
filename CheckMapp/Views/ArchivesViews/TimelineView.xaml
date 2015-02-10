@@ -14,9 +14,9 @@
     <!--Double largeur de panorama avec espaces réservés pour grandes images-->
     <Grid  x:Name="LayoutRoot" >
 
-        <ScrollViewer BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="2"
+        <ScrollViewer Tap="ScrollViewer_Tap" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="2"
                            VerticalScrollBarVisibility="Visible" >
-            <myControl:TimelineControl x:Name="timelineControl"> </myControl:TimelineControl>
+            <myControl:TimelineControl x:Name="timelineControl" Tap="timelineControl_Tap"> </myControl:TimelineControl>
         </ScrollViewer>
     </Grid>
 </UserControl>

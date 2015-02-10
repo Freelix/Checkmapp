@@ -88,8 +88,8 @@
                 <vwTrip:CurrentView x:Name="CurrentView" />
             </phone:PanoramaItem>
 
-            <phone:PanoramaItem x:Name="ArchiveItem" HeaderTemplate="{StaticResource TripPageTitle}" Header="archives">
-                <vw:DynamicContentControl Margin="0,-30,0,0"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding CurrentPageViewModel}" />
+            <phone:PanoramaItem x:Name="ArchiveItem"  HeaderTemplate="{StaticResource TripPageTitle}" Header="archives">
+                <vw:DynamicContentControl Margin="0,-30,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding CurrentPageViewModel}" />
             </phone:PanoramaItem>
 
             <!--<phone:PanoramaItem Margin="-10,0,0,0" Header="{Binding Path=LocalizedResources.LastActivities, Source={StaticResource LocalizedStrings}}">

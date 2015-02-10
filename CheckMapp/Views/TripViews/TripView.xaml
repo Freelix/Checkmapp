@@ -83,7 +83,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="DeleteTrip"  Text="[delete]"></shell:ApplicationBarMenuItem>
                 <shell:ApplicationBarMenuItem x:Name="EditTrip"  Click="EditTrip_Click" Text="[edit]"></shell:ApplicationBarMenuItem>
-                <shell:ApplicationBarMenuItem x:Name="FinisTrip"  Text="[finish trip]"></shell:ApplicationBarMenuItem>
+                <shell:ApplicationBarMenuItem x:Name="FinisTrip"  Click="FinisTrip_Click" Text="[finish trip]"></shell:ApplicationBarMenuItem>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

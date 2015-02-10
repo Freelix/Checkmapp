@@ -46,7 +46,7 @@ namespace CheckMapp.Model.DataService
 
         public PointOfInterest getDefaultPOI()
         {
-            return db.pointsOfInterests.Where(x => x.Name.Equals("None")).First();
+            return db.pointsOfInterests.Where(x => x.Name.Equals("None")).FirstOrDefault();
         }
 
         public PointOfInterest getPOIById(int id)

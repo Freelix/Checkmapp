@@ -32,6 +32,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
                 Note = note;
 
             LoadAllPOIFromDatabase();
+            LoadAllTripFromDatabase();
         }
 
 
@@ -104,6 +105,17 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
+        private List<Trip> _tripList;
+        public List<Trip> TripList
+        {
+            get { return _tripList; }
+            set
+            {
+                _tripList = value;
+                NotifyPropertyChanged("TripList");
+            }
+        }
+
         /// <summary>
         /// Le point d'intérêt
         /// </summary>
@@ -114,6 +126,19 @@ namespace CheckMapp.ViewModels.NoteViewModels
             {
                 Note.PointOfInterest = value;
                 NotifyPropertyChanged("POISelected");
+            }
+        }
+
+        /// <summary>
+        /// Le voyage courrant
+        /// </summary>
+        public Trip currentTrip
+        {
+            get { return Note.trip; }
+            set
+            {
+                Note.trip = value;
+                NotifyPropertyChanged("currentTrip");
             }
         }
 
@@ -145,7 +170,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         public string TripName
         {
-            get { return "Africa 2014"; }
+            get { return Note.trip.Name; }
         }
 
         #endregion
@@ -205,6 +230,13 @@ namespace CheckMapp.ViewModels.NoteViewModels
             DataServicePoi dsPoi = new DataServicePoi();
             _poiList = dsPoi.LoadListBoxPointOfInterests();
             POISelected = dsPoi.getDefaultPOI();
+        }
+
+        private void LoadAllTripFromDatabase()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            _tripList = dsTrip.LoadTrip();
+            currentTrip = dsTrip.getCurrentTrip();
         }
 
 

@@ -53,9 +53,11 @@ namespace CheckMapp.Views.NoteViews
                 if (vm != null)
                 {
                     vm.AddEditNoteCommand.Execute(null);
+                    PhoneApplicationService.Current.State["Trip"] = vm.currentTrip;
                 }
-
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                //todo
+                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
+                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack(); 
             });
         }
 

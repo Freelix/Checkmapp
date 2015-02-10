@@ -14,6 +14,7 @@ using CheckMapp.ViewModels;
 using CheckMapp.Utils;
 using System.Windows.Media.Imaging;
 using System.IO;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -22,7 +23,6 @@ namespace CheckMapp.Views.TripViews
         public TripView()
         {
             InitializeComponent();
-            this.DataContext = new TripViewModel(1);
         }
 
         private void RoundButton_Click(object sender, RoutedEventArgs e)
@@ -101,9 +101,28 @@ namespace CheckMapp.Views.TripViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-           // int id = (int)PhoneApplicationService.Current.State["id"];
-            //this.DataContext = new TripViewModel(id);
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new TripViewModel(currentTrip);
             base.OnNavigatedTo(e);
+        }
+
+        private void FinisTrip_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+
+            // wait till the next UI thread tick so that the binding gets updated
+            Dispatcher.BeginInvoke(() =>
+            {
+                var vm = DataContext as TripViewModel;
+                if (vm != null)
+                {
+                    vm.FinishTripCommand.Execute(null);
+                    PhoneApplicationService.Current.State["Trip"] = null;
+                }
+                //todo
+                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
+            });
         }
     }
 }
