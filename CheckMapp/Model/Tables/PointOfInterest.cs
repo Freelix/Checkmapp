@@ -15,8 +15,8 @@ namespace CheckMapp.Model.Tables
 
         public PointOfInterest()
         {
-            _notes = new EntitySet<Note>();
-            _pictures = new EntitySet<Picture>();
+           /* _notes = new EntitySet<Note>();
+            _pictures = new EntitySet<Picture>();*/
         }
 
         #endregion
@@ -116,7 +116,7 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _notes;
+        /*private EntitySet<Note> _notes;
 
         [Association(Storage = "_notes", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
         public EntitySet<Note> Notes
@@ -131,9 +131,9 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Notes");
                 }
             }
-        }
+        }*/
 
-        private EntitySet<Picture> _pictures;
+       /* private EntitySet<Picture> _pictures;
 
         [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
         public EntitySet<Picture> Pictures
@@ -148,9 +148,9 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Pictures");
                 }
             }
-        }
+        }*/
 
-       /* [Column]
+        [Column]
         private int _tripId;
         private EntityRef<Trip> _trip;
         [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
@@ -169,7 +169,7 @@ namespace CheckMapp.Model.Tables
 
                 NotifyPropertyChanging("trip");
             }
-        }*/
+        }
 
         /*private EntitySet<Note> _pictures;
 

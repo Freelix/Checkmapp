@@ -68,9 +68,9 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get 
             {
-               /* if (CurrentTrip != null)
+                if (CurrentTrip != null)
                     return String.Format(AppResources.CountPOI, CurrentTrip.PointsOfInterests.Count);
-                else*/
+                else
                     return "0";
             }
         }

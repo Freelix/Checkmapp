@@ -19,7 +19,7 @@ namespace CheckMapp.Model.Tables
         {
             _notes = new EntitySet<Note>();
             _pictures = new EntitySet<Picture>();
-            //_pointsOfInterests = new EntitySet<PointOfInterest>();
+            _pointsOfInterests = new EntitySet<PointOfInterest>();
         }
 
         #endregion
@@ -213,7 +213,7 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-       /* private EntitySet<PointOfInterest> _pointsOfInterests;
+        private EntitySet<PointOfInterest> _pointsOfInterests;
 
         [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId", ThisKey = "Id")]
         public EntitySet<PointOfInterest> PointsOfInterests
@@ -228,7 +228,12 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("PointsOfInterests");
                 }
             }
-        }*/
+        }
+
+        public bool IsActif
+        {
+            get { return (EndDate == null); }
+        }
 
 
         #endregion

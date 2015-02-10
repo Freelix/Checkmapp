@@ -6,10 +6,6 @@ using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Model.DataService
 {
-    public interface IDataServiceCountry
-    {
-        
-    }
 
     public interface IDataServicePicture
     {

@@ -67,7 +67,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string POITitle
         {
-            get { return String.Format(AppResources.POITripTitle, 40); }
+            get { return String.Format(AppResources.POITripTitle, CurrentTrip.PointsOfInterests.Count); }
         }
 
         #region Buttons
@@ -128,7 +128,6 @@ namespace CheckMapp.ViewModels.TripViewModels
         public void FinishTrip()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            CurrentTrip.IsActif = false;
             CurrentTrip.EndDate = DateTime.Now;
             dsTrip.UpdateTrip(CurrentTrip);
         }
