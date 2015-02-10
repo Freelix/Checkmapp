@@ -14,8 +14,7 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion>
-    </SilverlightVersion>
+    <SilverlightVersion></SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -107,6 +106,9 @@
       <DependentUpon>LiveTilePicture.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PinButton.cs" />
+    <Compile Include="Controls\PinchAndZoomImage.xaml.cs">
+      <DependentUpon>PinchAndZoomImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
@@ -116,7 +118,6 @@
     <Compile Include="Converter\ByteToImageConverter.cs" />
     <Compile Include="Converter\BoldConverter.cs" />
     <Compile Include="Converter\ButtonExtendConverter.cs" />
-    <Compile Include="Converter\RowNumberConverter.cs" />
     <Compile Include="Converter\NoteMessage.cs" />
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Design\DesignDataService.cs" />
@@ -231,6 +232,10 @@
     <Page Include="Controls\PinButtonTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PinchAndZoomImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimelineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -412,6 +417,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>

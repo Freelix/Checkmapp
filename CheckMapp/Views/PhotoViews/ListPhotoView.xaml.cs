@@ -11,6 +11,8 @@ using CheckMapp.ViewModels.PhotoViewModels;
 using CheckMapp.Resources;
 using CheckMapp.ViewModels;
 using CheckMapp.Model.Tables;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -50,7 +52,6 @@ namespace CheckMapp.Views.PhotoViews
             }
             ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
-
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -149,7 +150,6 @@ namespace CheckMapp.Views.PhotoViews
                     vm.DeletePicturesCommand.Execute(pictureList);
 
                 PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
-
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
             }
         }
@@ -164,6 +164,25 @@ namespace CheckMapp.Views.PhotoViews
                 PhoneApplicationService.Current.State["Picture"] = itemTapped;
                 NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
             }
+        }
+
+        private List<BitmapImage> SearchElement(DependencyObject targeted_control)
+        {
+            List<BitmapImage> returnList = new List<BitmapImage>();
+            var count = VisualTreeHelper.GetChildrenCount(targeted_control);
+            if (count > 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    var child = VisualTreeHelper.GetChild(targeted_control, i);
+                    if (child is Image) // Only search for ChecBoxes
+                        returnList.Add((child as Image).Source as BitmapImage);
+                    else
+                        returnList.AddRange(SearchElement(child));
+                }
+            }
+
+            return returnList;
         }
 
         private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)

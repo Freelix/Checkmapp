@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Device.Location;
 using System.Runtime.Serialization;
 
 namespace CheckMapp.Model.Tables
@@ -104,6 +105,14 @@ namespace CheckMapp.Model.Tables
                     _latitude = value;
                     NotifyPropertyChanged("Latitude");
                 }
+            }
+        }
+
+        public GeoCoordinate Coordinate
+        {
+            get
+            {
+                return new GeoCoordinate(Latitude, Longitude);
             }
         }
 
