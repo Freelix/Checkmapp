@@ -6,26 +6,39 @@ using System.Windows.Input;
 using CheckMapp.Model.DataService;
 using System.Windows.Media.Imaging;
 using Utility = CheckMapp.Utils.Utility;
+using System.Collections.Generic;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
     public class PhotoViewModel : INotifyPropertyChanged
     {
-        private Picture _picture;
-        public PhotoViewModel(Picture picture)
+        private List<Picture> _pictureList;
+        private int _picture;
+        public PhotoViewModel(int picture)
         {
-            this.Picture = picture;
+            this.SelectedPicture = picture;
+            LoadPictures();
         }
 
         #region Properties
 
-        public Picture Picture
+        public List<Picture> PictureList
+        {
+            get { return _pictureList; }
+            set
+            {
+                _pictureList = value;
+                NotifyPropertyChanged("PictureList");
+            }
+        }
+
+        public int SelectedPicture
         {
             get { return _picture; }
             set
             {
                 _picture = value;
-                NotifyPropertyChanged("Picture");
+                NotifyPropertyChanged("SelectedPicture");
             }
         }
 
@@ -72,8 +85,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         public void DeletePicture()
         {
             DataServicePicture dsPicture = new DataServicePicture();
-            dsPicture.DeletePicture(_picture);
+            dsPicture.DeletePicture(_pictureList[SelectedPicture]);
         }
+
+        public void LoadPictures()
+        {
+            DataServicePicture dsPicture = new DataServicePicture();
+            _pictureList = dsPicture.LoadPictures();
+        }
+
 
         #endregion
     }

@@ -18,7 +18,7 @@
 
     <UserControl.Resources>
         <DataTemplate  x:Key="TripDataTemplate" >
-            <StackPanel Margin="0,3,0,0" >
+            <StackPanel Margin="0,3,0,0" Tap="StackPanel_Tap">
                 <toolkit:ContextMenuService.ContextMenu >
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuTrip" >
                         <toolkit:MenuItem x:Name="Share" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
@@ -29,7 +29,7 @@
                 <Border Padding="0,10,0,0" Height="160" Width="130" Background="White">
                     <StackPanel VerticalAlignment="Top" >
                         <Image x:Name="img" Source="/Images/vacance.jpg" Height="120" Width="120"></Image>
-                        <TextBlock   HorizontalAlignment="Center" Foreground="Black">Africa</TextBlock>
+                        <TextBlock  HorizontalAlignment="Center" Foreground="Black" Text="{Binding Name}"></TextBlock>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -39,7 +39,13 @@
 
     <Grid x:Name="LayoutRoot"  >
        
-        <phone:LongListSelector SelectionChanged="listArchiveTrips_SelectionChanged" LayoutMode="Grid" GridCellSize="140,170" toolkit:TiltEffect.IsTiltEnabled="True"  Grid.Row="4" ItemsSource="{Binding ArchiveTripList}" ItemTemplate="{StaticResource TripDataTemplate}"  x:Name="listArchiveTrips" Margin="0,10,-22,-10" >
+        <phone:LongListSelector SelectionChanged="listArchiveTrips_SelectionChanged"
+                                LayoutMode="Grid" GridCellSize="140,170" 
+                                toolkit:TiltEffect.IsTiltEnabled="True"  
+                                Grid.Row="4" 
+                                ItemsSource="{Binding ArchiveTripList}" 
+                                ItemTemplate="{StaticResource TripDataTemplate}"  
+                                x:Name="listArchiveTrips" Margin="0,10,-22,-10" >
         </phone:LongListSelector>
 
     </Grid>

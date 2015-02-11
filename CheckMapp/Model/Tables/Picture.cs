@@ -101,6 +101,27 @@ namespace CheckMapp.Model.Tables
             }
         }
 
+        [Column]
+        private int _tripId;
+        private EntityRef<Trip> _trip;
+        [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
+        public Trip trip
+        {
+            get { return _trip.Entity; }
+            set
+            {
+                NotifyPropertyChanging("trip");
+                _trip.Entity = value;
+
+                if (value != null)
+                {
+                    _tripId = value.Id;
+                }
+
+                NotifyPropertyChanging("trip");
+            }
+        }
+
         #endregion
 
         #region INotifyPropertyChanged Members

@@ -6,10 +6,6 @@ using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Model.DataService
 {
-    public interface IDataServiceCountry
-    {
-        
-    }
 
     public interface IDataServicePicture
     {
@@ -33,10 +29,13 @@ namespace CheckMapp.Model.DataService
 
     public interface IDataServiceTrip
     {
-        Trip SaveTrip(Trip newTrip);
-        IList<Trip> LoadTrip();
-        Trip UpdateTrip(Trip selectedTrip);
-        Trip DeleteTrip(Trip selectedTrip);
+        void addTrip(Trip newTrip);
+        Trip getTripById(int id);
+        List<Trip> LoadTrip();
+        List<Trip> LoadArchiveTrip();
+        Trip getCurrentTrip();
+        void UpdateTrip(Trip selectedTrip);
+        void DeleteTrip(Trip selectedTrip);
     }
 
     public interface IDataServicePoi

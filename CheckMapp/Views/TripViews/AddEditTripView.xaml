@@ -47,16 +47,16 @@
                     </Grid>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <TextBox Text="{Binding Trip.Name}"></TextBox>
-
+                    <TextBox x:Name="NameTextBox" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
+                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <toolkit:DatePicker></toolkit:DatePicker>
+                    <toolkit:DatePicker  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
 
-                    <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <TextBox></TextBox>
-
+                    <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}" />
+                    <TextBox x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>
+                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripArrival, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <TextBox></TextBox>
+                    <TextBox x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}"></TextBox>
 
                 </StackPanel>
             </ScrollViewer>

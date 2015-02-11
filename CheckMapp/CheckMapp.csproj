@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -106,6 +107,9 @@
       <DependentUpon>LiveTilePicture.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PinButton.cs" />
+    <Compile Include="Controls\PinchAndZoomImage.xaml.cs">
+      <DependentUpon>PinchAndZoomImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
@@ -115,7 +119,6 @@
     <Compile Include="Converter\ByteToImageConverter.cs" />
     <Compile Include="Converter\BoldConverter.cs" />
     <Compile Include="Converter\ButtonExtendConverter.cs" />
-    <Compile Include="Converter\RowNumberConverter.cs" />
     <Compile Include="Converter\NoteMessage.cs" />
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Design\DesignDataService.cs" />
@@ -126,21 +129,17 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DatabaseDataContext.cs" />
-    <Compile Include="Model\DataService\DataServiceCountry.cs" />
     <Compile Include="Model\DataService\DataServiceNote.cs" />
     <Compile Include="Model\DataService\DataServicePicture.cs" />
     <Compile Include="Model\DataService\DataServicePoi.cs" />
     <Compile Include="Model\DataService\DataServiceTrip.cs" />
     <Compile Include="Model\DataService\IDataService.cs" />
-    <Compile Include="Model\Tables\Country.cs" />
     <Compile Include="Model\Tables\Note.cs" />
     <Compile Include="Model\Tables\Picture.cs" />
     <Compile Include="Model\Tables\PointOfInterest.cs" />
     <Compile Include="Model\Tables\Trip.cs" />
     <Compile Include="Model\Utils\DataTemplateSelector.cs" />
     <Compile Include="Model\Utils\Language.cs" />
-    <Compile Include="Model\Utils\LocalisationMap.cs" />
-    <Compile Include="Model\Utils\TripLocalisation.cs" />
     <Compile Include="Pages\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
@@ -150,6 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\MapHelper.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="ViewModels\Mode.cs" />
     <Compile Include="ViewModels\NoteViewModels\AddEditNoteViewModel.cs" />
@@ -231,6 +231,10 @@
     <Page Include="Controls\PinButtonTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PinchAndZoomImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimelineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -384,6 +388,11 @@
     <Content Include="Images\vacance.jpg" />
     <Content Include="Images\background.png" />
     <Content Include="Images\filter.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Coding4Fun.Toolkit.Audio">
@@ -407,11 +416,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>
@@ -423,6 +436,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.fr.xlf</DependentUpon>
       <culture>fr</culture>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.qps-ploc.resx">
       <AutoGen>True</AutoGen>
@@ -433,6 +447,7 @@
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -457,5 +472,10 @@
   -->
   <ProjectExtensions />
   <Import Project="..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.targets" Condition="Exists('..\packages\sqlite-net-wp8.3.8.4.3\build\windowsphone8\sqlite-net-wp8.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

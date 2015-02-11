@@ -12,6 +12,18 @@ namespace CheckMapp.Model.Tables
     [DataContract(IsReference = true)] 
     public class Trip : INotifyPropertyChanged, INotifyPropertyChanging
     {
+
+        #region Constructors
+        
+        public Trip()
+        {
+            _notes = new EntitySet<Note>();
+            _pictures = new EntitySet<Picture>();
+            _pointsOfInterests = new EntitySet<PointOfInterest>();
+        }
+
+        #endregion
+
         #region Members
 
         private int _id;
@@ -82,36 +94,70 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private TripLocalisation _departure;
-
+        private double _departureLongitude;
+      
         [Column]
-        public TripLocalisation Departure
+        public double DepartureLongitude
         {
-            get { return _departure; }
+            get { return _departureLongitude; }
             set
             {
-                if (_departure != value)
+                if (_departureLongitude != value)
                 {
-                    NotifyPropertyChanging("Departure");
-                    _departure = value;
-                    NotifyPropertyChanged("Departure");
+                    NotifyPropertyChanging("DepartureLongitude");
+                    _departureLongitude = value;
+                    NotifyPropertyChanged("DepartureLongitude");
                 }
             }
         }
 
-        private TripLocalisation _destination;
-
+        private double _departureLatitude;
+       
         [Column]
-        public TripLocalisation Destination
+        public double DepartureLatitude
         {
-            get { return _destination; }
+            get { return _departureLatitude; }
             set
             {
-                if (_destination != value)
+                if (_departureLatitude != value)
                 {
-                    NotifyPropertyChanging("Destination");
-                    _destination = value;
-                    NotifyPropertyChanged("Destination");
+                    NotifyPropertyChanging("DepartureLatitude");
+                    _departureLatitude = value;
+                    NotifyPropertyChanged("DepartureLatitude");
+                }
+            }
+        }
+
+        private double _destinationLongitude;
+
+        [Column]
+        public double DestinationLongitude
+        {
+            get { return _destinationLongitude; }
+            set
+            {
+                if (_destinationLongitude != value)
+                {
+                    NotifyPropertyChanging("DestinationLongitude");
+                    _destinationLongitude = value;
+                    NotifyPropertyChanged("DestinationLongitude");
+                }
+            }
+        }
+
+        private double _destinationLatitude;
+
+        [Column]
+        public double DestinationLatitude
+        {
+            get { return _destinationLatitude; }
+            set
+            {
+                if (_destinationLatitude != value)
+                {
+                    NotifyPropertyChanging("DestinationLatitude");
+                    _destinationLatitude = value;
+                    NotifyPropertyChanged("DestinationLatitude");
                 }
             }
         }
@@ -133,9 +179,9 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        /*private EntitySet<Note> _notes;
+        private EntitySet<Note> _notes;
 
-        [Association(Storage = "_notes", OtherKey = "_tripId")]
+        [Association(Storage = "_notes", OtherKey = "_tripId", ThisKey = "Id")]
         public EntitySet<Note> Notes
         {
             get { return _notes; }
@@ -150,10 +196,10 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _pictures;
+        private EntitySet<Picture> _pictures;
 
-        [Association(Storage = "_pictures", OtherKey = "_tripId")]
-        public EntitySet<Note> Pictures
+        [Association(Storage = "_pictures", OtherKey = "_tripId", ThisKey = "Id")]
+        public EntitySet<Picture> Pictures
         {
             get { return _pictures; }
             set
@@ -167,10 +213,10 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _pointsOfInterests;
+        private EntitySet<PointOfInterest> _pointsOfInterests;
 
-        [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId")]
-        public EntitySet<Note> PointsOfInterests
+        [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId", ThisKey = "Id")]
+        public EntitySet<PointOfInterest> PointsOfInterests
         {
             get { return _pointsOfInterests; }
             set
@@ -182,7 +228,13 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("PointsOfInterests");
                 }
             }
-        }*/
+        }
+
+        public bool IsActif
+        {
+            get { return (EndDate == null); }
+        }
+
 
         #endregion
 

@@ -3,6 +3,10 @@ using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
 using CheckMapp.Model.Tables;
+using CheckMapp.Model.DataService;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
+using System.ComponentModel;
 
 namespace CheckMapp.ViewModels.TripViewModels
 {
@@ -19,19 +23,19 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the TripViewModel class.
         /// </summary>
-        public TripViewModel()
+        public TripViewModel(Trip trip)
         {
-            Trip trip = new Trip();
-            trip.Name = "Belgique - Suisse 2012";
-            trip.BeginDate = DateTime.Now.AddDays(-20);
-            trip.EndDate = DateTime.Now.AddDays(-12);
-            CurrentTrip = trip;
+            this.CurrentTrip = trip;
         }
 
         public Trip CurrentTrip
         {
             get { return _currentTrip; }
-            set { _currentTrip = value; }
+            set
+            {
+                _currentTrip = value;
+                NotifyPropertyChanged("CurrentTrip");
+            }
         }
 
         public string FormatDate
@@ -47,7 +51,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string NoteTitle
         {
-            get { return String.Format(AppResources.NoteTripTitle, 2); }
+            get { return String.Format(AppResources.NoteTripTitle, CurrentTrip.Notes.Count); }
         }
 
         /// <summary>
@@ -55,7 +59,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string PhotoTitle
         {
-            get { return String.Format(AppResources.PhotoTripTitle, 6); }
+            get { return String.Format(AppResources.PhotoTripTitle, CurrentTrip.Pictures.Count); }
         }
 
         /// <summary>
@@ -63,9 +67,72 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string POITitle
         {
-            get { return String.Format(AppResources.POITripTitle, 40); }
+            get { return String.Format(AppResources.POITripTitle, CurrentTrip.PointsOfInterests.Count); }
         }
 
+        #region Buttons
+
+        private ICommand _deleteTripCommand;
+        public ICommand DeleteTripCommand
+        {
+            get
+            {
+                if (_deleteTripCommand == null)
+                {
+                    _deleteTripCommand = new RelayCommand(() => DeleteTrip());
+                }
+                return _deleteTripCommand;
+            }
+
+        }
+
+        private ICommand _finishTripCommand;
+        public ICommand FinishTripCommand
+        {
+            get
+            {
+                if (_finishTripCommand == null)
+                {
+                    _finishTripCommand = new RelayCommand(() => FinishTrip());
+                }
+                return _finishTripCommand;
+            }
+
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region DBMethods
+
+        public void DeleteTrip()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            dsTrip.DeleteTrip(CurrentTrip);
+        }
+
+        public void FinishTrip()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            CurrentTrip.EndDate = DateTime.Now;
+            dsTrip.UpdateTrip(CurrentTrip);
+        }
+
+        #endregion
 
     }
 }

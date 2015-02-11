@@ -12,6 +12,13 @@ using CheckMapp.Model.Tables;
 using CheckMapp.ViewModels;
 using Utility = CheckMapp.Utils.Utility;
 using CheckMapp.Resources;
+using CheckMapp.Model.DataService;
+using System.Windows.Data;
+using CheckMapp.Converter;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows.Input;
+using CheckMapp.Controls;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -24,30 +31,37 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
-            this.DataContext = new PhotoViewModel(myPicture);
+            Picture current = PhoneApplicationService.Current.State["Picture"] as Picture;
+            this.DataContext = new PhotoViewModel(0);
+
+            int index = 0;
+            foreach (Picture picture in (this.DataContext as PhotoViewModel).PictureList)
+            {
+                PivotItem item = new PivotItem();
+                item.Margin = new Thickness(0, -135, 0, 0);
+                ByteToImageConverter con = new ByteToImageConverter();
+                PinchAndZoomImage img = new PinchAndZoomImage();
+                img.Picture = picture;
+                img.Tap += img_Tap;
+                item.Content = img;
+                MyPivot.Items.Add(item);
+                if (picture == current)
+                    MyPivot.SelectedIndex = index;
+                else
+                    index++;
+
+            }
+
+            //Clear memory
+            PhoneApplicationService.Current.State["Picture"] = null;
             base.OnNavigatedTo(e);
         }
 
-        private void OnFlick(object sender, FlickGestureEventArgs e)
-        {
-            var vm = DataContext as PhotoViewModel;
-            if (vm != null)
-            {
-                // User flicked towards left
-                if (e.HorizontalVelocity < 0)
-                {
-                    // Load the next image 
-                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
-                }
 
-                // User flicked towards right
-                if (e.HorizontalVelocity > 0)
-                {
-                    // Load the previous image
-                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
-                }
-            }
+        void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            ApplicationBar.IsVisible = !ApplicationBar.IsVisible;
+            (sender as PinchAndZoomImage).IsTextVisible = ApplicationBar.IsVisible;
         }
 
         #region Buttons
@@ -57,15 +71,14 @@ namespace CheckMapp.Views.PhotoViews
             // Call the appropriate function in ViewModel
             var vm = DataContext as PhotoViewModel;
             if (vm != null)
-            {
                 vm.DeletePictureCommand.Execute(null);
-            }
 
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
+            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as PhotoViewModel).PictureList[MyPivot.SelectedIndex];
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }

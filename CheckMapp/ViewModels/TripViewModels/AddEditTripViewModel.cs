@@ -1,6 +1,20 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CheckMapp.Model.DataService;
+using CheckMapp.Model.Tables;
+using CheckMapp.Utils;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Phone.Controls;
+using System;
+using System.Linq;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using CheckMapp.Model.Utils;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Device.Location;
+using Windows.Devices.Geolocation;
 
 namespace CheckMapp.ViewModels.TripViewModels
 {
@@ -12,23 +26,26 @@ namespace CheckMapp.ViewModels.TripViewModels
     /// </summary>
     public class AddEditTripViewModel : ViewModelBase
     {
+        
+        private Trip _trip;
 
-
-        private ICommand _addEditTripCommand;
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
         /// </summary>
-        public AddEditTripViewModel(Mode mode)
+        public AddEditTripViewModel(Trip trip, Mode mode)
         {
             this.Mode = mode;
+
+            if (this.Mode == Mode.add)
+            {
+                Trip = new Trip();
+                Trip.BeginDate = DateTime.Now;
+            }
+            else
+                Trip = trip;
         }
 
-        public Mode Mode
-        {
-            get;
-            set;
-        }
-
+        private ICommand _addEditTripCommand;
         /// <summary>
         /// Commande pour ajouter un voyage
         /// </summary>
@@ -45,16 +62,197 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         }
 
-        public void AddEditTrip()
+        #region Properties
+
+        public Trip Trip
         {
-            if (Mode == Mode.add)
+            get { return _trip; }
+            set
             {
-
-            }
-            else
-            {
-
+                _trip = value;
             }
         }
+
+        public Mode Mode
+        {
+            get;
+            set;
+        }
+
+        public int TripId
+        {
+            get { return Trip.Id; }
+            set
+            {
+                if (Trip.Id != value)
+                {
+                    Trip.Id = value;
+                    NotifyPropertyChanged("TripId");
+                }
+            }
+        }
+
+       
+        public string TripName
+        {
+            get { return Trip.Name; }
+            set
+            {
+                if (Trip.Name != value)
+                {
+                    Trip.Name = value;
+                    NotifyPropertyChanged("TripName");
+                }
+            }
+        }
+
+        public DateTime TripBeginDate
+        {
+            get { return Trip.BeginDate; }
+            set
+            {
+                if (!Trip.BeginDate.Equals(value))
+                {
+                    Trip.BeginDate = value;
+                    NotifyPropertyChanged("TripBeginDate");
+                   
+                }
+            }
+        }
+
+        public DateTime? TripEndDate
+        {
+            get { return Trip.EndDate; }
+            set
+            {
+                if (!Trip.EndDate.Equals(value))
+                {
+                    Trip.EndDate = value;
+                    NotifyPropertyChanged("TripEndDate");
+                }
+            }
+        }
+
+        private string _departure;
+        public string Departure
+        {
+            get { return _departure; }
+            set
+            {
+                if (_departure != value)
+                {
+                    _departure = value;
+                    NotifyPropertyChanged("Departure");
+                }
+            }
+        }
+
+
+        private string _destination;
+        public string Destination
+        {
+            get { return _destination; }
+            set
+            {
+                if (_destination != value)
+                {
+                    _destination = value;
+                    NotifyPropertyChanged("Destination");
+                }
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region DBMethods
+
+        public void AddEditTrip()
+        {
+            // Adding a Trip
+            if (Mode == Mode.add)
+            {
+                if (!string.IsNullOrWhiteSpace(Trip.Name) &&
+                    !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
+                {
+                 //  await SetCoordinate();
+                   AddTripInDB(Trip);
+                }
+                else
+                {
+                    // Show an appropriate message
+                }
+            }
+            else if (Mode == Mode.edit)
+            {
+                // Edit a Trip
+                if (!string.IsNullOrWhiteSpace(Trip.Name) &&
+                    !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
+                {
+                    UpdateExistingTrip();
+                }
+                else
+                {
+                    // Show an appropriate message
+                }
+            }
+        }
+
+        public void AddTripInDB(Trip trip)
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            dsTrip.addTrip(trip);
+        }
+
+        public void UpdateExistingTrip()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            dsTrip.UpdateTrip(Trip);
+        }
+
+        #endregion
+
+        #region MapHelperMethod
+
+        //Set latitude and longitude from query to _TripDeparture and _TripDestination
+        private async Task SetCoordinate()
+        {
+
+          /*  await SetCoordinateAsync(_departure, Trip.Departure);
+            Trip.Departure.SetPosition(TripLocalisation.Position.Departure);
+
+            await SetCoordinateAsync(_destination, Trip.Destination);
+            Trip.Destination.SetPosition(TripLocalisation.Position.Destination);*/
+        }
+
+        private async Task SetCoordinateAsync(string searchString)
+        {
+            string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
+            var _Helper = new MapHelper(_Key);
+
+            var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
+
+            var _Address = _Location.First().address;
+            var _Coordinate = _Location.First().point;
+
+            //Ajout de la longitude et de la latitude
+           // tripLocalisation.Latitude =_Coordinate.coordinates[0];
+           // tripLocalisation.Longitude = _Coordinate.coordinates[1];
+        }
+        #endregion
+
     }
 }

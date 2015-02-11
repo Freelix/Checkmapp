@@ -13,19 +13,8 @@ namespace CheckMapp.ViewModel
 
         public MapViewModel()
         {
-            countryList = new List<string>();
-            countryList.Add("Canada");
-            countryList.Add("United States");
         }
 
 
-        public List<String> countryList = new List<String>();
-        public List<String> CountryList
-        {
-            get
-            {
-                return countryList;
-            }
-        }
     }
 }

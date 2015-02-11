@@ -14,6 +14,7 @@ using System.Threading;
 using CheckMapp.Model;
 using CheckMapp.Model.Tables;
 using System.Linq;
+using CheckMapp.Model.DataService;
 
 namespace CheckMapp
 {
@@ -76,15 +77,19 @@ namespace CheckMapp
                     db.CreateDatabase();
 
                     db.pointsOfInterests.InsertOnSubmit(new PointOfInterest { Name = "None" });
-
                     db.SubmitChanges();
                 }
             }
 
             //Création des  clés
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            if (dsTrip.getCurrentTrip() != null)
+                PhoneApplicationService.Current.State["Trip"] = dsTrip.getCurrentTrip();
+            else
+                PhoneApplicationService.Current.State["Trip"] = null;
+
             PhoneApplicationService.Current.State["Note"] = null;
             PhoneApplicationService.Current.State["Picture"] = null;
-            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
             PhoneApplicationService.Current.State["poiId"] = 0;
 
         }

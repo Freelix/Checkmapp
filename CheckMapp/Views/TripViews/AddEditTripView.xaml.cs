@@ -14,6 +14,7 @@ using Microsoft.Phone.Tasks;
 using System.Windows.Media.Imaging;
 using System.IO;
 using CheckMapp.Utils;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -27,7 +28,8 @@ namespace CheckMapp.Views.TripViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            this.DataContext = new AddEditTripViewModel(mode);
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new AddEditTripViewModel(currentTrip, mode);
 
             //Assigne le titre de la page
             var vm = this.DataContext as AddEditTripViewModel;
@@ -68,11 +70,17 @@ namespace CheckMapp.Views.TripViews
         private void IconSave_Click(object sender, EventArgs e)
         {
             this.Focus();
-            var vm = DataContext as AddEditTripViewModel;
-            if (vm != null)
+            Dispatcher.BeginInvoke(() =>
             {
-                vm.AddEditTripCommand.Execute(null);
-            }
+                var vm = DataContext as AddEditTripViewModel;
+                if (vm != null)
+                {
+                    vm.AddEditTripCommand.Execute(null);
+                    PhoneApplicationService.Current.State["Trip"] = vm.Trip;
+                }
+                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));  
+            });
         }
 
         /// <summary>
