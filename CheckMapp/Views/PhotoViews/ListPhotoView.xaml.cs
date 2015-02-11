@@ -19,12 +19,17 @@ namespace CheckMapp.Views.PhotoViews
         public ListPhotoView()
         {
             InitializeComponent();
-            loadData();
         }
 
         private void loadData()
         {
             this.DataContext = new ListPhotoViewModel();
+            PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
+        }
+
+        private void loadData(int poiId)
+        {
+            this.DataContext = new ListPhotoViewModel(poiId);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
@@ -55,8 +60,13 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+            if ((int) PhoneApplicationService.Current.State["poiId"] > 0)
+            {
+                int poiId = (int)PhoneApplicationService.Current.State["poiId"];
+                loadData(poiId);
+                PhoneApplicationService.Current.State["poiId"] = 0;
+            }
+            else
                 loadData();
         }
 

@@ -18,7 +18,7 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// </summary>
         public ListPOIViewModel()
         {
-            List<PointOfInterest> poiList = new List<PointOfInterest>();
+            /*List<PointOfInterest> poiList = new List<PointOfInterest>();
 
             PointOfInterest poi = new PointOfInterest();
             poi.City = "Drummondville";
@@ -35,9 +35,9 @@ namespace CheckMapp.ViewModels.POIViewModels
             PointOfInterestList = new ObservableCollection<PointOfInterest>();
 
             PointOfInterestList.Add(poi);
-            PointOfInterestList.Add(poi2);
+            PointOfInterestList.Add(poi2);*/
 
-            //LoadAllPoiFromDatabase();
+            LoadAllPoiFromDatabase();
         }
 
         #region Properties

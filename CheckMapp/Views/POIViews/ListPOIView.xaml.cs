@@ -37,8 +37,14 @@ namespace CheckMapp.Views.POIViews
                 switch (menuItem.Name)
                 {
                     case "POIPictures":
+                        PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));
+
                         break;
                     case "POINotes":
+                        PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/ListNoteView.xaml", UriKind.Relative));
+
                         break;
                     case "DeletePOI":
                         if (MessageBox.Show(AppResources.ConfirmDeletePOI, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)

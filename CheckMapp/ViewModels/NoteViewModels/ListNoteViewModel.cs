@@ -19,6 +19,11 @@ namespace CheckMapp.ViewModels.NoteViewModels
             LoadAllNotesFromDatabase();
         }
 
+        public ListNoteViewModel(int poiId)
+        {
+            LoadNotesByPoiId(poiId);
+        }
+
         private List<Note> _noteList;
         public List<Note> NoteList
         {
@@ -114,6 +119,12 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             DataServiceNote dsNote = new DataServiceNote();
             _noteList = dsNote.LoadNotes();
+        }
+
+        public void LoadNotesByPoiId(int poiId)
+        {
+            DataServiceNote dsNote = new DataServiceNote();
+            _noteList = dsNote.LoadNotesByPoiId(poiId);
         }
 
         #endregion

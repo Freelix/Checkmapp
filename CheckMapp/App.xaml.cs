@@ -85,6 +85,7 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["Note"] = null;
             PhoneApplicationService.Current.State["Picture"] = null;
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
+            PhoneApplicationService.Current.State["poiId"] = 0;
 
         }
 

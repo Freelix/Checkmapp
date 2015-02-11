@@ -32,6 +32,11 @@ namespace CheckMapp.Model.DataService
             return db.notes.ToList();
         }
 
+        public List<Note> LoadNotesByPoiId(int poiId)
+        {
+            return db.notes.Where(x => x.PointOfInterest.Id == poiId).ToList();
+        }
+
         public void UpdateNote(Note note)
         {
             Note noteToUpdate = db.notes.Where(x => x.Id == note.Id).First();

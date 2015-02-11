@@ -27,6 +27,11 @@ namespace CheckMapp.Model.DataService
             return db.pictures.ToList();
         }
 
+        public List<Picture> LoadPicturesByPoiId(int poiId)
+        {
+            return db.pictures.Where(x => x.PointOfInterest.Id == poiId).ToList();
+        }
+
         public Picture getPictureById(int id)
         {
             return db.pictures.Where(x => x.Id == id).First();

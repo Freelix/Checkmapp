@@ -20,6 +20,11 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             LoadAllPicturesFromDatabase();
         }
 
+        public ListPhotoViewModel(int poiId)
+        {
+            LoadAllPicturesByPoiId(poiId);
+        } 
+
         #region Properties
 
         public string TripName
@@ -122,7 +127,14 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             DataServicePicture dsPicture = new DataServicePicture();
             _pictureList = dsPicture.LoadPictures();
-            return dsPicture.LoadPictures();
+            return _pictureList;
+        }
+
+        public List<Picture> LoadAllPicturesByPoiId(int poiId)
+        {
+            DataServicePicture dsPicture = new DataServicePicture();
+            _pictureList = dsPicture.LoadPicturesByPoiId(poiId);
+            return _pictureList;
         }
 
         #endregion

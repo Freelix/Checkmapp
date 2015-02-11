@@ -19,12 +19,17 @@ namespace CheckMapp.Views.NoteViews
         public ListNoteView()
         {
             InitializeComponent();
-            loadData();
         }
 
         private void loadData()
         {
             this.DataContext = new ListNoteViewModel();
+            NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
+        }
+
+        private void loadData(int poiId)
+        {
+            this.DataContext = new ListNoteViewModel(poiId);
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
         }
 
@@ -117,7 +122,14 @@ namespace CheckMapp.Views.NoteViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+
+            if ((int)PhoneApplicationService.Current.State["poiId"] > 0)
+            {
+                int poiId = (int)PhoneApplicationService.Current.State["poiId"];
+                loadData(poiId);
+                PhoneApplicationService.Current.State["poiId"] = 0;
+            }
+            else
                 loadData();
         }
 
