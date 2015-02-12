@@ -23,14 +23,12 @@ namespace CheckMapp.Views.PhotoViews
         public AddEditPhotoView()
         {
             InitializeComponent();
-        }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
+            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
             Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
 
-            this.DataContext = new AddEditPhotoViewModel(myPicture, mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
+            this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
 
             //On vide la mémoire plus possible
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
@@ -39,10 +37,18 @@ namespace CheckMapp.Views.PhotoViews
             var vm = this.DataContext as AddEditPhotoViewModel;
 
             if (vm.Mode == Mode.add)
-                TitleTextblock.Text = AppResources.AddPicture;
+                TitleTextblock.Text = AppResources.AddPicture.ToLower();
             else if (vm.Mode == Mode.edit)
-                TitleTextblock.Text = AppResources.EditPicture;
+                TitleTextblock.Text = AppResources.EditPicture.ToLower();
+        }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
             base.OnNavigatedTo(e);
         }
 
@@ -89,10 +95,12 @@ namespace CheckMapp.Views.PhotoViews
         void photoChooserTask_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
-                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+            {
+                (this.DataContext as AddEditPhotoViewModel).ImageSource = Utils.Utility.ReadFully(e.ChosenPhoto);
+                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditPhotoViewModel).ImageSource);
+            }
 
-            //TODO : Pour une raison obscure le state de Picture se mettais a null... A voir...
-            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as AddEditPhotoViewModel).Picture;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Trip;
         }
     }
 }

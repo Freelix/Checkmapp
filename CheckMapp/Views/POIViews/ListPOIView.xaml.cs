@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using System.Device.Location;
+using System.Collections;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -27,11 +28,17 @@ namespace CheckMapp.Views.POIViews
 
         private void loadData()
         {
-            this.DataContext = new ListPOIViewModel();
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListPOIViewModel(currentTrip);
             POILLS.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
 
             ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(MyMap);
             var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;
+            if (obj.ItemsSource != null)
+            {
+                (obj.ItemsSource as IList).Clear();
+                obj.ItemsSource = null;
+            }
             obj.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
         }
 
@@ -62,8 +69,6 @@ namespace CheckMapp.Views.POIViews
                                 vm.DeletePOICommand.Execute(poiSelected);
                                 vm.PointOfInterestList.Remove(poiSelected);
                                 POILLS.ItemsSource = vm.PointOfInterestList;
-
-                               
                             }
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
@@ -160,13 +165,21 @@ namespace CheckMapp.Views.POIViews
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
         {
-            var bounds = new LocationRectangle(
- (this.DataContext as ListPOIViewModel).PointOfInterestList.Max((p) => p.Latitude),
- (this.DataContext as ListPOIViewModel).PointOfInterestList.Min((p) => p.Longitude),
- (this.DataContext as ListPOIViewModel).PointOfInterestList.Min((p) => p.Latitude),
- (this.DataContext as ListPOIViewModel).PointOfInterestList.Max((p) => p.Longitude));
+            System.Threading.Thread.Sleep(500);
 
-            MyMap.SetView(bounds);
+            var poiList = (this.DataContext as ListPOIViewModel).PointOfInterestList;
+            if (poiList.Count > 0)
+            {
+                var bounds = new LocationRectangle(
+                    poiList.Max((p) => p.Latitude),
+                    poiList.Min((p) => p.Longitude), 
+                    poiList.Min((p) => p.Latitude),
+                    poiList.Max((p) => p.Longitude));
+
+                
+                MyMap.SetView(bounds);
+            }
         }
+
     }
 }

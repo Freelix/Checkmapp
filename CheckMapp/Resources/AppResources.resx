@@ -258,7 +258,7 @@
     <value>Settings</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share on...</value>
+    <value>share on...</value>
   </data>
   <data name="Sort" xml:space="preserve">
     <value>Sort</value>
@@ -306,7 +306,7 @@
     <value>Statistic</value>
   </data>
   <data name="MyNotes" xml:space="preserve">
-    <value>My Notes</value>
+    <value>my notes</value>
   </data>
   <data name="SeeNotes" xml:space="preserve">
     <value>see notes...</value>
@@ -318,7 +318,7 @@
     <value />
   </data>
   <data name="MyPhoto" xml:space="preserve">
-    <value>My Photos</value>
+    <value>my photos</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -361,5 +361,8 @@
   </data>
   <data name="ConfirmDeletePOIs" xml:space="preserve">
     <value>Are you sure you want to delete theses point of interests?</value>
+  </data>
+  <data name="MyPoi" xml:space="preserve">
+    <value>point of interests</value>
   </data>
 </root>

@@ -33,6 +33,11 @@ namespace CheckMapp.Model.DataService
             return db.pointsOfInterests.Where(x => x.Name != "None").ToList();
         }
 
+        public List<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip)
+        {
+            return db.pointsOfInterests.Where(x=>x.Trip == trip).ToList();
+        }
+
         /// <summary>
         /// Load all the poi for including "None"
         /// "None" is a quick fix to be able to add Notes without

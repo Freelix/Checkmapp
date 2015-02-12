@@ -81,7 +81,7 @@
             </phone:Panorama.Background>
 
             <phone:PanoramaItem  Header="{Binding Path=LocalizedResources.Home, Source={StaticResource LocalizedStrings}}">
-                <vw:MapView x:Name="DashboardView" />
+                <vw:DashboardView x:Name="DashboardView" />
             </phone:PanoramaItem>
 
             <phone:PanoramaItem x:Name="CurrentTripItem" Header="{Binding Path=LocalizedResources.CurrentTrip, Source={StaticResource LocalizedStrings}}">

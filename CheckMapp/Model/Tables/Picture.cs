@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace CheckMapp.Model.Tables
 {
     [Table(Name = "Picture")]
-    [DataContract(IsReference = true)] 
+    [DataContract(IsReference = true)]
     public class Picture : INotifyPropertyChanged, INotifyPropertyChanging
     {
         #region Members
@@ -30,8 +30,8 @@ namespace CheckMapp.Model.Tables
         }
 
         [Column]
-        private int _pointOfInterestId;
-        private EntityRef<PointOfInterest> _pointOfInterest;
+        private int? _pointOfInterestId;
+        private EntityRef<PointOfInterest> _pointOfInterest = new EntityRef<PointOfInterest>();
         [Association(Storage = "_pointOfInterest", ThisKey = "_pointOfInterestId", OtherKey = "Id", IsForeignKey = true)]
         public PointOfInterest PointOfInterest
         {
@@ -50,7 +50,7 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private DateTime _date;
+        private DateTime _date = new DateTime();
 
         [Column]
         public DateTime Date
@@ -102,15 +102,15 @@ namespace CheckMapp.Model.Tables
         }
 
         [Column]
-        private int _tripId;
-        private EntityRef<Trip> _trip;
+        private int? _tripId;
+        private EntityRef<Trip> _trip = new EntityRef<Trip>();
         [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
-        public Trip trip
+        public Trip Trip
         {
             get { return _trip.Entity; }
             set
             {
-                NotifyPropertyChanging("trip");
+                NotifyPropertyChanging("Trip");
                 _trip.Entity = value;
 
                 if (value != null)
@@ -118,7 +118,7 @@ namespace CheckMapp.Model.Tables
                     _tripId = value.Id;
                 }
 
-                NotifyPropertyChanging("trip");
+                NotifyPropertyChanging("Trip");
             }
         }
 

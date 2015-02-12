@@ -19,15 +19,29 @@ namespace CheckMapp.ViewModels.ArchivesViewModels
         /// </summary>
         public ObservableCollection<Trip> ArchiveTripList { get; private set; }
 
-        public ArchivesViewModel()
+        public ArchivesViewModel(List<Trip> trip)
         {
-            LoadAllTripFromDatabase();
+            ArchiveTripList = new ObservableCollection<Trip>(trip);
         }
 
-        public void LoadAllTripFromDatabase()
+        private ICommand _deleteTripCommand;
+        public ICommand DeleteTripCommand
+        {
+            get
+            {
+                if (_deleteTripCommand == null)
+                {
+                    _deleteTripCommand = new RelayCommand<Trip>((trip) => DeleteTrip(trip));
+                }
+                return _deleteTripCommand;
+            }
+
+        }
+
+        private void DeleteTrip(Trip trip)
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            ArchiveTripList = new ObservableCollection<Trip>(dsTrip.LoadArchiveTrip());
+            dsTrip.DeleteTrip(trip);
         }
 
     }

@@ -16,31 +16,19 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// <summary>
         /// Initializes a new instance of the POIViewModel class.
         /// </summary>
-        public ListPOIViewModel()
+        public ListPOIViewModel(Trip trip)
         {
-            /*List<PointOfInterest> poiList = new List<PointOfInterest>();
-
-            PointOfInterest poi = new PointOfInterest();
-            poi.City = "Drummondville";
-            poi.Name = "Heriot";
-            poi.Latitude = 20.0;
-            poi.Longitude = 12.0;
-
-            PointOfInterest poi2 = new PointOfInterest();
-            poi2.City = "Victoriaville";
-            poi2.Name = "Heriot";
-            poi2.Latitude = 25.0;
-            poi2.Longitude = 3.0;
-
-            PointOfInterestList = new ObservableCollection<PointOfInterest>();
-
-            PointOfInterestList.Add(poi);
-            PointOfInterestList.Add(poi2);*/
-
-            LoadAllPoiFromDatabase();
+            this.Trip = trip;
+            PointOfInterestList = new ObservableCollection<PointOfInterest>(this.Trip.PointsOfInterests);
         }
 
         #region Properties
+
+        public Trip Trip
+        {
+            get;
+            set;
+        }
 
         private ObservableCollection<PointOfInterest> _pointOfInterestList;
         public ObservableCollection<PointOfInterest> PointOfInterestList
@@ -55,7 +43,7 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         public string TripName
         {
-            get { return "Africa 2014"; }
+            get { return Trip.Name; }
         }
 
         private ICommand _deletePOIsCommand;
@@ -109,12 +97,18 @@ namespace CheckMapp.ViewModels.POIViewModels
         public void DeletePOI(PointOfInterest poi)
         {
             DataServicePoi dsPoi = new DataServicePoi();
-            
+            Trip.PointsOfInterests.Remove(poi);
+            dsPoi.DeletePoi(poi);
         }
 
         public void DeletePOIs(List<PointOfInterest> poiList)
         {
             DataServicePoi dsPoi = new DataServicePoi();
+            foreach (PointOfInterest poi in poiList)
+            {
+                Trip.PointsOfInterests.Remove(poi);
+                dsPoi.DeletePoi(poi);
+            }
         }
 
 

@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.ArchivesViewModels;
 using CheckMapp.Resources;
 using CheckMapp.Model.Tables;
+using CheckMapp.ViewModel;
 
 namespace CheckMapp.Views.ArchivesViews
 {
@@ -18,7 +19,7 @@ namespace CheckMapp.Views.ArchivesViews
         public ArchivesView()
         {
             InitializeComponent();
-            this.DataContext = new ArchivesViewModel();
+            this.DataContext = MainViewModel.PageViewModels[0];
         }
 
         private void ContextMenu_Click(object sender, RoutedEventArgs e)
@@ -26,14 +27,22 @@ namespace CheckMapp.Views.ArchivesViews
             MenuItem menuItem = sender as MenuItem;
             if (menuItem != null)
             {
+                Trip tripSelected = ((sender as MenuItem).DataContext as Trip);
                 switch (menuItem.Name)
                 {
                     case "Share":
                         break;
                     case "Delete":
-                        MessageBox.Show("Are you sure you want to delete this trip?");
-                        break;
-                    case "Rename":
+                        if (MessageBox.Show(AppResources.ConfirmationDeleteTrip, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                        {
+                            var vm = DataContext as ArchivesViewModel;
+                            if (vm != null)
+                            {
+                                vm.DeleteTripCommand.Execute(tripSelected);
+                                vm.ArchiveTripList.Remove(tripSelected);
+                                listArchiveTrips.ItemsSource = vm.ArchiveTripList;
+                            }
+                        }
                         break;
                 }
             }
@@ -42,13 +51,8 @@ namespace CheckMapp.Views.ArchivesViews
 
         private void listArchiveTrips_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            PhoneApplicationService.Current.State["Trip"] = listArchiveTrips.SelectedItem as Trip;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
-        }
-
-        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            Trip itemTapped = (sender as FrameworkElement).DataContext as Trip;
-            PhoneApplicationService.Current.State["Trip"] = itemTapped;
         }
 
     }

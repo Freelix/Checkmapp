@@ -151,15 +151,15 @@ namespace CheckMapp.Model.Tables
         }*/
 
         [Column]
-        private int _tripId;
-        private EntityRef<Trip> _trip;
+        private int? _tripId;
+        private EntityRef<Trip> _trip = new EntityRef<Trip>();
         [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
-        public Trip trip
+        public Trip Trip
         {
             get { return _trip.Entity; }
             set
             {
-                NotifyPropertyChanging("trip");
+                NotifyPropertyChanging("Trip");
                 _trip.Entity = value;
 
                 if (value != null)
@@ -167,7 +167,7 @@ namespace CheckMapp.Model.Tables
                     _tripId = value.Id;
                 }
 
-                NotifyPropertyChanging("trip");
+                NotifyPropertyChanging("Trip");
             }
         }
 

@@ -38,20 +38,22 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
-        public string FormatDate
-        {
-            get
-            {
-                return CurrentTrip.BeginDate.ToShortDateString() + " - " + CurrentTrip.EndDate.Value.ToShortDateString();
-            }
-        }
-
         /// <summary>
         /// Le titre des notes dans le voyage
         /// </summary>
         public string NoteTitle
         {
-            get { return String.Format(AppResources.NoteTripTitle, CurrentTrip.Notes.Count); }
+            get
+            {
+                if (CurrentTrip.Notes != null)
+                {
+                    return String.Format(AppResources.NoteTripTitle, CurrentTrip.Notes.Count);
+                }
+                else
+                {
+                    return String.Format(AppResources.NoteTripTitle, 0);
+                }
+            }
         }
 
         /// <summary>
@@ -59,7 +61,17 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string PhotoTitle
         {
-            get { return String.Format(AppResources.PhotoTripTitle, CurrentTrip.Pictures.Count); }
+            get
+            {
+                if (CurrentTrip.Pictures != null)
+                {
+                    return String.Format(AppResources.PhotoTripTitle, CurrentTrip.Pictures.Count);
+                }
+                else
+                {
+                    return String.Format(AppResources.PhotoTripTitle, 0);
+                }
+            }
         }
 
         /// <summary>
@@ -67,7 +79,17 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public string POITitle
         {
-            get { return String.Format(AppResources.POITripTitle, CurrentTrip.PointsOfInterests.Count); }
+            get
+            {
+                if (CurrentTrip.PointsOfInterests != null)
+                {
+                    return String.Format(AppResources.POITripTitle, CurrentTrip.PointsOfInterests.Count);
+                }
+                else
+                {
+                    return String.Format(AppResources.POITripTitle, 0);
+                }
+            }
         }
 
         #region Buttons

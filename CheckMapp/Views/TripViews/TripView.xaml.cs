@@ -46,6 +46,8 @@ namespace CheckMapp.Views.TripViews
                 PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
             }
+            else
+                PhoneApplicationService.Current.State["ChosenPhoto"] = null;
         }
 
         private void IconButtonAddNotes_Click(object sender, EventArgs e)
@@ -67,8 +69,8 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddNote;
                 (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.AddPOI;
 
-                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.Delete;
-                (ApplicationBar.MenuItems[1] as ApplicationBarMenuItem).Text = AppResources.Edit;
+                (ApplicationBar.MenuItems[1] as ApplicationBarMenuItem).Text = AppResources.Delete;
+                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.Edit;
                 (ApplicationBar.MenuItems[2] as ApplicationBarMenuItem).Text = AppResources.FinishTrip;
             }
         }
@@ -99,6 +101,11 @@ namespace CheckMapp.Views.TripViews
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddEditTripView.xaml", UriKind.Relative));
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+        }
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
@@ -119,10 +126,23 @@ namespace CheckMapp.Views.TripViews
                     vm.FinishTripCommand.Execute(null);
                     PhoneApplicationService.Current.State["Trip"] = null;
                 }
-                //todo
+            
                 // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
             });
+        }
+
+        private void DeleteTrip_Click(object sender, EventArgs e)
+        {
+            //var vm = DataContext as TripViewModel;
+            //if (vm != null)
+            //{
+            //    vm.DeleteTripCommand.Execute(null);
+            //    PhoneApplicationService.Current.State["Trip"] = null;
+            //}
+
+            //// En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
+            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
         }
     }
 }

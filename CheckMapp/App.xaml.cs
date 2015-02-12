@@ -75,8 +75,6 @@ namespace CheckMapp
                 {
                     // Create the local database.
                     db.CreateDatabase();
-
-                    db.pointsOfInterests.InsertOnSubmit(new PointOfInterest { Name = "None" });
                     db.SubmitChanges();
                 }
             }
@@ -91,6 +89,7 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["Note"] = null;
             PhoneApplicationService.Current.State["Picture"] = null;
             PhoneApplicationService.Current.State["poiId"] = 0;
+            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
 
         }
 

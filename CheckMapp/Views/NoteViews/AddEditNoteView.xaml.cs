@@ -23,18 +23,24 @@ namespace CheckMapp.Views.NoteViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
             Note currentNote = (Note)PhoneApplicationService.Current.State["Note"];
-            this.DataContext = new AddEditNoteViewModel(currentNote, mode);
+            this.DataContext = new AddEditNoteViewModel(trip, currentNote, mode);
 
             //Assigne le titre de la page
             AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
             if (vm.Mode == Mode.add)
-                TitleTextblock.Text = AppResources.AddNote;
+                TitleTextblock.Text = AppResources.AddNote.ToLower();
             else if (vm.Mode == Mode.edit)
-                TitleTextblock.Text = AppResources.EditNote;
+                TitleTextblock.Text = AppResources.EditNote.ToLower();
 
             base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
         }
 
         /// <summary>
@@ -53,9 +59,7 @@ namespace CheckMapp.Views.NoteViews
                 if (vm != null)
                 {
                     vm.AddEditNoteCommand.Execute(null);
-                    PhoneApplicationService.Current.State["Trip"] = vm.currentTrip;
                 }
-                //todo
                 // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
                 (Application.Current.RootVisual as PhoneApplicationFrame).GoBack(); 
             });

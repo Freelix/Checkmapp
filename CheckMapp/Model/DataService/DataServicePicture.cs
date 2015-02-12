@@ -32,6 +32,11 @@ namespace CheckMapp.Model.DataService
             return db.pictures.Where(x => x.PointOfInterest.Id == poiId).ToList();
         }
 
+        public List<Picture> LoadPicturesFromTrip(Trip trip)
+        {
+            return db.pictures.Where(x => x.Trip == trip).ToList();
+        }
+
         public Picture getPictureById(int id)
         {
             return db.pictures.Where(x => x.Id == id).First();
@@ -55,7 +60,6 @@ namespace CheckMapp.Model.DataService
             pictureToUpdate.Id = picture.Id;
             pictureToUpdate.PictureData = picture.PictureData;
             pictureToUpdate.PointOfInterest = picture.PointOfInterest;
-            pictureToUpdate.Date = DateTime.Now;
             pictureToUpdate.Description = picture.Description;
 
             try
@@ -67,5 +71,6 @@ namespace CheckMapp.Model.DataService
                 Console.WriteLine("Error while trying to save a picture : " + e);
             }
         }
+
     }
 }

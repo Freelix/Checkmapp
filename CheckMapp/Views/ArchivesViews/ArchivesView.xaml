@@ -18,17 +18,16 @@
 
     <UserControl.Resources>
         <DataTemplate  x:Key="TripDataTemplate" >
-            <StackPanel Margin="0,3,0,0" Tap="StackPanel_Tap">
+            <StackPanel Margin="0,3,0,0" >
                 <toolkit:ContextMenuService.ContextMenu >
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuTrip" >
                         <toolkit:MenuItem x:Name="Share" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
-                        <toolkit:MenuItem x:Name="Rename" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Rename, Source={StaticResource LocalizedStrings}}" />
                         <toolkit:MenuItem x:Name="Delete" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
                 <Border Padding="0,10,0,0" Height="160" Width="130" Background="White">
                     <StackPanel VerticalAlignment="Top" >
-                        <Image x:Name="img" Source="/Images/vacance.jpg" Height="120" Width="120"></Image>
+                        <Image x:Name="img" Source="{Binding MainPictureData,Converter={StaticResource ByteToImageConverter}}" Height="120" Width="120"></Image>
                         <TextBlock  HorizontalAlignment="Center" Foreground="Black" Text="{Binding Name}"></TextBlock>
                     </StackPanel>
                 </Border>

@@ -179,12 +179,16 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _notes;
+        private EntitySet<Note> _notes = new EntitySet<Note>();
 
         [Association(Storage = "_notes", OtherKey = "_tripId", ThisKey = "Id")]
         public EntitySet<Note> Notes
         {
-            get { return _notes; }
+            get {
+                if (_notes == null)
+                    _notes = new EntitySet<Note>();
+                return _notes; 
+            }
             set
             {
                 if (_notes != value)
@@ -196,12 +200,16 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Picture> _pictures;
+        private EntitySet<Picture> _pictures = new EntitySet<Picture>();
 
         [Association(Storage = "_pictures", OtherKey = "_tripId", ThisKey = "Id")]
         public EntitySet<Picture> Pictures
         {
-            get { return _pictures; }
+            get {
+                if (_pictures == null)
+                    _pictures = new EntitySet<Picture>();
+                return _pictures; 
+            }
             set
             {
                 if (_pictures != value)
@@ -213,12 +221,16 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<PointOfInterest> _pointsOfInterests;
+        private EntitySet<PointOfInterest> _pointsOfInterests = new EntitySet<PointOfInterest>();
 
         [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId", ThisKey = "Id")]
         public EntitySet<PointOfInterest> PointsOfInterests
         {
-            get { return _pointsOfInterests; }
+            get {
+                if (_pointsOfInterests == null)
+                    _pointsOfInterests = new EntitySet<PointOfInterest>();
+                return _pointsOfInterests; 
+            }
             set
             {
                 if (_pointsOfInterests != value)

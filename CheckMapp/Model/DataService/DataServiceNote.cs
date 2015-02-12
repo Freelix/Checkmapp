@@ -32,6 +32,11 @@ namespace CheckMapp.Model.DataService
             return db.notes.ToList();
         }
 
+        public List<Note> LoadNotesFromTrip(Trip trip)
+        {
+            return db.notes.Where(x => x.Trip == trip).ToList();
+        }
+
         public List<Note> LoadNotesByPoiId(int poiId)
         {
             return db.notes.Where(x => x.PointOfInterest.Id == poiId).ToList();
@@ -41,7 +46,6 @@ namespace CheckMapp.Model.DataService
         {
             Note noteToUpdate = db.notes.Where(x => x.Id == note.Id).First();
 
-            noteToUpdate.Date = DateTime.Now;
             noteToUpdate.Message = note.Message;
             noteToUpdate.PointOfInterest = note.PointOfInterest;
             noteToUpdate.Title = note.Title;

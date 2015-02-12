@@ -45,7 +45,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         public string TripName
         {
-            get { return Note.trip.Name; }
+            get { return Note.Trip.Name; }
         }
 
         #endregion

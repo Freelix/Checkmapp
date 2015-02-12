@@ -13,39 +13,41 @@ namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class ListNoteViewModel : INotifyPropertyChanged
     {
-
-        public ListNoteViewModel()
+        public ListNoteViewModel(Trip trip)
         {
-            LoadAllNotesFromDatabase();
+            this.Trip = trip;
         }
 
-        public ListNoteViewModel(int poiId)
+        public ListNoteViewModel(Trip trip, int poiId)
         {
-            LoadNotesByPoiId(poiId);
+            this.Trip = trip;
+            this.PoiLoaded = poiId;
         }
 
-        private List<Note> _noteList;
-        public List<Note> NoteList
+        public Trip Trip
         {
-            get { return _noteList; }
-            set
-            {
-                _noteList = value;
-                NotifyPropertyChanged("NoteList");
-            }
+            get;
+            set;
         }
 
         public string TripName
         {
-            get { return "Afrique 2014"; }
+            get { return Trip.Name; }
         }
+
 
         public List<KeyedList<string, Note>> GroupedNotes
         {
             get
             {
+                List<Note> noteList = null;
+                if (PoiLoaded == null)
+                    noteList = Trip.Notes.ToList();
+                else
+                    noteList = Trip.Notes.Where(x => (x.PointOfInterest != null) && (x.PointOfInterest.Id == PoiLoaded)).ToList();
+                
                 var groupedNotes =
-                    from note in NoteList
+                    from note in noteList
                     orderby note.Date
                     group note by note.Date.ToString("m") into notesByDay
                     select new KeyedList<string, Note>(notesByDay);
@@ -82,6 +84,12 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         }
 
+        public int? PoiLoaded
+        {
+            get;
+            set;
+        }
+
 
         #region INotifyPropertyChanged Members
 
@@ -115,16 +123,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
             dsNote.DeleteNote(noteSelected);
         }
 
-        public void LoadAllNotesFromDatabase()
-        {
-            DataServiceNote dsNote = new DataServiceNote();
-            _noteList = dsNote.LoadNotes();
-        }
-
         public void LoadNotesByPoiId(int poiId)
         {
             DataServiceNote dsNote = new DataServiceNote();
-            _noteList = dsNote.LoadNotesByPoiId(poiId);
         }
 
         #endregion

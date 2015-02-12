@@ -20,7 +20,7 @@
 
         <StackPanel Orientation="Horizontal">
             <Border BorderBrush="White" BorderThickness="5,5,5,15">
-                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="170" Source="/Images/vacance.jpg"></Image>
+                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="170" Source="{Binding CurrentTrip.MainPictureData,Converter={StaticResource ByteToImageConverter}}"></Image>
             </Border>
             <StackPanel>
                 <TextBlock Margin="15,-10,0,0"  x:Name="textblockVertical"  VerticalAlignment="Top" Text="{Binding CurrentTrip.Name}"

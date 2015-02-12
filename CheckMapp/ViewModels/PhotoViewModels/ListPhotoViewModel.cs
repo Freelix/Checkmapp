@@ -15,32 +15,39 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 {
     public class ListPhotoViewModel : INotifyPropertyChanged
     {
-        public ListPhotoViewModel()
+        public ListPhotoViewModel(Trip trip)
         {
-            LoadAllPicturesFromDatabase();
+            this.Trip = trip;
         }
 
-        public ListPhotoViewModel(int poiId)
+        public ListPhotoViewModel(Trip trip, int poiId)
         {
-            LoadAllPicturesByPoiId(poiId);
+            this.Trip = trip;
+            this.PoiLoaded = poiId;
         } 
 
         #region Properties
 
+        public Trip Trip
+        {
+            get;
+            set;
+        }
         public string TripName
         {
-            get { return "Africa 2014"; }
+            get { return Trip.Name; }
+        }
+
+        public int? PoiLoaded
+        {
+            get;
+            set;
         }
 
         private List<Picture> _pictureList;
         public List<Picture> PictureList
         {
-            get { return _pictureList; }
-            set
-            {
-                _pictureList = value;
-                NotifyPropertyChanged("PictureList");
-            }
+            get { return Trip.Pictures.ToList(); }
         }
 
 
@@ -96,8 +103,14 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             get
             {
+                List<Picture> pictureList = null;
+                if (PoiLoaded == null)
+                    pictureList = Trip.Pictures.ToList();
+                else
+                    pictureList = Trip.Pictures.Where(x => (x.PointOfInterest != null) && (x.PointOfInterest.Id == PoiLoaded)).ToList();
+
                 var groupedPhotos =
-                    from photo in PictureList
+                    from photo in pictureList
                     orderby photo.Date
                     group photo by photo.Date.ToString("m") into photosByDay
                     select new KeyedList<string, Picture>(photosByDay);
@@ -123,12 +136,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             dsPicture.DeletePicture(picture);
         }
 
-        public List<Picture> LoadAllPicturesFromDatabase()
-        {
-            DataServicePicture dsPicture = new DataServicePicture();
-            _pictureList = dsPicture.LoadPictures();
-            return _pictureList;
-        }
 
         public List<Picture> LoadAllPicturesByPoiId(int poiId)
         {

@@ -17,8 +17,9 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// <summary>
         /// Initializes a new instance of the AddPOIViewModel class.
         /// </summary>
-        public AddPOIViewModel()
+        public AddPOIViewModel(Trip trip)
         {
+            this.Trip = trip;
         }
 
         /// <summary>
@@ -53,9 +54,11 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
+        public Trip Trip { get; set; }
+
         public string TripName
         {
-            get { return "Africa 2014"; }
+            get { return Trip.Name; }
         }
 
         private string _name;
@@ -108,8 +111,6 @@ namespace CheckMapp.ViewModels.POIViewModels
                     };
 
                     AddPoiInDB(newPOI);
-
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
                 }
                 else
                 {
@@ -121,6 +122,8 @@ namespace CheckMapp.ViewModels.POIViewModels
         public void AddPoiInDB(PointOfInterest poi)
         {
             DataServicePoi dsPoi = new DataServicePoi();
+            poi.Trip = Trip;
+            Trip.PointsOfInterests.Add(poi);
             dsPoi.addPoi(poi);
         }
 

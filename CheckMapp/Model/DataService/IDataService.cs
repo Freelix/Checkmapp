@@ -12,6 +12,7 @@ namespace CheckMapp.Model.DataService
         void addPicture(Picture newPicture);
         List<Picture> LoadPictures();
         List<Picture> LoadPicturesByPoiId(int poiId);
+        List<Picture> LoadPicturesFromTrip(Trip trip);
         Picture getPictureById(int id);
         void DeletePicture(Picture picture);
         void UpdatePicture(Picture picture);
@@ -23,6 +24,7 @@ namespace CheckMapp.Model.DataService
         Note getNoteById(int id);
         List<Note> LoadNotes();
         List<Note> LoadNotesByPoiId(int poiId);
+        List<Note> LoadNotesFromTrip(Trip trip);
         void UpdateNote(Note note);
         void DeleteNote(Note note);
     }
@@ -45,6 +47,7 @@ namespace CheckMapp.Model.DataService
         List<PointOfInterest> LoadListBoxPointOfInterests();
         PointOfInterest getPOIById(int id);
         PointOfInterest getDefaultPOI();
+        List<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip);
         void DeletePoi(PointOfInterest poi);
     }
 }

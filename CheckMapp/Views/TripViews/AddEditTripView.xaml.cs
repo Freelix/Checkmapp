@@ -23,10 +23,7 @@ namespace CheckMapp.Views.TripViews
         public AddEditTripView()
         {
             InitializeComponent();
-        }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
             Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new AddEditTripViewModel(currentTrip, mode);
@@ -34,15 +31,15 @@ namespace CheckMapp.Views.TripViews
             //Assigne le titre de la page
             var vm = this.DataContext as AddEditTripViewModel;
             if (vm.Mode == Mode.add)
-            {
-                TitleTextblock.Text = AppResources.AddTrip;
-            }
+                TitleTextblock.Text = AppResources.AddTrip.ToLower();
             else
-            {
-                TitleTextblock.Text = AppResources.EditTrip;
-            }
+                TitleTextblock.Text = AppResources.EditTrip.ToLower();
+        }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
            
+
             base.OnNavigatedTo(e);
         }
 
@@ -59,7 +56,7 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Cancel;
             }
 
-            
+
         }
 
         /// <summary>
@@ -76,10 +73,9 @@ namespace CheckMapp.Views.TripViews
                 if (vm != null)
                 {
                     vm.AddEditTripCommand.Execute(null);
-                    PhoneApplicationService.Current.State["Trip"] = vm.Trip;
                 }
                 // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
-                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));  
+                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
             });
         }
 
@@ -95,7 +91,6 @@ namespace CheckMapp.Views.TripViews
 
         private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
 
             PhotoChooserTask photoChooserTask = new PhotoChooserTask();
             photoChooserTask.Completed += photoChooserTask_Completed;
@@ -109,9 +104,10 @@ namespace CheckMapp.Views.TripViews
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+                (this.DataContext as AddEditTripViewModel).MainImage = Utils.Utility.ReadFully(e.ChosenPhoto);
+                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditTripViewModel).MainImage);
             }
-            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+            
         }
     }
 }

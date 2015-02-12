@@ -42,7 +42,7 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <toolkit:HubTile x:Name="hubTile"  IsFrozen="True" Grid.RowSpan="2" Height="200" Width="200"></toolkit:HubTile>
+                        <toolkit:HubTile x:Name="hubTile"  IsFrozen="True" Grid.RowSpan="2" Height="200" Width="200" Source="{Binding MainImage,Converter={StaticResource ByteToImageConverter}}"></toolkit:HubTile>
                         <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"  Text="{Binding Path=LocalizedResources.ChoosePicture, Source={StaticResource LocalizedStrings}}" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,20,0"></TextBlock>
                     </Grid>
 
@@ -50,7 +50,7 @@
                     <TextBox x:Name="NameTextBox" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
                     
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <toolkit:DatePicker  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
+                    <toolkit:DatePicker Name="datePicker"  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}" />
                     <TextBox x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>

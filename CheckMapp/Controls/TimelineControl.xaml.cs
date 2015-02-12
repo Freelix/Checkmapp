@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Globalization;
 using CheckMapp.Model.DataService;
+using System.Collections.ObjectModel;
 
 namespace CheckMapp.Controls
 {
@@ -22,22 +23,24 @@ namespace CheckMapp.Controls
         public Rectangle mainRectangle;
 
         public static readonly DependencyProperty TripsProperty =
-     DependencyProperty.Register("EventsList", typeof(List<Trip>), typeof(TimelineControl), null);
+     DependencyProperty.Register("Trips", typeof(ObservableCollection<Trip>), typeof(TimelineControl), null);
 
         public TimelineControl()
         {
             InitializeComponent();
-            LoadAllArchiveTripFromDatabase();
-            AdjustTimeLine();
         }
 
         /// <summary>
         /// Liste des évènements de l'utilisateur
         /// </summary>
-        public List<Trip> Trips
+        public ObservableCollection<Trip> Trips
         {
-            get { return base.GetValue(TripsProperty) as List<Trip>; }
-            set { base.SetValue(TripsProperty, value); }
+            get { return base.GetValue(TripsProperty) as ObservableCollection<Trip>; }
+            set
+            {
+                base.SetValue(TripsProperty, value);
+                AdjustTimeLine();
+            }
         }
 
 
@@ -182,17 +185,8 @@ namespace CheckMapp.Controls
             OnUserControlElementTap((sender as TimelineElementControl).Trip);
         }
 
-          /// <summary>
-        /// Collection de voyage archives
-        /// </summary>
-      
-          
-        
 
-        public void LoadAllArchiveTripFromDatabase()
-        {
-            DataServiceTrip dsTrip = new DataServiceTrip();
-            Trips = new List<Trip>(dsTrip.LoadArchiveTrip());
-        }
+
+
     }
 }

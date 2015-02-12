@@ -25,13 +25,15 @@ namespace CheckMapp.Views.PhotoViews
 
         private void loadData()
         {
-            this.DataContext = new ListPhotoViewModel();
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListPhotoViewModel(currentTrip);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
         private void loadData(int poiId)
         {
-            this.DataContext = new ListPhotoViewModel(poiId);
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListPhotoViewModel(currentTrip,poiId);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
@@ -61,6 +63,9 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+            PhoneApplicationService.Current.State["Picture"] = null;
+
             if ((int) PhoneApplicationService.Current.State["poiId"] > 0)
             {
                 int poiId = (int)PhoneApplicationService.Current.State["poiId"];
@@ -104,9 +109,11 @@ namespace CheckMapp.Views.PhotoViews
                         {
                             var vm = DataContext as ListPhotoViewModel;
                             if (vm != null)
+                            {
+                                vm.Trip.Pictures.Remove(pictureSelected);
                                 vm.DeletePictureCommand.Execute(pictureSelected);
+                            }
 
-                            vm.PictureList.Remove(pictureSelected);
                             PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
@@ -153,7 +160,7 @@ namespace CheckMapp.Views.PhotoViews
                 for (int i = 0; i < PhotoHubLLS.SelectedItems.Count; i++)
                 {
                     pictureList.Add(PhotoHubLLS.SelectedItems[i] as Picture);
-                    vm.PictureList.Remove(PhotoHubLLS.SelectedItems[i] as Picture);
+                    vm.Trip.Pictures.Remove(PhotoHubLLS.SelectedItems[i] as Picture);
                 }
 
                 if (vm != null)
