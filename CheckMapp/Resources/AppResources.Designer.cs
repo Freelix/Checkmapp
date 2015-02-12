@@ -736,20 +736,11 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Statistic.
+        ///   Recherche une chaîne localisée semblable à statistic.
         /// </summary>
         public static string Statistic {
             get {
                 return ResourceManager.GetString("Statistic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

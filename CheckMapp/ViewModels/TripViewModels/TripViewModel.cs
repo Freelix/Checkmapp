@@ -25,10 +25,10 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// </summary>
         public TripViewModel(Trip trip)
         {
-            this.CurrentTrip = trip;
+            this.Trip = trip;
         }
 
-        public Trip CurrentTrip
+        public Trip Trip
         {
             get { return _currentTrip; }
             set
@@ -45,9 +45,9 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get
             {
-                if (CurrentTrip.Notes != null)
+                if (Trip.Notes != null)
                 {
-                    return String.Format(AppResources.NoteTripTitle, CurrentTrip.Notes.Count);
+                    return String.Format(AppResources.NoteTripTitle, Trip.Notes.Count);
                 }
                 else
                 {
@@ -63,9 +63,9 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get
             {
-                if (CurrentTrip.Pictures != null)
+                if (Trip.Pictures != null)
                 {
-                    return String.Format(AppResources.PhotoTripTitle, CurrentTrip.Pictures.Count);
+                    return String.Format(AppResources.PhotoTripTitle, Trip.Pictures.Count);
                 }
                 else
                 {
@@ -81,9 +81,9 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get
             {
-                if (CurrentTrip.PointsOfInterests != null)
+                if (Trip.PointsOfInterests != null)
                 {
-                    return String.Format(AppResources.POITripTitle, CurrentTrip.PointsOfInterests.Count);
+                    return String.Format(AppResources.POITripTitle, Trip.PointsOfInterests.Count);
                 }
                 else
                 {
@@ -144,14 +144,14 @@ namespace CheckMapp.ViewModels.TripViewModels
         public void DeleteTrip()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            dsTrip.DeleteTrip(CurrentTrip);
+            dsTrip.DeleteTrip(Trip);
         }
 
         public void FinishTrip()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            CurrentTrip.EndDate = DateTime.Now;
-            dsTrip.UpdateTrip(CurrentTrip);
+            Trip.EndDate = DateTime.Now;
+            dsTrip.UpdateTrip(Trip);
         }
 
         #endregion

@@ -241,8 +241,8 @@
           <target state="new">Add p.o. interest</target>
         </trans-unit>
         <trans-unit id="Resx/Statistic" translate="yes" xml:space="preserve">
-          <source>Statistic</source>
-          <target state="new">Statistic</target>
+          <source>statistic</source>
+          <target state="new">statistic</target>
         </trans-unit>
         <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
           <source>my notes</source>
@@ -252,10 +252,7 @@
           <source>see photos...</source>
           <target state="new">see photos...</target>
         </trans-unit>
-        <trans-unit id="Resx/String1" translate="yes" xml:space="preserve">
-          <source />
-          <target state="new" />
-        </trans-unit><trans-unit id="Resx/MyPhoto" translate="yes" xml:space="preserve">
+        <trans-unit id="Resx/MyPhoto" translate="yes" xml:space="preserve">
           <source>my photos</source>
           <target state="new">my photos</target>
         </trans-unit>

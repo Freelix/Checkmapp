@@ -44,6 +44,7 @@ namespace CheckMapp.Views.TripViews
             {
                 PhoneApplicationService.Current.State["Mode"] = Mode.add;
                 PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as TripViewModel).Trip;
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
             }
             else

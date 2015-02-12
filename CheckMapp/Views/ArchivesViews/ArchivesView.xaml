@@ -18,7 +18,7 @@
 
     <UserControl.Resources>
         <DataTemplate  x:Key="TripDataTemplate" >
-            <StackPanel Margin="0,3,0,0" >
+            <StackPanel Tap="StackPanel_Tap" Margin="0,3,0,0" >
                 <toolkit:ContextMenuService.ContextMenu >
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuTrip" >
                         <toolkit:MenuItem x:Name="Share" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
@@ -38,8 +38,7 @@
 
     <Grid x:Name="LayoutRoot"  >
        
-        <phone:LongListSelector SelectionChanged="listArchiveTrips_SelectionChanged"
-                                LayoutMode="Grid" GridCellSize="140,170" 
+        <phone:LongListSelector LayoutMode="Grid" GridCellSize="140,170" 
                                 toolkit:TiltEffect.IsTiltEnabled="True"  
                                 Grid.Row="4" 
                                 ItemsSource="{Binding ArchiveTripList}" 

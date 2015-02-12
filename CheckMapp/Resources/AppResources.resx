@@ -303,7 +303,7 @@
     <value>Points of interest ({0})</value>
   </data>
   <data name="Statistic" xml:space="preserve">
-    <value>Statistic</value>
+    <value>statistic</value>
   </data>
   <data name="MyNotes" xml:space="preserve">
     <value>my notes</value>
@@ -313,9 +313,6 @@
   </data>
   <data name="SeePhotos" xml:space="preserve">
     <value>see photos...</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
   <data name="MyPhoto" xml:space="preserve">
     <value>my photos</value>
