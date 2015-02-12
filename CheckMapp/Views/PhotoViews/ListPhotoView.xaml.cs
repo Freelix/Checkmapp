@@ -11,6 +11,8 @@ using CheckMapp.ViewModels.PhotoViewModels;
 using CheckMapp.Resources;
 using CheckMapp.ViewModels;
 using CheckMapp.Model.Tables;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -19,12 +21,19 @@ namespace CheckMapp.Views.PhotoViews
         public ListPhotoView()
         {
             InitializeComponent();
-            loadData();
         }
 
         private void loadData()
         {
-            this.DataContext = new ListPhotoViewModel();
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListPhotoViewModel(currentTrip);
+            PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
+        }
+
+        private void loadData(int poiId)
+        {
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListPhotoViewModel(currentTrip,poiId);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
@@ -50,13 +59,20 @@ namespace CheckMapp.Views.PhotoViews
             }
             ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
-
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+            PhoneApplicationService.Current.State["Picture"] = null;
+
+            if ((int) PhoneApplicationService.Current.State["poiId"] > 0)
+            {
+                int poiId = (int)PhoneApplicationService.Current.State["poiId"];
+                loadData(poiId);
+                PhoneApplicationService.Current.State["poiId"] = 0;
+            }
+            else
                 loadData();
         }
 
@@ -93,9 +109,11 @@ namespace CheckMapp.Views.PhotoViews
                         {
                             var vm = DataContext as ListPhotoViewModel;
                             if (vm != null)
+                            {
+                                vm.Trip.Pictures.Remove(pictureSelected);
                                 vm.DeletePictureCommand.Execute(pictureSelected);
+                            }
 
-                            vm.PictureList.Remove(pictureSelected);
                             PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
@@ -142,14 +160,13 @@ namespace CheckMapp.Views.PhotoViews
                 for (int i = 0; i < PhotoHubLLS.SelectedItems.Count; i++)
                 {
                     pictureList.Add(PhotoHubLLS.SelectedItems[i] as Picture);
-                    vm.PictureList.Remove(PhotoHubLLS.SelectedItems[i] as Picture);
+                    vm.Trip.Pictures.Remove(PhotoHubLLS.SelectedItems[i] as Picture);
                 }
 
                 if (vm != null)
                     vm.DeletePicturesCommand.Execute(pictureList);
 
                 PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
-
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
             }
         }
@@ -164,6 +181,25 @@ namespace CheckMapp.Views.PhotoViews
                 PhoneApplicationService.Current.State["Picture"] = itemTapped;
                 NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
             }
+        }
+
+        private List<BitmapImage> SearchElement(DependencyObject targeted_control)
+        {
+            List<BitmapImage> returnList = new List<BitmapImage>();
+            var count = VisualTreeHelper.GetChildrenCount(targeted_control);
+            if (count > 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    var child = VisualTreeHelper.GetChild(targeted_control, i);
+                    if (child is Image) // Only search for ChecBoxes
+                        returnList.Add((child as Image).Source as BitmapImage);
+                    else
+                        returnList.AddRange(SearchElement(child));
+                }
+            }
+
+            return returnList;
         }
 
         private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)

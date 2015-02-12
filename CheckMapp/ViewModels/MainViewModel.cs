@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CheckMapp.Model.DataService;
+using CheckMapp.Model.Tables;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -20,21 +22,29 @@ namespace CheckMapp.ViewModel
         private ICommand _ShowUserControlTripCommand;
 
         private ViewModelBase _currentPageViewModel;
-        private List<ViewModelBase> _pageViewModels;
 
         private bool _isList;
         private bool _isTimeline;
 
+        public List<Trip> TripList {get;set;}
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
+            LoadArchivesTripFromDatabase();
+            PageViewModels = new List<ViewModelBase>();
             // Add available pages
-            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel());
-            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel());
+            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel(TripList.FindAll(x=>!x.IsActif)));
+            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel(TripList.FindAll(x=>!x.IsActif)));
             // Set starting page
             ShowUserControlTrip();
+        }
+
+        public void LoadArchivesTripFromDatabase()
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            TripList =  dsTrip.LoadTrip();
         }
 
         /// <summary>
@@ -108,15 +118,10 @@ namespace CheckMapp.ViewModel
         }
 
 
-        public List<ViewModelBase> PageViewModels
+        public static List<ViewModelBase> PageViewModels
         {
-            get
-            {
-                if (_pageViewModels == null)
-                    _pageViewModels = new List<ViewModelBase>();
-
-                return _pageViewModels;
-            }
+            get;
+            set;
         }
 
         public ViewModelBase CurrentPageViewModel

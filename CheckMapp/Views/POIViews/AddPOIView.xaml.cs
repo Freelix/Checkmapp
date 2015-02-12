@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.POIViewModels;
 using CheckMapp.Resources;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -17,7 +18,8 @@ namespace CheckMapp.Views.POIViews
         public AddPOIView()
         {
             InitializeComponent();
-            this.DataContext = new AddPOIViewModel();
+            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new AddPOIViewModel(trip);
         }
 
         /// <summary>
@@ -42,11 +44,18 @@ namespace CheckMapp.Views.POIViews
         private void IconSave_Click(object sender, EventArgs e)
         {
             this.Focus();
-            var vm = DataContext as AddPOIViewModel;
-            if (vm != null)
+            // wait till the next UI thread tick so that the binding gets updated
+            Dispatcher.BeginInvoke(() =>
             {
-                vm.AddPOICommand.Execute(null);
-            }
+                var vm = DataContext as AddPOIViewModel;
+                if (vm != null)
+                {
+                    vm.AddPOICommand.Execute(null);
+                }
+
+                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+            });
+            
         }
 
         /// <summary>

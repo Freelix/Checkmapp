@@ -13,34 +13,41 @@ namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class ListNoteViewModel : INotifyPropertyChanged
     {
-
-        public ListNoteViewModel()
+        public ListNoteViewModel(Trip trip)
         {
-            LoadAllNotesFromDatabase();
+            this.Trip = trip;
         }
 
-        private List<Note> _noteList;
-        public List<Note> NoteList
+        public ListNoteViewModel(Trip trip, int poiId)
         {
-            get { return _noteList; }
-            set
-            {
-                _noteList = value;
-                NotifyPropertyChanged("NoteList");
-            }
+            this.Trip = trip;
+            this.PoiLoaded = poiId;
+        }
+
+        public Trip Trip
+        {
+            get;
+            set;
         }
 
         public string TripName
         {
-            get { return "Afrique 2014"; }
+            get { return Trip.Name; }
         }
+
 
         public List<KeyedList<string, Note>> GroupedNotes
         {
             get
             {
+                List<Note> noteList = null;
+                if (PoiLoaded == null)
+                    noteList = Trip.Notes.ToList();
+                else
+                    noteList = Trip.Notes.Where(x => (x.PointOfInterest != null) && (x.PointOfInterest.Id == PoiLoaded)).ToList();
+                
                 var groupedNotes =
-                    from note in NoteList
+                    from note in noteList
                     orderby note.Date
                     group note by note.Date.ToString("m") into notesByDay
                     select new KeyedList<string, Note>(notesByDay);
@@ -77,6 +84,12 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         }
 
+        public int? PoiLoaded
+        {
+            get;
+            set;
+        }
+
 
         #region INotifyPropertyChanged Members
 
@@ -110,10 +123,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
             dsNote.DeleteNote(noteSelected);
         }
 
-        public void LoadAllNotesFromDatabase()
+        public void LoadNotesByPoiId(int poiId)
         {
             DataServiceNote dsNote = new DataServiceNote();
-            _noteList = dsNote.LoadNotes();
         }
 
         #endregion

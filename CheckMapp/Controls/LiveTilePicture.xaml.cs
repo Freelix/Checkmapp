@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace CheckMapp.Controls
 {
@@ -16,7 +17,6 @@ namespace CheckMapp.Controls
         public LiveTilePicture()
         {
             InitializeComponent();
-            this.DataContext = this;
             Storyboard anim = (Storyboard)FindName("liveTileAnimTop");
             anim.Begin();
         }
@@ -34,24 +34,33 @@ namespace CheckMapp.Controls
         }
 
         public static readonly DependencyProperty SourceImageProperty =
-           DependencyProperty.Register("Images", typeof(string), typeof(LiveTilePicture), null);
+           DependencyProperty.Register("SourceImage", typeof(BitmapImage), typeof(LiveTilePicture), null);
 
         /// <summary>
         /// La source de l'image
         /// </summary>
-        public string SourceImage
+        public BitmapImage SourceImage
         {
-            get { return GetValue(SourceImageProperty) as string; }
+            get { return base.GetValue(SourceImageProperty) as BitmapImage; }
             set
             {
-                SetValue(SourceImageProperty, value);
+                base.SetValue(SourceImageProperty, value);
             }
         }
 
+        bool hasStarted = false;
+
         private void imgPhoto_Loaded(object sender, RoutedEventArgs e)
         {
-            splineDouble.Value = -imgPhoto.ActualHeight + 200;
+            if(!hasStarted)
+                splineDouble.Value = -imgPhoto.ActualHeight - 200;
+            hasStarted = true;
 
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            imgPhoto.Source = SourceImage;
         }
     }
 }

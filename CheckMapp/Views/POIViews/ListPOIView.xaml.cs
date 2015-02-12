@@ -11,6 +11,10 @@ using CheckMapp.ViewModels.POIViewModels;
 using CheckMapp.Resources;
 using CheckMapp.Model.Tables;
 using System.Collections.ObjectModel;
+using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Maps.Toolkit;
+using System.Device.Location;
+using System.Collections;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -24,8 +28,18 @@ namespace CheckMapp.Views.POIViews
 
         private void loadData()
         {
-            this.DataContext = new ListPOIViewModel();
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListPOIViewModel(currentTrip);
             POILLS.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
+
+            ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(MyMap);
+            var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;
+            if (obj.ItemsSource != null)
+            {
+                (obj.ItemsSource as IList).Clear();
+                obj.ItemsSource = null;
+            }
+            obj.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
         }
 
         private void ContextMenu_Click(object sender, RoutedEventArgs e)
@@ -37,8 +51,14 @@ namespace CheckMapp.Views.POIViews
                 switch (menuItem.Name)
                 {
                     case "POIPictures":
+                        PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));
+
                         break;
                     case "POINotes":
+                        PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/ListNoteView.xaml", UriKind.Relative));
+
                         break;
                     case "DeletePOI":
                         if (MessageBox.Show(AppResources.ConfirmDeletePOI, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
@@ -47,7 +67,6 @@ namespace CheckMapp.Views.POIViews
                             if (vm != null)
                             {
                                 vm.DeletePOICommand.Execute(poiSelected);
-
                                 vm.PointOfInterestList.Remove(poiSelected);
                                 POILLS.ItemsSource = vm.PointOfInterestList;
                             }
@@ -144,11 +163,23 @@ namespace CheckMapp.Views.POIViews
             }
         }
 
-        private void POILLS_ItemRealized(object sender, ItemRealizationEventArgs e)
+        private void MyMap_Loaded(object sender, RoutedEventArgs e)
         {
-            //LongListMultiSelectorItem item = (sender as LongListMultiSelectorItem);
-            //TextBlock textBlock = item.FindName("RowNumber") as TextBlock;
-            //textBlock.Text = 
+            System.Threading.Thread.Sleep(500);
+
+            var poiList = (this.DataContext as ListPOIViewModel).PointOfInterestList;
+            if (poiList.Count > 0)
+            {
+                var bounds = new LocationRectangle(
+                    poiList.Max((p) => p.Latitude),
+                    poiList.Min((p) => p.Longitude), 
+                    poiList.Min((p) => p.Latitude),
+                    poiList.Max((p) => p.Longitude));
+
+                
+                MyMap.SetView(bounds);
+            }
         }
+
     }
 }

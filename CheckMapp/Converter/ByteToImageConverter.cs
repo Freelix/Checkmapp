@@ -33,8 +33,7 @@ namespace CheckMapp.Converter
             {
                 img = this.ConvertByteArrayToBitMapImage(value as byte[]);
             }
-            img.DecodePixelWidth = 480;
-            img.DecodePixelHeight = 480;
+            
             return img;
         }
 

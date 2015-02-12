@@ -19,8 +19,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         private ICommand _addEditPhotoCommand;
         private Picture _picture;
 
-        public AddEditPhotoViewModel(Picture picture, Mode mode, byte[] photoArray)
+        public AddEditPhotoViewModel(Trip trip, Picture picture, Mode mode, byte[] photoArray)
         {
+            this.Trip = trip;
             this.Mode = mode;
 
             if (this.Mode == Mode.add)
@@ -31,7 +32,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             else
                 Picture = picture;
 
-            LoadAllPOIFromDatabase();
+            if(Trip.PointsOfInterests!=null)
+                PoiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
 
             if (photoArray != null)
                 this.ImageSource = photoArray;
@@ -123,12 +125,18 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
         }
 
+        public Trip Trip
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Nom du voyage
         /// </summary>
         public string TripName
         {
-            get { return Picture.trip.Name; }
+            get { return Trip.Name; }
         }
 
         #endregion
@@ -170,14 +178,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             if (!string.IsNullOrWhiteSpace(Description) && ImageSource != null)
             {
                 if (Mode == Mode.add)
-                {
-                    // Create the picture
                     AddPictureInDB(Picture);
-                }
                 else if (Mode == Mode.edit)
-                {
                     UpdateExistingPicture();
-                }
             }
             else
             {
@@ -188,14 +191,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         private void AddPictureInDB(Picture picture)
         {
             DataServicePicture dsPicture = new DataServicePicture();
+            picture.Trip = Trip;
+            Trip.Pictures.Add(picture);
             dsPicture.addPicture(picture);
-        }
-
-        private void LoadAllPOIFromDatabase()
-        {
-            DataServicePoi dsPoi = new DataServicePoi();
-            _poiList = dsPoi.LoadListBoxPointOfInterests();
-            POISelected = dsPoi.getDefaultPOI();
         }
 
         private void UpdateExistingPicture()

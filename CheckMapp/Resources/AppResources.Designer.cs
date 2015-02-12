@@ -484,7 +484,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à My Notes.
+        ///   Recherche une chaîne localisée semblable à my notes.
         /// </summary>
         public static string MyNotes {
             get {
@@ -493,11 +493,20 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à My Photos.
+        ///   Recherche une chaîne localisée semblable à my photos.
         /// </summary>
         public static string MyPhoto {
             get {
                 return ResourceManager.GetString("MyPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à point of interests.
+        /// </summary>
+        public static string MyPoi {
+            get {
+                return ResourceManager.GetString("MyPoi", resourceCulture);
             }
         }
         
@@ -682,7 +691,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Share on....
+        ///   Recherche une chaîne localisée semblable à share on....
         /// </summary>
         public static string Share {
             get {

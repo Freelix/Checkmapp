@@ -43,6 +43,7 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
             else
                 Trip = trip;
+
         }
 
         private ICommand _addEditTripCommand;
@@ -159,6 +160,16 @@ namespace CheckMapp.ViewModels.TripViewModels
                     _destination = value;
                     NotifyPropertyChanged("Destination");
                 }
+            }
+        }
+
+        public byte[] MainImage
+        {
+            get { return Trip.MainPictureData; }
+            set
+            {
+                Trip.MainPictureData = value;
+                NotifyPropertyChanged("MainImage");
             }
         }
 

@@ -12,6 +12,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+    xmlns:my="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Loaded="PhoneApplicationPage_Loaded">
@@ -38,18 +39,28 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"></TextBlock>
-            <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}"  Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.MyPoi, Source={StaticResource LocalizedStrings}}"  Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <StackPanel Grid.Row="1" Grid.RowSpan="2">
-            <Controls:Map Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  />
+            <Controls:Map Loaded="MyMap_Loaded"  Name="MyMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  >
+                <my:MapExtensions.Children>
+                    <my:MapItemsControl x:Name="MyMapItems">
+                        <my:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <my:Pushpin GeoCoordinate="{Binding Coordinate}" Content="{Binding Name}" />
+                            </DataTemplate>
+                        </my:MapItemsControl.ItemTemplate>
+                    </my:MapItemsControl>
+                </my:MapExtensions.Children>
+            </Controls:Map>
+            
             <toolkit:LongListMultiSelector x:Name="POILLS" Margin="0,20,0,0" 
                                         ItemsSource="{Binding PointOfInterestList}"
                                         LayoutMode="List" 
                                         SelectionChanged="POILLS_SelectionChanged"
                                         IsSelectionEnabledChanged="POILLS_IsSelectionEnabledChanged"
-                                             ItemRealized="POILLS_ItemRealized"
                                             >
                 <toolkit:LongListMultiSelector.ItemTemplate>
                     <DataTemplate>
@@ -61,8 +72,7 @@
                                     <toolkit:MenuItem x:Name="DeletePOI" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                                 </toolkit:ContextMenu>
                             </toolkit:ContextMenuService.ContextMenu>
-                            <Image Height="65"  Source="/Images/poiLogo.png"></Image>
-                            <TextBlock Margin="-23,6,0,0"  Text="" x:Name="RowNumber" Foreground="Black"  Style="{StaticResource PhoneTextNormalStyle}" ></TextBlock>
+                            <Image Height="50"  Source="/Images/poiLogo.png"></Image>
                             <StackPanel Margin="0,-10,0,0">
                                 <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding City}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>

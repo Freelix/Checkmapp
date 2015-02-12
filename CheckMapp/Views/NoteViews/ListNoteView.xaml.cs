@@ -19,12 +19,19 @@ namespace CheckMapp.Views.NoteViews
         public ListNoteView()
         {
             InitializeComponent();
-            loadData();
         }
 
         private void loadData()
         {
-            this.DataContext = new ListNoteViewModel();
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListNoteViewModel(currentTrip);
+            NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
+        }
+
+        private void loadData(int poiId)
+        {
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new ListNoteViewModel(currentTrip,poiId);
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
         }
 
@@ -87,9 +94,8 @@ namespace CheckMapp.Views.NoteViews
                             var vm = DataContext as ListNoteViewModel;
                             if (vm != null)
                             {
+                                vm.Trip.Notes.Remove(noteSelected);
                                 vm.DeleteNoteCommand.Execute(noteSelected);
-
-                                vm.NoteList.Remove(noteSelected);
                                 NoteLLS.ItemsSource = vm.GroupedNotes;
                             }
 
@@ -117,7 +123,15 @@ namespace CheckMapp.Views.NoteViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
+            PhoneApplicationService.Current.State["Note"] = null;
+
+            if ((int)PhoneApplicationService.Current.State["poiId"] > 0)
+            {
+                int poiId = (int)PhoneApplicationService.Current.State["poiId"];
+                loadData(poiId);
+                PhoneApplicationService.Current.State["poiId"] = 0;
+            }
+            else
                 loadData();
         }
 
@@ -157,7 +171,7 @@ namespace CheckMapp.Views.NoteViews
                 for (int i = 0; i < NoteLLS.SelectedItems.Count; i++)
                 {
                     noteList.Add(NoteLLS.SelectedItems[i] as Note);
-                    vm.NoteList.Remove(NoteLLS.SelectedItems[i] as Note);
+                    vm.Trip.Notes.Remove(NoteLLS.SelectedItems[i] as Note);
                 }
 
                 if (vm != null)

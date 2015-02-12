@@ -15,7 +15,7 @@
         <StackPanel Orientation="Horizontal">
             <Polygon x:Name="left" Points="8,0 0,5, 8,10" Stroke="White" Fill="White" />
             <Border BorderThickness="8,8,8,8" BorderBrush="White" Margin="-1,0,0,0">
-                <toolkit:HubTile Source="/Images/vacance.jpg" Title="Africa" Message="voyage"   Size="Small">
+                <toolkit:HubTile Source="{Binding Trip.MainPictureData, Converter={StaticResource ByteToImageConverter}}" Title="Africa" Message="voyage"   Size="Small">
                 </toolkit:HubTile>
             </Border>
             <Polygon x:Name="right" Points="0,0 8,5, 0,10" Stroke="White" Fill="White" />

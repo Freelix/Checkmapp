@@ -40,14 +40,14 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <toolkit:HubTile x:Name="hubTile" IsFrozen="True" Grid.RowSpan="2" Height="200" Width="200" Source="{Binding ImageSource,Converter={StaticResource ByteToImageConverter}, Mode=TwoWay}"/>
+                        <toolkit:HubTile x:Name="hubTile" IsFrozen="True" Grid.RowSpan="2" Height="200" Width="200" Source="{Binding ImageSource,Converter={StaticResource ByteToImageConverter}}"/>
                         <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"  Text="{Binding Path=LocalizedResources.ChoosePicture, Source={StaticResource LocalizedStrings}}" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,20,0"></TextBlock>
                     </Grid>
-                    
-                    <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
 
-                    <!-- Use to store the value of the ListPicker -->
-                    <!--<TextBox x:Name="poiTextBox" Text="{Binding POIID, Mode=TwoWay}"  Visibility="Collapsed"/>-->
+                    <TextBlock x:Name="DateTextBlock" Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <toolkit:DatePicker></toolkit:DatePicker>
+
+                    <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
 
                     <toolkit:ListPicker
                     x:Name="poiListPicker"

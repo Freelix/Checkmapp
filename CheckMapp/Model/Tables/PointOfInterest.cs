@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Device.Location;
 using System.Runtime.Serialization;
 
 namespace CheckMapp.Model.Tables
@@ -14,8 +15,8 @@ namespace CheckMapp.Model.Tables
 
         public PointOfInterest()
         {
-            _notes = new EntitySet<Note>();
-            _pictures = new EntitySet<Picture>();
+           /* _notes = new EntitySet<Note>();
+            _pictures = new EntitySet<Picture>();*/
         }
 
         #endregion
@@ -107,7 +108,15 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private EntitySet<Note> _notes;
+        public GeoCoordinate Coordinate
+        {
+            get
+            {
+                return new GeoCoordinate(Latitude, Longitude);
+            }
+        }
+
+        /*private EntitySet<Note> _notes;
 
         [Association(Storage = "_notes", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
         public EntitySet<Note> Notes
@@ -122,9 +131,9 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Notes");
                 }
             }
-        }
+        }*/
 
-        private EntitySet<Picture> _pictures;
+       /* private EntitySet<Picture> _pictures;
 
         [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
         public EntitySet<Picture> Pictures
@@ -139,18 +148,18 @@ namespace CheckMapp.Model.Tables
                     NotifyPropertyChanged("Pictures");
                 }
             }
-        }
+        }*/
 
-       /* [Column]
-        private int _tripId;
-        private EntityRef<Trip> _trip;
+        [Column]
+        private int? _tripId;
+        private EntityRef<Trip> _trip = new EntityRef<Trip>();
         [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
-        public Trip trip
+        public Trip Trip
         {
             get { return _trip.Entity; }
             set
             {
-                NotifyPropertyChanging("trip");
+                NotifyPropertyChanging("Trip");
                 _trip.Entity = value;
 
                 if (value != null)
@@ -158,9 +167,9 @@ namespace CheckMapp.Model.Tables
                     _tripId = value.Id;
                 }
 
-                NotifyPropertyChanging("trip");
+                NotifyPropertyChanging("Trip");
             }
-        }*/
+        }
 
         /*private EntitySet<Note> _pictures;
 

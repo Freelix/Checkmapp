@@ -13,37 +13,43 @@ using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views
 {
-    public partial class MapView : UserControl
+    public partial class DashboardView : UserControl
     {
-        public MapView()
+        public DashboardView()
         {
             InitializeComponent();
+
+            TiltEffect.TiltableItems.Add(typeof(PinButton));
+            this.DataContext = new DashboardViewModel();
+        }
+
+        public void LoadComponents(bool hasCurrentTrip)
+        {
             //Si il existe un voyage en cours
-            if (PhoneApplicationService.Current.State["Trip"] != null)
+            if (hasCurrentTrip)
             {
                 pinButtonAddTrip.IsEnabled = false;
                 pinButtonAddTrip.Opacity = 0.4;
+                textAddTrip.Opacity = 0.4;
 
                 pinButtonCurrentTrip.IsEnabled = true;
                 pinButtonCurrentTrip.Opacity = 1.0;
+                textCurrentTrip.Opacity = 1.0;
             }
             else
-            { 
+            {
                 pinButtonAddTrip.IsEnabled = true;
                 pinButtonAddTrip.Opacity = 1.0;
+                textAddTrip.Opacity = 1.0;
 
                 pinButtonCurrentTrip.IsEnabled = false;
                 pinButtonCurrentTrip.Opacity = 0.4;
+                textCurrentTrip.Opacity = 0.4;
             }
-            TiltEffect.TiltableItems.Add(typeof(PinButton));
-            this.DataContext = new MapViewModel();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //connectors.Children.Add(pinButtonMap.LinkTo(pinButtonCurrentTrip));
-            //connectors.Children.Add(pinButtonCurrentTrip.LinkTo(pinButtonAddTrip));
-            //connectors.Children.Add(pinButtonAddTrip.LinkTo(pinButtonSettings));
         }
 
         private void pinButtonMap_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -53,6 +59,7 @@ namespace CheckMapp.Views
 
         private void pinButtonCurrentTrip_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
 

@@ -193,9 +193,10 @@
           <target state="translated">Paramètres</target>
         </trans-unit>
         <trans-unit id="Resx/Share" translate="yes" xml:space="preserve">
-          <source>Share on...</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Partager sur...</target>
-        </trans-unit>
+          <source>share on...</source>
+          <target state="needs-review-translation">partager sur...</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/Sort" translate="yes" xml:space="preserve">
           <source>Sort</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Tri</target>
@@ -245,9 +246,10 @@
           <target state="translated">Statistiques</target>
         </trans-unit>
         <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
-          <source>My Notes</source>
-          <target state="translated">Mes notes</target>
-        </trans-unit>
+          <source>my notes</source>
+          <target state="needs-review-translation">mes notes</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/SeePhotos" translate="yes" xml:space="preserve">
           <source>see photos...</source>
           <target state="translated">voir les photos...</target>
@@ -256,9 +258,10 @@
           <source />
           <target state="new" />
         </trans-unit><trans-unit id="Resx/MyPhoto" translate="yes" xml:space="preserve">
-          <source>My Photos</source>
-          <target state="translated">Mes photos</target>
-        </trans-unit>
+          <source>my photos</source>
+          <target state="needs-review-translation">mes photos</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/Save" translate="yes" xml:space="preserve">
           <source>Save</source>
           <target state="translated">Enregistrer</target>
@@ -287,6 +290,10 @@
         <trans-unit id="Resx/ConfirmDeletePOIs" translate="yes" xml:space="preserve">
           <source>Are you sure you want to delete theses point of interests?</source>
           <target state="translated">Êtes-vous sûr de vouloir supprimer ces points d'intérêt?</target>
+        </trans-unit>
+        <trans-unit id="Resx/MyPoi" translate="yes" xml:space="preserve">
+          <source>point of interests</source>
+          <target state="needs-review-translation">points d'intérêts</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/ConfirmDeletePOI" translate="yes" xml:space="preserve">
           <source>Are you sure you want to delete this point of interest?</source>

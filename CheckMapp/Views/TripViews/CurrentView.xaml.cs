@@ -19,8 +19,6 @@ namespace CheckMapp.Views.TripViews
         public CurrentView()
         {
             InitializeComponent();
-            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            this.DataContext = new CurrentViewModel(trip);
         }
 
     }

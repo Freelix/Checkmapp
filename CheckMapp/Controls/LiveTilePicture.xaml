@@ -8,12 +8,13 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:local="clr-namespace:CheckMapp"
-    d:DesignHeight="500" d:DesignWidth="500">
+    d:DesignHeight="500" d:DesignWidth="500"
+             Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
 
         <Storyboard x:Key="liveTileAnimTop" x:Name="liveTileAnimTop" Completed="liveTileAnimTop_Completed_1">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:01" 
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
                                    Storyboard.TargetName="panel1" Storyboard.TargetProperty="Y">
 
                 <SplineDoubleKeyFrame x:Name="splineDouble" KeyTime="00:00:15.00" />
@@ -21,7 +22,7 @@
         </Storyboard>
 
         <Storyboard x:Key="liveTileAnimBottom" x:Name="liveTileAnimBottom" Completed="liveTileAnimBottom_Completed_1">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:01" 
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
                                    Storyboard.TargetName="panel1" Storyboard.TargetProperty="Y">
 
                 <SplineDoubleKeyFrame KeyTime="00:00:15.00" Value="0"/>
@@ -35,8 +36,7 @@
             <StackPanel.RenderTransform>
                 <TranslateTransform x:Name="panel1" Y="0" X="0"/>
             </StackPanel.RenderTransform>
-            <Image x:Name="imgPhoto" Loaded="imgPhoto_Loaded"  Source="{Binding SourceImage}" Stretch="UniformToFill" />
-       
+            <Image x:Name="imgPhoto" Loaded="imgPhoto_Loaded" Stretch="UniformToFill" />
         </StackPanel>
 
     </StackPanel>
