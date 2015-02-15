@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="CheckMapp" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.0.1200.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -287,6 +287,46 @@
         <trans-unit id="Resx/MyPoi" translate="yes" xml:space="preserve">
           <source>point of interests</source>
           <target state="new">point of interests</target>
+        </trans-unit>
+        <trans-unit id="Resx/Lang_French" translate="yes" xml:space="preserve">
+          <source>French</source>
+          <target state="new">French</target>
+        </trans-unit>
+        <trans-unit id="Resx/Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="new">Language</target>
+        </trans-unit>
+        <trans-unit id="Resx/WifiOnly" translate="yes" xml:space="preserve">
+          <source>Use Wifi only</source>
+          <target state="new">Use Wifi only</target>
+        </trans-unit>
+        <trans-unit id="Resx/VersionNumber" translate="yes" xml:space="preserve">
+          <source>Version number</source>
+          <target state="new">Version number</target>
+        </trans-unit>
+        <trans-unit id="Resx/RecommendApp" translate="yes" xml:space="preserve">
+          <source>Recommend this application</source>
+          <target state="new">Recommend this application</target>
+        </trans-unit>
+        <trans-unit id="Resx/ClearHistory" translate="yes" xml:space="preserve">
+          <source>Clear the history</source>
+          <target state="new">Clear the history</target>
+        </trans-unit>
+        <trans-unit id="Resx/CheckUpdates" translate="yes" xml:space="preserve">
+          <source>Check for updates</source>
+          <target state="new">Check for updates</target>
+        </trans-unit>
+        <trans-unit id="Resx/AboutUs" translate="yes" xml:space="preserve">
+          <source>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a convallis nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae justo enim. Vivamus id semper lacus. Duis aliquam diam volutpat, consectetur erat ac, fermentum ex. Donec tincidunt venenatis placerat. Duis dignissim, arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Quisque placerat gravida mauris, in ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget finibus tellus, quis aliquet massa. Sed at lacus purus. Aenean sapien lacus, malesuada eu ligula et, cursus tristique nibh. Aliquam consectetur libero et erat imperdiet, vitae convallis mi porta.</source>
+          <target state="new">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a convallis nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae justo enim. Vivamus id semper lacus. Duis aliquam diam volutpat, consectetur erat ac, fermentum ex. Donec tincidunt venenatis placerat. Duis dignissim, arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Quisque placerat gravida mauris, in ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget finibus tellus, quis aliquet massa. Sed at lacus purus. Aenean sapien lacus, malesuada eu ligula et, cursus tristique nibh. Aliquam consectetur libero et erat imperdiet, vitae convallis mi porta.</target>
+        </trans-unit>
+        <trans-unit id="Resx/AutoSync" translate="yes" xml:space="preserve">
+          <source>Auto sync the data</source>
+          <target state="new">Auto sync the data</target>
+        </trans-unit>
+        <trans-unit id="Resx/Lang_English" translate="yes" xml:space="preserve">
+          <source>English</source>
+          <target state="new">English</target>
         </trans-unit>
         <trans-unit id="Resx/ConfirmDeletePOI" translate="yes" xml:space="preserve">
           <source>Are you sure you want to delete this point of interest?</source>

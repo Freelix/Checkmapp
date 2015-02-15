@@ -362,4 +362,34 @@
   <data name="MyPoi" xml:space="preserve">
     <value>point of interests</value>
   </data>
+  <data name="Lang_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Lang_French" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="AutoSync" xml:space="preserve">
+    <value>Auto sync the data</value>
+  </data>
+  <data name="WifiOnly" xml:space="preserve">
+    <value>Use Wifi only</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a convallis nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae justo enim. Vivamus id semper lacus. Duis aliquam diam volutpat, consectetur erat ac, fermentum ex. Donec tincidunt venenatis placerat. Duis dignissim, arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Quisque placerat gravida mauris, in ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget finibus tellus, quis aliquet massa. Sed at lacus purus. Aenean sapien lacus, malesuada eu ligula et, cursus tristique nibh. Aliquam consectetur libero et erat imperdiet, vitae convallis mi porta.</value>
+  </data>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="ClearHistory" xml:space="preserve">
+    <value>Clear the history</value>
+  </data>
+  <data name="RecommendApp" xml:space="preserve">
+    <value>Recommend this application</value>
+  </data>
+  <data name="VersionNumber" xml:space="preserve">
+    <value>Version number</value>
+  </data>
 </root>

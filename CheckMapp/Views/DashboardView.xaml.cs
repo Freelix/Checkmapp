@@ -71,7 +71,7 @@ namespace CheckMapp.Views
 
         private void pinButtonSettings_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/SettingsView.xaml", UriKind.Relative));
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/SettingsViews/SettingsView.xaml", UriKind.Relative));
         }
     }
 }

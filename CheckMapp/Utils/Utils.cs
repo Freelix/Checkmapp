@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Xml;
 
 namespace CheckMapp.Utils
 {
@@ -98,6 +99,25 @@ namespace CheckMapp.Utils
                 return ms.ToArray();
             }
         }
+        #endregion
+
+        #region XML
+
+        public static string GetAppVersion()
+        {
+            var xmlReaderSettings = new XmlReaderSettings
+            {
+                XmlResolver = new XmlXapResolver()
+            };
+
+            using (var xmlReader = XmlReader.Create("WMAppManifest.xml", xmlReaderSettings))
+            {
+                xmlReader.ReadToDescendant("App");
+
+                return xmlReader.GetAttribute("Version");
+            }
+        }
+
         #endregion
     }
 }
