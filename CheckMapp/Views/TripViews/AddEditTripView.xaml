@@ -69,8 +69,8 @@
                         </Button>
                     </Grid>
 
-                    <Controls:Map   Width="420" Name="DepMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DepMap_Hold"  >
-                  
+
+                    <Controls:Map   Width="420" Name="DepMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DepMap_Hold">
                     </Controls:Map>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripArrival, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
@@ -83,11 +83,9 @@
                         <Button x:Name="btn_dest" Width="114" Grid.Column="1">
                             <Image Source="Images/appbar.eye.png" />
                         </Button>
-                    </Grid>
+                    </Grid>  
 
-                  
-                    
-                    <Controls:Map  Width="420" Name="DestMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DestMap_Hold"  >
+                    <Controls:Map  Width="420" Name="DestMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DestMap_Hold" >
                     </Controls:Map>
 
                 </StackPanel>

@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
