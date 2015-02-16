@@ -12,10 +12,12 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:maptk="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
     Loaded="PhoneApplicationPage_Loaded">
 
-   
+
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -28,8 +30,8 @@
             <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="TitleTextblock" Text="[add/edit trip]" Margin="9,-7,0,0" Style="{StaticResource PanoramaItemHeaderTextStyle}"/>
         </StackPanel>
-        
-        
+
+
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -48,15 +50,45 @@
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <TextBox x:Name="NameTextBox" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
-                    
+
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:DatePicker Name="datePicker"  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBox x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>
-                    
+
+
+
+                    <Grid Width="444">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox  Width="330" x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>
+                        <Button x:Name="btn_dep" Width="114" Grid.Column="1" >
+                            <Image  Source="Images/appbar.eye.png" Stretch="Fill"  />
+                        </Button>
+                    </Grid>
+
+                    <Controls:Map   Width="420" Name="DepMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DepMap_Hold"  >
+                  
+                    </Controls:Map>
+
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripArrival, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <TextBox x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}"></TextBox>
+                    <Grid Width="444">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Width="330" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}" ></TextBox>
+                        <Button x:Name="btn_dest" Width="114" Grid.Column="1">
+                            <Image Source="Images/appbar.eye.png" />
+                        </Button>
+                    </Grid>
+
+                  
+                    
+                    <Controls:Map  Width="420" Name="DestMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DestMap_Hold"  >
+                    </Controls:Map>
 
                 </StackPanel>
             </ScrollViewer>

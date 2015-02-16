@@ -50,7 +50,7 @@ namespace CheckMapp.ViewModels.POIViewModels
         {
             get
             {
-                return false;
+                return true;
             }
         }
 

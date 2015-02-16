@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Xml;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace CheckMapp.Utils
 {
@@ -100,6 +101,23 @@ namespace CheckMapp.Utils
             }
         }
         #endregion
+
+        /// <summary>
+        /// Vérifie qu'il y est une connexion active
+        /// </summary>
+        /// <param name=></param>
+        /// <returns>true si connecté à un réseaux</returns>
+        public static bool checkNetworkConnection()
+        {
+            var ni = NetworkInterface.NetworkInterfaceType;
+
+            bool IsConnected = false;
+            if ((ni == NetworkInterfaceType.Wireless80211)|| (ni == NetworkInterfaceType.MobileBroadbandCdma)|| (ni == NetworkInterfaceType.MobileBroadbandGsm))
+                IsConnected= true;
+            else if (ni == NetworkInterfaceType.None)
+                IsConnected= false;
+            return IsConnected;
+        }
 
         #region XML
 
