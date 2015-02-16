@@ -84,16 +84,13 @@
                 <vw:DashboardView x:Name="DashboardView" />
             </phone:PanoramaItem>
 
-            <phone:PanoramaItem x:Name="CurrentTripItem" Header="{Binding Path=LocalizedResources.CurrentTrip, Source={StaticResource LocalizedStrings}}">
-                <vwTrip:CurrentView x:Name="CurrentView" />
+            <phone:PanoramaItem Visibility="{Binding IsTripActif, Converter={StaticResource ConvertBoolean}}" x:Name="CurrentTripItem" Header="{Binding Path=LocalizedResources.CurrentTrip, Source={StaticResource LocalizedStrings}}">
+                <vwTrip:CurrentView  x:Name="CurrentView" />
             </phone:PanoramaItem>
 
             <phone:PanoramaItem x:Name="ArchiveItem"  HeaderTemplate="{StaticResource TripPageTitle}" Header="archives">
-                <vw:DynamicContentControl Margin="0,-30,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding CurrentPageViewModel}" />
+                <vw:DynamicContentControl x:Name="DynamicView" Margin="0,-30,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding ElementName=MainPanorama, Path=DataContext.CurrentPageViewModel}" />
             </phone:PanoramaItem>
-
-            <!--<phone:PanoramaItem Margin="-10,0,0,0" Header="{Binding Path=LocalizedResources.LastActivities, Source={StaticResource LocalizedStrings}}">
-            </phone:PanoramaItem>-->
 
         </phone:Panorama>
 

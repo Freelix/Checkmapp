@@ -18,7 +18,8 @@ namespace CheckMapp.Views.ArchivesViews
         public TimelineView()
         {
             InitializeComponent();
-            this.DataContext = MainViewModel.PageViewModels[1];
+            MainViewModel myModel = (((PhoneApplicationFrame)Application.Current.RootVisual).Content as MainPage).DataContext as MainViewModel;
+            this.DataContext = myModel.PageViewModels[1];
             timelineControl.Trips = (this.DataContext as TimelineViewModel).ArchiveTripList;
         }
 

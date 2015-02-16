@@ -14,6 +14,7 @@ using System.Windows.Markup;
 using System.Threading;
 using CheckMapp.Model.Tables;
 using CheckMapp.ViewModels.TripViewModels;
+using CheckMapp.Views;
 
 namespace CheckMapp
 {
@@ -27,22 +28,18 @@ namespace CheckMapp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             while (NavigationService.RemoveBackEntry() != null) ;
+
             this.DataContext = new MainViewModel();
             MainPanorama.SelectionChanged += MainPanorama_SelectionChanged;
-            Trip current = (this.DataContext as MainViewModel).TripList.Find(x => x.IsActif);
+            Trip current = (this.DataContext as MainViewModel).TripActif;
             PhoneApplicationService.Current.State["Trip"] = current;
-            if (current == null)
-            {
-                CurrentTripItem.Visibility = System.Windows.Visibility.Collapsed;
-            }
-            else
-            {
-                CurrentTripItem.Visibility = System.Windows.Visibility.Visible;
+            if ((this.DataContext as MainViewModel).IsTripActif)
                 CurrentView.DataContext = new CurrentViewModel(current);
-            }
-            DashboardView.LoadComponents(current!=null);
-            base.OnNavigatedTo(e);
+
+            DashboardView.LoadComponents((this.DataContext as MainViewModel).IsTripActif);
         }
 
         /// <summary>

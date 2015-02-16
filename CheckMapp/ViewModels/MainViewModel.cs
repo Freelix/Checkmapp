@@ -39,12 +39,33 @@ namespace CheckMapp.ViewModel
             PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel(TripList.FindAll(x=>!x.IsActif)));
             // Set starting page
             ShowUserControlTrip();
+
+            TripActif = TripList.Find(x => x.IsActif);
         }
 
         public void LoadArchivesTripFromDatabase()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
             TripList =  dsTrip.LoadTrip();
+        }
+
+        public Trip _tripActif;
+        public Trip TripActif
+        {
+            get
+            {
+                return _tripActif;
+            }
+            set
+            {
+                _tripActif = value;
+                RaisePropertyChanged("IsTripActif");
+            }
+        }
+
+        public bool IsTripActif
+        {
+            get { return TripActif != null; }
         }
 
         /// <summary>
@@ -118,7 +139,7 @@ namespace CheckMapp.ViewModel
         }
 
 
-        public static List<ViewModelBase> PageViewModels
+        public List<ViewModelBase> PageViewModels
         {
             get;
             set;
@@ -139,6 +160,9 @@ namespace CheckMapp.ViewModel
                 }
             }
         }
+
+
+
 
 
 

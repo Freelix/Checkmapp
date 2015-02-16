@@ -12,8 +12,8 @@ namespace CheckMapp.Model.Utils
     {
         public static DataTemplate GetTemplate(ViewModelBase param)
         {
-            Type t = param.GetType();
-            return App.Current.Resources[t.Name] as DataTemplate;
+                Type t = param.GetType();
+                return App.Current.Resources[t.Name] as DataTemplate;
         }
     }
 }

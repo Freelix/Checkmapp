@@ -274,8 +274,8 @@
     <value>modifier</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>À propos</value>
-  </data>
+    <value>à propos</value>
+  <comment></comment></data>
   <data name="FinishTrip" xml:space="preserve">
     <value>Terminer le voyage</value>
   </data>
