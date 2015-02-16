@@ -54,7 +54,7 @@ namespace CheckMapp.Views
 
         private void pinButtonMap_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Pages/MapPage.xaml", UriKind.Relative));
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/MapView.xaml", UriKind.Relative));
         }
 
         private void pinButtonCurrentTrip_Tap(object sender, System.Windows.Input.GestureEventArgs e)
