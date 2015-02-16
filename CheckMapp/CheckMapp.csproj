@@ -148,7 +148,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Languages\LocalizationChangedEventArgs.cs" />
+    <Compile Include="Utils\Languages\LocalizationManager.cs" />
+    <Compile Include="Utils\Languages\SupportedLanguages.cs" />
+    <Compile Include="Utils\Settings\CMIsolatedStorageProperty.cs" />
     <Compile Include="Utils\MapHelper.cs" />
+    <Compile Include="Utils\Settings\CMIsolatedStoragePropertyHelper.cs" />
+    <Compile Include="Utils\Settings\CMSettingsContainer.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="ViewModels\Mode.cs" />
     <Compile Include="ViewModels\NoteViewModels\AddEditNoteViewModel.cs" />
@@ -159,6 +165,7 @@
     <Compile Include="ViewModels\PhotoViewModels\PhotoViewModel.cs" />
     <Compile Include="ViewModels\POIViewModels\AddPOIViewModel.cs" />
     <Compile Include="ViewModels\POIViewModels\ListPOIViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\StatisticViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\AddEditTripViewModel.cs" />
     <Compile Include="ViewModels\TripViewModels\TripViewModel.cs" />
@@ -198,7 +205,7 @@
     <Compile Include="Views\TripViews\AddEditTripView.xaml.cs">
       <DependentUpon>AddEditTripView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
+    <Compile Include="Views\SettingsViews\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TripViews\TripView.xaml.cs">
@@ -291,7 +298,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsView.xaml">
+    <Page Include="Views\SettingsViews\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

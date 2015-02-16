@@ -137,13 +137,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
 
-        public List<Picture> LoadAllPicturesByPoiId(int poiId)
-        {
-            DataServicePicture dsPicture = new DataServicePicture();
-            _pictureList = dsPicture.LoadPicturesByPoiId(poiId);
-            return _pictureList;
-        }
-
         #endregion
 
     }

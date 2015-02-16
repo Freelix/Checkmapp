@@ -27,6 +27,7 @@ namespace CheckMapp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            while (NavigationService.RemoveBackEntry() != null) ;
             this.DataContext = new MainViewModel();
             MainPanorama.SelectionChanged += MainPanorama_SelectionChanged;
             Trip current = (this.DataContext as MainViewModel).TripList.Find(x => x.IsActif);
