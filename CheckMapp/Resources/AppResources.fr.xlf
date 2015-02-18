@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="fr" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="CheckMapp" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.0.1200.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -309,6 +309,34 @@
         <trans-unit id="Resx/VersionNumber" translate="yes" xml:space="preserve">
           <source>Version number</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Numéro de version</target>
+        </trans-unit>
+        <trans-unit id="Resx/Error_EmptyPicture" translate="yes" xml:space="preserve">
+          <source>You have to choose a picture</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez choisir une image</target>
+        </trans-unit>
+        <trans-unit id="Resx/Error_EmptyName" translate="yes" xml:space="preserve">
+          <source>You have to specify a name</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un nom</target>
+        </trans-unit>
+        <trans-unit id="Resx/Error_EmptyMessage" translate="yes" xml:space="preserve">
+          <source>You have to specify a message</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un message</target>
+        </trans-unit>
+        <trans-unit id="Resx/Error_EmptyDescription" translate="yes" xml:space="preserve">
+          <source>You have to specify a description</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier une description</target>
+        </trans-unit>
+        <trans-unit id="Resx/Error_EmptyCoordinates" translate="yes" xml:space="preserve">
+          <source>You have to specify a departure and a destination</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un départ et une destination</target>
+        </trans-unit>
+        <trans-unit id="Resx/ErrorsDetected" translate="yes" xml:space="preserve">
+          <source>The following errors occured :</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Les erreurs suivantes s'est produite :</target>
+        </trans-unit>
+        <trans-unit id="Resx/Errors" translate="yes" xml:space="preserve">
+          <source>Errors</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Erreurs</target>
         </trans-unit>
         <trans-unit id="Resx/RecommendApp" translate="yes" xml:space="preserve">
           <source>Recommend this application</source>

@@ -12,12 +12,17 @@ using Microsoft.Phone.Controls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Utility = CheckMapp.Utils.Utility;
+using FluentValidation;
+using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class AddEditNoteViewModel : PhoneApplicationPage, INotifyPropertyChanged
     {
         private Note _note;
+
+        // Used for validate the form
+        private IValidator<Note> _validator;
 
         public AddEditNoteViewModel(Trip trip, Note note, Mode mode)
         {
@@ -34,8 +39,14 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
             if(this.Trip.PointsOfInterests!=null)
                 _poiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
+
+            InitialiseValidator();
         }
 
+        private void InitialiseValidator()
+        {
+            _validator = new ValidatorFactory().GetValidator<Note>();
+        }
 
         private ICommand _addEditNoteCommand;
         public ICommand AddEditNoteCommand
@@ -52,6 +63,18 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         #region Properties
+
+        private bool _isFormValid;
+
+        public bool IsFormValid
+        {
+            get { return _isFormValid; }
+            set
+            {
+                _isFormValid = value;
+            }
+        }
+
         /// <summary>
         /// Ma note
         /// </summary>
@@ -180,19 +203,17 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// </summary>
         public void AddEditNote()
         {
-            if (!string.IsNullOrWhiteSpace(NoteName) && !string.IsNullOrWhiteSpace(Message))
+            // If the form is not valid, a notification will appear
+            if (ValidationErrorsHandler.IsValid(_validator, Note))
             {
+                _isFormValid = true;
+
                 if (Mode == Mode.add)
                     AddNoteInDB(Note);
                 else if (Mode == Mode.edit)
                     UpdateExistingNote();
             }
-            else
-            {
-                // Show an appropriate message
-            }
         }
-
 
         private void AddNoteInDB(Note note)
         {

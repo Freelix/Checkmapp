@@ -73,7 +73,8 @@ namespace CheckMapp.Views.POIViews
                     vm.AddPOICommand.Execute(null);
                 }
 
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                if (vm.IsFormValid)
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
             });
             
         }

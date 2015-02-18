@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Device.Location;
 using Windows.Devices.Geolocation;
+using FluentValidation;
+using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.TripViewModels
 {
@@ -26,8 +28,10 @@ namespace CheckMapp.ViewModels.TripViewModels
     /// </summary>
     public class AddEditTripViewModel : ViewModelBase
     {
-        
         private Trip _trip;
+
+        // Used for validate the form
+        private IValidator<Trip> _validator;
 
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
@@ -44,6 +48,12 @@ namespace CheckMapp.ViewModels.TripViewModels
             else
                 Trip = trip;
 
+            InitialiseValidator();
+        }
+
+        private void InitialiseValidator()
+        {
+            _validator = new ValidatorFactory().GetValidator<Trip>();
         }
 
         private ICommand _addEditTripCommand;
@@ -64,6 +74,17 @@ namespace CheckMapp.ViewModels.TripViewModels
         }
 
         #region Properties
+
+        private bool _isFormValid;
+
+        public bool IsFormValid
+        {
+            get { return _isFormValid; }
+            set
+            {
+                _isFormValid = value;
+            }
+        }
 
         public Trip Trip
         {
@@ -193,31 +214,20 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         public void AddEditTrip()
         {
-            // Adding a Trip
-            if (Mode == Mode.add)
+            // If the form is not valid, a notification will appear
+            if (ValidationErrorsHandler.IsValid(_validator, Trip))
             {
-                if (!string.IsNullOrWhiteSpace(Trip.Name) &&
-                    !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
+                _isFormValid = true;
+
+                // Adding a Trip
+                if (Mode == Mode.add)
                 {
-                 //  await SetCoordinate();
-                   AddTripInDB(Trip);
+                    //  await SetCoordinate();
+                    AddTripInDB(Trip);
                 }
-                else
-                {
-                    // Show an appropriate message
-                }
-            }
-            else if (Mode == Mode.edit)
-            {
-                // Edit a Trip
-                if (!string.IsNullOrWhiteSpace(Trip.Name) &&
-                    !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
+                else if (Mode == Mode.edit)
                 {
                     UpdateExistingTrip();
-                }
-                else
-                {
-                    // Show an appropriate message
                 }
             }
         }

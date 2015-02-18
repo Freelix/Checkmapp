@@ -60,8 +60,12 @@ namespace CheckMapp.Views.NoteViews
                 {
                     vm.AddEditNoteCommand.Execute(null);
                 }
-                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack(); 
+
+                if (vm.IsFormValid)
+                {
+                    // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                }
             });
         }
 

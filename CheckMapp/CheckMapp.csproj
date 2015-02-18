@@ -14,8 +14,7 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion>
-    </SilverlightVersion>
+    <SilverlightVersion></SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -158,6 +157,13 @@
     <Compile Include="Utils\Settings\CMIsolatedStoragePropertyHelper.cs" />
     <Compile Include="Utils\Settings\CMSettingsContainer.cs" />
     <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Utils\Validations\Validators\NoteValidator.cs" />
+    <Compile Include="Utils\Validations\ValidationErrorsHandler.cs" />
+    <Compile Include="Utils\Validations\ValidatorFactory.cs" />
+    <Compile Include="Utils\Validations\Validators\PhotoValidator.cs" />
+    <Compile Include="Utils\Validations\Validators\POIValidator.cs" />
+    <Compile Include="Utils\Validations\Validators\CustomValidators\ValidateTripCoordinates.cs" />
+    <Compile Include="Utils\Validations\Validators\TripValidator.cs" />
     <Compile Include="ViewModels\Mode.cs" />
     <Compile Include="ViewModels\NoteViewModels\AddEditNoteViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModels\ListNoteViewModel.cs" />
@@ -397,6 +403,7 @@
     <Content Include="Images\vacance.jpg" />
     <Content Include="Images\background.png" />
     <Content Include="Images\filter.png" />
+    <Content Include="System.ComponentModel.DataAnnotations.dll" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -416,6 +423,9 @@
     </Reference>
     <Reference Include="Coding4Fun.Toolkit.Storage">
       <HintPath>..\packages\Coding4Fun.Toolkit.Storage.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\portable-win+net40+sl50+wp80+wpa81\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -477,7 +487,9 @@
       <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>
     </XliffResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

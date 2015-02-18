@@ -8,18 +8,30 @@ using Microsoft.Phone.Controls;
 using System.Windows.Controls;
 using System.Windows;
 using CheckMapp.Model.DataService;
+using FluentValidation;
+using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
     public class AddPOIViewModel : PhoneApplicationPage, INotifyPropertyChanged
     {
         private ICommand _addPOICommand;
+
+        // Used for validate the form
+        private IValidator<PointOfInterest> _validator;
+
         /// <summary>
         /// Initializes a new instance of the AddPOIViewModel class.
         /// </summary>
         public AddPOIViewModel(Trip trip)
         {
             this.Trip = trip;
+            InitialiseValidator();
+        }
+
+        private void InitialiseValidator()
+        {
+            _validator = new ValidatorFactory().GetValidator<PointOfInterest>();
         }
 
         /// <summary>
@@ -39,6 +51,17 @@ namespace CheckMapp.ViewModels.POIViewModels
         }
 
         #region Properties
+
+        private bool _isFormValid;
+
+        public bool IsFormValid
+        {
+            get { return _isFormValid; }
+            set
+            {
+                _isFormValid = value;
+            }
+        }
 
         public Mode Mode
         {
@@ -99,22 +122,21 @@ namespace CheckMapp.ViewModels.POIViewModels
             // Adding a note
             if (Mode == Mode.add)
             {
-                if (!string.IsNullOrWhiteSpace(_name))
+                // TODO: Replace that part with a request using bing maps API (key needed)
+                PointOfInterest newPOI = new PointOfInterest
                 {
-                    PointOfInterest newPOI = new PointOfInterest
-                    {
-                        // Replace that part with a request using bing maps API (key needed)
-                        Name = _name,
-                        City = "Sherbrooke",
-                        Longitude = -71.88,
-                        Latitude = 45.40
-                    };
+                    Name = _name,
+                    City = "Sherbrooke",
+                    Longitude = -71.88,
+                    Latitude = 45.40
+                };
+
+                // If the form is not valid, a notification will appear
+                if (ValidationErrorsHandler.IsValid(_validator, newPOI))
+                {
+                    _isFormValid = true;
 
                     AddPoiInDB(newPOI);
-                }
-                else
-                {
-                    // Show an appropriate message
                 }
             }
         }
