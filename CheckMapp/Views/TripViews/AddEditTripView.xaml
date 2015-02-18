@@ -64,8 +64,8 @@
                             <ColumnDefinition Width="100*" />
                         </Grid.ColumnDefinitions>
                         <TextBox  Width="330" x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>
-                        <Button x:Name="btn_dep" Width="114" Grid.Column="1" >
-                            <Image  Source="Images/appbar.eye.png" Stretch="Fill"  />
+                        <Button x:Name="btn_dep" Width="114" Grid.Column="1" Click="btn_dep_Click" >
+                            <Image  Source="/Images/appbar.eye.min.png" Height="28"  />
                         </Button>
                     </Grid>
 
@@ -80,8 +80,8 @@
                             <ColumnDefinition Width="100*" />
                         </Grid.ColumnDefinitions>
                         <TextBox Width="330" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}" ></TextBox>
-                        <Button x:Name="btn_dest" Width="114" Grid.Column="1">
-                            <Image Source="Images/appbar.eye.png" />
+                        <Button x:Name="btn_dest" Width="114" Grid.Column="1" Click="btn_dest_Click">
+                            <Image Source="/Images/appbar.eye.min.png" Height="28"  />
                         </Button>
                     </Grid>  
 

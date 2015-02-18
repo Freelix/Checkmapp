@@ -42,7 +42,11 @@ namespace CheckMapp.Views.TripViews
             if (vm.Mode == Mode.add)
                 TitleTextblock.Text = AppResources.AddTrip.ToLower();
             else
+            {
                 TitleTextblock.Text = AppResources.EditTrip.ToLower();
+                AddLocation_onEdit(currentTrip);
+            }
+                
 
         }
 
@@ -121,49 +125,28 @@ namespace CheckMapp.Views.TripViews
         }
 
         private async void DepMap_Hold(object sender, System.Windows.Input.GestureEventArgs e)
-        { 
-            ReverseGeocodeQuery query;
-            List<MapLocation> mapLocations;
-            string pushpinContent;
-            MapLocation mapLocation;
-
-            query = new ReverseGeocodeQuery();
-            query.GeoCoordinate = this.DepMap.ConvertViewportPointToGeoCoordinate(e.GetPosition(this.DepMap));
-
-            mapLocations = (List<MapLocation>)await query.GetMapLocationsAsync();
-            mapLocation = mapLocations.FirstOrDefault();
-
-            if (mapLocation != null)
-            {  
-                MapLayer pinLayout = new MapLayer();
-                Pushpin MyPushpin = new Pushpin();
-                MapOverlay pinOverlay = new MapOverlay();
-                if(this.DepMap.Layers.Count > 0)
-                {
-                    this.DepMap.Layers.RemoveAt(this.DepMap.Layers.Count - 1);
-                }
-                
-                this.DepMap.Layers.Add(pinLayout);
-
-                MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
-
-                pinOverlay.Content = MyPushpin;
-                pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
-                pinLayout.Add(pinOverlay);
-
-                pushpinContent = mapLocation.Information.Name;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? mapLocation.Information.Description : null;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0} {1} {2} ", mapLocation.Information.Address.Street, mapLocation.Information.Address.City, mapLocation.Information.Address.Country) : null;
-
-                MyPushpin.Content = pushpinContent.Trim();
-                MyPushpin.Visibility = Visibility.Visible;
-
-                this.DepartureTextBox.Text = MyPushpin.Content.ToString();
-      
-             }
+        {
+            await AddLocation_onHold(this.DepMap, this.DepartureTextBox, e);
         }
 
         private async void DestMap_Hold(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            await AddLocation_onHold(this.DestMap, this.DestinationTextBox, e);
+        }
+
+        private void btn_dep_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as AddEditTripViewModel;
+            AfficherCarte(vm, this.DepartureTextBox, this.DepMap);
+        }
+
+        private void btn_dest_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as AddEditTripViewModel;
+            AfficherCarte(vm, this.DestinationTextBox, this.DestMap);
+        }
+
+        private async System.Threading.Tasks.Task AddLocation_onHold(Microsoft.Phone.Maps.Controls.Map myMap, TextBox myTextBox, System.Windows.Input.GestureEventArgs e)
         {
             ReverseGeocodeQuery query;
             List<MapLocation> mapLocations;
@@ -171,23 +154,22 @@ namespace CheckMapp.Views.TripViews
             MapLocation mapLocation;
 
             query = new ReverseGeocodeQuery();
-            query.GeoCoordinate = this.DestMap.ConvertViewportPointToGeoCoordinate(e.GetPosition(this.DestMap));
+            query.GeoCoordinate = myMap.ConvertViewportPointToGeoCoordinate(e.GetPosition(myMap));
 
             mapLocations = (List<MapLocation>)await query.GetMapLocationsAsync();
             mapLocation = mapLocations.FirstOrDefault();
 
             if (mapLocation != null)
             {
-
                 MapLayer pinLayout = new MapLayer();
                 Pushpin MyPushpin = new Pushpin();
                 MapOverlay pinOverlay = new MapOverlay();
-                if (this.DestMap.Layers.Count > 0)
+                if (myMap.Layers.Count > 0)
                 {
-                    this.DestMap.Layers.RemoveAt(this.DestMap.Layers.Count - 1);
+                    myMap.Layers.RemoveAt(myMap.Layers.Count - 1);
                 }
 
-                this.DestMap.Layers.Add(pinLayout);
+                myMap.Layers.Add(pinLayout);
 
                 MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
 
@@ -202,8 +184,70 @@ namespace CheckMapp.Views.TripViews
                 MyPushpin.Content = pushpinContent.Trim();
                 MyPushpin.Visibility = Visibility.Visible;
 
-                this.DestinationTextBox.Text = MyPushpin.Content.ToString();
+                myTextBox.Text = MyPushpin.Content.ToString();
+
             }
         }
+
+        public async void AddLocation_onEdit(Trip currentTrip)
+        {
+            await AddLocation_onEdit(this.DepMap, this.DepartureTextBox, currentTrip.DepartureLatitude, currentTrip.DepartureLongitude);
+            await AddLocation_onEdit(this.DestMap, this.DestinationTextBox, currentTrip.DestinationLatitude, currentTrip.DestinationLongitude);
+        }
+
+        private async System.Threading.Tasks.Task AddLocation_onEdit(Microsoft.Phone.Maps.Controls.Map myMap, TextBox myTextBox, double latitude, double longitude)
+        {
+            List<MapLocation> mapLocations;
+            MapLocation mapLocation;
+            string pushpinContent;
+            ReverseGeocodeQuery query = new ReverseGeocodeQuery();
+            query.GeoCoordinate = new GeoCoordinate(latitude, longitude);
+           
+            mapLocations =(List<MapLocation>)await query.GetMapLocationsAsync();
+            mapLocation = mapLocations.FirstOrDefault();
+
+            if (mapLocation != null)
+            {
+                MapLayer pinLayout = new MapLayer();
+                Pushpin MyPushpin = new Pushpin();
+                MapOverlay pinOverlay = new MapOverlay();
+                if (myMap.Layers.Count > 0)
+                {
+                    myMap.Layers.RemoveAt(myMap.Layers.Count - 1);
+                }
+
+                myMap.Layers.Add(pinLayout);
+
+                MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
+
+                pinOverlay.Content = MyPushpin;
+                pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
+                pinLayout.Add(pinOverlay);
+
+                pushpinContent = mapLocation.Information.Name;
+                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? mapLocation.Information.Description : null;
+                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0} {1} {2} ", mapLocation.Information.Address.Street, mapLocation.Information.Address.City, mapLocation.Information.Address.Country) : null;
+
+                MyPushpin.Content = pushpinContent.Trim();
+                MyPushpin.Visibility = Visibility.Visible;
+
+                myTextBox.Text = MyPushpin.Content.ToString();
+                    
+            }
+        }
+
+        private async void AfficherCarte(AddEditTripViewModel vm, TextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
+        {
+            try
+            {
+                var CoordinateList = await vm.getCoordinateAsync(myTextBox.Text);
+                await AddLocation_onEdit(myMap, myTextBox, CoordinateList[0], CoordinateList[1]);
+            }
+            catch(Exception e)
+            {
+                Console.Out.WriteLine(e);
+            }
+        }
+
     }
 }

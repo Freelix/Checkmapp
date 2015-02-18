@@ -102,6 +102,7 @@ namespace CheckMapp.Utils
         }
         #endregion
 
+        #region Internet connection Functions
         /// <summary>
         /// Vérifie qu'il y est une connexion active
         /// </summary>
@@ -118,6 +119,8 @@ namespace CheckMapp.Utils
                 IsConnected= false;
             return IsConnected;
         }
+
+        #endregion
 
         #region XML
 

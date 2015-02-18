@@ -372,6 +372,7 @@
     <Content Include="Images\appbar.addflag.png" />
     <Content Include="Images\appbar.clipboard.variant.png" />
     <Content Include="Images\appbar.delete.png" />
+    <Content Include="Images\appbar.eye.min.png" />
     <Content Include="Images\appbar.eye.png" />
     <Content Include="Images\appbar.flag.png" />
     <Content Include="Images\appbar.flag.wavy.png" />

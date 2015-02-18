@@ -163,6 +163,70 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
+        private double _departureLongitude;
+
+   
+        public double DepartureLongitude
+        {
+            get { return _departureLongitude; }
+            set
+            {
+                if (_departureLongitude != value)
+                {
+                    _departureLongitude = value;
+                    NotifyPropertyChanged("DepartureLongitude");
+                }
+            }
+        }
+
+        private double _departureLatitude;
+
+    
+        public double DepartureLatitude
+        {
+            get { return _departureLatitude; }
+            set
+            {
+                if (_departureLatitude != value)
+                {
+                    _departureLatitude = value;
+                    NotifyPropertyChanged("DepartureLatitude");
+                }
+            }
+        }
+
+        private double _destinationLongitude;
+
+      
+        public double DestinationLongitude
+        {
+            get { return _destinationLongitude; }
+            set
+            {
+                if (_destinationLongitude != value)
+                {
+                    _destinationLongitude = value;
+                    NotifyPropertyChanged("DestinationLongitude");
+                }
+            }
+        }
+
+        private double _destinationLatitude;
+
+
+        public double DestinationLatitude
+        {
+            get { return _destinationLatitude; }
+            set
+            {
+                if (_destinationLatitude != value)
+                {
+                    _destinationLatitude = value;
+                    NotifyPropertyChanged("DestinationLatitude");
+                }
+            }
+        }
+
         public byte[] MainImage
         {
             get { return Trip.MainPictureData; }
@@ -191,7 +255,7 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         #region DBMethods
 
-        public void AddEditTrip()
+        public async void AddEditTrip()
         {
             // Adding a Trip
             if (Mode == Mode.add)
@@ -199,7 +263,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (!string.IsNullOrWhiteSpace(Trip.Name) &&
                     !string.IsNullOrWhiteSpace(_departure) && !string.IsNullOrWhiteSpace(_destination))
                 {
-                 //  await SetCoordinate();
+                   await SetCoordinate();
                    AddTripInDB(Trip);
                 }
                 else
@@ -242,26 +306,67 @@ namespace CheckMapp.ViewModels.TripViewModels
         private async Task SetCoordinate()
         {
 
-          /*  await SetCoordinateAsync(_departure, Trip.Departure);
-            Trip.Departure.SetPosition(TripLocalisation.Position.Departure);
+            await SetCoordinateAsync(_departure, true);
 
-            await SetCoordinateAsync(_destination, Trip.Destination);
-            Trip.Destination.SetPosition(TripLocalisation.Position.Destination);*/
+            await SetCoordinateAsync(_destination, false);
+           
         }
 
-        private async Task SetCoordinateAsync(string searchString)
+        public async Task SetCoordinateAsync(string searchString, bool isDeparture)
         {
-            string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
-            var _Helper = new MapHelper(_Key);
+            try
+            {
+                string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
+                var _Helper = new MapHelper(_Key);
 
-            var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
+                var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
 
-            var _Address = _Location.First().address;
-            var _Coordinate = _Location.First().point;
+                var _Address = _Location.First().address;
+                var _Coordinate = _Location.First().point;
 
-            //Ajout de la longitude et de la latitude
-           // tripLocalisation.Latitude =_Coordinate.coordinates[0];
-           // tripLocalisation.Longitude = _Coordinate.coordinates[1];
+                //Ajout de la longitude et de la latitude
+                if (isDeparture)
+                {
+                    Trip.DepartureLatitude = _Coordinate.coordinates[0];
+                    Trip.DepartureLongitude = _Coordinate.coordinates[1];
+                }
+                else
+                {
+                    Trip.DestinationLatitude = _Coordinate.coordinates[0];
+                    Trip.DestinationLongitude = _Coordinate.coordinates[1];
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.Out.WriteLine(e);
+            }           
+           
+        }
+
+        public async Task<List<double>> getCoordinateAsync(string searchString)
+        {
+            List<double> myList = new List<double>();
+            try
+            {
+                
+                string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
+                var _Helper = new MapHelper(_Key);
+
+                var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
+
+                var _Address = _Location.First().address;
+                var _Coordinate = _Location.First().point;
+
+
+                myList.Add(_Coordinate.coordinates[0]);
+                myList.Add(_Coordinate.coordinates[1]);
+                return myList;
+            }
+            catch (MapHelper.InvalidStatusCodeException e)
+            {
+                Console.Out.WriteLine(e);
+                throw e;
+            }           
         }
         #endregion
 
