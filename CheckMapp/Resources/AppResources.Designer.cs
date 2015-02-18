@@ -412,6 +412,69 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à You have to specify a departure and a destination.
+        /// </summary>
+        public static string Error_EmptyCoordinates {
+            get {
+                return ResourceManager.GetString("Error_EmptyCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You have to specify a description.
+        /// </summary>
+        public static string Error_EmptyDescription {
+            get {
+                return ResourceManager.GetString("Error_EmptyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You have to specify a message.
+        /// </summary>
+        public static string Error_EmptyMessage {
+            get {
+                return ResourceManager.GetString("Error_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You have to specify a name.
+        /// </summary>
+        public static string Error_EmptyName {
+            get {
+                return ResourceManager.GetString("Error_EmptyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You have to choose a picture.
+        /// </summary>
+        public static string Error_EmptyPicture {
+            get {
+                return ResourceManager.GetString("Error_EmptyPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Errors.
+        /// </summary>
+        public static string Errors {
+            get {
+                return ResourceManager.GetString("Errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The following errors occured :.
+        /// </summary>
+        public static string ErrorsDetected {
+            get {
+                return ResourceManager.GetString("ErrorsDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Finish the trip.
         /// </summary>
         public static string FinishTrip {

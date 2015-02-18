@@ -88,8 +88,12 @@ namespace CheckMapp.Views.TripViews
                 {
                     vm.AddEditTripCommand.Execute(null);
                 }
-                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+
+                if (vm.IsFormValid)
+                {
+                    // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                }
             });
         }
 

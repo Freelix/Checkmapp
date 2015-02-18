@@ -392,4 +392,25 @@
   <data name="VersionNumber" xml:space="preserve">
     <value>Version number</value>
   </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="ErrorsDetected" xml:space="preserve">
+    <value>The following errors occured :</value>
+  </data>
+  <data name="Error_EmptyCoordinates" xml:space="preserve">
+    <value>You have to specify a departure and a destination</value>
+  </data>
+  <data name="Error_EmptyDescription" xml:space="preserve">
+    <value>You have to specify a description</value>
+  </data>
+  <data name="Error_EmptyMessage" xml:space="preserve">
+    <value>You have to specify a message</value>
+  </data>
+  <data name="Error_EmptyName" xml:space="preserve">
+    <value>You have to specify a name</value>
+  </data>
+  <data name="Error_EmptyPicture" xml:space="preserve">
+    <value>You have to choose a picture</value>
+  </data>
 </root>

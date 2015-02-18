@@ -275,7 +275,8 @@
   </data>
   <data name="About" xml:space="preserve">
     <value>à propos</value>
-  <comment></comment></data>
+    <comment></comment>
+  </data>
   <data name="FinishTrip" xml:space="preserve">
     <value>Terminer le voyage</value>
   </data>
@@ -403,5 +404,26 @@
   </data>
   <data name="AboutUs" xml:space="preserve">
     <value>Lorem ipsum dolor sit amet, consectetur adipiscing public concerné. Pellentesque un nulla convallis. Très sociis natoque penatibus et magnis dis PARTURIENTS permettant montes, nascetur ridiculus mus. Donec un curriculum vitae justo enim. Vivamus id siège lacus. Duis aliquam diam volutpat, CA erat de consectetur, fermentum exemple : Donec tincidunt venenatis placerat. Dignissim duis arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Mauris de gravida placerat Quisque, dans ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget publication tellus, quis aliquet massa. Sed à lacus purus. Aenean sapien lacus, ligula de l'Union européenne malesuada et, cursus tristique nibh. Libero de consectetur Aliquam et imperdiet erat, un curriculum vitae convallis mi Portal.</value>
+  </data>
+  <data name="Error_EmptyPicture" xml:space="preserve">
+    <value>Vous devez choisir une image</value>
+  </data>
+  <data name="Error_EmptyName" xml:space="preserve">
+    <value>Vous devez spécifier un nom</value>
+  </data>
+  <data name="Error_EmptyMessage" xml:space="preserve">
+    <value>Vous devez spécifier un message</value>
+  </data>
+  <data name="Error_EmptyDescription" xml:space="preserve">
+    <value>Vous devez spécifier une description</value>
+  </data>
+  <data name="Error_EmptyCoordinates" xml:space="preserve">
+    <value>Vous devez spécifier un départ et une destination</value>
+  </data>
+  <data name="ErrorsDetected" xml:space="preserve">
+    <value>Les erreurs suivantes s'est produite :</value>
+  </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Erreurs</value>
   </data>
 </root>

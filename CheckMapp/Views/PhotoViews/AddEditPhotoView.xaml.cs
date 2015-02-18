@@ -74,7 +74,8 @@ namespace CheckMapp.Views.PhotoViews
                     vm.AddEditPhotoCommand.Execute(null);
                 }
 
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                if (vm.IsFormValid)
+                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
             });
 
         }

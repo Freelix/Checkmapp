@@ -11,6 +11,8 @@ using System.Windows;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
+using FluentValidation;
+using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
@@ -18,6 +20,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
     {
         private ICommand _addEditPhotoCommand;
         private Picture _picture;
+
+        // Used for validate the form
+        private IValidator<Picture> _validator;
 
         public AddEditPhotoViewModel(Trip trip, Picture picture, Mode mode, byte[] photoArray)
         {
@@ -37,9 +42,27 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
             if (photoArray != null)
                 this.ImageSource = photoArray;
+
+            InitialiseValidator();
+        }
+
+        private void InitialiseValidator()
+        {
+            _validator = new ValidatorFactory().GetValidator<Picture>();
         }
 
         #region Properties
+
+        private bool _isFormValid;
+
+        public bool IsFormValid
+        {
+            get { return _isFormValid; }
+            set
+            {
+                _isFormValid = value;
+            }
+        }
 
         /// <summary>
         /// Ma photo
@@ -58,7 +81,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             get;
             set;
         }
-
 
         private List<PointOfInterest> _poiList;
         /// <summary>
@@ -175,16 +197,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         /// </summary>
         public void AddEditPhoto()
         {
-            if (!string.IsNullOrWhiteSpace(Description) && ImageSource != null)
+            // If the form is not valid, a notification will appear
+            if (ValidationErrorsHandler.IsValid(_validator, Picture))
             {
+                _isFormValid = true;
+
                 if (Mode == Mode.add)
                     AddPictureInDB(Picture);
                 else if (Mode == Mode.edit)
                     UpdateExistingPicture();
-            }
-            else
-            {
-                // Show an appropriate message
             }
         }
 
