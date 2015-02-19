@@ -140,23 +140,28 @@ namespace CheckMapp.Views.TripViews
         private async void DepMap_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
             await AddLocation_onHold(this.DepMap, this.DepartureTextBox, e);
+            MapLayer layer = this.DepMap.Layers.FirstOrDefault();
+            (this.DataContext as AddEditTripViewModel).Trip.DepartureLatitude = layer[0].GeoCoordinate.Latitude;
+            (this.DataContext as AddEditTripViewModel).Trip.DepartureLongitude = layer[0].GeoCoordinate.Longitude;
         }
 
         private async void DestMap_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
             await AddLocation_onHold(this.DestMap, this.DestinationTextBox, e);
+            MapLayer layer = this.DestMap.Layers.FirstOrDefault();
+            (this.DataContext as AddEditTripViewModel).Trip.DestinationLatitude = layer[0].GeoCoordinate.Latitude;
+            (this.DataContext as AddEditTripViewModel).Trip.DestinationLongitude = layer[0].GeoCoordinate.Longitude;
+          
         }
 
         private void btn_dep_Click(object sender, RoutedEventArgs e)
         {
-            var vm = DataContext as AddEditTripViewModel;
-            AfficherCarte(vm, this.DepartureTextBox, this.DepMap);
+            AfficherCarte(this.DepartureTextBox, this.DepMap);
         }
 
         private void btn_dest_Click(object sender, RoutedEventArgs e)
         {
-            var vm = DataContext as AddEditTripViewModel;
-            AfficherCarte(vm, this.DestinationTextBox, this.DestMap);
+            AfficherCarte(this.DestinationTextBox, this.DestMap);
         }
         
         private async System.Threading.Tasks.Task AddLocation_onHold(Microsoft.Phone.Maps.Controls.Map myMap, PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e)
@@ -164,7 +169,7 @@ namespace CheckMapp.Views.TripViews
             await Utils.Utility.AddLocation(myMap, myTextBox, e, 0.0, 0.0);
         }
 
-        public async void AddLocation_onEdit(Trip currentTrip)
+        private async void AddLocation_onEdit(Trip currentTrip)
         {
             await AddLocation_onEdit(this.DepMap, this.DepartureTextBox, currentTrip.DepartureLatitude, currentTrip.DepartureLongitude);
             await AddLocation_onEdit(this.DestMap, this.DestinationTextBox, currentTrip.DestinationLatitude, currentTrip.DestinationLongitude);
@@ -175,16 +180,28 @@ namespace CheckMapp.Views.TripViews
             await Utils.Utility.AddLocation(myMap, myTextBox, null, latitude, longitude);
         }
           
-        private async void AfficherCarte(AddEditTripViewModel vm, PhoneTextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
+        private async void AfficherCarte(PhoneTextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
         {
             try
             {
-                var CoordinateList = await vm.getCoordinateAsync(myTextBox.Text);
+                var CoordinateList = await (this.DataContext as AddEditTripViewModel).getCoordinateAsync(myTextBox.Text);
+               
+                // CoordinateList[0] = latitude, CoordinateList[1] = longitude
                 await AddLocation_onEdit(myMap, myTextBox, CoordinateList[0], CoordinateList[1]);
+                if (myMap == this.DepMap)
+                { 
+                    (this.DataContext as AddEditTripViewModel).Trip.DepartureLatitude = CoordinateList[0];
+                    (this.DataContext as AddEditTripViewModel).Trip.DepartureLongitude = CoordinateList[1];
+                }
+                else 
+                {
+                    (this.DataContext as AddEditTripViewModel).Trip.DestinationLatitude = CoordinateList[0];
+                    (this.DataContext as AddEditTripViewModel).Trip.DestinationLongitude = CoordinateList[1];
+                }
             }
             catch(Exception e)
             {
-                Console.Out.WriteLine(e);
+                MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
             }
         }
 

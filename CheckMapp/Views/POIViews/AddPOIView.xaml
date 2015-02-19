@@ -32,7 +32,7 @@
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <toolkit:PhoneTextBox Height="100" Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                <toolkit:PhoneTextBox Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
                 <Controls:Map  Margin="10" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="Map_Hold"  />
             </StackPanel>
         </Grid>

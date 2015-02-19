@@ -422,4 +422,10 @@
   <data name="NotConnected" xml:space="preserve">
     <value>Internet connection missing</value>
   </data>
+  <data name="InvalideSearch" xml:space="preserve">
+    <value>No result found for : {0}</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
 </root>

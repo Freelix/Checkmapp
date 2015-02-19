@@ -511,6 +511,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No result found for : {0}.
+        /// </summary>
+        public static string InvalideSearch {
+            get {
+                return ResourceManager.GetString("InvalideSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string Lang_English {
@@ -921,6 +930,15 @@ namespace CheckMapp.Resources {
         public static string VersionNumber {
             get {
                 return ResourceManager.GetString("VersionNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
         

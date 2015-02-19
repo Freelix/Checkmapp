@@ -8,8 +8,9 @@
       <group id="Resx">
         <trans-unit id="Resx/About" translate="yes" xml:space="preserve">
           <source>about</source>
-          <target state="needs-review-translation">à propos</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">à propos</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/AddPicture" translate="yes" xml:space="preserve">
           <source>Add picture</source>
           <target state="translated">Ajouter une image</target>
@@ -314,6 +315,28 @@
           <source>You have to choose a picture</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez choisir une image</target>
         </trans-unit>
+        <trans-unit id="Resx/InternetConnection" translate="yes" xml:space="preserve">
+          <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
+          <target state="translated">Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</target>
+        </trans-unit>
+        <trans-unit id="Resx/NotConnected" translate="yes" xml:space="preserve">
+          <source>Internet connection missing</source>
+          <target state="needs-review-translation">Connexion internet désactivée</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
+        <trans-unit id="Resx/InvalideSearch" translate="yes" xml:space="preserve">
+          <source>No result found for : {0}</source>
+          <target state="translated">Aucun résultat trouvé pour : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/Warning" translate="yes" xml:space="preserve">
+          <source>Warning</source>
+          <target state="translated">Avertissement</target>
+        </trans-unit>
+        <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
+          <source>city, (state, province, disctrict), country</source>
+          <target state="needs-review-translation">ville, (état, province, disctrict), pays</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/Error_EmptyName" translate="yes" xml:space="preserve">
           <source>You have to specify a name</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un nom</target>
