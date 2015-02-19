@@ -125,4 +125,14 @@
     <value>qps-ploc</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="InternetConnection" xml:space="preserve">
+    <value>Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</value>
+  </data>
+  <data name="DepDest" xml:space="preserve">
+    <value>ville, (état, province, disctrict), pays</value>
+  </data>
+  <data name="NotConnected" xml:space="preserve">
+    <value>Connexion internet désactivée</value>
+    <comment></comment>
+  </data>
 </root>

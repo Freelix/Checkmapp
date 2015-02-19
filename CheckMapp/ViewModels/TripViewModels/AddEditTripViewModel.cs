@@ -276,7 +276,7 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         #region DBMethods
 
-        public async void AddEditTrip()
+        public void AddEditTrip()
         {
             // If the form is not valid, a notification will appear
             if (ValidationErrorsHandler.IsValid(_validator, Trip))
@@ -286,12 +286,13 @@ namespace CheckMapp.ViewModels.TripViewModels
                 // Adding a Trip
                 if (Mode == Mode.add)
                 {
-                   await SetCoordinate();
+                   SetCoordinate();
                    AddTripInDB(Trip);
 
                 }
                 else if (Mode == Mode.edit)
                 {
+                    SetCoordinate();
                     UpdateExistingTrip();
                 }
             }
@@ -314,7 +315,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         #region MapHelperMethod
 
         //Set latitude and longitude from query to _TripDeparture and _TripDestination
-        private async Task SetCoordinate()
+        private async void SetCoordinate()
         {
 
             await SetCoordinateAsync(_departure, true);
@@ -332,7 +333,6 @@ namespace CheckMapp.ViewModels.TripViewModels
 
                 var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
 
-                var _Address = _Location.First().address;
                 var _Coordinate = _Location.First().point;
 
                 //Ajout de la longitude et de la latitude
@@ -365,7 +365,6 @@ namespace CheckMapp.ViewModels.TripViewModels
 
                 var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
 
-                var _Address = _Location.First().address;
                 var _Coordinate = _Location.First().point;
 
 

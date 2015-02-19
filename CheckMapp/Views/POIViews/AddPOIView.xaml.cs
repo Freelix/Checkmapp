@@ -13,12 +13,13 @@ using CheckMapp.Model.Tables;
 using Microsoft.Phone.Maps.Services;
 using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
+using CheckMapp.Utils;
 
 namespace CheckMapp.Views.POIViews
 {
     public partial class AddPOIView : PhoneApplicationPage
     {
-        TextBox PoiNameTextBox;
+        PhoneTextBox PoiNameTextBox;
         Microsoft.Phone.Maps.Controls.Map poiMap;
         StackPanel myStack;
         public AddPOIView()
@@ -33,8 +34,8 @@ namespace CheckMapp.Views.POIViews
                     myStack = (StackPanel)element;
                     foreach (var element2 in myStack.Children)
                     {
-                        if (element2 is TextBox)
-                            PoiNameTextBox = (TextBox)element2;
+                        if (element2 is PhoneTextBox)
+                            PoiNameTextBox = (PhoneTextBox)element2;
                         if (element2 is Microsoft.Phone.Maps.Controls.Map)
                             poiMap = (Microsoft.Phone.Maps.Controls.Map)element2;
                     }
@@ -91,45 +92,8 @@ namespace CheckMapp.Views.POIViews
 
         private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            ReverseGeocodeQuery query;
-            List<MapLocation> mapLocations;
-            string pushpinContent;
-            MapLocation mapLocation;
-
-            query = new ReverseGeocodeQuery();
-            query.GeoCoordinate = poiMap.ConvertViewportPointToGeoCoordinate(e.GetPosition(poiMap));
-
-            mapLocations = (List<MapLocation>)await query.GetMapLocationsAsync();
-            mapLocation = mapLocations.FirstOrDefault();
-
-            if (mapLocation != null)
-            {
-                MapLayer pinLayout = new MapLayer();
-                Pushpin MyPushpin = new Pushpin();
-                MapOverlay pinOverlay = new MapOverlay();
-                if (poiMap.Layers.Count > 0)
-                {
-                    poiMap.Layers.RemoveAt(poiMap.Layers.Count - 1);
-                }
-
-                poiMap.Layers.Add(pinLayout);
-
-                MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
-
-                pinOverlay.Content = MyPushpin;
-                pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
-                pinLayout.Add(pinOverlay);
-
-                pushpinContent = mapLocation.Information.Name;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? mapLocation.Information.Description : null;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0} {1} {2} ", mapLocation.Information.Address.Street, mapLocation.Information.Address.City, mapLocation.Information.Address.Country) : null;
-
-                MyPushpin.Content = pushpinContent.Trim();
-                MyPushpin.Visibility = Visibility.Visible;
-
-                this.PoiNameTextBox.Text = MyPushpin.Content.ToString();
-
-            }
+           await Utils.Utility.AddLocation(this.poiMap, this.PoiTextBox, e, 0.0, 0.0);
         }
+
     }
 }

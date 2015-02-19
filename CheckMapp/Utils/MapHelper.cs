@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Phone.Maps.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -195,6 +196,16 @@ namespace CheckMapp.Utils
             }
             catch (InvalidSomethingException) { throw; }
             catch (Exception e) { throw new InvalidSomethingException(e) { JSON = _JsonString }; }
+        }
+
+        public static string getRegion( MapLocation mapLocation)
+        {
+            string region = "";
+            region = string.IsNullOrEmpty(region) ? mapLocation.Information.Address.Province : region;
+            region = string.IsNullOrEmpty(region) ? mapLocation.Information.Address.County : region;
+            region = string.IsNullOrEmpty(region) ? mapLocation.Information.Address.State : region;
+            region = string.IsNullOrEmpty(region) ? mapLocation.Information.Address.District : region;
+            return region;
         }
 
         public class InvalidSomethingException : Exception

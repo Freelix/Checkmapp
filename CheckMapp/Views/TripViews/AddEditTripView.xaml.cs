@@ -19,6 +19,7 @@ using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Services;
 using Microsoft.Phone.Maps.Controls;
+using System.Threading.Tasks;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -30,7 +31,18 @@ namespace CheckMapp.Views.TripViews
 
             if (!Utils.Utility.checkNetworkConnection())
             {
-                MessageBoxResult mbr = MessageBox.Show("Connect your phone to a wifi connection or your mobile connection to create a new trip", "Warning", MessageBoxButton.OK);
+                MessageBox.Show(AppResources.InternetConnection, AppResources.NotConnected, MessageBoxButton.OK);
+                this.DepartureTextBox.IsEnabled = false;
+                this.DestinationTextBox.IsEnabled = false;
+                this.btn_dep.Visibility = Visibility.Collapsed;
+                this.btn_dest.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                this.DepartureTextBox.IsEnabled = true;
+                this.DestinationTextBox.IsEnabled = true;
+                this.btn_dep.Visibility = Visibility.Visible;
+                this.btn_dest.Visibility = Visibility.Visible;
             }
 
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
@@ -52,8 +64,6 @@ namespace CheckMapp.Views.TripViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-           
-
             base.OnNavigatedTo(e);
         }
 
@@ -69,7 +79,6 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Save;
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Cancel;
             }
-
 
         }
 
@@ -149,48 +158,10 @@ namespace CheckMapp.Views.TripViews
             var vm = DataContext as AddEditTripViewModel;
             AfficherCarte(vm, this.DestinationTextBox, this.DestMap);
         }
-
-        private async System.Threading.Tasks.Task AddLocation_onHold(Microsoft.Phone.Maps.Controls.Map myMap, TextBox myTextBox, System.Windows.Input.GestureEventArgs e)
+        
+        private async System.Threading.Tasks.Task AddLocation_onHold(Microsoft.Phone.Maps.Controls.Map myMap, PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e)
         {
-            ReverseGeocodeQuery query;
-            List<MapLocation> mapLocations;
-            string pushpinContent;
-            MapLocation mapLocation;
-
-            query = new ReverseGeocodeQuery();
-            query.GeoCoordinate = myMap.ConvertViewportPointToGeoCoordinate(e.GetPosition(myMap));
-
-            mapLocations = (List<MapLocation>)await query.GetMapLocationsAsync();
-            mapLocation = mapLocations.FirstOrDefault();
-
-            if (mapLocation != null)
-            {
-                MapLayer pinLayout = new MapLayer();
-                Pushpin MyPushpin = new Pushpin();
-                MapOverlay pinOverlay = new MapOverlay();
-                if (myMap.Layers.Count > 0)
-                {
-                    myMap.Layers.RemoveAt(myMap.Layers.Count - 1);
-                }
-
-                myMap.Layers.Add(pinLayout);
-
-                MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
-
-                pinOverlay.Content = MyPushpin;
-                pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
-                pinLayout.Add(pinOverlay);
-
-                pushpinContent = mapLocation.Information.Name;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? mapLocation.Information.Description : null;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0} {1} {2} ", mapLocation.Information.Address.Street, mapLocation.Information.Address.City, mapLocation.Information.Address.Country) : null;
-
-                MyPushpin.Content = pushpinContent.Trim();
-                MyPushpin.Visibility = Visibility.Visible;
-
-                myTextBox.Text = MyPushpin.Content.ToString();
-
-            }
+            await Utils.Utility.AddLocation(myMap, myTextBox, e, 0.0, 0.0);
         }
 
         public async void AddLocation_onEdit(Trip currentTrip)
@@ -199,48 +170,12 @@ namespace CheckMapp.Views.TripViews
             await AddLocation_onEdit(this.DestMap, this.DestinationTextBox, currentTrip.DestinationLatitude, currentTrip.DestinationLongitude);
         }
 
-        private async System.Threading.Tasks.Task AddLocation_onEdit(Microsoft.Phone.Maps.Controls.Map myMap, TextBox myTextBox, double latitude, double longitude)
+        private async System.Threading.Tasks.Task AddLocation_onEdit(Microsoft.Phone.Maps.Controls.Map myMap, PhoneTextBox myTextBox, double latitude, double longitude)
         {
-            List<MapLocation> mapLocations;
-            MapLocation mapLocation;
-            string pushpinContent;
-            ReverseGeocodeQuery query = new ReverseGeocodeQuery();
-            query.GeoCoordinate = new GeoCoordinate(latitude, longitude);
-           
-            mapLocations =(List<MapLocation>)await query.GetMapLocationsAsync();
-            mapLocation = mapLocations.FirstOrDefault();
-
-            if (mapLocation != null)
-            {
-                MapLayer pinLayout = new MapLayer();
-                Pushpin MyPushpin = new Pushpin();
-                MapOverlay pinOverlay = new MapOverlay();
-                if (myMap.Layers.Count > 0)
-                {
-                    myMap.Layers.RemoveAt(myMap.Layers.Count - 1);
-                }
-
-                myMap.Layers.Add(pinLayout);
-
-                MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
-
-                pinOverlay.Content = MyPushpin;
-                pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
-                pinLayout.Add(pinOverlay);
-
-                pushpinContent = mapLocation.Information.Name;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? mapLocation.Information.Description : null;
-                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0} {1} {2} ", mapLocation.Information.Address.Street, mapLocation.Information.Address.City, mapLocation.Information.Address.Country) : null;
-
-                MyPushpin.Content = pushpinContent.Trim();
-                MyPushpin.Visibility = Visibility.Visible;
-
-                myTextBox.Text = MyPushpin.Content.ToString();
-                    
-            }
+            await Utils.Utility.AddLocation(myMap, myTextBox, null, latitude, longitude);
         }
-
-        private async void AfficherCarte(AddEditTripViewModel vm, TextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
+          
+        private async void AfficherCarte(AddEditTripViewModel vm, PhoneTextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
         {
             try
             {
@@ -252,6 +187,8 @@ namespace CheckMapp.Views.TripViews
                 Console.Out.WriteLine(e);
             }
         }
+
+
 
     }
 }

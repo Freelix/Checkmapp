@@ -7,6 +7,11 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Xml;
 using Microsoft.Phone.Net.NetworkInformation;
+using Microsoft.Phone.Maps.Services;
+using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Maps.Toolkit;
+using System.Windows;
+using System.Device.Location;
 
 namespace CheckMapp.Utils
 {
@@ -121,6 +126,59 @@ namespace CheckMapp.Utils
         }
 
         #endregion
+
+        public static async Task AddLocation(Microsoft.Phone.Maps.Controls.Map myMap, Microsoft.Phone.Controls.PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e, double latitude, double longitude)
+        {
+            ReverseGeocodeQuery query;
+            List<MapLocation> mapLocations;
+            string pushpinContent;
+            string region = "";
+            MapLocation mapLocation;
+
+            query = new ReverseGeocodeQuery();
+            if (e != null)
+                query.GeoCoordinate = myMap.ConvertViewportPointToGeoCoordinate(e.GetPosition(myMap));
+            else
+                query.GeoCoordinate = new GeoCoordinate(latitude, longitude);
+
+            mapLocations = (List<MapLocation>)await query.GetMapLocationsAsync();
+            mapLocation = mapLocations.FirstOrDefault();
+
+            if (mapLocation != null)
+            {
+                MapLayer pinLayout = new MapLayer();
+                Pushpin MyPushpin = new Pushpin();
+                MapOverlay pinOverlay = new MapOverlay();
+                if (myMap.Layers.Count > 0)
+                {
+                    myMap.Layers.RemoveAt(myMap.Layers.Count - 1);
+                }
+
+                myMap.Layers.Add(pinLayout);
+
+                MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
+
+                pinOverlay.Content = MyPushpin;
+                pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
+                pinLayout.Add(pinOverlay);
+
+                region = MapHelper.getRegion(mapLocation);
+
+                pushpinContent = mapLocation.Information.Name;
+                pushpinContent = string.IsNullOrEmpty(pushpinContent) ? mapLocation.Information.Description : null;
+
+                if (string.IsNullOrEmpty(region))
+                    pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0}, {1} ", mapLocation.Information.Address.City, mapLocation.Information.Address.Country) : null;
+                else
+                    pushpinContent = string.IsNullOrEmpty(pushpinContent) ? string.Format("{0}, {1}, {2} ", mapLocation.Information.Address.City, region, mapLocation.Information.Address.Country) : null;
+
+                MyPushpin.Content = pushpinContent.Trim();
+                MyPushpin.Visibility = Visibility.Visible;
+
+                myTextBox.Text = MyPushpin.Content.ToString();
+            }
+        }
+
 
         #region XML
 

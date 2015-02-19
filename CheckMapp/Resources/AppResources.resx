@@ -413,4 +413,13 @@
   <data name="Error_EmptyPicture" xml:space="preserve">
     <value>You have to choose a picture</value>
   </data>
+  <data name="DepDest" xml:space="preserve">
+    <value>city, (state, province, disctrict), country</value>
+  </data>
+  <data name="InternetConnection" xml:space="preserve">
+    <value>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</value>
+  </data>
+  <data name="NotConnected" xml:space="preserve">
+    <value>Internet connection missing</value>
+  </data>
 </root>
