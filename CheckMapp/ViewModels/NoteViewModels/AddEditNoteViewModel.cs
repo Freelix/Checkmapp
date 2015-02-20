@@ -17,7 +17,7 @@ using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
-    public class AddEditNoteViewModel : PhoneApplicationPage, INotifyPropertyChanged
+    public class AddEditNoteViewModel : ViewModelBase
     {
         private Note _note;
 
@@ -101,7 +101,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 Note.Id = value;
-                NotifyPropertyChanged("NoteId");
+                RaisePropertyChanged("NoteId");
             }
         }
 
@@ -114,7 +114,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 Note.Title = value;
-                NotifyPropertyChanged("NoteName");
+                RaisePropertyChanged("NoteName");
             }
         }
 
@@ -125,7 +125,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 _poiList = value;
-                NotifyPropertyChanged("PoiList");
+                RaisePropertyChanged("PoiList");
             }
         }
 
@@ -138,7 +138,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 Note.PointOfInterest = value;
-                NotifyPropertyChanged("POISelected");
+                RaisePropertyChanged("POISelected");
             }
         }
 
@@ -151,7 +151,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 Note.Message = value;
-                NotifyPropertyChanged("Message");
+                RaisePropertyChanged("Message");
             }
         }
 
@@ -164,7 +164,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 Note.Date = value;
-                NotifyPropertyChanged("NoteDate");
+                RaisePropertyChanged("NoteDate");
             }
         }
 
@@ -177,21 +177,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
         public string TripName
         {
             get { return Trip.Name; }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         #endregion

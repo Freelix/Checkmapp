@@ -13,7 +13,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
-    public class ListPhotoViewModel : INotifyPropertyChanged
+    public class ListPhotoViewModel : ViewModelBase
     {
         public ListPhotoViewModel(Trip trip)
         {
@@ -79,21 +79,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         }
 
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         #endregion
 

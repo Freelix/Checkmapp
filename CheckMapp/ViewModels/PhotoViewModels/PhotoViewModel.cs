@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
-    public class PhotoViewModel : INotifyPropertyChanged
+    public class PhotoViewModel : ViewModelBase
     {
         private List<Picture> _pictureList;
         private int _picture;
@@ -28,7 +28,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 _pictureList = value;
-                NotifyPropertyChanged("PictureList");
+                RaisePropertyChanged("PictureList");
             }
         }
 
@@ -38,22 +38,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 _picture = value;
-                NotifyPropertyChanged("SelectedPicture");
-            }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                RaisePropertyChanged("SelectedPicture");
             }
         }
 

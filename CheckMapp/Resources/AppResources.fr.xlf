@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="fr" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="CheckMapp" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.0.1200.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -313,6 +313,18 @@
         <trans-unit id="Resx/Error_EmptyPicture" translate="yes" xml:space="preserve">
           <source>You have to choose a picture</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez choisir une image</target>
+        </trans-unit>
+        <trans-unit id="Resx/NotConnected" translate="yes" xml:space="preserve">
+          <source>Internet connection missing</source>
+          <target state="new">Internet connection missing</target>
+        </trans-unit>
+        <trans-unit id="Resx/InternetConnection" translate="yes" xml:space="preserve">
+          <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
+          <target state="new">Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</target>
+        </trans-unit>
+        <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
+          <source>city, (state, province, disctrict), country</source>
+          <target state="new">city, (state, province, disctrict), country</target>
         </trans-unit>
         <trans-unit id="Resx/Error_EmptyName" translate="yes" xml:space="preserve">
           <source>You have to specify a name</source>

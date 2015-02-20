@@ -14,7 +14,7 @@ using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.ViewModels.SettingsViewModels
 {
-    public class SettingsViewModel : PhoneApplicationPage, INotifyPropertyChanged
+    public class SettingsViewModel : ViewModelBase
     {
         private CMIsolatedStorageProperty<bool> WifiOnlyStorageProperty;
         private CMIsolatedStorageProperty<bool> AutoSyncStorageProperty;
@@ -75,7 +75,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             set
             {
                 _appVersion = value;
-                NotifyPropertyChanged("AppVersion");
+                RaisePropertyChanged("AppVersion");
             }
         }
 
@@ -87,7 +87,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             set
             {
                 _wifiOnly = value;
-                NotifyPropertyChanged("WifiOnly");
+                RaisePropertyChanged("WifiOnly");
             }
         }
 
@@ -99,7 +99,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             set
             {
                 _autoSync = value;
-                NotifyPropertyChanged("AutoSync");
+                RaisePropertyChanged("AutoSync");
             }
         }
 
@@ -111,7 +111,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             set
             {
                 _languageIndex = value;
-                NotifyPropertyChanged("LanguageIndex");
+                RaisePropertyChanged("LanguageIndex");
             }
         }
 
@@ -123,7 +123,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             set
             {
                 _languagesList = value;
-                NotifyPropertyChanged("LanguagesList");
+                RaisePropertyChanged("LanguagesList");
             }
         }
 
@@ -188,20 +188,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         #endregion
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
 
         #region Storage Methods
 

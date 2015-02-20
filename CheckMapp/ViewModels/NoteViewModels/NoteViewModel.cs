@@ -10,7 +10,7 @@ using CheckMapp.Model.DataService;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
-    public class NoteViewModel : INotifyPropertyChanged
+    public class NoteViewModel : ViewModelBase
     {
         private Note _note;
 
@@ -27,7 +27,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set
             {
                 _note = value;
-                NotifyPropertyChanged("Note");
+                RaisePropertyChanged("Note");
             }
         }
 
@@ -64,21 +64,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
                 return _deleteNoteCommand;
             }
 
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         #endregion

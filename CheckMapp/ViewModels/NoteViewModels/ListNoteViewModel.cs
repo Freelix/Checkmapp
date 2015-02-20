@@ -8,10 +8,11 @@ using CheckMapp.Model.DataService;
 using CheckMapp.KeyGroup;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
-    public class ListNoteViewModel : INotifyPropertyChanged
+    public class ListNoteViewModel : ViewModelBase
     {
         public ListNoteViewModel(Trip trip)
         {
@@ -90,21 +91,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set;
         }
 
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
 
         #region DBMethods
 

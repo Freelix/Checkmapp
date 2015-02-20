@@ -109,7 +109,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (Trip.Id != value)
                 {
                     Trip.Id = value;
-                    NotifyPropertyChanged("TripId");
+                    RaisePropertyChanged("TripId");
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (Trip.Name != value)
                 {
                     Trip.Name = value;
-                    NotifyPropertyChanged("TripName");
+                    RaisePropertyChanged("TripName");
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (!Trip.BeginDate.Equals(value))
                 {
                     Trip.BeginDate = value;
-                    NotifyPropertyChanged("TripBeginDate");
+                    RaisePropertyChanged("TripBeginDate");
                    
                 }
             }
@@ -150,7 +150,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (!Trip.EndDate.Equals(value))
                 {
                     Trip.EndDate = value;
-                    NotifyPropertyChanged("TripEndDate");
+                    RaisePropertyChanged("TripEndDate");
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (_departure != value)
                 {
                     _departure = value;
-                    NotifyPropertyChanged("Departure");
+                    RaisePropertyChanged("Departure");
                 }
             }
         }
@@ -179,7 +179,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (_destination != value)
                 {
                     _destination = value;
-                    NotifyPropertyChanged("Destination");
+                    RaisePropertyChanged("Destination");
                 }
             }
         }
@@ -195,7 +195,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (_departureLongitude != value)
                 {
                     _departureLongitude = value;
-                    NotifyPropertyChanged("DepartureLongitude");
+                    RaisePropertyChanged("DepartureLongitude");
                 }
             }
         }
@@ -211,7 +211,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (_departureLatitude != value)
                 {
                     _departureLatitude = value;
-                    NotifyPropertyChanged("DepartureLatitude");
+                    RaisePropertyChanged("DepartureLatitude");
                 }
             }
         }
@@ -227,7 +227,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (_destinationLongitude != value)
                 {
                     _destinationLongitude = value;
-                    NotifyPropertyChanged("DestinationLongitude");
+                    RaisePropertyChanged("DestinationLongitude");
                 }
             }
         }
@@ -243,7 +243,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (_destinationLatitude != value)
                 {
                     _destinationLatitude = value;
-                    NotifyPropertyChanged("DestinationLatitude");
+                    RaisePropertyChanged("DestinationLatitude");
                 }
             }
         }
@@ -254,21 +254,7 @@ namespace CheckMapp.ViewModels.TripViewModels
             set
             {
                 Trip.MainPictureData = value;
-                NotifyPropertyChanged("MainImage");
-            }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                RaisePropertyChanged("MainImage");
             }
         }
 

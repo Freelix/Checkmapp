@@ -16,7 +16,7 @@ using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
-    public class AddEditPhotoViewModel : PhoneApplicationPage, INotifyPropertyChanged
+    public class AddEditPhotoViewModel : ViewModelBase
     {
         private ICommand _addEditPhotoCommand;
         private Picture _picture;
@@ -104,7 +104,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 Picture.Id = value;
-                NotifyPropertyChanged("PictureId");
+                RaisePropertyChanged("PictureId");
             }
         }
 
@@ -117,7 +117,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 Picture.PointOfInterest = value;
-                NotifyPropertyChanged("POISelected");
+                RaisePropertyChanged("POISelected");
             }
         }
 
@@ -130,7 +130,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 Picture.Description = value;
-                NotifyPropertyChanged("Description");
+                RaisePropertyChanged("Description");
             }
         }
 
@@ -143,7 +143,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 Picture.PictureData = value;
-                NotifyPropertyChanged("ImageSource");
+                RaisePropertyChanged("ImageSource");
             }
         }
 
@@ -163,20 +163,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         #endregion
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
 
         public ICommand AddEditPhotoCommand
         {

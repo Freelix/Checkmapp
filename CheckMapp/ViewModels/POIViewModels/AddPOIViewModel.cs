@@ -13,7 +13,7 @@ using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
-    public class AddPOIViewModel : PhoneApplicationPage, INotifyPropertyChanged
+    public class AddPOIViewModel : ViewModelBase
     {
         private ICommand _addPOICommand;
 
@@ -26,6 +26,7 @@ namespace CheckMapp.ViewModels.POIViewModels
         public AddPOIViewModel(Trip trip)
         {
             this.Trip = trip;
+            PointOfInterest = new Model.Tables.PointOfInterest();
             InitialiseValidator();
         }
 
@@ -52,6 +53,20 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         #region Properties
 
+        private PointOfInterest _pointOfInterest;
+
+        public PointOfInterest PointOfInterest
+        {
+            get
+            {
+                return _pointOfInterest;
+            }
+            set
+            {
+                _pointOfInterest = value;
+            }
+        }
+
         private bool _isFormValid;
 
         public bool IsFormValid
@@ -69,14 +84,6 @@ namespace CheckMapp.ViewModels.POIViewModels
             set;
         }
 
-        public bool IsVisible
-        {
-            get
-            {
-                return true;
-            }
-        }
-
         public Trip Trip { get; set; }
 
         public string TripName
@@ -87,26 +94,40 @@ namespace CheckMapp.ViewModels.POIViewModels
         private string _name;
         public string PoiName
         {
-            get { return _name; }
+            get { return PointOfInterest.Name; }
             set
             {
-                _name = value;
-                NotifyPropertyChanged("PoiName");
+                PointOfInterest.Name = value;
             }
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
+        public string PoiCity
         {
-            if (PropertyChanged != null)
+            get
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return PointOfInterest.City;
+            }
+            set
+            {
+                PointOfInterest.City = value;
+            }
+        }
+
+        public double Latitude
+        {
+            get { return PointOfInterest.Latitude; }
+            set
+            {
+                PointOfInterest.Latitude = value;
+            }
+        }
+
+        public double Longitude
+        {
+            get { return PointOfInterest.Longitude; }
+            set
+            {
+                PointOfInterest.Longitude = value;
             }
         }
 
@@ -122,21 +143,11 @@ namespace CheckMapp.ViewModels.POIViewModels
             // Adding a note
             if (Mode == Mode.add)
             {
-                // TODO: Replace that part with a request using bing maps API (key needed)
-                PointOfInterest newPOI = new PointOfInterest
-                {
-                    Name = _name,
-                    City = "Sherbrooke",
-                    Longitude = -71.88,
-                    Latitude = 45.40
-                };
-
                 // If the form is not valid, a notification will appear
-                if (ValidationErrorsHandler.IsValid(_validator, newPOI))
+                if (ValidationErrorsHandler.IsValid(_validator, PointOfInterest))
                 {
                     _isFormValid = true;
-
-                    AddPoiInDB(newPOI);
+                    AddPoiInDB(PointOfInterest);
                 }
             }
         }

@@ -19,28 +19,11 @@ namespace CheckMapp.Views.POIViews
 {
     public partial class AddPOIView : PhoneApplicationPage
     {
-        PhoneTextBox PoiNameTextBox;
-        Microsoft.Phone.Maps.Controls.Map poiMap;
-        StackPanel myStack;
         public AddPOIView()
         {
             InitializeComponent();
             Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new AddPOIViewModel(trip);
-
-            foreach (var element in this.ContentPanel.Children)
-            {
-                if (element is StackPanel) {
-                    myStack = (StackPanel)element;
-                    foreach (var element2 in myStack.Children)
-                    {
-                        if (element2 is PhoneTextBox)
-                            PoiNameTextBox = (PhoneTextBox)element2;
-                        if (element2 is Microsoft.Phone.Maps.Controls.Map)
-                            poiMap = (Microsoft.Phone.Maps.Controls.Map)element2;
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -92,7 +75,7 @@ namespace CheckMapp.Views.POIViews
 
         private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
-           await Utils.Utility.AddLocation(this.poiMap, this.PoiTextBox, e, 0.0, 0.0);
+           await Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0);
         }
 
     }

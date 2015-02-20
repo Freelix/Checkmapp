@@ -11,7 +11,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
-    public class ListPOIViewModel : INotifyPropertyChanged
+    public class ListPOIViewModel : ViewModelBase
     {
         /// <summary>
         /// Initializes a new instance of the POIViewModel class.
@@ -37,7 +37,7 @@ namespace CheckMapp.ViewModels.POIViewModels
             set
             {
                 _pointOfInterestList = value;
-                NotifyPropertyChanged("PointOfInterestList");
+                RaisePropertyChanged("PointOfInterestList");
             }
         }
 
@@ -77,20 +77,6 @@ namespace CheckMapp.ViewModels.POIViewModels
        
         #endregion
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
 
         #region DBMethods
 

@@ -61,7 +61,7 @@ namespace CheckMapp.Model.DataService
 
         public void DeletePoi(PointOfInterest poi)
         {
-            var existing = db.pointsOfInterests.Single(x => x.Id == poi.Id);
+            var existing = db.pointsOfInterests.FirstOrDefault(x => x.Id == poi.Id);
 
             if (existing != null)
             {
