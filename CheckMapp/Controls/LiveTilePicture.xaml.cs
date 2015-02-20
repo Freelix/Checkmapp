@@ -52,7 +52,7 @@ namespace CheckMapp.Controls
 
         private void imgPhoto_Loaded(object sender, RoutedEventArgs e)
         {
-            if(!hasStarted)
+            if (!hasStarted)
                 splineDouble.Value = -imgPhoto.ActualHeight - 200;
             hasStarted = true;
 
@@ -61,6 +61,12 @@ namespace CheckMapp.Controls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             imgPhoto.Source = SourceImage;
+            if (SourceImage == null)
+            {
+                BitmapImage logo = new BitmapImage();
+                logo.UriSource = new Uri(@"/Assets/Logo.png", UriKind.Relative);
+                imgPhoto.Source = logo;
+            }
         }
     }
 }

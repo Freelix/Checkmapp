@@ -96,15 +96,7 @@ namespace CheckMapp.ViewModels.POIViewModels
                 dsPoi.DeletePoi(poi);
             }
         }
-
-
-        public void LoadAllPoiFromDatabase()
-        {
-            DataServicePoi dsPoi = new DataServicePoi();
-            var allPoiInDB = dsPoi.LoadPointOfInterests();
-
-            PointOfInterestList = new ObservableCollection<PointOfInterest>(allPoiInDB);
-        }
+     
 
         #endregion
     }

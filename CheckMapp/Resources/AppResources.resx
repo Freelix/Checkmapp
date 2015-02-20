@@ -428,4 +428,10 @@
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="ExamplePointInterest" xml:space="preserve">
+    <value>Eiffel Tower</value>
+  </data>
+  <data name="EditPoi" xml:space="preserve">
+    <value>edit p.o. interest</value>
+  </data>
 </root>

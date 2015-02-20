@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -115,6 +116,7 @@
     <Compile Include="Controls\TimelineElementControl.xaml.cs">
       <DependentUpon>TimelineElementControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\ArchiveTripTitle.cs" />
     <Compile Include="Converter\ByteToImageConverter.cs" />
     <Compile Include="Converter\BoldConverter.cs" />
     <Compile Include="Converter\ButtonExtendConverter.cs" />
@@ -171,7 +173,7 @@
     <Compile Include="ViewModels\PhotoViewModels\AddEditPhotoViewModel.cs" />
     <Compile Include="ViewModels\PhotoViewModels\ListPhotoViewModel.cs" />
     <Compile Include="ViewModels\PhotoViewModels\PhotoViewModel.cs" />
-    <Compile Include="ViewModels\POIViewModels\AddPOIViewModel.cs" />
+    <Compile Include="ViewModels\POIViewModels\AddEditPOIViewModel.cs" />
     <Compile Include="ViewModels\POIViewModels\ListPOIViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\StatisticViewModel.cs" />
@@ -201,8 +203,8 @@
     <Compile Include="Views\PhotoViews\PhotoView.xaml.cs">
       <DependentUpon>PhotoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\POIViews\AddPOIView.xaml.cs">
-      <DependentUpon>AddPOIView.xaml</DependentUpon>
+    <Compile Include="Views\POIViews\AddEditPOIView.xaml.cs">
+      <DependentUpon>AddEditPOIView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\POIViews\ListPOIView.xaml.cs">
       <DependentUpon>ListPOIView.xaml</DependentUpon>
@@ -290,7 +292,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\POIViews\AddPOIView.xaml">
+    <Page Include="Views\POIViews\AddEditPOIView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

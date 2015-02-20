@@ -23,6 +23,7 @@
             <converter:ButtonExtendConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="ButtonExtendConverter"></converter:ButtonExtendConverter>
             <converter:DateConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="DateConverter"></converter:DateConverter>
             <converter:NoteMessage xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="NoteMessage"></converter:NoteMessage>
+            <converter:ArchiveTripTitle xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="ArchiveTripTitle"></converter:ArchiveTripTitle>
             <converter:ByteToImageConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="ByteToImageConverter"></converter:ByteToImageConverter>
                 <sys:String x:Key="CurrentTripName">null</sys:String>
             <local:LocalizedStrings xmlns:local="clr-namespace:CheckMapp" x:Key="LocalizedStrings"/>

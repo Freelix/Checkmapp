@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="CheckMapp.Views.POIViews.AddPOIView"
+    x:Class="CheckMapp.Views.POIViews.AddEditPOIView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -26,7 +26,7 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.AddPOI, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="TitleTextBox" Text="{Binding Path=LocalizedResources.AddPOI, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
@@ -36,8 +36,12 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <toolkit:PhoneTextBox Grid.Row="0"  Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
-                <Controls:Map Grid.Row="1" x:Name="myMap"  Margin="10" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="Map_Hold"  />
+                <StackPanel>
+                    <TextBlock Text="{Binding Path=LocalizedResources.NoteName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.ExamplePointInterest, Source={StaticResource LocalizedStrings}}" x:Name="txtBoxName" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                    <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiLocation, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                </StackPanel>
+                <Controls:Map Grid.Row="1" x:Name="myMap"  Margin="12" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="Map_Hold"  />
             </Grid>
         </Grid>
     </Grid>

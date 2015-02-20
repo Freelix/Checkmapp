@@ -14,16 +14,35 @@ using Microsoft.Phone.Maps.Services;
 using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using CheckMapp.Utils;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.POIViews
 {
-    public partial class AddPOIView : PhoneApplicationPage
+    public partial class AddEditPOIView : PhoneApplicationPage
     {
-        public AddPOIView()
+        public AddEditPOIView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            this.DataContext = new AddPOIViewModel(trip);
+            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+            PointOfInterest currentPoi = (PointOfInterest)PhoneApplicationService.Current.State["Poi"];
+            this.DataContext = new AddEditPOIViewModel(trip, mode, currentPoi);
+
+            //Assigne le titre de la page
+            AddEditPOIViewModel vm = DataContext as AddEditPOIViewModel;
+            if (vm.Mode == Mode.add)
+                TitleTextBox.Text = AppResources.AddPOI.ToLower();
+            else if (vm.Mode == Mode.edit)
+                TitleTextBox.Text = AppResources.EditPoi.ToLower();
+
+            if (mode == Mode.edit)
+                Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, null, currentPoi.Latitude, currentPoi.Longitude);
+
+            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -51,7 +70,7 @@ namespace CheckMapp.Views.POIViews
             // wait till the next UI thread tick so that the binding gets updated
             Dispatcher.BeginInvoke(() =>
             {
-                var vm = DataContext as AddPOIViewModel;
+                var vm = DataContext as AddEditPOIViewModel;
                 if (vm != null)
                 {
                     vm.AddPOICommand.Execute(null);
@@ -77,8 +96,8 @@ namespace CheckMapp.Views.POIViews
         {
            await Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0);
            MapLayer layer = this.myMap.Layers.FirstOrDefault();
-           (this.DataContext as AddPOIViewModel).Latitude = layer[0].GeoCoordinate.Latitude;
-           (this.DataContext as AddPOIViewModel).Longitude = layer[0].GeoCoordinate.Longitude;
+           (this.DataContext as AddEditPOIViewModel).Latitude = layer[0].GeoCoordinate.Latitude;
+           (this.DataContext as AddEditPOIViewModel).Longitude = layer[0].GeoCoordinate.Longitude;
         }
 
     }

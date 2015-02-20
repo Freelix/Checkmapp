@@ -15,6 +15,7 @@ using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using System.Device.Location;
 using System.Collections;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -60,6 +61,12 @@ namespace CheckMapp.Views.POIViews
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/ListNoteView.xaml", UriKind.Relative));
 
                         break;
+                    case "EditPoi":
+                        PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                        PhoneApplicationService.Current.State["Poi"] = poiSelected;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPoiView.xaml", UriKind.Relative));
+
+                        break;
                     case "DeletePOI":
                         if (MessageBox.Show(AppResources.ConfirmDeletePOI, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                         {
@@ -80,7 +87,8 @@ namespace CheckMapp.Views.POIViews
 
         private void IconAdd_Click(object sender, EventArgs e)
         {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddPOIView.xaml", UriKind.Relative));
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

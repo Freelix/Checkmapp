@@ -25,10 +25,10 @@
                         <toolkit:MenuItem x:Name="Delete" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
-                <Border Padding="0,10,0,0" Height="160" Width="130" Background="White">
+                <Border Padding="0,10,0,0" Height="175" Width="150" Background="White">
                     <StackPanel VerticalAlignment="Top" >
-                        <Image x:Name="img" Source="{Binding MainPictureData,Converter={StaticResource ByteToImageConverter}}" Height="120" Width="120"></Image>
-                        <TextBlock  HorizontalAlignment="Center" Foreground="Black" Text="{Binding Name}"></TextBlock>
+                        <Image x:Name="img" Source="{Binding MainPictureData,Converter={StaticResource ByteToImageConverter}}" Height="130" Width="130"></Image>
+                        <TextBlock HorizontalAlignment="Center" Foreground="Black" Text="{Binding Name,Converter={StaticResource ArchiveTripTitle}}"></TextBlock>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -38,7 +38,7 @@
 
     <Grid x:Name="LayoutRoot"  >
        
-        <phone:LongListSelector LayoutMode="Grid" GridCellSize="140,170" 
+        <phone:LongListSelector LayoutMode="Grid" GridCellSize="160,190" 
                                 toolkit:TiltEffect.IsTiltEnabled="True"  
                                 Grid.Row="4" 
                                 ItemsSource="{Binding ArchiveTripList}" 

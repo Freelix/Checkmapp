@@ -71,7 +71,7 @@
                     </Grid>
 
 
-                    <Controls:Map   Width="420" Name="DepMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DepMap_Hold">
+                    <Controls:Map Margin="0,0,0,7"   Width="420" Name="DepMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DepMap_Hold">
                     </Controls:Map>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripArrival, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>

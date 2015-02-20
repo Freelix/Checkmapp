@@ -444,4 +444,4 @@
   <data name="Warning" xml:space="preserve">
     <value>Avertissement</value>
   </data>
-</root>
+<data name="ExamplePointInterest" xml:space="preserve"><value>Tour Effeil</value></data><data name="EditPoi" xml:space="preserve"><value>modifier p. d'intérêt</value></data></root>

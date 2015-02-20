@@ -69,5 +69,24 @@ namespace CheckMapp.Model.DataService
                 db.SubmitChanges();
             }
         }
+
+        public void UpdatePoi(PointOfInterest poi)
+        {
+            PointOfInterest poiToUpdate = db.pointsOfInterests.First(x => x.Id == poi.Id);
+
+            poiToUpdate.Location = poi.Location;
+            poiToUpdate.Name = poi.Name;
+            poiToUpdate.Latitude = poi.Latitude;
+            poiToUpdate.Longitude = poi.Longitude;
+
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while trying to save a point of interest : " + e);
+            }
+        }
     }
 }

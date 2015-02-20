@@ -57,19 +57,19 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        private string _city;
+        private string _location;
 
         [Column]
-        public string City
+        public string Location
         {
-            get { return _city; }
+            get { return _location; }
             set
             {
-                if (_city != value)
+                if (_location != value)
                 {
-                    NotifyPropertyChanging("City");
-                    _city = value;
-                    NotifyPropertyChanged("City");
+                    NotifyPropertyChanging("Location");
+                    _location = value;
+                    NotifyPropertyChanged("Location");
                 }
             }
         }

@@ -41,8 +41,8 @@ namespace CheckMapp.Utils
 
         #region Images Functions
 
-       
-        public static MemoryStream ImageToByteArray(string imagePath)
+
+        public static byte[] ImageToByteArray(string imagePath)
         {
             BitmapImage image = new BitmapImage();
             image.CreateOptions = BitmapCreateOptions.BackgroundCreation;
@@ -51,7 +51,7 @@ namespace CheckMapp.Utils
             MemoryStream ms = new MemoryStream();
             wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
 
-            return ms;
+            return ms.ToArray();
         }
 
         public static BitmapImage ByteArrayToImage(byte[] imageByteArray)
@@ -67,17 +67,15 @@ namespace CheckMapp.Utils
 
         public static byte[] ConvertToBytes(BitmapImage bitmapImage)
         {
-            using (MemoryStream ms = new MemoryStream())
+            byte[] data = null;
+            using (MemoryStream stream = new MemoryStream())
             {
-                WriteableBitmap btmMap = new WriteableBitmap
-                    (bitmapImage.PixelWidth, bitmapImage.PixelHeight);
-
-                // write an image into the stream
-                Extensions.SaveJpeg(btmMap, ms,
-                    bitmapImage.PixelWidth, bitmapImage.PixelHeight, 0, 100);
-
-                return ms.ToArray();
+                WriteableBitmap wBitmap = new WriteableBitmap(bitmapImage);
+                wBitmap.SaveJpeg(stream, wBitmap.PixelWidth, wBitmap.PixelHeight, 0, 100);
+                stream.Seek(0, SeekOrigin.Begin);
+                data = stream.GetBuffer();
             }
+            return data;
         }
 
         #endregion

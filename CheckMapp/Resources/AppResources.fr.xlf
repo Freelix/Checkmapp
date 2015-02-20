@@ -315,20 +315,6 @@
           <source>You have to choose a picture</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez choisir une image</target>
         </trans-unit>
-<<<<<<< HEAD
-        <trans-unit id="Resx/NotConnected" translate="yes" xml:space="preserve">
-          <source>Internet connection missing</source>
-          <target state="new">Internet connection missing</target>
-        </trans-unit>
-        <trans-unit id="Resx/InternetConnection" translate="yes" xml:space="preserve">
-          <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
-          <target state="new">Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</target>
-        </trans-unit>
-        <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
-          <source>city, (state, province, disctrict), country</source>
-          <target state="new">city, (state, province, disctrict), country</target>
-        </trans-unit>
-=======
         <trans-unit id="Resx/InternetConnection" translate="yes" xml:space="preserve">
           <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
           <target state="translated">Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</target>
@@ -346,12 +332,19 @@
           <source>Warning</source>
           <target state="translated">Avertissement</target>
         </trans-unit>
+        <trans-unit id="Resx/ExamplePointInterest" translate="yes" xml:space="preserve">
+          <source>Eiffel Tower</source>
+          <target state="translated">Tour Effeil</target>
+        </trans-unit>
+        <trans-unit id="Resx/EditPoi" translate="yes" xml:space="preserve">
+          <source>edit p.o. interest</source>
+          <target state="translated">modifier p. d'intérêt</target>
+        </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>
           <target state="needs-review-translation">ville, (état, province, disctrict), pays</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
->>>>>>> 49155de38917d5dc817b60aaeedccd40a57e5ee5
         <trans-unit id="Resx/Error_EmptyName" translate="yes" xml:space="preserve">
           <source>You have to specify a name</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un nom</target>

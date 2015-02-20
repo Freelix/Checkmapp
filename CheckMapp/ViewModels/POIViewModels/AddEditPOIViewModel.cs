@@ -13,7 +13,7 @@ using CheckMapp.Utils.Validations;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
-    public class AddPOIViewModel : ViewModelBase
+    public class AddEditPOIViewModel : ViewModelBase
     {
         private ICommand _addPOICommand;
 
@@ -23,10 +23,18 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// <summary>
         /// Initializes a new instance of the AddPOIViewModel class.
         /// </summary>
-        public AddPOIViewModel(Trip trip)
+        public AddEditPOIViewModel(Trip trip, Mode mode, PointOfInterest poi)
         {
             this.Trip = trip;
-            PointOfInterest = new Model.Tables.PointOfInterest();
+            this.Mode = mode;
+
+            if (this.Mode == Mode.add)
+            {
+                PointOfInterest = new Model.Tables.PointOfInterest();
+            }
+            else
+                PointOfInterest = poi;
+
             InitialiseValidator();
         }
 
@@ -91,25 +99,26 @@ namespace CheckMapp.ViewModels.POIViewModels
             get { return Trip.Name; }
         }
 
-        private string _name;
         public string PoiName
         {
             get { return PointOfInterest.Name; }
             set
             {
                 PointOfInterest.Name = value;
+                RaisePropertyChanged("PoiName");
             }
         }
 
-        public string PoiCity
+        public string PoiLocation
         {
             get
             {
-                return PointOfInterest.City;
+                return PointOfInterest.Location;
             }
             set
             {
-                PointOfInterest.City = value;
+                PointOfInterest.Location = value;
+                RaisePropertyChanged("PoiLocation");
             }
         }
 
@@ -140,15 +149,14 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// </summary>
         public void AddPOI()
         {
-            // Adding a note
-            if (Mode == Mode.add)
+            if (ValidationErrorsHandler.IsValid(_validator, PointOfInterest))
             {
-                // If the form is not valid, a notification will appear
-                if (ValidationErrorsHandler.IsValid(_validator, PointOfInterest))
-                {
-                    _isFormValid = true;
+                _isFormValid = true;
+                // Adding a poi
+                if (Mode == Mode.add)
                     AddPoiInDB(PointOfInterest);
-                }
+                else
+                    UpdateExistingPOI();
             }
         }
 
@@ -158,6 +166,12 @@ namespace CheckMapp.ViewModels.POIViewModels
             poi.Trip = Trip;
             Trip.PointsOfInterests.Add(poi);
             dsPoi.addPoi(poi);
+        }
+
+        private void UpdateExistingPOI()
+        {
+            DataServicePoi dsPOI = new DataServicePoi();
+            dsPOI.UpdatePoi(PointOfInterest);
         }
 
         #endregion

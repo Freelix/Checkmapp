@@ -12,7 +12,6 @@ namespace CheckMapp.Utils.Validations.Validators
         public TripValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage(AppResources.Error_EmptyName);
-            RuleFor(x => x.MainPictureData).NotNull().WithMessage(AppResources.Error_EmptyPicture);
             RuleFor(x => x.DepartureLatitude).SetValidator(new ValidateTripCoordinates());
         }
     }

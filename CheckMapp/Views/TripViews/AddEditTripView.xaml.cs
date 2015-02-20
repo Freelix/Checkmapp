@@ -95,15 +95,42 @@ namespace CheckMapp.Views.TripViews
                 var vm = DataContext as AddEditTripViewModel;
                 if (vm != null)
                 {
-                    vm.AddEditTripCommand.Execute(null);
+                    if (vm.Trip.MainPictureData == null)
+                    {
+                        //Si l'usager ne met pas d'image on en met une par défaut
+                        BitmapImage logo = new BitmapImage();
+                        logo.UriSource = new Uri(@"/Assets/Logo.png", UriKind.Relative);
+                        logo.CreateOptions = BitmapCreateOptions.BackgroundCreation;
+                        logo.ImageOpened += logo_ImageOpened;
+                    }
+                    else
+                    {
+                        vm.AddEditTripCommand.Execute(null);
+
+                        if (vm.IsFormValid)
+                        {
+                            // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
+                            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                        }
+                    }
                 }
 
-                if (vm.IsFormValid)
-                {
-                    // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
-                    (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-                }
+                
             });
+        }
+
+        void logo_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as AddEditTripViewModel;
+            vm.Trip.MainPictureData = Utils.Utility.ConvertToBytes(sender as BitmapImage);
+
+            vm.AddEditTripCommand.Execute(null);
+
+            if (vm.IsFormValid)
+            {
+                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
+                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+            }
         }
 
         /// <summary>
