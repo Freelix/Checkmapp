@@ -145,19 +145,14 @@ namespace CheckMapp.Views.POIViews
             {
                 var vm = DataContext as ListPOIViewModel;
                 List<PointOfInterest> poiList = new List<PointOfInterest>();
-
-                if (vm != null)
+                while(POILLS.SelectedItems.Count!=0)
                 {
-                    var copy = new ObservableCollection<PointOfInterest>(vm.PointOfInterestList);
-
-                    for (int i = 0; i < POILLS.SelectedItems.Count; i++)
-                    {
-                        poiList.Add(POILLS.SelectedItems[i] as PointOfInterest);
-                    }
-
-                    vm.DeletePOIsCommand.Execute(poiList);
-                    POILLS.ItemsSource = vm.PointOfInterestList;
+                    poiList.Add(POILLS.SelectedItems[0] as PointOfInterest);
+                    vm.PointOfInterestList.Remove(POILLS.SelectedItems[0] as PointOfInterest);
                 }
+
+                vm.DeletePOIsCommand.Execute(poiList);
+                POILLS.ItemsSource = vm.PointOfInterestList;
 
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
             }
@@ -172,11 +167,11 @@ namespace CheckMapp.Views.POIViews
             {
                 var bounds = new LocationRectangle(
                     poiList.Max((p) => p.Latitude),
-                    poiList.Min((p) => p.Longitude), 
+                    poiList.Min((p) => p.Longitude),
                     poiList.Min((p) => p.Latitude),
                     poiList.Max((p) => p.Longitude));
 
-                
+
                 MyMap.SetView(bounds);
             }
         }

@@ -76,6 +76,9 @@ namespace CheckMapp.Views.POIViews
         private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
            await Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0);
+           MapLayer layer = this.myMap.Layers.FirstOrDefault();
+           (this.DataContext as AddPOIViewModel).Latitude = layer[0].GeoCoordinate.Latitude;
+           (this.DataContext as AddPOIViewModel).Longitude = layer[0].GeoCoordinate.Longitude;
         }
 
     }

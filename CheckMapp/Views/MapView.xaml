@@ -28,7 +28,7 @@
                 <my:MapItemsControl x:Name="MyMapItems">
                     <my:MapItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <my:Pushpin Tap="Pushpin_Tap" GeoCoordinate="{Binding Coordinate}" Content="{Binding Name}" />
+                            <my:Pushpin Tap="Pushpin_Tap" GeoCoordinate="{Binding CoordinateDestination}" Content="{Binding Name}" />
                         </DataTemplate>
                     </my:MapItemsControl.ItemTemplate>
                 </my:MapItemsControl>

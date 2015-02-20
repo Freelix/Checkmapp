@@ -22,7 +22,7 @@ namespace CheckMapp.Pages
         public MapView()
         {
             InitializeComponent();
-
+            
             this.DataContext = new MapViewModel();
             ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(MyMap);
             var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;

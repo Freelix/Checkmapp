@@ -4,6 +4,7 @@ using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using CheckMapp.Model.Utils;
 using System.Runtime.Serialization;
+using System.Device.Location;
 
 namespace CheckMapp.Model.Tables
 {
@@ -247,6 +248,13 @@ namespace CheckMapp.Model.Tables
             get { return (EndDate == null); }
         }
 
+        public GeoCoordinate CoordinateDestination
+        {
+            get
+            {
+                return new GeoCoordinate(DestinationLatitude, DestinationLongitude);
+            }
+        }
 
         #endregion
 

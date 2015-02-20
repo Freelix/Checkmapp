@@ -145,6 +145,7 @@ namespace CheckMapp.Utils
 
             if (mapLocation != null)
             {
+
                 MapLayer pinLayout = new MapLayer();
                 Pushpin MyPushpin = new Pushpin();
                 MapOverlay pinOverlay = new MapOverlay();
@@ -156,16 +157,16 @@ namespace CheckMapp.Utils
                 myMap.Layers.Add(pinLayout);
 
                 MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
-
+                
+              
                 pinOverlay.Content = MyPushpin;
                 pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
+                pinOverlay.PositionOrigin = new Point(0, 1);
                 pinLayout.Add(pinOverlay);
-
+                
                 pushpinContent = getAddress(mapLocation);
 
-                
                 MyPushpin.Content = pushpinContent.Trim();
-                MyPushpin.Visibility = Visibility.Visible;
 
                 myTextBox.Text = MyPushpin.Content.ToString();
             }
