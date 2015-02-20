@@ -18,12 +18,9 @@ namespace CheckMapp.Utils.Validations.Validators.CustomValidators
         {
             Trip trip = context.Instance as Trip;
 
-            // Uncomment that code when both textbox always return coordinates
-            // But this part is working !
-
-            /*if (trip.DepartureLatitude == 0.0 || trip.DepartureLongitude == 0.0 ||
+            if (trip.DepartureLatitude == 0.0 || trip.DepartureLongitude == 0.0 ||
                 trip.DestinationLatitude == 0.0 || trip.DestinationLongitude == 0.0)
-                return false;*/
+                return false;
 
             return true;
         }

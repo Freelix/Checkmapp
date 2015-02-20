@@ -426,7 +426,22 @@
   <data name="Errors" xml:space="preserve">
     <value>Erreurs</value>
   </data>
-  
-  
-  
+
+  <data name="InternetConnection" xml:space="preserve">
+    <value>Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</value>
+  </data>
+  <data name="DepDest" xml:space="preserve">
+    <value>ville, (état, province, disctrict), pays</value>
+    <comment></comment>
+  </data>
+  <data name="NotConnected" xml:space="preserve">
+    <value>Connexion internet désactivée</value>
+    <comment></comment>
+  </data>
+  <data name="InvalideSearch" xml:space="preserve">
+    <value>Aucun résultat trouvé pour : {0}</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
 </root>

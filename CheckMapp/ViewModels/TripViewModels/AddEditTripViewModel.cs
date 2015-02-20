@@ -271,14 +271,11 @@ namespace CheckMapp.ViewModels.TripViewModels
 
                 // Adding a Trip
                 if (Mode == Mode.add)
-                {
-                   SetCoordinate();
+                {   
                    AddTripInDB(Trip);
-
                 }
                 else if (Mode == Mode.edit)
                 {
-                    SetCoordinate();
                     UpdateExistingTrip();
                 }
             }
@@ -299,46 +296,6 @@ namespace CheckMapp.ViewModels.TripViewModels
         #endregion
 
         #region MapHelperMethod
-
-        //Set latitude and longitude from query to _TripDeparture and _TripDestination
-        private async void SetCoordinate()
-        {
-
-            await SetCoordinateAsync(_departure, true);
-
-            await SetCoordinateAsync(_destination, false);
-           
-        }
-
-        public async Task SetCoordinateAsync(string searchString, bool isDeparture)
-        {
-            try
-            {
-                string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
-                var _Helper = new MapHelper(_Key);
-
-                var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
-
-                var _Coordinate = _Location.First().point;
-
-                //Ajout de la longitude et de la latitude
-                if (isDeparture)
-                {
-                    Trip.DepartureLatitude = _Coordinate.coordinates[0];
-                    Trip.DepartureLongitude = _Coordinate.coordinates[1];
-                }
-                else
-                {
-                    Trip.DestinationLatitude = _Coordinate.coordinates[0];
-                    Trip.DestinationLongitude = _Coordinate.coordinates[1];
-                }
-            }
-            catch (NullReferenceException e)
-            {
-                Console.Out.WriteLine(e);
-            }           
-           
-        }
 
         public async Task<List<double>> getCoordinateAsync(string searchString)
         {

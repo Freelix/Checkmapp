@@ -135,4 +135,7 @@
     <value>Connexion internet désactivée</value>
     <comment></comment>
   </data>
+  <data name="InvalideSearch" xml:space="preserve">
+    <value>Aucun résultat trouvé pour : {0}</value>
+  </data>
 </root>
