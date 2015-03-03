@@ -125,7 +125,7 @@ namespace CheckMapp.Utils
 
         #endregion
 
-        public static async Task AddLocation(Microsoft.Phone.Maps.Controls.Map myMap, Microsoft.Phone.Controls.PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e, double latitude, double longitude)
+        public static async Task AddLocation(Microsoft.Phone.Maps.Controls.Map myMap, Microsoft.Phone.Controls.PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e, double latitude, double longitude, bool completeAddress = false)
         {
             ReverseGeocodeQuery query;
             List<MapLocation> mapLocations;
@@ -162,7 +162,10 @@ namespace CheckMapp.Utils
                 pinOverlay.PositionOrigin = new Point(0, 1);
                 pinLayout.Add(pinOverlay);
                 
-                pushpinContent = getAddress(mapLocation);
+                if(!completeAddress)
+                    pushpinContent = getAddress(mapLocation);
+                else
+                    pushpinContent = getCompleteAddress(mapLocation);
 
                 MyPushpin.Content = pushpinContent.Trim();
 
@@ -194,6 +197,41 @@ namespace CheckMapp.Utils
             else
                 Address = string.Format("{0}, {1}, {2} ", city, region, country);
            
+            return Address;
+        }
+
+        private static string getCompleteAddress(MapLocation mapLocation)
+        {
+            string houseNumber = mapLocation.Information.Address.HouseNumber;
+            string street = mapLocation.Information.Address.Street;
+            string Address = "";
+            string region = MapHelper.getRegion(mapLocation);
+            string city = mapLocation.Information.Address.City;
+            string country = mapLocation.Information.Address.Country;
+
+            if (string.IsNullOrEmpty(region) && string.IsNullOrEmpty(city) && string.IsNullOrEmpty(country))
+                Address = "";
+            else if (string.IsNullOrEmpty(region) && string.IsNullOrEmpty(city))
+                Address = country;
+            else if (string.IsNullOrEmpty(region) && string.IsNullOrEmpty(country))
+                Address = city;
+            else if (string.IsNullOrEmpty(city) && string.IsNullOrEmpty(country))
+                Address = region;
+            else if (string.IsNullOrEmpty(region))
+                Address = string.Format("{0}, {1} ", city, country);
+            else if (string.IsNullOrEmpty(city))
+                Address = string.Format("{0}, {1} ", region, country);
+            else if (string.IsNullOrEmpty(country))
+                Address = string.Format("{0}, {1} ", city, region);
+            else if (string.IsNullOrEmpty(houseNumber) && string.IsNullOrEmpty(street))
+                Address = string.Format("{0}, {1}, {2} ", city, region, country);
+            else if (string.IsNullOrEmpty(houseNumber))
+                Address = string.Format("{0}, {1}, {2}, {3}", street, city, region, country);
+            else if (string.IsNullOrEmpty(street))
+                Address = string.Format("{0}, {1}, {2}, {3}", houseNumber, city, region, country);
+            else
+                Address = string.Format("{0}, {1}, {2}, {3}, {4}", houseNumber, street, city, region, country);
+
             return Address;
         }
 

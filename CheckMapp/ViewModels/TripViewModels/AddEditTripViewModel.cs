@@ -295,33 +295,5 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         #endregion
 
-        #region MapHelperMethod
-
-        public async Task<List<double>> getCoordinateAsync(string searchString)
-        {
-            List<double> myList = new List<double>();
-            try
-            {
-                
-                string _Key = @"ApLNskx1-wRcHef5fqjiu4wQADHER1tzQjJvNFkGc93ezOx3YK8HO6rMlScx74Lt";
-                var _Helper = new MapHelper(_Key);
-
-                var _Location = await _Helper.FindLocationByQueryAsync(searchString).ConfigureAwait(false);
-
-                var _Coordinate = _Location.First().point;
-
-
-                myList.Add(_Coordinate.coordinates[0]);
-                myList.Add(_Coordinate.coordinates[1]);
-                return myList;
-            }
-            catch (MapHelper.InvalidStatusCodeException e)
-            {
-                Console.Out.WriteLine(e);
-                throw e;
-            }           
-        }
-        #endregion
-
     }
 }

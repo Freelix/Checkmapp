@@ -211,7 +211,7 @@ namespace CheckMapp.Views.TripViews
         {
             try
             {
-                var CoordinateList = await (this.DataContext as AddEditTripViewModel).getCoordinateAsync(myTextBox.Text);
+                var CoordinateList = await MapHelper.getCoordinateAsync(myTextBox.Text);
                
                 // CoordinateList[0] = latitude, CoordinateList[1] = longitude
                 await AddLocation_onEdit(myMap, myTextBox, CoordinateList[0], CoordinateList[1]);

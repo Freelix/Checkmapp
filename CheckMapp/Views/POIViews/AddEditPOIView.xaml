@@ -39,7 +39,17 @@
                 <StackPanel>
                     <TextBlock Text="{Binding Path=LocalizedResources.NoteName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.ExamplePointInterest, Source={StaticResource LocalizedStrings}}" x:Name="txtBoxName" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
-                    <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiLocation, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                    <TextBlock Text="{Binding Path=LocalizedResources.Place, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiLocation, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                        <Button x:Name="btn_place" Width="114" Grid.Column="1" Click="btn_place_Click" >
+                            <Image  Source="/Images/appbar.eye.min.png" Height="28"  />
+                        </Button>
+                    </Grid>
                 </StackPanel>
                 <Controls:Map Grid.Row="1" x:Name="myMap"  Margin="12" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="Map_Hold"  />
             </Grid>
