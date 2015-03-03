@@ -381,6 +381,7 @@
     <Content Include="Images\appbar.delete.png" />
     <Content Include="Images\appbar.eye.min.png" />
     <Content Include="Images\appbar.eye.png" />
+    <Content Include="Images\appbar.flag.listpoi.png" />
     <Content Include="Images\appbar.flag.png" />
     <Content Include="Images\appbar.flag.wavy.png" />
     <Content Include="Images\appbar.graph.line.up.png" />

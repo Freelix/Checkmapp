@@ -39,7 +39,7 @@
                 <StackPanel>
                     <TextBlock Text="{Binding Path=LocalizedResources.NoteName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.ExamplePointInterest, Source={StaticResource LocalizedStrings}}" x:Name="txtBoxName" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
-                    <TextBlock Text="{Binding Path=LocalizedResources.Place, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Text="{Binding Path=LocalizedResources.PlacePOI, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />

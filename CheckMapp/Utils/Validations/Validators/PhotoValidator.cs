@@ -10,7 +10,6 @@ namespace CheckMapp.Utils.Validations.Validators
     {
         public PhotoValidator()
         {
-            RuleFor(x => x.Description).NotEmpty().WithMessage(AppResources.Error_EmptyDescription);
             RuleFor(x => x.PictureData).NotNull().WithMessage(AppResources.Error_EmptyPicture);
         }
     }

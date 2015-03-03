@@ -40,6 +40,8 @@ namespace CheckMapp.ViewModels.TripViewModels
                 if (CurrentTrip != null)
                 {
                     TimeSpan elapsed = DateTime.Now.Subtract(CurrentTrip.BeginDate);
+                    if (elapsed.TotalDays < 0)
+                        return 0;
                     return (int)elapsed.TotalDays;
                 }
                 else

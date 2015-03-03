@@ -434,7 +434,7 @@
   <data name="EditPoi" xml:space="preserve">
     <value>edit p.o. interest</value>
   </data>
-  <data name="Place" xml:space="preserve">
+  <data name="PlacePOI" xml:space="preserve">
     <value>Place</value>
   </data>
 </root>

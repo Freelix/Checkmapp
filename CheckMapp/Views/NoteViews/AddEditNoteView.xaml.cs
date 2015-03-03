@@ -19,10 +19,7 @@ namespace CheckMapp.Views.NoteViews
         public AddEditNoteView()
         {
             InitializeComponent();
-        }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
             Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
             Note currentNote = (Note)PhoneApplicationService.Current.State["Note"];
@@ -34,7 +31,10 @@ namespace CheckMapp.Views.NoteViews
                 TitleTextblock.Text = AppResources.AddNote.ToLower();
             else if (vm.Mode == Mode.edit)
                 TitleTextblock.Text = AppResources.EditNote.ToLower();
+        }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
             base.OnNavigatedTo(e);
         }
 

@@ -754,6 +754,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Place.
+        /// </summary>
+        public static string PlacePOI {
+            get {
+                return ResourceManager.GetString("PlacePOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Points of Interest.
         /// </summary>
         public static string POITitle {

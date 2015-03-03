@@ -25,8 +25,16 @@
             </Canvas>
         </ViewportControl>
         <StackPanel Visibility="{Binding IsTextVisible, Converter={StaticResource ConvertBoolean}}" VerticalAlignment="Bottom" >
-            <TextBlock  Text="{Binding Picture.PointOfInterest.Name}"></TextBlock>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Picture.Description}" ></TextBlock>
+            <TextBlock x:Name="txtPOI" TextWrapping="Wrap">
+                <Run Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}"/>
+                <Run Text=" : "/>
+                <Run Text="{Binding Picture.PointOfInterest.Name}"/>
+            </TextBlock>
+            <TextBlock x:Name="txtDesc" TextWrapping="Wrap" >
+                 <Run Text="{Binding Path=LocalizedResources.Description, Source={StaticResource LocalizedStrings}}"/>
+                <Run Text=" : "/>
+                <Run Text="{Binding Picture.Description}"/>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -24,14 +24,17 @@ namespace CheckMapp.Views.NoteViews
 
         private void IconDelete_Click(object sender, EventArgs e)
         {
-            // Call the appropriate function in ViewModel
-            var vm = DataContext as NoteViewModel;
-            if (vm != null)
+            if (MessageBox.Show(AppResources.ConfirmationDeleteNote, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                vm.DeleteNoteCommand.Execute(null);
-            }
+                // Call the appropriate function in ViewModel
+                var vm = DataContext as NoteViewModel;
+                if (vm != null)
+                {
+                    vm.DeleteNoteCommand.Execute(null);
+                }
 
-            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+            }
         }
 
         private void IconEdit_Click(object sender, EventArgs e)

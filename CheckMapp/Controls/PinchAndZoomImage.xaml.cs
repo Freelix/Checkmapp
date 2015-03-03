@@ -49,6 +49,10 @@ namespace CheckMapp.Controls
             set
             {
                 SetValue(PictureProperty, value);
+                if (String.IsNullOrEmpty(value.Description))
+                    txtDesc.Visibility = System.Windows.Visibility.Collapsed;
+                if (value.PointOfInterest == null)
+                    txtPOI.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -152,6 +156,11 @@ namespace CheckMapp.Controls
             _scale = _coercedScale;
 
             ResizeImage(true);
+
+            if (String.IsNullOrEmpty(Picture.Description))
+                txtDesc.Visibility = System.Windows.Visibility.Collapsed;
+            if (Picture.PointOfInterest == null)
+                txtPOI.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         /// <summary> 

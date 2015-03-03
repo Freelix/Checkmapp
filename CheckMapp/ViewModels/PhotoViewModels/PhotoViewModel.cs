@@ -14,9 +14,10 @@ namespace CheckMapp.ViewModels.PhotoViewModels
     {
         private List<Picture> _pictureList;
         private int _picture;
-        public PhotoViewModel(int picture)
+        public PhotoViewModel(int picture, Trip trip)
         {
             this.SelectedPicture = picture;
+            this.Trip = trip;
             LoadPictures();
         }
 
@@ -40,6 +41,12 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                 _picture = value;
                 RaisePropertyChanged("SelectedPicture");
             }
+        }
+
+        public Trip Trip
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -76,7 +83,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         public void LoadPictures()
         {
             DataServicePicture dsPicture = new DataServicePicture();
-            _pictureList = dsPicture.LoadPictures();
+            _pictureList = dsPicture.LoadPicturesFromTrip(Trip);
         }
 
 

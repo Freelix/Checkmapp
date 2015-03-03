@@ -161,6 +161,9 @@ namespace CheckMapp.Views.TripViews
                 (this.DataContext as AddEditTripViewModel).MainImage = Utils.Utility.ReadFully(e.ChosenPhoto);
                 hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditTripViewModel).MainImage);
             }
+
+            //La valeur s'enleve pour une raison inconnu encore, alors on doit la réassigner
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditTripViewModel).Trip;
             
         }
 

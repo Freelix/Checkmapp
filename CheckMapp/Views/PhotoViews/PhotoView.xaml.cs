@@ -32,8 +32,8 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             Picture current = PhoneApplicationService.Current.State["Picture"] as Picture;
-            this.DataContext = new PhotoViewModel(0);
-
+            this.DataContext = new PhotoViewModel(0,current.Trip);
+            MyPivot.Items.Clear();
             int index = 0;
             foreach (Picture picture in (this.DataContext as PhotoViewModel).PictureList)
             {

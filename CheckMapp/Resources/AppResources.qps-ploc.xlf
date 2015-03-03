@@ -332,6 +332,10 @@
           <source>edit p.o. interest</source>
           <target state="new">edit p.o. interest</target>
         </trans-unit>
+        <trans-unit id="Resx/PlacePOI" translate="yes" xml:space="preserve">
+          <source>Place</source>
+          <target state="new">Place</target>
+        </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>
           <target state="translated">ville, (état, province, disctrict), pays</target></trans-unit>
