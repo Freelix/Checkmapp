@@ -3,6 +3,8 @@ using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
 using System.Windows.Input;
+using CheckMapp.Model.DataService;
+using System.Collections.ObjectModel;
 
 namespace CheckMapp.ViewModels.TripViewModels
 {
@@ -71,7 +73,10 @@ namespace CheckMapp.ViewModels.TripViewModels
             get 
             {
                 if (CurrentTrip != null)
-                    return String.Format(AppResources.CountPOI, CurrentTrip.PointsOfInterests.Count);
+                {
+                    DataServicePoi dsPoi = new DataServicePoi();
+                    return String.Format(AppResources.CountPOI, dsPoi.LoadPointOfInterestsFromTrip(CurrentTrip).Count);
+                }
                 else
                     return "0";
             }

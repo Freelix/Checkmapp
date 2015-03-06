@@ -136,15 +136,15 @@ namespace CheckMapp.Views.TripViews
 
         private void DeleteTrip_Click(object sender, EventArgs e)
         {
-            //var vm = DataContext as TripViewModel;
-            //if (vm != null)
-            //{
-            //    vm.DeleteTripCommand.Execute(null);
-            //    PhoneApplicationService.Current.State["Trip"] = null;
-            //}
-
-            //// En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
-            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
+            if (MessageBox.Show(AppResources.ConfirmationDeleteTrip, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                var vm = DataContext as TripViewModel;
+                if (vm != null)
+                {
+                    vm.DeleteTripCommand.Execute(vm.Trip);
+                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
+            } 
         }
     }
 }

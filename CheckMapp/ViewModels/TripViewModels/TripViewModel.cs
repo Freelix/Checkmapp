@@ -83,7 +83,8 @@ namespace CheckMapp.ViewModels.TripViewModels
             {
                 if (Trip.PointsOfInterests != null)
                 {
-                    return String.Format(AppResources.POITripTitle, Trip.PointsOfInterests.Count);
+                    DataServicePoi dsPoi = new DataServicePoi();
+                    return String.Format(AppResources.POITripTitle, dsPoi.LoadPointOfInterestsFromTrip(Trip).Count);
                 }
                 else
                 {

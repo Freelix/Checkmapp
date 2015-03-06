@@ -129,6 +129,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DatabaseDataContext.cs" />
+    <Compile Include="Model\DataService\DataServiceCommon.cs" />
     <Compile Include="Model\DataService\DataServiceNote.cs" />
     <Compile Include="Model\DataService\DataServicePicture.cs" />
     <Compile Include="Model\DataService\DataServicePoi.cs" />

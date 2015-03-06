@@ -437,4 +437,7 @@
   <data name="PlacePOI" xml:space="preserve">
     <value>Place</value>
   </data>
+  <data name="DefaultPoi" xml:space="preserve">
+    <value>No POI selected</value>
+  </data>
 </root>

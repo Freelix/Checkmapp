@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CheckMapp.Model.Tables;
+using System.Collections.ObjectModel;
 
 namespace CheckMapp.Model.DataService
 {
@@ -43,11 +44,17 @@ namespace CheckMapp.Model.DataService
     public interface IDataServicePoi
     {
         void addPoi(PointOfInterest poi);
-        List<PointOfInterest> LoadPointOfInterests();
-        List<PointOfInterest> LoadListBoxPointOfInterests();
         PointOfInterest getPOIById(int id);
         PointOfInterest getDefaultPOI();
-        List<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip);
+        ObservableCollection<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip);
         void DeletePoi(PointOfInterest poi);
+        void DeleteDefaultPoiForATrip(Trip trip);
+        void UpdatePoi(PointOfInterest poi);
+    }
+
+    public interface IDataServiceCommon
+    {
+        void DeletePoiInCascade(PointOfInterest poi);
+        void DeleteTripInCascade(Trip trip);
     }
 }

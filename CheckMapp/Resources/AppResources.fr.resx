@@ -449,5 +449,10 @@
   <data name="EditPoi" xml:space="preserve">
     <value>modifier p. d'intérêt</value>
   </data>
-  
-<data name="PlacePOI" xml:space="preserve"><value>Lieu</value></data></root>
+  <data name="PlacePOI" xml:space="preserve">
+    <value>Lieu</value>
+  </data>
+  <data name="DefaultPoi" xml:space="preserve">
+    <value>Aucun POI sélectionné</value>
+  </data>
+</root>

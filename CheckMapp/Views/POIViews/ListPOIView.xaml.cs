@@ -78,6 +78,7 @@ namespace CheckMapp.Views.POIViews
                                 POILLS.ItemsSource = vm.PointOfInterestList;
                             }
 
+                            int i = vm.Trip.Pictures.Count;
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
                         }
                         break;

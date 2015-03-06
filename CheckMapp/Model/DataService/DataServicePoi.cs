@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System;
 using CheckMapp.Model.Tables;
+using CheckMapp.Resources;
 
 namespace CheckMapp.Model.DataService
 {
@@ -22,46 +23,51 @@ namespace CheckMapp.Model.DataService
             db.SubmitChanges();
         }
 
-        /// <summary>
-        /// Load all the poi except "None"
-        /// "None" is a quick fix to be able to add Notes without
-        /// adding a blank poi in ListPOIView
-        /// </summary>
-        /// <returns></returns>
-        public List<PointOfInterest> LoadPointOfInterests()
-        {
-            return db.pointsOfInterests.Where(x => x.Name != "None").ToList();
-        }
-
-        public List<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip)
-        {
-            return db.pointsOfInterests.Where(x=>x.Trip == trip).ToList();
-        }
-
-        /// <summary>
-        /// Load all the poi for including "None"
-        /// "None" is a quick fix to be able to add Notes without
-        /// adding a blank poi in ListPOIView
-        /// </summary>
-        /// <returns></returns>
-        public List<PointOfInterest> LoadListBoxPointOfInterests()
-        {
-            return db.pointsOfInterests.ToList();
-        }
-
-        public PointOfInterest getDefaultPOI()
-        {
-            return db.pointsOfInterests.Where(x => x.Name.Equals("None")).FirstOrDefault();
-        }
-
         public PointOfInterest getPOIById(int id)
         {
             return db.pointsOfInterests.Where(x => x.Id == id).First();
         }
 
+        public PointOfInterest getDefaultPOI()
+        {
+            PointOfInterest defaultPoi = db.pointsOfInterests.Where(x => x.Name.Equals(AppResources.DefaultPoi)).FirstOrDefault();
+
+            if (defaultPoi != null)
+                return defaultPoi;
+            else
+            {
+                PointOfInterest poi = new PointOfInterest { Name = AppResources.DefaultPoi };
+                addPoi(poi);
+                return poi;
+            }
+        }
+
+        public ObservableCollection<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip)
+        {
+            List<PointOfInterest> listPOI = db.pointsOfInterests.Where(x => x.Trip == trip &&
+                    x.Name != AppResources.DefaultPoi).ToList();
+            return new ObservableCollection<PointOfInterest>(listPOI);
+        }
+
         public void DeletePoi(PointOfInterest poi)
         {
             var existing = db.pointsOfInterests.FirstOrDefault(x => x.Id == poi.Id);
+
+            if (existing != null)
+            {
+                DataServiceCommon dsCommon = new DataServiceCommon();
+                dsCommon.DeletePoiInCascade(poi);
+
+                db.pointsOfInterests.DeleteOnSubmit(existing);
+                db.SubmitChanges();
+            }
+        }
+
+        public void DeleteDefaultPoiForATrip(Trip trip)
+        {
+            var existing = db.pointsOfInterests.Where(
+                x => x.Name.Equals(AppResources.DefaultPoi) &&
+                    x.Trip.Id == trip.Id).FirstOrDefault();
 
             if (existing != null)
             {
