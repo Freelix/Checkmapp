@@ -336,7 +336,6 @@
           <source>Place</source>
           <target state="new">Place</target>
         </trans-unit>
-<<<<<<< HEAD
         <trans-unit id="Resx/PictureWeek" translate="yes" xml:space="preserve">
           <source>Picture taken this last 7 days : {0}</source>
           <target state="new">Picture taken this last 7 days : {0}</target>
@@ -368,11 +367,9 @@
         <trans-unit id="Resx/NoteAllTime" translate="yes" xml:space="preserve">
           <source>All note taken in this trip : {0}</source>
           <target state="new">All note taken in this trip : {0}</target>
-=======
         <trans-unit id="Resx/DefaultPoi" translate="yes" xml:space="preserve">
           <source>No POI selected</source>
           <target state="new">No POI selected</target>
->>>>>>> 031cc54ebd6d58ffe9d6acfca948c186f982af79
         </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>

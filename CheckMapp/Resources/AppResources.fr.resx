@@ -473,10 +473,10 @@
   <data name="NoteMonth" xml:space="preserve">
     <value>Note prise ces derniers 31 jours : {0}</value>
   </data>
-  <data name="NoteAllTime" xml:space="preserve">
-    <value>Toute les notes prises dans ce voyage : {0}</value>
- </data>
   <data name="DefaultPoi" xml:space="preserve">
     <value>Aucun POI sélectionné</value>
+  </data>
+  <data name="NoteAllTime" xml:space="preserve">
+    <value>Toute les notes prises dans ce voyages : {0}</value>
   </data>
 </root>
