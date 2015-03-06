@@ -45,7 +45,7 @@
                     </Grid>
 
                     <TextBlock x:Name="DateTextBlock" Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <toolkit:DatePicker></toolkit:DatePicker>
+                    <toolkit:DatePicker  Name="datePicker"  Value="{Binding PictureDate, Mode=TwoWay}"></toolkit:DatePicker>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
 

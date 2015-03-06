@@ -23,13 +23,40 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
+       
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-        </Grid>
+        <phone:Panorama HorizontalAlignment="Left" Margin="0,10,0,-3" Title="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top">
+            <phone:PanoramaItem CacheMode="{x:Null}" Header="{Binding Path=LocalizedResources.MyNotes, Source={StaticResource LocalizedStrings}}">
+                    <phone:PanoramaItem.RenderTransform>
+                        <TranslateTransform/>
+                    </phone:PanoramaItem.RenderTransform>
+                <StackPanel>
+                    <TextBlock x:Name="NoteToday" Margin="0,30,0,30" Text="{Binding TripNoteToday}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock x:Name="NoteWeek"  Margin="0,30,0,30" Text="{Binding TripNoteWeek}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock x:Name="NoteMonth"   Margin="0,30,0,30" Text="{Binding TripNoteMonth}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock x:Name="NoteAllTime"   Margin="0,30,0,30" Text="{Binding TripNoteAllTime}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                </StackPanel>
+               
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" Header="{Binding Path=LocalizedResources.MyPhoto, Source={StaticResource LocalizedStrings}}">
+                    <phone:PanoramaItem.RenderTransform>
+                        <TranslateTransform/>
+                    </phone:PanoramaItem.RenderTransform>
+                <StackPanel>
+                    <TextBlock x:Name="PictureToday" Margin="0,30,0,30" Text="{Binding TripPictureToday}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock x:Name="PictureWeek"  Margin="0,30,0,30" Text="{Binding TripPictureWeek}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock x:Name="PictureMonth"   Margin="0,30,0,30" Text="{Binding TripPictureMonth}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock x:Name="PictureAllTime"   Margin="0,30,0,30" Text="{Binding TripPictureAllTime}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                </StackPanel>
+            </phone:PanoramaItem>
+            </phone:Panorama>
+            <!--    <StackPanel Margin="12,17,0,28">
+                <TextBlock Text="{Binding TripNoteWeek}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" />
+            </StackPanel>--> 
+       
     </Grid>
 
 </phone:PhoneApplicationPage>

@@ -154,6 +154,19 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
         /// <summary>
+        /// La date de ma photo
+        /// </summary>
+        public DateTime PictureDate
+        {
+            get { return Picture.Date; }
+            set
+            {
+                Picture.Date = value;
+                RaisePropertyChanged("PictureDate");
+            }
+        }
+
+        /// <summary>
         /// Nom du voyage
         /// </summary>
         public string TripName

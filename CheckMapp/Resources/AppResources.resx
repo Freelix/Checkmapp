@@ -437,4 +437,28 @@
   <data name="PlacePOI" xml:space="preserve">
     <value>Place</value>
   </data>
+  <data name="NoteAllTime" xml:space="preserve">
+    <value>All note taken in this trip : {0}</value>
+  </data>
+  <data name="NoteMonth" xml:space="preserve">
+    <value>Note taken this last 31 days : {0}</value>
+  </data>
+  <data name="NoteToday" xml:space="preserve">
+    <value>Note taken today : {0}</value>
+  </data>
+  <data name="NoteWeek" xml:space="preserve">
+    <value>Note taken this last 7 days : {0}</value>
+  </data>
+  <data name="PictureAllTime" xml:space="preserve">
+    <value>All picture taken in this trip : {0}</value>
+  </data>
+  <data name="PictureMonth" xml:space="preserve">
+    <value>Picture taken this last 31 days : {0}</value>
+  </data>
+  <data name="PictureToday" xml:space="preserve">
+    <value>Picture taken today : {0}</value>
+  </data>
+  <data name="PictureWeek" xml:space="preserve">
+    <value>Picture taken this last 7 days : {0}</value>
+  </data>
 </root>

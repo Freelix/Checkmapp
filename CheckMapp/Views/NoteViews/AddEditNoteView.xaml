@@ -38,7 +38,7 @@
                 <TextBox x:Name="NameTextBox" Text="{Binding NoteName, Mode=TwoWay}"></TextBox>
 
                 <TextBlock x:Name="DateTextBlock" Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                <toolkit:DatePicker></toolkit:DatePicker>
+                    <toolkit:DatePicker Name="datePicker"  Value="{Binding NoteDate, Mode=TwoWay}"></toolkit:DatePicker>
 
                 <TextBlock Text="{Binding Path=LocalizedResources.NoteInterestPoint, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 

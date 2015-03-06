@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="fr" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="CheckMapp" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.0.1200.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -343,6 +343,38 @@
         <trans-unit id="Resx/PlacePOI" translate="yes" xml:space="preserve">
           <source>Place</source>
           <target state="translated">Lieu</target>
+        </trans-unit>
+        <trans-unit id="Resx/PictureWeek" translate="yes" xml:space="preserve">
+          <source>Picture taken this last 7 days : {0}</source>
+          <target state="translated">Photo prises ces derniers 7 jours : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/PictureToday" translate="yes" xml:space="preserve">
+          <source>Picture taken today : {0}</source>
+          <target state="translated">Photo prise aujourd'hui : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/PictureMonth" translate="yes" xml:space="preserve">
+          <source>Picture taken this last 31 days : {0}</source>
+          <target state="translated">Photo prise ces derniers 31 jours : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/PictureAllTime" translate="yes" xml:space="preserve">
+          <source>All picture taken in this trip : {0}</source>
+          <target state="translated">Toute les photos prises dans ce voyage : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteWeek" translate="yes" xml:space="preserve">
+          <source>Note taken this last 7 days : {0}</source>
+          <target state="translated">Note prise ces derniers 7 jours: {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteToday" translate="yes" xml:space="preserve">
+          <source>Note taken today : {0}</source>
+          <target state="translated">Note prise aujourd'hui : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteMonth" translate="yes" xml:space="preserve">
+          <source>Note taken this last 31 days : {0}</source>
+          <target state="translated">Note prise ces derniers 31 jours : {0}</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoteAllTime" translate="yes" xml:space="preserve">
+          <source>All note taken in this trip : {0}</source>
+          <target state="translated">Toute les notes prises dans ce voyage : {0}</target>
         </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>
