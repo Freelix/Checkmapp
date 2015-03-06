@@ -461,4 +461,7 @@
   <data name="PictureWeek" xml:space="preserve">
     <value>Picture taken this last 7 days : {0}</value>
   </data>
+  <data name="DefaultPoi" xml:space="preserve">
+    <value>No POI selected</value>
+  </data>
 </root>

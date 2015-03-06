@@ -358,6 +358,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No POI selected.
+        /// </summary>
+        public static string DefaultPoi {
+            get {
+                return ResourceManager.GetString("DefaultPoi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to delete.
         /// </summary>
         public static string Delete {

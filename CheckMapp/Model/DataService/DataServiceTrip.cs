@@ -16,6 +16,12 @@ namespace CheckMapp.Model.DataService
 
         public void addTrip(Trip newTrip)
         {
+            DataServicePoi dsPoi = new DataServicePoi();
+            PointOfInterest poi = dsPoi.getDefaultPOI();
+
+            poi.Trip = newTrip;
+            newTrip.PointsOfInterests.Add(poi);
+
             db.trips.InsertOnSubmit(newTrip);
             db.SubmitChanges();
         }
@@ -66,6 +72,9 @@ namespace CheckMapp.Model.DataService
 
             if (existing != null)
             {
+                DataServiceCommon dsCommon = new DataServiceCommon();
+                dsCommon.DeleteTripInCascade(trip);
+
                 db.trips.DeleteOnSubmit(existing);
                 db.SubmitChanges();
             }

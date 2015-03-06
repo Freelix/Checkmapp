@@ -19,7 +19,11 @@ namespace CheckMapp.ViewModels.POIViewModels
         public ListPOIViewModel(Trip trip)
         {
             this.Trip = trip;
-            PointOfInterestList = new ObservableCollection<PointOfInterest>(this.Trip.PointsOfInterests);
+
+            DataServicePoi dsPoi = new DataServicePoi();
+
+            PointOfInterestList = new ObservableCollection<PointOfInterest>
+                (dsPoi.LoadPointOfInterestsFromTrip(this.Trip));
         }
 
         #region Properties
@@ -84,6 +88,16 @@ namespace CheckMapp.ViewModels.POIViewModels
         {
             DataServicePoi dsPoi = new DataServicePoi();
             Trip.PointsOfInterests.Remove(poi);
+
+            // For some reasons, Picture table doesn't refresh properly
+            // We have to remove each element in the array manually
+            DataServicePicture dsPicture = new DataServicePicture();
+            
+            foreach (Picture pic in dsPicture.LoadPicturesByPoiId(poi.Id))
+            {
+                Trip.Pictures.Remove(pic);
+            }
+
             dsPoi.DeletePoi(poi);
         }
 

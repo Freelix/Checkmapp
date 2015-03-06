@@ -475,5 +475,8 @@
   </data>
   <data name="NoteAllTime" xml:space="preserve">
     <value>Toute les notes prises dans ce voyage : {0}</value>
+ </data>
+  <data name="DefaultPoi" xml:space="preserve">
+    <value>Aucun POI sélectionné</value>
   </data>
 </root>
