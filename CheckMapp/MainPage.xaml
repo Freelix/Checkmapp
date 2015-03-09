@@ -24,7 +24,10 @@
 
         <DataTemplate x:Key="SmallPanoramaTitle">
             <ContentPresenter>
-                <TextBlock Text="{Binding}" FontSize="100" Margin="10,30,0,0" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/logo.png" Width="120" Margin="0,50,0,0" Height="120"/>
+                    <TextBlock Text="{Binding}" FontSize="100" FontFamily="Dolphin" VerticalAlignment="Bottom" Margin="10,30,0,0" />
+                </StackPanel>
             </ContentPresenter>
         </DataTemplate>
 

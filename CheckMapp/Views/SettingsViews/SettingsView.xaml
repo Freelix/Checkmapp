@@ -54,6 +54,7 @@
                 <Grid x:Name="ContentPanelAbout" Grid.Row="1" >
                     <ScrollViewer>
                         <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                            <Image Source="/Assets/logo.png" Width="120" HorizontalAlignment="Left" Margin="0,0,0,0" Height="120"/>
                             <TextBlock Text="{Binding Path=LocalizedResources.AboutUs, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"/>
                             <TextBlock Text="{Binding AppVersion}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <Button Click="BtnRateApp_Click" Content="{Binding Path=LocalizedResources.RateApp, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
