@@ -46,11 +46,7 @@ namespace CheckMapp.Views.SettingsViews
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApplicationBar.Buttons != null)
-            {
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Save;
-                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Cancel;
-            }
+            
         }
 
         private void BtnClearHistory_Click(object sender, EventArgs e)
@@ -83,7 +79,7 @@ namespace CheckMapp.Views.SettingsViews
             });
         }
 
-        private void BtnRecommendApp_Click(object sender, EventArgs e)
+        private void BtnRateApp_Click(object sender, EventArgs e)
         {
             this.Focus();
 
@@ -93,7 +89,7 @@ namespace CheckMapp.Views.SettingsViews
                 var vm = DataContext as SettingsViewModel;
                 if (vm != null)
                 {
-                    vm.RecommendAppCommand.Execute(null);
+                    vm.RateAppCommand.Execute(null);
                 }
             });
         }
@@ -126,5 +122,7 @@ namespace CheckMapp.Views.SettingsViews
         {
             this.DataContext = new SettingsViewModel();
         }
+
+       
     }
 }

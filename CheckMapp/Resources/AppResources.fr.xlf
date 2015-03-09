@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="fr" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="CheckMapp" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.0.1200.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -29,9 +29,9 @@
           <target state="translated">Lieu de départ</target>
         </trans-unit>
         <trans-unit id="Resx/AddTripDate" translate="yes" xml:space="preserve">
-          <source>Schedule Date</source>
-          <target state="translated">Date prévu</target>
-        </trans-unit>
+          <source>Trip Date</source>
+          <target state="needs-review-translation">Date du voyage</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/AddTripArrival" translate="yes" xml:space="preserve">
           <source>Trip Arrival</source>
           <target state="translated">Lieu d'arrivé</target>
@@ -190,9 +190,10 @@
           <target state="translated">Sélectionner une date : </target>
         </trans-unit>
         <trans-unit id="Resx/Settings" translate="yes" xml:space="preserve">
-          <source>Settings</source>
-          <target state="translated">Paramètres</target>
-        </trans-unit>
+          <source>settings</source>
+          <target state="needs-review-translation">paramètres</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/Share" translate="yes" xml:space="preserve">
           <source>share on...</source>
           <target state="needs-review-translation">partager sur...</target>
@@ -243,9 +244,8 @@
           <target state="translated">Ajouter p. d'intérêt</target>
         </trans-unit>
         <trans-unit id="Resx/Statistic" translate="yes" xml:space="preserve">
-          <source>statistic</source>
-          <target state="needs-review-translation">statistiques</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <source>Statistic</source>
+          <target state="needs-review-translation">Statistiques</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
         <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
           <source>my notes</source>
@@ -380,6 +380,10 @@
           <source>No POI selected</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Aucun POI sélectionné</target>
         </trans-unit>
+        <trans-unit id="Resx/ConfirmFinishTrip" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to finish this trip? (You will not be able to edit it in the future)</source>
+          <target state="translated">Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</target>
+        </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>
           <target state="needs-review-translation">ville, (état, province, disctrict), pays</target>
@@ -409,22 +413,31 @@
           <source>Errors</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Erreurs</target>
         </trans-unit>
-        <trans-unit id="Resx/RecommendApp" translate="yes" xml:space="preserve">
-          <source>Recommend this application</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Recommander cette application</target>
-        </trans-unit>
         <trans-unit id="Resx/ClearHistory" translate="yes" xml:space="preserve">
           <source>Clear the history</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Effacer l'historique</target>
+        </trans-unit>
+        <trans-unit id="Resx/RateApp" translate="yes" xml:space="preserve">
+          <source>Rate this app</source>
+          <target state="translated">Évaluer l'application</target>
         </trans-unit>
         <trans-unit id="Resx/CheckUpdates" translate="yes" xml:space="preserve">
           <source>Check for updates</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Mises à jour disponibles</target>
         </trans-unit>
         <trans-unit id="Resx/AboutUs" translate="yes" xml:space="preserve">
-          <source>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a convallis nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae justo enim. Vivamus id semper lacus. Duis aliquam diam volutpat, consectetur erat ac, fermentum ex. Donec tincidunt venenatis placerat. Duis dignissim, arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Quisque placerat gravida mauris, in ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget finibus tellus, quis aliquet massa. Sed at lacus purus. Aenean sapien lacus, malesuada eu ligula et, cursus tristique nibh. Aliquam consectetur libero et erat imperdiet, vitae convallis mi porta.</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Lorem ipsum dolor sit amet, consectetur adipiscing public concerné. Pellentesque un nulla convallis. Très sociis natoque penatibus et magnis dis PARTURIENTS permettant montes, nascetur ridiculus mus. Donec un curriculum vitae justo enim. Vivamus id siège lacus. Duis aliquam diam volutpat, CA erat de consectetur, fermentum exemple : Donec tincidunt venenatis placerat. Dignissim duis arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Mauris de gravida placerat Quisque, dans ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget publication tellus, quis aliquet massa. Sed à lacus purus. Aenean sapien lacus, ligula de l'Union européenne malesuada et, cursus tristique nibh. Libero de consectetur Aliquam et imperdiet erat, un curriculum vitae convallis mi Portal.</target>
-        </trans-unit>
+          <source>Checkmapp is an application to keep an history of all your trips around the world. So you can keep the best memories and share them with our friends.
+
+John-William Forcier
+Félix Baril
+Alexandre Roy</source>
+          <target state="needs-review-translation">Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. On peut donc garder de meilleurs souvenirs et les partager à nos proches.
+
+John-William Forcier
+Félix Baril
+Alexandre Roy</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/AutoSync" translate="yes" xml:space="preserve">
           <source>Auto sync the data</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Synchronisation automatique de données</target>

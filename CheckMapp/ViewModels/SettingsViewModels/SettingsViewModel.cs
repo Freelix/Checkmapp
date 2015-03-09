@@ -172,16 +172,16 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             }
         }
 
-        private ICommand _recommendAppCommand;
-        public ICommand RecommendAppCommand
+        private ICommand _rateAppCommand;
+        public ICommand RateAppCommand
         {
             get
             {
-                if (_recommendAppCommand == null)
+                if (_rateAppCommand == null)
                 {
-                    _recommendAppCommand = new RelayCommand(() => RecommendApp());
+                    _rateAppCommand = new RelayCommand(() => RateApp());
                 }
-                return _recommendAppCommand;
+                return _rateAppCommand;
             }
 
         }
@@ -223,7 +223,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         }
 
-        private void RecommendApp()
+        private void RateApp()
         {
 
         }

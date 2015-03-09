@@ -84,6 +84,10 @@ namespace CheckMapp.Controls
         /// </summary>
         public void AdjustTimeLine()
         {
+            if (Trips.Count == 0)
+            {
+                return;
+            }
             canvas = new Canvas();
             canvas.Width = 450;
             canvas.Opacity = 0.9;

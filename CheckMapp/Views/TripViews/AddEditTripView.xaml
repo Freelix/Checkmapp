@@ -64,7 +64,7 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                        <!--  <TextBox  Width="330" x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>-->
-                        <toolkit:PhoneTextBox Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}"  x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                        <toolkit:PhoneTextBox TextChanged="DepartureTextBox_TextChanged" Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}"  x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></toolkit:PhoneTextBox>
                         <Button x:Name="btn_dep" Width="114" Grid.Column="1" Click="btn_dep_Click" >
                             <Image  Source="/Images/appbar.eye.min.png" Height="28"  />
                         </Button>
@@ -81,7 +81,7 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <!--<TextBox Width="330" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}" ></TextBox>-->
-                        <toolkit:PhoneTextBox Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                        <toolkit:PhoneTextBox TextChanged="DestinationTextBox_TextChanged" Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}"></toolkit:PhoneTextBox>
                         <Button x:Name="btn_dest" Width="114" Grid.Column="1" Click="btn_dest_Click">
                             <Image Source="/Images/appbar.eye.min.png" Height="28"  />
                         </Button>

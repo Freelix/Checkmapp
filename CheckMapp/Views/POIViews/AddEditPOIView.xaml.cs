@@ -42,6 +42,7 @@ namespace CheckMapp.Views.POIViews
             if (mode == Mode.edit)
                 Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, null, currentPoi.Latitude, currentPoi.Longitude);
 
+            btn_place.IsEnabled = !String.IsNullOrEmpty(PoiTextBox.Text);
             base.OnNavigatedTo(e);
         }
 
@@ -121,6 +122,11 @@ namespace CheckMapp.Views.POIViews
             {
                 MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
             }
+        }
+
+        private void PoiTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btn_place.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
         }
 
     }

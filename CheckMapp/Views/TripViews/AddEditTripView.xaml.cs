@@ -58,7 +58,9 @@ namespace CheckMapp.Views.TripViews
                 TitleTextblock.Text = AppResources.EditTrip.ToLower();
                 AddLocation_onEdit(currentTrip);
             }
-                
+
+            btn_dep.IsEnabled = !String.IsNullOrEmpty(DepartureTextBox.Text);
+            btn_dest.IsEnabled = !String.IsNullOrEmpty(DestinationTextBox.Text);
 
         }
 
@@ -233,6 +235,16 @@ namespace CheckMapp.Views.TripViews
             {
                 MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
             }
+        }
+
+        private void DepartureTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btn_dep.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
+        }
+
+        private void DestinationTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btn_dest.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
         }
 
 

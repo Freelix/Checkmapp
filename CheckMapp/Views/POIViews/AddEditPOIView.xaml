@@ -45,7 +45,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                        <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiLocation, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                        <toolkit:PhoneTextBox TextChanged="PoiTextBox_TextChanged"  Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="PoiTextBox" Text="{Binding PoiLocation, Mode=TwoWay}"></toolkit:PhoneTextBox>
                         <Button x:Name="btn_place" Width="114" Grid.Column="1" Click="btn_place_Click" >
                             <Image  Source="/Images/appbar.eye.min.png" Height="28"  />
                         </Button>

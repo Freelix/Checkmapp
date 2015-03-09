@@ -232,8 +232,8 @@
     <value>Carte</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
-  </data>
+    <value>paramètres</value>
+  <comment></comment></data>
   <data name="Home" xml:space="preserve">
     <value>accueil</value>
   </data>
@@ -250,8 +250,8 @@
     <value>Lieu de départ</value>
   </data>
   <data name="AddTripDate" xml:space="preserve">
-    <value>Date prévu</value>
-  </data>
+    <value>Date du voyage</value>
+  <comment></comment></data>
   <data name="AddTripArrival" xml:space="preserve">
     <value>Lieu d'arrivé</value>
   </data>
@@ -284,7 +284,7 @@
     <value>Ajouter p. d'intérêt</value>
   </data>
   <data name="Statistic" xml:space="preserve">
-    <value>statistiques</value>
+    <value>Statistiques</value>
     <comment></comment>
   </data>
   <data name="POITripTitle" xml:space="preserve">
@@ -393,9 +393,7 @@
   <data name="VersionNumber" xml:space="preserve">
     <value>Numéro de version</value>
   </data>
-  <data name="RecommendApp" xml:space="preserve">
-    <value>Recommander cette application</value>
-  </data>
+  
   <data name="ClearHistory" xml:space="preserve">
     <value>Effacer l'historique</value>
   </data>
@@ -403,8 +401,12 @@
     <value>Mises à jour disponibles</value>
   </data>
   <data name="AboutUs" xml:space="preserve">
-    <value>Lorem ipsum dolor sit amet, consectetur adipiscing public concerné. Pellentesque un nulla convallis. Très sociis natoque penatibus et magnis dis PARTURIENTS permettant montes, nascetur ridiculus mus. Donec un curriculum vitae justo enim. Vivamus id siège lacus. Duis aliquam diam volutpat, CA erat de consectetur, fermentum exemple : Donec tincidunt venenatis placerat. Dignissim duis arcu ut ultrices consequat, ligula ligula venenatis ipsum, id sollicitudin arcu enim ultricies tellus. Mauris de gravida placerat Quisque, dans ultrices tellus efficitur quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam eget publication tellus, quis aliquet massa. Sed à lacus purus. Aenean sapien lacus, ligula de l'Union européenne malesuada et, cursus tristique nibh. Libero de consectetur Aliquam et imperdiet erat, un curriculum vitae convallis mi Portal.</value>
-  </data>
+    <value>Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. On peut donc garder de meilleurs souvenirs et les partager à nos proches.
+
+John-William Forcier
+Félix Baril
+Alexandre Roy</value>
+  <comment></comment></data>
   <data name="Error_EmptyPicture" xml:space="preserve">
     <value>Vous devez choisir une image</value>
   </data>
@@ -479,4 +481,4 @@
   <data name="NoteAllTime" xml:space="preserve">
     <value>Toute les notes prises dans ce voyages : {0}</value>
   </data>
-</root>
+<data name="ConfirmFinishTrip" xml:space="preserve"><value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value></data><data name="RateApp" xml:space="preserve"><value>Évaluer l'application</value></data></root>

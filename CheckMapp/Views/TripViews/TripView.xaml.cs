@@ -74,6 +74,9 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.MenuItems[1] as ApplicationBarMenuItem).Text = AppResources.Delete;
                 (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.Edit;
                 (ApplicationBar.MenuItems[2] as ApplicationBarMenuItem).Text = AppResources.FinishTrip;
+
+                (ApplicationBar.MenuItems[1] as ApplicationBarMenuItem).IsEnabled = (this.DataContext as TripViewModel).Trip.IsActif;
+                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).IsEnabled = (this.DataContext as TripViewModel).Trip.IsActif;
             }
         }
 
@@ -117,21 +120,24 @@ namespace CheckMapp.Views.TripViews
 
         private void FinisTrip_Click(object sender, EventArgs e)
         {
-            this.Focus();
-
-            // wait till the next UI thread tick so that the binding gets updated
-            Dispatcher.BeginInvoke(() =>
+            if (MessageBox.Show(AppResources.ConfirmFinishTrip, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                var vm = DataContext as TripViewModel;
-                if (vm != null)
+                this.Focus();
+
+                // wait till the next UI thread tick so that the binding gets updated
+                Dispatcher.BeginInvoke(() =>
                 {
-                    vm.FinishTripCommand.Execute(null);
-                    PhoneApplicationService.Current.State["Trip"] = null;
-                }
-            
-                // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
-                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative)); 
-            });
+                    var vm = DataContext as TripViewModel;
+                    if (vm != null)
+                    {
+                        vm.FinishTripCommand.Execute(null);
+                        PhoneApplicationService.Current.State["Trip"] = null;
+                    }
+
+                    // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour le panorama
+                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                });
+            }
         }
 
         private void DeleteTrip_Click(object sender, EventArgs e)
@@ -144,7 +150,7 @@ namespace CheckMapp.Views.TripViews
                     vm.DeleteTripCommand.Execute(vm.Trip);
                     (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
-            } 
+            }
         }
     }
 }
