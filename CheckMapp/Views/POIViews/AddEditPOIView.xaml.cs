@@ -118,7 +118,7 @@ namespace CheckMapp.Views.POIViews
                 (this.DataContext as AddEditPOIViewModel).PointOfInterest.Latitude = CoordinateList[0];
                 (this.DataContext as AddEditPOIViewModel).PointOfInterest.Longitude = CoordinateList[1];
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
             }

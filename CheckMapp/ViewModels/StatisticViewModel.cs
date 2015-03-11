@@ -42,17 +42,17 @@ namespace CheckMapp.ViewModels
 
         public string TripNoteToday
         {
-            get { return String.Format(AppResources.NoteToday, Trip.Notes.Where(x => x.Date.Date == DateTime.Today).Count()); }               
+            get { return String.Format("", Trip.Notes.Where(x => x.Date.Date == DateTime.Today).Count()); }               
         }
 
         public string TripNoteWeek
         {
-            get { return String.Format(AppResources.NoteWeek, Trip.Notes.Where(x => x.Date >= DateTime.Now.AddDays(-7)).Count()); }
+            get { return String.Format("", Trip.Notes.Where(x => x.Date >= DateTime.Now.AddDays(-7)).Count()); }
         }
 
         public string TripNoteMonth
         {
-            get { return String.Format(AppResources.NoteMonth, Trip.Notes.Where(x => x.Date >= DateTime.Now.AddDays(-31)).Count());}
+            get { return String.Format("", Trip.Notes.Where(x => x.Date >= DateTime.Now.AddDays(-31)).Count());}
         }
 
         public string TripNoteAllTime

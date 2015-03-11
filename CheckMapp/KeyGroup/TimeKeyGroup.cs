@@ -11,8 +11,6 @@ namespace CheckMapp.KeyGroup
 {
     public class TimeKeyGroup<T> : List<T>
     {
-        private IGrouping<string, Note> photosByMonth;
-
         /// <summary>
         /// The Key of this group.
         /// </summary>

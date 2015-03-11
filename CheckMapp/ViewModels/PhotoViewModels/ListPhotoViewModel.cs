@@ -44,13 +44,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set;
         }
 
-        private List<Picture> _pictureList;
-        public List<Picture> PictureList
-        {
-            get { return Trip.Pictures.ToList(); }
-        }
-
-
+     
         private ICommand _deletePictureCommand;
         public ICommand DeletePictureCommand
         {

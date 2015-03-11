@@ -125,8 +125,26 @@
     <value>fr</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>à propos</value>
+  </data>
   <data name="AddPicture" xml:space="preserve">
     <value>Ajouter une image</value>
+  </data>
+  <data name="AddTrip" xml:space="preserve">
+    <value>Nouveau voyage</value>
+  </data>
+  <data name="AddTripName" xml:space="preserve">
+    <value>Nom du voyage</value>
+  </data>
+  <data name="AddTripDeparture" xml:space="preserve">
+    <value>Lieu de départ</value>
+  </data>
+  <data name="AddTripDate" xml:space="preserve">
+    <value>Date du voyage</value>
+  </data>
+  <data name="AddTripArrival" xml:space="preserve">
+    <value>Lieu d'arrivé</value>
   </data>
   <data name="AddNote" xml:space="preserve">
     <value>Nouvelle note</value>
@@ -140,11 +158,41 @@
   <data name="ConfirmButton" xml:space="preserve">
     <value>Confirmer</value>
   </data>
+  <data name="ConfirmNewTrip" xml:space="preserve">
+    <value>Confirmer le voyage</value>
+  </data>
+  <data name="ContinueTrip" xml:space="preserve">
+    <value>Continuer le voyage</value>
+  </data>
+  <data name="CountPhotos" xml:space="preserve">
+    <value>Photos : {0}</value>
+  </data>
+  <data name="CountPOI" xml:space="preserve">
+    <value>P. d'intérêt : {0}</value>
+  </data>
+  <data name="CountNotes" xml:space="preserve">
+    <value>Notes : {0}</value>
+  </data>
+  <data name="CurrentTrip" xml:space="preserve">
+    <value>voyage courant</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date :</value>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>Jour :</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>supprimer</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>modifier</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>accueil</value>
+  </data>
+  <data name="LastActivities" xml:space="preserve">
+    <value>actions récentes</value>
   </data>
   <data name="LastMonth" xml:space="preserve">
     <value>Mois dernier</value>
@@ -160,13 +208,42 @@
   </data>
   <data name="LastYear" xml:space="preserve">
     <value>L'année dernière</value>
-    <comment></comment>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>liste</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Spécifier un lieu :</value>
   </data>
+  <data name="Map" xml:space="preserve">
+    <value>Carte</value>
+  </data>
   <data name="Message" xml:space="preserve">
     <value>Message :</value>
+  </data>
+  <data name="EditNote" xml:space="preserve">
+    <value>Modifier la note</value>
+  </data>
+  <data name="NoteName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="NoteInterestPoint" xml:space="preserve">
+    <value>Point d'intérêt</value>
+  </data>
+  <data name="NoteDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="NoteContent" xml:space="preserve">
+    <value>Contenu</value>
+  </data>
+  <data name="OldTrip" xml:space="preserve">
+    <value>voyages précédents</value>
+  </data>
+  <data name="POITitle" xml:space="preserve">
+    <value>Points d'intérêt</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Renommer</value>
   </data>
   <data name="SampleProperty" xml:space="preserve">
     <value>Exemple de valeur de propriété d'exécution</value>
@@ -174,9 +251,14 @@
   <data name="SelectCountry" xml:space="preserve">
     <value>Sélectionnez un pays : </value>
   </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Sélectionner une date : </value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>paramètres</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>partager sur...</value>
-    <comment></comment>
   </data>
   <data name="Sort" xml:space="preserve">
     <value>Tri</value>
@@ -190,6 +272,9 @@
   <data name="SortMode" xml:space="preserve">
     <value>Mode de tri</value>
   </data>
+  <data name="Timeline" xml:space="preserve">
+    <value>ligne de temps</value>
+  </data>
   <data name="YourJournal" xml:space="preserve">
     <value>votre journal</value>
   </data>
@@ -199,83 +284,8 @@
   <data name="YourTimeLine" xml:space="preserve">
     <value>votre ligne de temps</value>
   </data>
-  <data name="SelectDate" xml:space="preserve">
-    <value>Sélectionner une date : </value>
-  </data>
-  <data name="Rename" xml:space="preserve">
-    <value>Renommer</value>
-  </data>
   <data name="YourTravels" xml:space="preserve">
     <value>vos voyages</value>
-  </data>
-  <data name="CurrentTrip" xml:space="preserve">
-    <value>voyage courant</value>
-  </data>
-  <data name="OldTrip" xml:space="preserve">
-    <value>voyages précédents</value>
-  </data>
-  <data name="List" xml:space="preserve">
-    <value>liste</value>
-  </data>
-  <data name="Timeline" xml:space="preserve">
-    <value>ligne de temps</value>
-  </data>
-  <data name="Day" xml:space="preserve">
-    <value>Jour :</value>
-    <comment></comment>
-  </data>
-  <data name="AddTrip" xml:space="preserve">
-    <value>Nouveau voyage</value>
-    <comment></comment>
-  </data>
-  <data name="Map" xml:space="preserve">
-    <value>Carte</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>paramètres</value>
-  <comment></comment></data>
-  <data name="Home" xml:space="preserve">
-    <value>accueil</value>
-  </data>
-  <data name="ContinueTrip" xml:space="preserve">
-    <value>Continuer le voyage</value>
-  </data>
-  <data name="LastActivities" xml:space="preserve">
-    <value>actions récentes</value>
-  </data>
-  <data name="AddTripName" xml:space="preserve">
-    <value>Nom du voyage</value>
-  </data>
-  <data name="AddTripDeparture" xml:space="preserve">
-    <value>Lieu de départ</value>
-  </data>
-  <data name="AddTripDate" xml:space="preserve">
-    <value>Date du voyage</value>
-  <comment></comment></data>
-  <data name="AddTripArrival" xml:space="preserve">
-    <value>Lieu d'arrivé</value>
-  </data>
-  <data name="ConfirmNewTrip" xml:space="preserve">
-    <value>Confirmer le voyage</value>
-  </data>
-  <data name="NoteName" xml:space="preserve">
-    <value>Nom</value>
-  </data>
-  <data name="NoteInterestPoint" xml:space="preserve">
-    <value>Point d'intérêt</value>
-  </data>
-  <data name="NoteContent" xml:space="preserve">
-    <value>Contenu</value>
-  </data>
-  <data name="POITitle" xml:space="preserve">
-    <value>Points d'intérêt</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>modifier</value>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>à propos</value>
-    <comment></comment>
   </data>
   <data name="FinishTrip" xml:space="preserve">
     <value>Terminer le voyage</value>
@@ -285,70 +295,30 @@
   </data>
   <data name="Statistic" xml:space="preserve">
     <value>Statistiques</value>
-    <comment></comment>
-  </data>
-  <data name="POITripTitle" xml:space="preserve">
-    <value>Points d'intérêt ({0})</value>
-    <comment></comment>
-  </data>
-  <data name="PhotoTripTitle" xml:space="preserve">
-    <value>Photos ({0})</value>
-    <comment></comment>
-  </data>
-  <data name="NoteTripTitle" xml:space="preserve">
-    <value>Notes ({0})</value>
-    <comment></comment>
   </data>
   <data name="MyNotes" xml:space="preserve">
     <value>mes notes</value>
-    <comment></comment>
   </data>
   <data name="SeePhotos" xml:space="preserve">
     <value>voir les photos...</value>
   </data>
-  <data name="SeeNotes" xml:space="preserve">
-    <value>voir les notes...</value>
-  </data>
-  <data name="CountPOI" xml:space="preserve">
-    <value>P. d'intérêt : {0}</value>
-  </data>
   <data name="MyPhoto" xml:space="preserve">
     <value>mes photos</value>
-    <comment></comment>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-  </data>
-  <data name="EditNote" xml:space="preserve">
-    <value>Modifier la note</value>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="EditTrip" xml:space="preserve">
     <value>Modifier le voyage</value>
   </data>
-  <data name="EditPicture" xml:space="preserve">
-    <value>Modifier la photo</value>
-  </data>
   <data name="ChoosePicture" xml:space="preserve">
     <value>choisir photo</value>
-    <comment></comment>
   </data>
   <data name="ConfirmationDeleteTrip" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer ce voyage?</value>
-  </data>
-  <data name="ConfirmationDeletePictures" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer ces photos?</value>
-  </data>
-  <data name="ConfirmationDeletePicture" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer cette photo?</value>
-  </data>
-  <data name="ConfirmationDeleteNotes" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer ces notes?</value>
-  </data>
-  <data name="ConfirmationDeleteNote" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer cette note?</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>sélectionner</value>
@@ -356,24 +326,8 @@
   <data name="ConfirmDeletePOIs" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer ces points d'intérêt?</value>
   </data>
-  <data name="ConfirmDeletePOI" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer ce point d'intérêt?</value>
-  </data>
   <data name="MyPoi" xml:space="preserve">
     <value>points d'intérêts</value>
-    <comment></comment>
-  </data>
-  <data name="CountPhotos" xml:space="preserve">
-    <value>Photos : {0}</value>
-  </data>
-  <data name="CountNotes" xml:space="preserve">
-    <value>Notes : {0}</value>
-  </data>
-  <data name="NoteDate" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
   </data>
   <data name="Lang_French" xml:space="preserve">
     <value>Français</value>
@@ -384,31 +338,62 @@
   <data name="WifiOnly" xml:space="preserve">
     <value>Utiliser uniquement la Wi-Fi</value>
   </data>
-  <data name="AutoSync" xml:space="preserve">
-    <value>Synchronisation automatique de données</value>
-  </data>
-  <data name="Lang_English" xml:space="preserve">
-    <value>Anglais</value>
-  </data>
   <data name="VersionNumber" xml:space="preserve">
     <value>Numéro de version</value>
   </data>
-  
-  <data name="ClearHistory" xml:space="preserve">
-    <value>Effacer l'historique</value>
-  </data>
-  <data name="CheckUpdates" xml:space="preserve">
-    <value>Mises à jour disponibles</value>
-  </data>
-  <data name="AboutUs" xml:space="preserve">
-    <value>Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. On peut donc garder de meilleurs souvenirs et les partager à nos proches.
-
-John-William Forcier
-Félix Baril
-Alexandre Roy</value>
-  <comment></comment></data>
   <data name="Error_EmptyPicture" xml:space="preserve">
     <value>Vous devez choisir une image</value>
+  </data>
+  <data name="InternetConnection" xml:space="preserve">
+    <value>Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</value>
+  </data>
+  <data name="NotConnected" xml:space="preserve">
+    <value>Connexion internet désactivée</value>
+  </data>
+  <data name="InvalideSearch" xml:space="preserve">
+    <value>Aucun résultat trouvé pour : {0}</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
+  <data name="ExamplePointInterest" xml:space="preserve">
+    <value>Tour Effeil</value>
+  </data>
+  <data name="EditPoi" xml:space="preserve">
+    <value>modifier p. d'intérêt</value>
+  </data>
+  <data name="PlacePOI" xml:space="preserve">
+    <value>Lieu</value>
+  </data>
+  <data name="NoteAllTime" xml:space="preserve">
+    <value>Toute les notes prises dans ce voyages : {0}</value>
+  </data>
+  <data name="PictureWeek" xml:space="preserve">
+    <value>Photo prises ces derniers 7 jours : {0}</value>
+  </data>
+  <data name="PictureToday" xml:space="preserve">
+    <value>Photo prise aujourd'hui : {0}</value>
+  </data>
+  <data name="PictureMonth" xml:space="preserve">
+    <value>Photo prise ces derniers 31 jours : {0}</value>
+  </data>
+  <data name="PictureAllTime" xml:space="preserve">
+    <value>Toute les photos prises dans ce voyage : {0}</value>
+  </data>
+  <data name="DefaultPoi" xml:space="preserve">
+    <value>Aucun POI sélectionné</value>
+  </data>
+  <data name="ConfirmFinishTrip" xml:space="preserve">
+    <value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value>
+  </data>
+  <data name="TravelFriends" xml:space="preserve">
+    <value>Amis de voyage</value>
+  </data>
+  <data name="NoPoi" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="DepDest" xml:space="preserve">
+    <value>ville, (état, province, disctrict), pays</value>
   </data>
   <data name="Error_EmptyName" xml:space="preserve">
     <value>Vous devez spécifier un nom</value>
@@ -428,57 +413,59 @@ Alexandre Roy</value>
   <data name="Errors" xml:space="preserve">
     <value>Erreurs</value>
   </data>
-  <data name="InternetConnection" xml:space="preserve">
-    <value>Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</value>
+  <data name="ClearHistory" xml:space="preserve">
+    <value>Effacer l'historique</value>
   </data>
-  <data name="DepDest" xml:space="preserve">
-    <value>ville, (état, province, disctrict), pays</value>
-    <comment></comment>
+  <data name="RateApp" xml:space="preserve">
+    <value>Évaluer l'application</value>
   </data>
-  <data name="NotConnected" xml:space="preserve">
-    <value>Connexion internet désactivée</value>
-    <comment></comment>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>Mises à jour disponibles</value>
   </data>
-  <data name="InvalideSearch" xml:space="preserve">
-    <value>Aucun résultat trouvé pour : {0}</value>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. On peut donc garder de meilleurs souvenirs et les partager à nos proches.
+
+John-William Forcier
+Félix Baril
+Alexandre Roy</value>
   </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Avertissement</value>
+  <data name="AutoSync" xml:space="preserve">
+    <value>Synchronisation automatique de données</value>
   </data>
-  <data name="ExamplePointInterest" xml:space="preserve">
-    <value>Tour Effeil</value>
+  <data name="Lang_English" xml:space="preserve">
+    <value>Anglais</value>
   </data>
-  <data name="EditPoi" xml:space="preserve">
-    <value>modifier p. d'intérêt</value>
+  <data name="ConfirmDeletePOI" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer ce point d'intérêt?</value>
   </data>
-  <data name="PlacePOI" xml:space="preserve">
-    <value>Lieu</value>
+  <data name="ConfirmationDeletePictures" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer ces photos?</value>
   </data>
-  <data name="PictureWeek" xml:space="preserve">
-    <value>Photo prises ces derniers 7 jours : {0}</value>
+  <data name="ConfirmationDeletePicture" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer cette photo?</value>
   </data>
-  <data name="PictureToday" xml:space="preserve">
-    <value>Photo prise aujourd'hui : {0}</value>
+  <data name="ConfirmationDeleteNotes" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer ces notes?</value>
   </data>
-  <data name="PictureMonth" xml:space="preserve">
-    <value>Photo prise ces derniers 31 jours : {0}</value>
+  <data name="ConfirmationDeleteNote" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer cette note?</value>
   </data>
-  <data name="PictureAllTime" xml:space="preserve">
-    <value>Toute les photos prises dans ce voyage : {0}</value>
+  <data name="EditPicture" xml:space="preserve">
+    <value>Modifier la photo</value>
   </data>
-  <data name="NoteWeek" xml:space="preserve">
-    <value>Note prise ces derniers 7 jours: {0}</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
   </data>
-  <data name="NoteToday" xml:space="preserve">
-    <value>Note prise aujourd'hui : {0}</value>
+  <data name="SeeNotes" xml:space="preserve">
+    <value>voir les notes...</value>
   </data>
-  <data name="NoteMonth" xml:space="preserve">
-    <value>Note prise ces derniers 31 jours : {0}</value>
+  <data name="POITripTitle" xml:space="preserve">
+    <value>Points d'intérêt ({0})</value>
   </data>
-  <data name="DefaultPoi" xml:space="preserve">
-    <value>Aucun POI sélectionné</value>
+  <data name="PhotoTripTitle" xml:space="preserve">
+    <value>Photos ({0})</value>
   </data>
-  <data name="NoteAllTime" xml:space="preserve">
-    <value>Toute les notes prises dans ce voyages : {0}</value>
+  <data name="NoteTripTitle" xml:space="preserve">
+    <value>Notes ({0})</value>
   </data>
-<data name="ConfirmFinishTrip" xml:space="preserve"><value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value></data><data name="RateApp" xml:space="preserve"><value>Évaluer l'application</value></data><data name="TravelFriends" xml:space="preserve"><value>Amis de voyage</value></data></root>
+</root>

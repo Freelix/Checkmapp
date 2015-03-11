@@ -704,6 +704,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à None.
+        /// </summary>
+        public static string NoPoi {
+            get {
+                return ResourceManager.GetString("NoPoi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Internet connection missing.
         /// </summary>
         public static string NotConnected {
@@ -749,15 +758,6 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Note taken this last 31 days : {0}.
-        /// </summary>
-        public static string NoteMonth {
-            get {
-                return ResourceManager.GetString("NoteMonth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
         public static string NoteName {
@@ -767,29 +767,11 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Note taken today : {0}.
-        /// </summary>
-        public static string NoteToday {
-            get {
-                return ResourceManager.GetString("NoteToday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Notes ({0}).
         /// </summary>
         public static string NoteTripTitle {
             get {
                 return ResourceManager.GetString("NoteTripTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Note taken this last 7 days : {0}.
-        /// </summary>
-        public static string NoteWeek {
-            get {
-                return ResourceManager.GetString("NoteWeek", resourceCulture);
             }
         }
         

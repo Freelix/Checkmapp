@@ -444,15 +444,6 @@ Alexandre Roy</value>
   <data name="NoteAllTime" xml:space="preserve">
     <value>All note taken in this trip : {0}</value>
   </data>
-  <data name="NoteMonth" xml:space="preserve">
-    <value>Note taken this last 31 days : {0}</value>
-  </data>
-  <data name="NoteToday" xml:space="preserve">
-    <value>Note taken today : {0}</value>
-  </data>
-  <data name="NoteWeek" xml:space="preserve">
-    <value>Note taken this last 7 days : {0}</value>
-  </data>
   <data name="PictureAllTime" xml:space="preserve">
     <value>All picture taken in this trip : {0}</value>
   </data>
@@ -473,5 +464,8 @@ Alexandre Roy</value>
   </data>
   <data name="TravelFriends" xml:space="preserve">
     <value>Travel Friends</value>
+  </data>
+  <data name="NoPoi" xml:space="preserve">
+    <value>None</value>
   </data>
 </root>

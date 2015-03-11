@@ -28,24 +28,9 @@ namespace CheckMapp.Model.DataService
             return db.pointsOfInterests.Where(x => x.Id == id).First();
         }
 
-        public PointOfInterest getDefaultPOI()
-        {
-            PointOfInterest defaultPoi = db.pointsOfInterests.Where(x => x.Name.Equals(AppResources.DefaultPoi)).FirstOrDefault();
-
-            if (defaultPoi != null)
-                return defaultPoi;
-            else
-            {
-                PointOfInterest poi = new PointOfInterest { Name = AppResources.DefaultPoi };
-                addPoi(poi);
-                return poi;
-            }
-        }
-
         public ObservableCollection<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip)
         {
-            List<PointOfInterest> listPOI = db.pointsOfInterests.Where(x => x.Trip == trip &&
-                    x.Name != AppResources.DefaultPoi).ToList();
+            List<PointOfInterest> listPOI = db.pointsOfInterests.Where(x => x.Trip == trip).ToList();
             return new ObservableCollection<PointOfInterest>(listPOI);
         }
 
@@ -58,19 +43,6 @@ namespace CheckMapp.Model.DataService
                 DataServiceCommon dsCommon = new DataServiceCommon();
                 dsCommon.DeletePoiInCascade(poi);
 
-                db.pointsOfInterests.DeleteOnSubmit(existing);
-                db.SubmitChanges();
-            }
-        }
-
-        public void DeleteDefaultPoiForATrip(Trip trip)
-        {
-            var existing = db.pointsOfInterests.Where(
-                x => x.Name.Equals(AppResources.DefaultPoi) &&
-                    x.Trip.Id == trip.Id).FirstOrDefault();
-
-            if (existing != null)
-            {
                 db.pointsOfInterests.DeleteOnSubmit(existing);
                 db.SubmitChanges();
             }

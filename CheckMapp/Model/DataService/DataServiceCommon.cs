@@ -40,9 +40,6 @@ namespace CheckMapp.Model.DataService
             // Removing items
             DeleteNotesAndPictures(noteList, pictureList);
             DeletePois(poiList);
-
-            // Remove the remaining default poi
-            dsPoi.DeleteDefaultPoiForATrip(trip);
         }
 
         private void DeleteNotesAndPictures(List<Note> noteList, List<Picture> pictureList)

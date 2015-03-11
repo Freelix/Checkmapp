@@ -231,7 +231,7 @@ namespace CheckMapp.Views.TripViews
                     (this.DataContext as AddEditTripViewModel).Trip.DestinationLongitude = CoordinateList[1];
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
             }
