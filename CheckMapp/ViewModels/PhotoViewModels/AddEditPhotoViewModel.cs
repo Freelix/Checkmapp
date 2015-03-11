@@ -37,8 +37,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             else
                 Picture = picture;
 
-            if(Trip.PointsOfInterests!=null)
+            if (Trip.PointsOfInterests != null)
+            {
                 PoiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
+
+                if (PoiList.Count == 0 || Picture.PointOfInterest == null)
+                    _isCheckedPoi = true;
+                else
+                    _isCheckedPoi = false;
+            }
 
             if (photoArray != null)
                 this.ImageSource = photoArray;
@@ -52,6 +59,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
         #region Properties
+
+        private bool _isCheckedPoi;
+
+        public bool IsCheckedPoi
+        {
+            get { return _isCheckedPoi; }
+            set
+            {
+                _isCheckedPoi = value;
+            }
+        }
 
         private bool _isFormValid;
 
@@ -200,6 +218,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             if (ValidationErrorsHandler.IsValid(_validator, Picture))
             {
                 _isFormValid = true;
+
+                if (_isCheckedPoi)
+                    Picture.PointOfInterest = null;
 
                 if (Mode == Mode.add)
                     AddPictureInDB(Picture);

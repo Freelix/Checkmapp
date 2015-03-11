@@ -233,7 +233,8 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>paramètres</value>
-  <comment></comment></data>
+    <comment></comment>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>accueil</value>
   </data>
@@ -251,7 +252,8 @@
   </data>
   <data name="AddTripDate" xml:space="preserve">
     <value>Date du voyage</value>
-  <comment></comment></data>
+    <comment></comment>
+  </data>
   <data name="AddTripArrival" xml:space="preserve">
     <value>Lieu d'arrivé</value>
   </data>
@@ -393,7 +395,6 @@
   <data name="VersionNumber" xml:space="preserve">
     <value>Numéro de version</value>
   </data>
-  
   <data name="ClearHistory" xml:space="preserve">
     <value>Effacer l'historique</value>
   </data>
@@ -406,7 +407,8 @@
 John-William Forcier
 Félix Baril
 Alexandre Roy</value>
-  <comment></comment></data>
+    <comment></comment>
+  </data>
   <data name="Error_EmptyPicture" xml:space="preserve">
     <value>Vous devez choisir une image</value>
   </data>
@@ -481,4 +483,13 @@ Alexandre Roy</value>
   <data name="NoteAllTime" xml:space="preserve">
     <value>Toute les notes prises dans ce voyages : {0}</value>
   </data>
-<data name="ConfirmFinishTrip" xml:space="preserve"><value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value></data><data name="RateApp" xml:space="preserve"><value>Évaluer l'application</value></data></root>
+  <data name="ConfirmFinishTrip" xml:space="preserve">
+    <value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value>
+  </data>
+  <data name="RateApp" xml:space="preserve">
+    <value>Évaluer l'application</value>
+  </data>
+  <data name="NoPoi" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+</root>

@@ -45,10 +45,8 @@ namespace CheckMapp.Model.DataService
     {
         void addPoi(PointOfInterest poi);
         PointOfInterest getPOIById(int id);
-        PointOfInterest getDefaultPOI();
         ObservableCollection<PointOfInterest> LoadPointOfInterestsFromTrip(Trip trip);
         void DeletePoi(PointOfInterest poi);
-        void DeleteDefaultPoiForATrip(Trip trip);
         void UpdatePoi(PointOfInterest poi);
     }
 

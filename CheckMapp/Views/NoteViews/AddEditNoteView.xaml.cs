@@ -31,6 +31,9 @@ namespace CheckMapp.Views.NoteViews
                 TitleTextblock.Text = AppResources.AddNote.ToLower();
             else if (vm.Mode == Mode.edit)
                 TitleTextblock.Text = AppResources.EditNote.ToLower();
+
+            if (vm.PoiList.Count == 0)
+                chkNoPOI.IsEnabled = false;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -93,6 +96,21 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
-        
+        #region CheckBox functions
+
+        private void chkNoPOI_Checked(object sender, RoutedEventArgs e)
+        {
+            chkHide_Storyboard.Begin();
+            poiListPicker.Visibility = Visibility.Collapsed;
+        }
+
+        private void chkNoPOI_UnChecked(object sender, RoutedEventArgs e)
+        {
+            chkShow_Storyboard.Begin();
+            poiListPicker.Visibility = Visibility.Visible;
+            poiListPicker.SelectedIndex = 0;
+        }
+
+        #endregion
     }
 }

@@ -15,6 +15,20 @@
     Loaded="PhoneApplicationPage_Loaded"
         xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="chkHide_Storyboard">
+            <DoubleAnimation Storyboard.TargetName="poiListPicker"
+            Storyboard.TargetProperty="Opacity"
+            From="1.0" To="0.0" Duration="0:0:1" />
+        </Storyboard>
+
+        <Storyboard x:Name="chkShow_Storyboard">
+            <DoubleAnimation Storyboard.TargetName="poiListPicker"
+            Storyboard.TargetProperty="Opacity"
+            From="0.0" To="1.0" Duration="0:0:1" />
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -48,6 +62,8 @@
                     <toolkit:DatePicker  Name="datePicker"  Value="{Binding PictureDate, Mode=TwoWay}"></toolkit:DatePicker>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+
+                    <CheckBox x:Name="chkNoPOI" Grid.Row="1" Content="{Binding Path=LocalizedResources.NoPoi, Source={StaticResource LocalizedStrings}}" Checked="chkNoPOI_Checked" Unchecked="chkNoPOI_UnChecked" IsChecked="{Binding IsCheckedPoi, Mode=TwoWay}" />
 
                     <toolkit:ListPicker
                     x:Name="poiListPicker"
