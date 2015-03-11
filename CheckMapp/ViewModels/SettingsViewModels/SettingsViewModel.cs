@@ -159,18 +159,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         }
 
-        private ICommand _checkUpdatesCommand;
-        public ICommand CheckUpdatesCommand
-        {
-            get
-            {
-                if (_checkUpdatesCommand == null)
-                {
-                    _checkUpdatesCommand = new RelayCommand(() => CheckUpdates());
-                }
-                return _checkUpdatesCommand;
-            }
-        }
 
         private ICommand _rateAppCommand;
         public ICommand RateAppCommand
@@ -218,11 +206,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         }
 
-        private void CheckUpdates()
-        {
-
-        }
-
+        
         private void RateApp()
         {
 

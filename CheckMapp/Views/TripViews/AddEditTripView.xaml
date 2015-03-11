@@ -90,6 +90,9 @@
                     <Controls:Map  Width="420" Name="DestMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DestMap_Hold" >
                     </Controls:Map>
 
+                    <TextBlock Text="{Binding Path=LocalizedResources.TravelFriends, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+
+                    
                 </StackPanel>
             </ScrollViewer>
         </Grid>

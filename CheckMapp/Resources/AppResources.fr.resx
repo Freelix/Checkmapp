@@ -481,4 +481,4 @@ Alexandre Roy</value>
   <data name="NoteAllTime" xml:space="preserve">
     <value>Toute les notes prises dans ce voyages : {0}</value>
   </data>
-<data name="ConfirmFinishTrip" xml:space="preserve"><value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value></data><data name="RateApp" xml:space="preserve"><value>Évaluer l'application</value></data></root>
+<data name="ConfirmFinishTrip" xml:space="preserve"><value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value></data><data name="RateApp" xml:space="preserve"><value>Évaluer l'application</value></data><data name="TravelFriends" xml:space="preserve"><value>Amis de voyage</value></data></root>

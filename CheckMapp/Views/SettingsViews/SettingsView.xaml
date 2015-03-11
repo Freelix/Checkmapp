@@ -12,6 +12,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+    xmlns:facebookControls="clr-namespace:Facebook.Client.Controls;assembly=Facebook.Client"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Loaded="PhoneApplicationPage_Loaded">
 

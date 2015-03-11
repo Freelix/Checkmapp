@@ -64,20 +64,6 @@ namespace CheckMapp.Views.SettingsViews
             });
         }
 
-        private void BtnUpdate_Click(object sender, EventArgs e)
-        {
-            this.Focus();
-
-            // wait till the next UI thread tick so that the binding gets updated
-            Dispatcher.BeginInvoke(() =>
-            {
-                var vm = DataContext as SettingsViewModel;
-                if (vm != null)
-                {
-                    vm.CheckUpdatesCommand.Execute(null);
-                }
-            });
-        }
 
         private void BtnRateApp_Click(object sender, EventArgs e)
         {
@@ -122,6 +108,8 @@ namespace CheckMapp.Views.SettingsViews
         {
             this.DataContext = new SettingsViewModel();
         }
+
+     
 
        
     }

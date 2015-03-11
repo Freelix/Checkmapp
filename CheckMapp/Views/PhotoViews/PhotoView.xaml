@@ -23,32 +23,10 @@
         </phone:Pivot>
     </Grid>
 
-    <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <!--<Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        --><!--TitlePanel contient le nom de l'application et le titre de la page--><!--
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <Image Name="myImage" HorizontalAlignment="Stretch"
-                   Source="{Binding Picture.PictureData,Converter={StaticResource ByteToImageConverter}}"
-                   VerticalAlignment="Stretch" Stretch="Uniform">
-                <toolkit:GestureService.GestureListener>
-                    <toolkit:GestureListener Flick="OnFlick"/>
-                </toolkit:GestureService.GestureListener>
-            </Image>
-
-            <TextBlock Text="{Binding Picture.Date}"/>
-            <TextBlock Margin="10" Text="{Binding Picture.PointOfInterest.Name}"/>
-            <TextBlock x:Name="DescriptionTextBlock" Text="{Binding Picture.Description}"/>
-        </StackPanel>
-
-        --><!--ContentPanel - placez tout contenu supplémentaire ici--><!--
-    </Grid>-->
-
+    
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton  x:Name="IconFacebook"  Click="IconFacebook_Click"  IconUri="/Images/appbar.social.facebook.png" Text="[share]"/>
             <shell:ApplicationBarIconButton  x:Name="IconEdit"  Click="IconEdit_Click"  IconUri="/Images/edit.png" Text="[edit]"/>
             <shell:ApplicationBarIconButton  x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
         </shell:ApplicationBar>

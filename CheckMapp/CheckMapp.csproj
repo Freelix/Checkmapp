@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr%3bqps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -388,6 +389,7 @@
     <Content Include="Images\appbar.graph.line.up.png" />
     <Content Include="Images\appbar.list.check.png" />
     <Content Include="Images\appbar.location.png" />
+    <Content Include="Images\appbar.social.facebook.png" />
     <Content Include="Images\cancel.png" />
     <Content Include="Images\check.png" />
     <Content Include="Images\ContinueTripPin.png" />

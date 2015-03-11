@@ -1046,6 +1046,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Travel Friends.
+        /// </summary>
+        public static string TravelFriends {
+            get {
+                return ResourceManager.GetString("TravelFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Version number.
         /// </summary>
         public static string VersionNumber {

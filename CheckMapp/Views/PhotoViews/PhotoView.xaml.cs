@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows.Input;
 using CheckMapp.Controls;
+using Microsoft.Phone.Tasks;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -87,11 +88,17 @@ namespace CheckMapp.Views.PhotoViews
         {
             if (ApplicationBar.Buttons != null)
             {
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Edit;
-                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Delete;
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Share;
+                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Edit;
+                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.Delete;
             }
         }
 
         #endregion
+
+        private void IconFacebook_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

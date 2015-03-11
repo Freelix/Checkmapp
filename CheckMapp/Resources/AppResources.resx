@@ -471,4 +471,7 @@ Alexandre Roy</value>
   <data name="ConfirmFinishTrip" xml:space="preserve">
     <value>Are you sure you want to finish this trip? (You will not be able to edit it in the future)</value>
   </data>
+  <data name="TravelFriends" xml:space="preserve">
+    <value>Travel Friends</value>
+  </data>
 </root>

@@ -51,6 +51,9 @@ namespace CheckMapp.Views.POIViews
                 PointOfInterest poiSelected = (sender as MenuItem).DataContext as PointOfInterest;
                 switch (menuItem.Name)
                 {
+                    case "POIShare":
+                        
+                        break;
                     case "POIPictures":
                         PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));

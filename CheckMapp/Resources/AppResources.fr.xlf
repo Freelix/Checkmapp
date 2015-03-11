@@ -31,7 +31,8 @@
         <trans-unit id="Resx/AddTripDate" translate="yes" xml:space="preserve">
           <source>Trip Date</source>
           <target state="needs-review-translation">Date du voyage</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/AddTripArrival" translate="yes" xml:space="preserve">
           <source>Trip Arrival</source>
           <target state="translated">Lieu d'arrivé</target>
@@ -245,8 +246,8 @@
         </trans-unit>
         <trans-unit id="Resx/Statistic" translate="yes" xml:space="preserve">
           <source>Statistic</source>
-          <target state="needs-review-translation">Statistiques</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-          </trans-unit>
+          <target state="needs-review-translation">Statistiques</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
           <source>my notes</source>
           <target state="needs-review-translation">mes notes</target>
@@ -383,6 +384,10 @@
         <trans-unit id="Resx/ConfirmFinishTrip" translate="yes" xml:space="preserve">
           <source>Are you sure you want to finish this trip? (You will not be able to edit it in the future)</source>
           <target state="translated">Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</target>
+        </trans-unit>
+        <trans-unit id="Resx/TravelFriends" translate="yes" xml:space="preserve">
+          <source>Travel Friends</source>
+          <target state="translated">Amis de voyage</target>
         </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>
