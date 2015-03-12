@@ -40,19 +40,19 @@ namespace CheckMapp.ViewModels
             get { return Trip.Name; }
         }
 
+         public string TripBeginDate
+        {
+            get { return String.Format(AppResources.TripBeginDate, Trip.BeginDate.ToString()); }
+        }
+
+        public string TripEndDate
+        {
+            get { return String.Format(AppResources.TripEndDate, Trip.EndDate.ToString()); }
+        }
+
         public string TripNoteToday
         {
-            get { return String.Format("", Trip.Notes.Where(x => x.Date.Date == DateTime.Today).Count()); }               
-        }
-
-        public string TripNoteWeek
-        {
-            get { return String.Format("", Trip.Notes.Where(x => x.Date >= DateTime.Now.AddDays(-7)).Count()); }
-        }
-
-        public string TripNoteMonth
-        {
-            get { return String.Format("", Trip.Notes.Where(x => x.Date >= DateTime.Now.AddDays(-31)).Count());}
+            get { return String.Format(AppResources.NoteToday, Trip.Notes.Where(x => x.Date.Date == DateTime.Today).Count()); }                        
         }
 
         public string TripNoteAllTime
@@ -60,33 +60,15 @@ namespace CheckMapp.ViewModels
             get { return String.Format(AppResources.NoteAllTime, Trip.Notes.Count()); }
         }
 
-
-
-
-
-
         public string TripPictureToday
         {
             get { return String.Format(AppResources.PictureToday, Trip.Pictures.Where(x => x.Date.Date == DateTime.Today).Count()); }
-        }
-
-        public string TripPictureWeek
-        {
-            get { return String.Format(AppResources.PictureWeek, Trip.Pictures.Where(x => x.Date >= DateTime.Now.AddDays(-7)).Count()); }
-        }
-
-        public string TripPictureMonth
-        {
-            get { return String.Format(AppResources.PictureMonth, Trip.Pictures.Where(x => x.Date >= DateTime.Now.AddDays(-31)).Count()); }
         }
 
         public string TripPictureAllTime
         {
             get { return String.Format(AppResources.PictureAllTime, Trip.Pictures.Count()); }
         }
-
-
-
 
         #endregion
 

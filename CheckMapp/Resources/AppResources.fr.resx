@@ -366,19 +366,14 @@
     <value>Lieu</value>
   </data>
   <data name="NoteAllTime" xml:space="preserve">
-    <value>Toute les notes prises dans ce voyages : {0}</value>
-  </data>
-  <data name="PictureWeek" xml:space="preserve">
-    <value>Photo prises ces derniers 7 jours : {0}</value>
+    <value>{0} note(s) dans ce voyage</value>
+    <comment></comment>
   </data>
   <data name="PictureToday" xml:space="preserve">
-    <value>Photo prise aujourd'hui : {0}</value>
-  </data>
-  <data name="PictureMonth" xml:space="preserve">
-    <value>Photo prise ces derniers 31 jours : {0}</value>
+    <value>{0} photo(s) aujourd'hui</value>
   </data>
   <data name="PictureAllTime" xml:space="preserve">
-    <value>Toute les photos prises dans ce voyage : {0}</value>
+    <value>{0} photo(s) dans ce voyage</value>
   </data>
   <data name="DefaultPoi" xml:space="preserve">
     <value>Aucun POI sélectionné</value>
@@ -467,5 +462,17 @@ Alexandre Roy</value>
   </data>
   <data name="NoteTripTitle" xml:space="preserve">
     <value>Notes ({0})</value>
+  </data>
+  <data name="TripEndDate" xml:space="preserve">
+    <value>Fin du voyage :{0}</value>
+  </data>
+  <data name="TripBeginDate" xml:space="preserve">
+    <value>Début du voyage : {0}</value>
+  </data>
+  <data name="NoteToday" xml:space="preserve">
+    <value>{0} note(s) aujourd'hui</value>
+  </data>
+  <data name="YourPosition" xml:space="preserve">
+    <value>votre position</value>
   </data>
 </root>
