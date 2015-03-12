@@ -15,7 +15,7 @@ namespace CheckMapp.Controls
 {
     public partial class PinchAndZoomImage : UserControl
     {
-        const double MaxScale = 8;
+        const double MaxScale = 6;
 
         double _scale = 1.0;
         double _minScale;
@@ -28,6 +28,12 @@ namespace CheckMapp.Controls
         Point _relativeMidpoint;
 
         BitmapImage _bitmap;
+
+        public BitmapImage Bitmap
+        {
+            get { return _bitmap; }
+            set { _bitmap = value; }
+        }
 
 
         public PinchAndZoomImage()
@@ -84,8 +90,8 @@ namespace CheckMapp.Controls
             if (newSize != _viewportSize)
             {
                 _viewportSize = newSize;
-                CoerceScale(true);
-                ResizeImage(false);
+                InitializeImage();
+                
             }
         }
 
@@ -148,19 +154,34 @@ namespace CheckMapp.Controls
         /// </summary> 
         void OnImageOpened(object sender, RoutedEventArgs e)
         {
+            InitializeImage();
+        }
+
+        private double originalSize = 0;
+
+        public void InitializeImage()
+        {
             _bitmap = (BitmapImage)TestImage.Source;
 
             // Set scale to the minimum, and then save it. 
             _scale = 0;
             CoerceScale(true);
             _scale = _coercedScale;
-
+            originalSize = _scale;
             ResizeImage(true);
 
             if (String.IsNullOrEmpty(Picture.Description))
                 txtDesc.Visibility = System.Windows.Visibility.Collapsed;
             if (Picture.PointOfInterest == null)
                 txtPOI.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        public bool IsOrigin
+        {
+            get
+            {
+                return _scale == originalSize;
+            }
         }
 
         /// <summary> 

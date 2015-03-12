@@ -14,8 +14,7 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion>
-    </SilverlightVersion>
+    <SilverlightVersion></SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -389,7 +388,7 @@
     <Content Include="Images\appbar.graph.line.up.png" />
     <Content Include="Images\appbar.list.check.png" />
     <Content Include="Images\appbar.location.png" />
-    <Content Include="Images\appbar.social.facebook.png" />
+    <Content Include="Images\appbar.social.sharethis.png" />
     <Content Include="Images\cancel.png" />
     <Content Include="Images\check.png" />
     <Content Include="Images\ContinueTripPin.png" />
@@ -406,6 +405,7 @@
     <Content Include="Images\rose2.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\SettingsPin.png" />
+    <Content Include="Images\small.add.png" />
     <Content Include="Images\vacance.jpg" />
     <Content Include="Images\background.png" />
     <Content Include="Images\filter.png" />
@@ -416,9 +416,6 @@
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Toolkit.Audio">
-      <HintPath>..\packages\Coding4Fun.Toolkit.Audio.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Audio.dll</HintPath>
-    </Reference>
     <Reference Include="Coding4Fun.Toolkit.Controls, Version=2.0.7.0, Culture=neutral, PublicKeyToken=c5fd7b72b1a17ce4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>

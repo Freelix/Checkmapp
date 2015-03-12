@@ -13,6 +13,8 @@ using CheckMapp.ViewModels;
 using CheckMapp.Model.Tables;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Phone.Tasks;
+using CheckMapp.Utils;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -39,8 +41,23 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconAdd_Click(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Mode"] = Mode.add;
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+            PhotoChooserTask photoChooserTask = new PhotoChooserTask();
+            photoChooserTask.Completed += photoChooserTask_Completed;
+            photoChooserTask.ShowCamera = true;
+            photoChooserTask.Show();
+        }
+
+        void photoChooserTask_Completed(object sender, PhotoResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
+                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip;
+                PhoneApplicationService.Current.State["Mode"] = Mode.add;
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+            }
+            else
+                PhoneApplicationService.Current.State["ChosenPhoto"] = null;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -59,12 +76,13 @@ namespace CheckMapp.Views.PhotoViews
             }
             ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
+
+            (this.DataContext as ListPhotoViewModel).Loading = false;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            PhoneApplicationService.Current.State["Picture"] = null;
 
             if ((int) PhoneApplicationService.Current.State["poiId"] > 0)
             {
@@ -74,6 +92,9 @@ namespace CheckMapp.Views.PhotoViews
             }
             else
                 loadData();
+
+            PhoneApplicationService.Current.State["Picture"] = null;
+            PhoneApplicationService.Current.State["Trip"] = null;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -84,6 +105,8 @@ namespace CheckMapp.Views.PhotoViews
                 PhotoHubLLS.IsSelectionEnabled = false;
                 e.Cancel = true;
             }
+
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip;
         }
 
         /// <summary>
@@ -181,25 +204,6 @@ namespace CheckMapp.Views.PhotoViews
                 PhoneApplicationService.Current.State["Picture"] = itemTapped;
                 NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
             }
-        }
-
-        private List<BitmapImage> SearchElement(DependencyObject targeted_control)
-        {
-            List<BitmapImage> returnList = new List<BitmapImage>();
-            var count = VisualTreeHelper.GetChildrenCount(targeted_control);
-            if (count > 0)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    var child = VisualTreeHelper.GetChild(targeted_control, i);
-                    if (child is Image) // Only search for ChecBoxes
-                        returnList.Add((child as Image).Source as BitmapImage);
-                    else
-                        returnList.AddRange(SearchElement(child));
-                }
-            }
-
-            return returnList;
         }
 
         private void PhotoHubLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)

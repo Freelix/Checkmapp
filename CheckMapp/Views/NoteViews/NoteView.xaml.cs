@@ -61,9 +61,11 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
-        private void IconFacebook_Click(object sender, EventArgs e)
+        private void IconShare_Click(object sender, EventArgs e)
         {
-            
+            ShareStatusTask status = new ShareStatusTask();
+            status.Status = (this.DataContext as NoteViewModel).Note.Message;
+            status.Show();
         }
     }
 }

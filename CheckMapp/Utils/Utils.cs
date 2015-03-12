@@ -54,9 +54,15 @@ namespace CheckMapp.Utils
             return ms.ToArray();
         }
 
-        public static BitmapImage ByteArrayToImage(byte[] imageByteArray)
+        public static BitmapImage ByteArrayToImage(byte[] imageByteArray, bool compress)
         {
             BitmapImage img = new BitmapImage();
+            if (compress)
+            {
+                img.DecodePixelHeight = 100;
+                img.DecodePixelType = DecodePixelType.Logical;
+                img.CreateOptions = BitmapCreateOptions.DelayCreation;
+            }
             using (MemoryStream memStream = new MemoryStream(imageByteArray))
             {
                 img.SetSource(memStream);
@@ -116,10 +122,10 @@ namespace CheckMapp.Utils
             var ni = NetworkInterface.NetworkInterfaceType;
 
             bool IsConnected = false;
-            if ((ni == NetworkInterfaceType.Wireless80211)|| (ni == NetworkInterfaceType.MobileBroadbandCdma)|| (ni == NetworkInterfaceType.MobileBroadbandGsm))
-                IsConnected= true;
+            if ((ni == NetworkInterfaceType.Wireless80211) || (ni == NetworkInterfaceType.MobileBroadbandCdma) || (ni == NetworkInterfaceType.MobileBroadbandGsm))
+                IsConnected = true;
             else if (ni == NetworkInterfaceType.None)
-                IsConnected= false;
+                IsConnected = false;
             return IsConnected;
         }
 
@@ -129,7 +135,7 @@ namespace CheckMapp.Utils
         {
             ReverseGeocodeQuery query;
             List<MapLocation> mapLocations;
-            string pushpinContent="";
+            string pushpinContent = "";
             MapLocation mapLocation;
 
             query = new ReverseGeocodeQuery();
@@ -155,14 +161,14 @@ namespace CheckMapp.Utils
                 myMap.Layers.Add(pinLayout);
 
                 MyPushpin.GeoCoordinate = mapLocation.GeoCoordinate;
-                
-              
+
+
                 pinOverlay.Content = MyPushpin;
                 pinOverlay.GeoCoordinate = mapLocation.GeoCoordinate;
                 pinOverlay.PositionOrigin = new Point(0, 1);
                 pinLayout.Add(pinOverlay);
-                
-                if(!completeAddress)
+
+                if (!completeAddress)
                     pushpinContent = getAddress(mapLocation);
                 else
                     pushpinContent = getCompleteAddress(mapLocation);
@@ -173,7 +179,7 @@ namespace CheckMapp.Utils
             }
         }
 
-        private static string getAddress(MapLocation mapLocation) 
+        private static string getAddress(MapLocation mapLocation)
         {
             string Address = "";
             string region = MapHelper.getRegion(mapLocation);
@@ -196,7 +202,7 @@ namespace CheckMapp.Utils
                 Address = string.Format("{0}, {1} ", city, region);
             else
                 Address = string.Format("{0}, {1}, {2} ", city, region, country);
-           
+
             return Address;
         }
 
@@ -254,5 +260,32 @@ namespace CheckMapp.Utils
         }
 
         #endregion
+
+        #region friend list
+
+        public static List<string> FriendToList(string friends)
+        {
+            if (String.IsNullOrEmpty(friends))
+            {
+                return new List<string>();
+            }
+            return friends.Split(',').Where(x => !String.IsNullOrEmpty(x)).ToList();
+        }
+
+        public static string FriendToString(List<string> friends)
+        {
+            if (friends == null)
+                return string.Empty;
+
+            string friendString = null;
+            foreach (string friend in friends)
+            {
+                friendString += friend + ",";
+            }
+
+            return friendString;
+        }
+
+        #endregion friend list
     }
 }

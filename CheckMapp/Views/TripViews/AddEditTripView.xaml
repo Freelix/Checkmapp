@@ -15,9 +15,24 @@
     xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:maptk="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
+  xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     Loaded="PhoneApplicationPage_Loaded">
 
+    <phone:PhoneApplicationPage.Resources>
 
+
+        <DataTemplate x:Key="ItemTemplate">
+            <StackPanel>
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu Opened="ContextMenuNote_Opened" IsZoomEnabled="True" x:Name="ContextMenuNote" >
+                        <toolkit:MenuItem x:Name="DeleteFriend" Click="DeleteFriend_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <TextBlock Text="{Binding}" TextWrapping="Wrap" Style="{StaticResource PhoneTextGroupHeaderStyle}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -48,22 +63,32 @@
                         <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"  Text="{Binding Path=LocalizedResources.ChoosePicture, Source={StaticResource LocalizedStrings}}" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,20,0"></TextBlock>
                     </Grid>
 
+                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <TextBox x:Name="NameTextBox" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
-
+                   
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:DatePicker Name="datePicker"  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
 
+                    <StackPanel Tap="StackPanel_Tap" Margin="0,15,0,0" Orientation="Horizontal">
+                        <c4f:RoundButton ButtonHeight="60" ButtonWidth="60"  x:Name="btnFriend"  ImageSource="/Images/small.add.png" />
+                        <TextBlock  Text="{Binding Path=LocalizedResources.TravelFriends, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+
+                    <ListBox Name="FriendLLS"  Margin="15,0,0,15"
+                                        ItemsSource="{Binding FriendList}"
+                                        ItemTemplate="{StaticResource ItemTemplate}"                     
+                                        />
+
+                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}" />
-
-
 
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                       <!--  <TextBox  Width="330" x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>-->
+                        <!--  <TextBox  Width="330" x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>-->
                         <toolkit:PhoneTextBox TextChanged="DepartureTextBox_TextChanged" Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}"  x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></toolkit:PhoneTextBox>
                         <Button x:Name="btn_dep" Width="114" Grid.Column="1" Click="btn_dep_Click" >
                             <Image  Source="/Images/appbar.eye.min.png" Height="28"  />
@@ -85,14 +110,11 @@
                         <Button x:Name="btn_dest" Width="114" Grid.Column="1" Click="btn_dest_Click">
                             <Image Source="/Images/appbar.eye.min.png" Height="28"  />
                         </Button>
-                    </Grid>  
+                    </Grid>
 
                     <Controls:Map  Width="420" Name="DestMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DestMap_Hold" >
                     </Controls:Map>
 
-                    <TextBlock Text="{Binding Path=LocalizedResources.TravelFriends, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-
-                    
                 </StackPanel>
             </ScrollViewer>
         </Grid>
