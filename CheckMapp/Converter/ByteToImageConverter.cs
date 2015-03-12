@@ -12,29 +12,17 @@ namespace CheckMapp.Converter
 {
     public class ByteToImageConverter : IValueConverter
     {
-        public BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
-        {
-            BitmapImage img = new BitmapImage();
-            using (MemoryStream memStream = new MemoryStream(imageByteArray))
-            {
-                if (memStream.Length > 0)
-                {
-                    img.SetSource(memStream);
-                }
-            }
-            return img;
-        }
-
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BitmapImage img = new BitmapImage();
             if (value != null)
             {
-                img = this.ConvertByteArrayToBitMapImage(value as byte[]);
+                if (parameter != null)
+                    return Utils.Utility.ByteArrayToImage(value as byte[], true);
+                else
+                    return Utils.Utility.ByteArrayToImage(value as byte[], false);
             }
-            
-            return img;
+
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

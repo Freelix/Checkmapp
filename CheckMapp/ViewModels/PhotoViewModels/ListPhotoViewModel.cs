@@ -18,13 +18,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         public ListPhotoViewModel(Trip trip)
         {
             this.Trip = trip;
+            Loading = true;
         }
 
         public ListPhotoViewModel(Trip trip, int poiId)
         {
             this.Trip = trip;
             this.PoiLoaded = poiId;
-        } 
+            Loading = true;
+        }
 
         #region Properties
 
@@ -44,7 +46,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set;
         }
 
-     
+
         private ICommand _deletePictureCommand;
         public ICommand DeletePictureCommand
         {
@@ -73,6 +75,20 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         }
 
+        private bool _loading = false;
+
+        public bool Loading
+        {
+            get { return _loading; }
+            set
+            {
+                _loading = value;
+                RaisePropertyChanged("Loading");
+            }
+        }
+
+
+
 
         #endregion
 
@@ -94,7 +110,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                     group photo by photo.Date.ToString("m") into photosByDay
                     select new KeyedList<string, Picture>(photosByDay);
 
-                return new List<KeyedList<string,Picture>>(groupedPhotos);
+                return new List<KeyedList<string, Picture>>(groupedPhotos);
             }
         }
 

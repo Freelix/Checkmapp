@@ -42,7 +42,7 @@
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="False">
-            <shell:ApplicationBarIconButton  x:Name="IconFacebook"  Click="IconFacebook_Click"  IconUri="/Images/appbar.social.facebook.png" Text="[share]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconShare"  Click="IconShare_Click"  IconUri="/Images/appbar.social.sharethis.png" Text="[share]"/>
             <shell:ApplicationBarIconButton  x:Name="IconEdit"  Click="IconEdit_Click"  IconUri="/Images/edit.png" Text="[edit]"/>
             <shell:ApplicationBarIconButton  x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
         </shell:ApplicationBar>

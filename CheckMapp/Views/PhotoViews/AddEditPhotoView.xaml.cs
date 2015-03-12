@@ -48,6 +48,7 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            hubTile.Source.ClearValue(BitmapImage.UriSourceProperty);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -101,7 +102,7 @@ namespace CheckMapp.Views.PhotoViews
             if (e.TaskResult == TaskResult.OK)
             {
                 (this.DataContext as AddEditPhotoViewModel).ImageSource = Utils.Utility.ReadFully(e.ChosenPhoto);
-                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditPhotoViewModel).ImageSource);
+                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditPhotoViewModel).ImageSource, false);
             }
 
             PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Trip;

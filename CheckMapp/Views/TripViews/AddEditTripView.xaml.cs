@@ -20,6 +20,7 @@ using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Services;
 using Microsoft.Phone.Maps.Controls;
 using System.Threading.Tasks;
+using Microsoft.Phone.UserData;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -63,6 +64,7 @@ namespace CheckMapp.Views.TripViews
             btn_dest.IsEnabled = !String.IsNullOrEmpty(DestinationTextBox.Text);
 
         }
+
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -161,7 +163,7 @@ namespace CheckMapp.Views.TripViews
             if (e.TaskResult == TaskResult.OK)
             {
                 (this.DataContext as AddEditTripViewModel).MainImage = Utils.Utility.ReadFully(e.ChosenPhoto);
-                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditTripViewModel).MainImage);
+                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditTripViewModel).MainImage,false);
             }
 
             //La valeur s'enleve pour une raison inconnu encore, alors on doit la réassigner
@@ -247,7 +249,42 @@ namespace CheckMapp.Views.TripViews
             btn_dest.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
         }
 
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var phoneNumberChooserTask = new AddressChooserTask();
+            phoneNumberChooserTask.Completed += phoneNumberChooserTask_Completed;
+            phoneNumberChooserTask.Show();
+        }
 
+        void phoneNumberChooserTask_Completed(object sender, AddressResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                (this.DataContext as AddEditTripViewModel).FriendList.Add(e.DisplayName);
+                FriendLLS.ItemsSource = null;
+                FriendLLS.ItemsSource = (this.DataContext as AddEditTripViewModel).FriendList;
+            }
+        }
+
+        private void DeleteFriend_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            if (menuItem != null && ((sender as MenuItem).DataContext is string))
+            {
+                string selected = ((sender as MenuItem).DataContext as string);
+                (this.DataContext as AddEditTripViewModel).FriendList.Remove(selected);
+                FriendLLS.ItemsSource = null;
+                FriendLLS.ItemsSource = (this.DataContext as AddEditTripViewModel).FriendList;
+            }
+        }
+
+        private void ContextMenuNote_Opened(object sender, RoutedEventArgs e)
+        {
+            var menu = (ContextMenu)sender;
+            var owner = (FrameworkElement)menu.Owner;
+            if (owner.DataContext != menu.DataContext)
+                menu.DataContext = owner.DataContext;
+        }
 
     }
 }

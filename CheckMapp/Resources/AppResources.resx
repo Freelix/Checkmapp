@@ -474,4 +474,7 @@ Alexandre Roy</value>
   <data name="YourPosition" xml:space="preserve">
     <value>your position</value>
   </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
 </root>

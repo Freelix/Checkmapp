@@ -75,7 +75,7 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.Edit;
                 (ApplicationBar.MenuItems[2] as ApplicationBarMenuItem).Text = AppResources.FinishTrip;
 
-                (ApplicationBar.MenuItems[1] as ApplicationBarMenuItem).IsEnabled = (this.DataContext as TripViewModel).Trip.IsActif;
+                (ApplicationBar.MenuItems[2] as ApplicationBarMenuItem).IsEnabled = (this.DataContext as TripViewModel).Trip.IsActif;
                 (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).IsEnabled = (this.DataContext as TripViewModel).Trip.IsActif;
             }
         }

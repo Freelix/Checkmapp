@@ -35,8 +35,8 @@ namespace CheckMapp.ViewModel
             LoadArchivesTripFromDatabase();
             PageViewModels = new List<ViewModelBase>();
             // Add available pages
-            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel(TripList.FindAll(x=>!x.IsActif)));
-            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel(TripList.FindAll(x=>!x.IsActif)));
+            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.ArchivesViewModel(TripListActif()));
+            PageViewModels.Add(new CheckMapp.ViewModels.ArchivesViewModels.TimelineViewModel(TripListActif()));
             // Set starting page
             ShowUserControlTrip();
 
@@ -47,6 +47,11 @@ namespace CheckMapp.ViewModel
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
             TripList =  dsTrip.LoadTrip();
+        }
+
+        public List<Trip> TripListActif()
+        {
+            return TripList.FindAll(x=>!x.IsActif);
         }
 
         public Trip _tripActif;

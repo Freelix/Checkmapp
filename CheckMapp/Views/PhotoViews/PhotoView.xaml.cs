@@ -20,6 +20,11 @@ using System.Windows.Media;
 using System.Windows.Input;
 using CheckMapp.Controls;
 using Microsoft.Phone.Tasks;
+using Windows.Storage;
+using System.IO;
+using Microsoft.Xna.Framework.Media.PhoneExtensions;
+using System.IO.IsolatedStorage;
+using CheckMapp.KeyGroup;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -30,34 +35,57 @@ namespace CheckMapp.Views.PhotoViews
             InitializeComponent();
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            myImage.Bitmap.ClearValue(BitmapImage.UriSourceProperty);
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as PhotoViewModel).Trip;
+        }
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             Picture current = PhoneApplicationService.Current.State["Picture"] as Picture;
-            this.DataContext = new PhotoViewModel(0,current.Trip);
-            MyPivot.Items.Clear();
-            int index = 0;
-            foreach (Picture picture in (this.DataContext as PhotoViewModel).PictureList)
-            {
-                PivotItem item = new PivotItem();
-                item.Margin = new Thickness(0, -135, 0, 0);
-                ByteToImageConverter con = new ByteToImageConverter();
-                PinchAndZoomImage img = new PinchAndZoomImage();
-                img.Picture = picture;
-                img.Tap += img_Tap;
-                item.Content = img;
-                MyPivot.Items.Add(item);
-                if (picture == current)
-                    MyPivot.SelectedIndex = index;
-                else
-                    index++;
+            this.DataContext = new PhotoViewModel(current);
+            int currentIndex = (this.DataContext as PhotoViewModel).GroupedPhotos[0].IndexOf(current);
+            (this.DataContext as PhotoViewModel).SelectedPictureIndex = currentIndex;
 
-            }
+            myImage.Picture = current;
 
-            //Clear memory
+            PhoneApplicationService.Current.State["Trip"] = null;
             PhoneApplicationService.Current.State["Picture"] = null;
             base.OnNavigatedTo(e);
         }
 
+        private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
+        {
+            if (!myImage.IsOrigin)
+                return;
+            var vm = (this.DataContext as PhotoViewModel);
+
+            // User flicked towards gauche
+            if (e.HorizontalVelocity > 0)
+            {
+                myImage.Bitmap.ClearValue(BitmapImage.UriSourceProperty);
+                // Load the next image 
+                vm.SelectedPictureIndex -= 1;
+                if (vm.SelectedPictureIndex < 0)
+                    vm.SelectedPictureIndex = vm.GroupedPhotos[0].Count - 1;
+            }
+
+            // User flicked towards droit
+            if (e.HorizontalVelocity < 0)
+            {
+                myImage.Bitmap.ClearValue(BitmapImage.UriSourceProperty);
+                // Load the previous image
+                vm.SelectedPictureIndex += 1;
+                if (vm.SelectedPictureIndex >= vm.GroupedPhotos[0].Count)
+                    vm.SelectedPictureIndex = 0;
+            }
+
+            myImage.Picture = vm.GroupedPhotos[0][vm.SelectedPictureIndex];
+            myImage.InitializeImage();
+            vm.SelectedPicture = myImage.Picture;
+        }
 
         void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -79,7 +107,7 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as PhotoViewModel).PictureList[MyPivot.SelectedIndex];
+            PhoneApplicationService.Current.State["Picture"] = myImage.Picture;
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }
@@ -96,9 +124,29 @@ namespace CheckMapp.Views.PhotoViews
 
         #endregion
 
-        private void IconFacebook_Click(object sender, EventArgs e)
+        private void IconShare_Click(object sender, EventArgs e)
         {
-            
+            //On a besoin d'un filePath donc on l,ajoute a la librarie temporairement
+            //byte[] temp = (this.DataContext as PhotoViewModel).PictureList[(this.DataContext as PhotoViewModel).SelectedPicture].PictureData;
+
+            //using (var ms = new MemoryStream(temp))
+            //{
+            //    ms.Seek(0, SeekOrigin.Begin);
+            //    var lib = new Microsoft.Xna.Framework.Media.MediaLibrary();
+            //    var picture = lib.SavePicture(string.Format("test.jpg"), ms);
+
+            //    var task = new ShareMediaTask();
+
+            //    task.FilePath = MediaLibraryExtensions.GetPath(picture);
+            //    task.Show();
+
+            //    //On le supprime par la suite.
+
+            //}
+
         }
+
+
+
     }
 }

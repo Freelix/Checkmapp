@@ -12,9 +12,14 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    Loaded="PhoneApplicationPage_Loaded"
+    Loaded="PhoneApplicationPage_Loaded" 
       xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="True" Text="{Binding Path=LocalizedResources.Loading, Source={StaticResource LocalizedStrings}}" 
+                             IsVisible="{Binding Loading}" />
+    </shell:SystemTray.ProgressIndicator>
+    
     <phone:PhoneApplicationPage.Resources>
 
         <shell:ApplicationBar x:Key="AppBarList" IsVisible="True" IsMenuEnabled="True">
@@ -75,8 +80,8 @@
                         <toolkit:MenuItem x:Name="DeletePhoto" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
-                <Image Source="{Binding PictureData,Converter={StaticResource ByteToImageConverter}}" 
-                       Width="108" Height="108" Stretch="UniformToFill">
+                <Image Source="{Binding PictureData,Converter={StaticResource ByteToImageConverter},ConverterParameter=true}" 
+                       Width="100" Height="100" Stretch="UniformToFill">
                 </Image>
             </StackPanel>
         </DataTemplate>
@@ -107,7 +112,7 @@
                                         LayoutMode="Grid" 
                                            SelectionChanged="PhotoHubLLS_SelectionChanged"
                                            IsSelectionEnabledChanged="PhotoHubLLS_IsSelectionEnabledChanged"
-                                        GridCellSize="108,108"/>
+                                        GridCellSize="100,100"/>
         </Grid>
     </Grid>
 

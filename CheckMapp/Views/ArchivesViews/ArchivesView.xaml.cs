@@ -39,9 +39,11 @@ namespace CheckMapp.Views.ArchivesViews
                             var vm = DataContext as ArchivesViewModel;
                             if (vm != null)
                             {
+                                MainViewModel myModel = (((PhoneApplicationFrame)Application.Current.RootVisual).Content as MainPage).DataContext as MainViewModel;
                                 vm.DeleteTripCommand.Execute(tripSelected);
                                 vm.ArchiveTripList.Remove(tripSelected);
                                 listArchiveTrips.ItemsSource = vm.ArchiveTripList;
+                                myModel.TripList.Remove(tripSelected);
                             }
                         }
                         break;
@@ -53,6 +55,9 @@ namespace CheckMapp.Views.ArchivesViews
         {
             PhoneApplicationService.Current.State["Trip"] = (sender as FrameworkElement).DataContext as Trip;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
+
+           
+          
         }
 
     }

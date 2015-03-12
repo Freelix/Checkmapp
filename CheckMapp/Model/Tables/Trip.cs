@@ -61,6 +61,24 @@ namespace CheckMapp.Model.Tables
             }
         }
 
+        private string _friendList;
+
+        //exemple: john,felix,roy
+        [Column]
+        public string FriendList
+        {
+            get { return _friendList; }
+            set
+            {
+                if (_friendList != value)
+                {
+                    NotifyPropertyChanging("FriendList");
+                    _friendList = value;
+                    NotifyPropertyChanged("FriendList");
+                }
+            }
+        }
+
         private DateTime _beginDate;
 
         [Column]

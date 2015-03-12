@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.Model.Tables;
 using CheckMapp.ViewModel;
 using CheckMapp.ViewModels.ArchivesViewModels;
+using System.Collections.ObjectModel;
 
 namespace CheckMapp.Views.ArchivesViews
 {
@@ -20,7 +21,7 @@ namespace CheckMapp.Views.ArchivesViews
             InitializeComponent();
             MainViewModel myModel = (((PhoneApplicationFrame)Application.Current.RootVisual).Content as MainPage).DataContext as MainViewModel;
             this.DataContext = myModel.PageViewModels[1];
-            timelineControl.Trips = (this.DataContext as TimelineViewModel).ArchiveTripList;
+            timelineControl.Trips = new ObservableCollection<Trip>(myModel.TripListActif());
         }
 
         void timelineControl_UserControlElementTap(object sender, EventArgs e)

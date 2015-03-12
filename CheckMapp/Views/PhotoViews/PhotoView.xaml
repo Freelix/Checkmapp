@@ -13,20 +13,19 @@
     shell:SystemTray.IsVisible="false"
     SupportedOrientations="PortraitOrLandscape"
      xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    Loaded="PhoneApplicationPage_Loaded">
+    Loaded="PhoneApplicationPage_Loaded"
+     xmlns:myControl="clr-namespace:CheckMapp.Controls">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Pivot SelectedIndex="{Binding SelectedPicture}" x:Name="MyPivot">
-            <!--Pivot item one-->
-            
-           
-        </phone:Pivot>
-    </Grid>
+        <myControl:PinchAndZoomImage x:Name="myImage" Tap="img_Tap">
+            <toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener Flick="GestureListener_Flick"/>
+            </toolkit:GestureService.GestureListener>
+        </myControl:PinchAndZoomImage>
 
     
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="False">
-            <shell:ApplicationBarIconButton  x:Name="IconFacebook"  Click="IconFacebook_Click"  IconUri="/Images/appbar.social.facebook.png" Text="[share]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconShare"  Click="IconShare_Click"  IconUri="/Images/appbar.social.sharethis.png" Text="[share]"/>
             <shell:ApplicationBarIconButton  x:Name="IconEdit"  Click="IconEdit_Click"  IconUri="/Images/edit.png" Text="[edit]"/>
             <shell:ApplicationBarIconButton  x:Name="IconDelete"  Click="IconDelete_Click"  IconUri="/Images/appbar.delete.png" Text="[delete]"/>
         </shell:ApplicationBar>

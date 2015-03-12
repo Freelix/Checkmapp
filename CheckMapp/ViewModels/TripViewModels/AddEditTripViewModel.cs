@@ -32,6 +32,7 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         // Used for validate the form
         private IValidator<Trip> _validator;
+        public List<string> _friendList;
 
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
@@ -48,6 +49,7 @@ namespace CheckMapp.ViewModels.TripViewModels
             else
                 Trip = trip;
 
+            this.FriendList = Utils.Utility.FriendToList(Trip.FriendList);
             InitialiseValidator();
         }
 
@@ -124,6 +126,19 @@ namespace CheckMapp.ViewModels.TripViewModels
                 {
                     Trip.Name = value;
                     RaisePropertyChanged("TripName");
+                }
+            }
+        }
+
+        public List<string> FriendList
+        {
+            get { return _friendList; }
+            set
+            {
+                if (_friendList != value)
+                {
+                    _friendList = value;
+                    RaisePropertyChanged("FriendList");
                 }
             }
         }
@@ -268,7 +283,7 @@ namespace CheckMapp.ViewModels.TripViewModels
             if (ValidationErrorsHandler.IsValid(_validator, Trip))
             {
                 _isFormValid = true;
-
+                Trip.FriendList = Utils.Utility.FriendToString(FriendList);
                 // Adding a Trip
                 if (Mode == Mode.add)
                 {   
