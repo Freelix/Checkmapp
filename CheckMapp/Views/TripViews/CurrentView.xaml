@@ -20,13 +20,13 @@
 
         <StackPanel Orientation="Horizontal">
             <Border BorderBrush="White" BorderThickness="5,5,5,15">
-                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="170" Source="{Binding CurrentTrip.MainPictureData,Converter={StaticResource ByteToImageConverter}}"></Image>
+                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="170" Source="{Binding Trip.MainPictureData,Converter={StaticResource ByteToImageConverter}}"></Image>
             </Border>
             <StackPanel>
-                <TextBlock Margin="15,-10,0,0"  x:Name="textblockVertical"  VerticalAlignment="Top" Text="{Binding CurrentTrip.Name}"
+                <TextBlock Margin="15,-10,0,0"  x:Name="textblockVertical"  VerticalAlignment="Top" Text="{Binding Trip.Name}"
          Foreground="White" FontSize="40"  Width="240"   TextWrapping="Wrap"   >
                 </TextBlock>
-                <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentTrip.BeginDate, Converter={StaticResource DateConverter}}" Margin="0,15,0,0" Height="74" Width="208"></TextBlock>
+                <TextBlock  TextWrapping="Wrap" Text="{Binding Trip.BeginDate, Converter={StaticResource DateConverter}}" Margin="0,15,0,0" Height="74" Width="208"></TextBlock>
             </StackPanel>
         </StackPanel>
 

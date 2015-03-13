@@ -25,17 +25,14 @@ namespace CheckMapp.ViewModels.NoteViewModels
             this.PoiLoaded = poiId;
         }
 
+        /// <summary>
+        /// Le voyage choisi
+        /// </summary>
         public Trip Trip
         {
             get;
             set;
         }
-
-        public string TripName
-        {
-            get { return Trip.Name; }
-        }
-
 
         public List<KeyedList<string, Note>> GroupedNotes
         {
@@ -78,13 +75,16 @@ namespace CheckMapp.ViewModels.NoteViewModels
             {
                 if (_deleteNotesCommand == null)
                 {
-                    _deleteNotesCommand = new RelayCommand<List<Note>>((noteList) => DeleteNotes(noteList));
+                    _deleteNotesCommand = new RelayCommand<List<object>>((noteList) => DeleteNotes(noteList));
                 }
                 return _deleteNotesCommand;
             }
 
         }
 
+        /// <summary>
+        /// Si les notes sont selon un poi
+        /// </summary>
         public int? PoiLoaded
         {
             get;
@@ -94,11 +94,12 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region DBMethods
 
-        public void DeleteNotes(List<Note> noteList)
+        public void DeleteNotes(List<object> noteList)
         {
             DataServiceNote dsNote = new DataServiceNote();
             foreach (Note note in noteList)
             {
+                Trip.Notes.Remove(note);
                 dsNote.DeleteNote(note);
             }
         }
@@ -106,12 +107,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
         public void DeleteNote(Note noteSelected)
         {
             DataServiceNote dsNote = new DataServiceNote();
+            Trip.Notes.Remove(noteSelected);
             dsNote.DeleteNote(noteSelected);
-        }
-
-        public void LoadNotesByPoiId(int poiId)
-        {
-            DataServiceNote dsNote = new DataServiceNote();
         }
 
         #endregion

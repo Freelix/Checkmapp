@@ -48,11 +48,6 @@ namespace CheckMapp.Views.PhotoViews
             hubTile.Source.ClearValue(BitmapImage.UriSourceProperty);
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }
-
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (ApplicationBar.Buttons != null)
@@ -70,11 +65,7 @@ namespace CheckMapp.Views.PhotoViews
             Dispatcher.BeginInvoke(() =>
             {
                 var vm = DataContext as AddEditPhotoViewModel;
-                if (vm != null)
-                {
-                    vm.AddEditPhotoCommand.Execute(null);
-                }
-
+                vm.AddEditPhotoCommand.Execute(null);
                 if (vm.IsFormValid)
                     (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
             });
@@ -102,7 +93,7 @@ namespace CheckMapp.Views.PhotoViews
                 hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditPhotoViewModel).ImageSource, false);
             }
 
-            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Trip;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Picture.Trip;
         }
 
         #region CheckBox functions

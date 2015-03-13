@@ -23,12 +23,12 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0" Margin="10" >
             <TextBlock Text="{Binding Note.Trip.Name}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="TitleTextBlock" Text="{Binding Note.Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <Line X1="0" X2="1" Stretch="Fill" Margin="0, 10, 0, 10" Stroke="White" StrokeThickness="1" />
-            <TextBlock  Style="{StaticResource PhoneTextSmallStyle}" Text="{Binding Note.Date}"></TextBlock>
-            <TextBlock  Margin="0,3,0,0" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Style="{StaticResource PhoneTextSmallStyle}" x:Name="poiTextBlock" >
+            <TextBlock Margin="0,0,0,10" x:Name="TitleTextBlock" Text="{Binding Note.Title}"  Style="{StaticResource PhoneTextTitle1Style}" TextWrapping="Wrap"/>
+            <Line X1="0" X2="1" Stretch="Fill"  Stroke="White" StrokeThickness="1" />
+            <TextBlock Margin="0,5,0,0" Style="{StaticResource PhoneTextSmallStyle}" Text="{Binding Note.Date}"></TextBlock>
+            <TextBlock  Margin="0,5,0,0" Visibility="{Binding IsVisible, Converter={StaticResource ConvertBoolean}}" Style="{StaticResource PhoneTextSmallStyle}" x:Name="poiTextBlock" >
                 <Run Text="{Binding Path=LocalizedResources.PlacePOI, Source={StaticResource LocalizedStrings}}"></Run>
                 <Run Text=" : "></Run>
                 <Run Text="{Binding Note.PointOfInterest.Name}"></Run>
@@ -37,7 +37,7 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                <TextBlock x:Name="messageTextBlock" Margin="10" TextWrapping="Wrap" Text="{Binding Note.Message}"></TextBlock>
+                <TextBlock TextWrapping="Wrap" x:Name="messageTextBlock" Margin="0,10,0,0"  Text="{Binding Note.Message}"></TextBlock>
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>

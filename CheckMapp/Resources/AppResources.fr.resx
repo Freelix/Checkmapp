@@ -479,4 +479,7 @@ Alexandre Roy</value>
     <value>Chargement...</value>
     <comment></comment>
   </data>
+  <data name="IamHere" xml:space="preserve">
+    <value>Je suis à : {0}</value>
+  </data>
 </root>

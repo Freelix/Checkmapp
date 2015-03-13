@@ -16,7 +16,7 @@
             <Canvas x:Name="canvas">
                 <Image x:Name="TestImage" Source="{Binding Picture.PictureData,Converter={StaticResource ByteToImageConverter}}" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform"  RenderTransformOrigin="0,0" CacheMode="BitmapCache"
-                              Loaded="OnImageOpened">
+                              ImageOpened="TestImage_ImageOpened">
                     <Image.RenderTransform>
                         <ScaleTransform x:Name="xform"/>
                     </Image.RenderTransform>

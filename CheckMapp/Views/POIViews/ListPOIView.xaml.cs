@@ -16,6 +16,7 @@ using Microsoft.Phone.Maps.Toolkit;
 using System.Device.Location;
 using System.Collections;
 using CheckMapp.ViewModels;
+using Microsoft.Phone.Tasks;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -33,6 +34,7 @@ namespace CheckMapp.Views.POIViews
             this.DataContext = new ListPOIViewModel(currentTrip);
             POILLS.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
 
+            //Bind les POI a la map
             ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(MyMap);
             var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;
             if (obj.ItemsSource != null)
@@ -52,23 +54,22 @@ namespace CheckMapp.Views.POIViews
                 switch (menuItem.Name)
                 {
                     case "POIShare":
-                        
+                        ShareStatusTask status = new ShareStatusTask();
+                        status.Status = String.Format(AppResources.IamHere, poiSelected.Name);
+                        status.Show();
                         break;
                     case "POIPictures":
                         PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));
-
                         break;
                     case "POINotes":
                         PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/ListNoteView.xaml", UriKind.Relative));
-
                         break;
                     case "EditPoi":
                         PhoneApplicationService.Current.State["Mode"] = Mode.edit;
                         PhoneApplicationService.Current.State["Poi"] = poiSelected;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPoiView.xaml", UriKind.Relative));
-
                         break;
                     case "DeletePOI":
                         if (MessageBox.Show(AppResources.ConfirmDeletePOI, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
@@ -77,11 +78,9 @@ namespace CheckMapp.Views.POIViews
                             if (vm != null)
                             {
                                 vm.DeletePOICommand.Execute(poiSelected);
-                                vm.PointOfInterestList.Remove(poiSelected);
                                 POILLS.ItemsSource = vm.PointOfInterestList;
                             }
 
-                            int i = vm.Trip.Pictures.Count;
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
                         }
                         break;
@@ -156,16 +155,8 @@ namespace CheckMapp.Views.POIViews
             if (MessageBox.Show(AppResources.ConfirmDeletePOIs, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 var vm = DataContext as ListPOIViewModel;
-                List<PointOfInterest> poiList = new List<PointOfInterest>();
-                while(POILLS.SelectedItems.Count!=0)
-                {
-                    poiList.Add(POILLS.SelectedItems[0] as PointOfInterest);
-                    vm.PointOfInterestList.Remove(POILLS.SelectedItems[0] as PointOfInterest);
-                }
-
-                vm.DeletePOIsCommand.Execute(poiList);
+                vm.DeletePOIsCommand.Execute(new List<object>(POILLS.SelectedItems as IList<object>));
                 POILLS.ItemsSource = vm.PointOfInterestList;
-
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
             }
         }
@@ -182,12 +173,10 @@ namespace CheckMapp.Views.POIViews
                     poiList.Min((p) => p.Longitude),
                     poiList.Min((p) => p.Latitude),
                     poiList.Max((p) => p.Longitude));
-
-
                 MyMap.SetView(bounds);
             }
         }
 
-        
+
     }
 }

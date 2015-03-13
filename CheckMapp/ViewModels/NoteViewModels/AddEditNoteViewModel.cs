@@ -26,21 +26,21 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         public AddEditNoteViewModel(Trip trip, Note note, Mode mode)
         {
-            this.Trip = trip;
             this.Mode = mode;
 
             if (this.Mode == Mode.add)
             {
                 Note = new Note();
+                Note.Trip = trip;
+                trip.Notes.Add(Note);
                 Note.Date = DateTime.Now;
             }
             else
                 Note = note;
 
-            if (this.Trip.PointsOfInterests != null)
+            if (trip.PointsOfInterests != null)
             {
-                _poiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
-
+                _poiList = new List<PointOfInterest>(trip.PointsOfInterests);
             }
 
             InitialiseValidator();
@@ -80,7 +80,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         /// <summary>
-        /// Ma note
+        /// La note
         /// </summary>
         public Note Note
         {
@@ -96,21 +96,10 @@ namespace CheckMapp.ViewModels.NoteViewModels
             set;
         }
 
-        /// <summary>
-        /// Le id de ma note
-        /// </summary>
-        public int NoteId
-        {
-            get { return Note.Id; }
-            set
-            {
-                Note.Id = value;
-                RaisePropertyChanged("NoteId");
-            }
-        }
-
         private bool _noneCheck;
-
+        /// <summary>
+        /// Aucun poi sélectionné
+        /// </summary>
         public bool NoneCheck
         {
             get { return _noneCheck; }
@@ -131,6 +120,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         private List<PointOfInterest> _poiList;
+        /// <summary>
+        /// Liste des points d'intérêts
+        /// </summary>
         public List<PointOfInterest> PoiList
         {
             get { return _poiList; }
@@ -180,17 +172,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
-        public Trip Trip
-        {
-            get;
-            set;
-        }
-
-        public string TripName
-        {
-            get { return Trip.Name; }
-        }
-
         #endregion
 
         #region DBMethods
@@ -209,18 +190,16 @@ namespace CheckMapp.ViewModels.NoteViewModels
                     Note.PointOfInterest = null;
 
                 if (Mode == Mode.add)
-                    AddNoteInDB(Note);
+                    AddNoteInDB();
                 else if (Mode == Mode.edit)
                     UpdateExistingNote();
             }
         }
 
-        private void AddNoteInDB(Note note)
+        private void AddNoteInDB()
         {
             DataServiceNote dsNote = new DataServiceNote();
-            note.Trip = Trip;
-            Trip.Notes.Add(note);
-            dsNote.addNote(note);
+            dsNote.addNote(Note);
         }
 
         private void UpdateExistingNote()

@@ -16,7 +16,7 @@
     Loaded="PhoneApplicationPage_Loaded"
      xmlns:myControl="clr-namespace:CheckMapp.Controls">
 
-        <myControl:PinchAndZoomImage x:Name="myImage" Tap="img_Tap">
+    <myControl:PinchAndZoomImage  x:Name="myImage" Tap="img_Tap">
             <toolkit:GestureService.GestureListener>
                 <toolkit:GestureListener Flick="GestureListener_Flick"/>
             </toolkit:GestureService.GestureListener>

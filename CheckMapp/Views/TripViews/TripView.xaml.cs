@@ -25,11 +25,6 @@ namespace CheckMapp.Views.TripViews
             InitializeComponent();
         }
 
-        private void RoundButton_Click(object sender, RoutedEventArgs e)
-        {
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/POIView.xaml", UriKind.Relative));
-        }
-
         private void IconButtonAddMedia_Click(object sender, EventArgs e)
         {
             PhotoChooserTask photoChooserTask = new PhotoChooserTask();
@@ -104,11 +99,6 @@ namespace CheckMapp.Views.TripViews
         {
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/AddEditTripView.xaml", UriKind.Relative));
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

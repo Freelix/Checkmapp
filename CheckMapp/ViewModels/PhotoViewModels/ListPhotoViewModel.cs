@@ -30,16 +30,18 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         #region Properties
 
+        /// <summary>
+        /// Le voyage choisi
+        /// </summary>
         public Trip Trip
         {
             get;
             set;
         }
-        public string TripName
-        {
-            get { return Trip.Name; }
-        }
 
+        /// <summary>
+        /// Si c'est des photos à partir d'un poi
+        /// </summary>
         public int? PoiLoaded
         {
             get;
@@ -68,7 +70,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 if (_deletePicturesCommand == null)
                 {
-                    _deletePicturesCommand = new RelayCommand<List<Picture>>((pictureList) => DeletePictures(pictureList));
+                    _deletePicturesCommand = new RelayCommand<List<object>>((pictureList) => DeletePictures(pictureList));
                 }
                 return _deletePicturesCommand;
             }
@@ -116,11 +118,12 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         #region DBMethods
 
-        public void DeletePictures(List<Picture> pictureList)
+        public void DeletePictures(List<object> pictureList)
         {
             DataServicePicture dsPicture = new DataServicePicture();
             foreach (Picture picture in pictureList)
             {
+                Trip.Pictures.Remove(picture);
                 dsPicture.DeletePicture(picture);
             }
         }
@@ -128,6 +131,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         public void DeletePicture(Picture picture)
         {
             DataServicePicture dsPicture = new DataServicePicture();
+            Trip.Pictures.Remove(picture);
             dsPicture.DeletePicture(picture);
         }
 

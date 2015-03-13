@@ -38,7 +38,6 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            myImage.Bitmap.ClearValue(BitmapImage.UriSourceProperty);
             PhoneApplicationService.Current.State["Trip"] = (this.DataContext as PhotoViewModel).Trip;
         }
 
@@ -46,13 +45,7 @@ namespace CheckMapp.Views.PhotoViews
         {
             Picture current = PhoneApplicationService.Current.State["Picture"] as Picture;
             this.DataContext = new PhotoViewModel(current);
-            int currentIndex = (this.DataContext as PhotoViewModel).GroupedPhotos[0].IndexOf(current);
-            (this.DataContext as PhotoViewModel).SelectedPictureIndex = currentIndex;
-
-            myImage.Picture = current;
-
-            PhoneApplicationService.Current.State["Trip"] = null;
-            PhoneApplicationService.Current.State["Picture"] = null;
+            myImage.Picture = (this.DataContext as PhotoViewModel).SelectedPicture;
             base.OnNavigatedTo(e);
         }
 
@@ -60,31 +53,24 @@ namespace CheckMapp.Views.PhotoViews
         {
             if (!myImage.IsOrigin)
                 return;
+
             var vm = (this.DataContext as PhotoViewModel);
 
-            // User flicked towards gauche
+            // User swap towards gauche
             if (e.HorizontalVelocity > 0)
             {
-                myImage.Bitmap.ClearValue(BitmapImage.UriSourceProperty);
                 // Load the next image 
                 vm.SelectedPictureIndex -= 1;
-                if (vm.SelectedPictureIndex < 0)
-                    vm.SelectedPictureIndex = vm.GroupedPhotos[0].Count - 1;
             }
 
-            // User flicked towards droit
+            // User swap towards droit
             if (e.HorizontalVelocity < 0)
             {
-                myImage.Bitmap.ClearValue(BitmapImage.UriSourceProperty);
                 // Load the previous image
                 vm.SelectedPictureIndex += 1;
-                if (vm.SelectedPictureIndex >= vm.GroupedPhotos[0].Count)
-                    vm.SelectedPictureIndex = 0;
             }
 
-            myImage.Picture = vm.GroupedPhotos[0][vm.SelectedPictureIndex];
-            myImage.InitializeImage();
-            vm.SelectedPicture = myImage.Picture;
+            myImage.Picture = vm.SelectedPicture;
         }
 
         void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -107,7 +93,7 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Picture"] = myImage.Picture;
+            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as PhotoViewModel).SelectedPicture;
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }
@@ -143,7 +129,6 @@ namespace CheckMapp.Views.PhotoViews
             //    //On le supprime par la suite.
 
             //}
-
         }
 
 

@@ -26,21 +26,20 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         public AddEditPhotoViewModel(Trip trip, Picture picture, Mode mode, byte[] photoArray)
         {
-            this.Trip = trip;
             this.Mode = mode;
 
             if (this.Mode == Mode.add)
             {
                 Picture = new Picture();
+                Picture.Trip = trip;
+                trip.Pictures.Add(Picture);
                 Picture.Date = DateTime.Now;
             }
             else
                 Picture = picture;
 
-            if (Trip.PointsOfInterests != null)
-            {
-                PoiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
-            }
+            if (trip.PointsOfInterests != null)
+                PoiList = new List<PointOfInterest>(trip.PointsOfInterests);
 
             if (photoArray != null)
                 this.ImageSource = photoArray;
@@ -56,7 +55,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         #region Properties
 
         private bool _isFormValid;
-
+        /// <summary>
+        /// Si la form est valide
+        /// </summary>
         public bool IsFormValid
         {
             get { return _isFormValid; }
@@ -67,16 +68,18 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
         private bool _noneCheck;
-
+        /// <summary>
+        /// Si on coche aucun points d'intérêt
+        /// </summary>
         public bool NoneCheck
         {
             get { return _noneCheck; }
             set { _noneCheck = value; }
         }
-       
+
 
         /// <summary>
-        /// Ma photo
+        /// La photo choisie
         /// </summary>
         public Picture Picture
         {
@@ -87,6 +90,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
         }
 
+        /// <summary>
+        /// Mode édition ou ajout
+        /// </summary>
         public Mode Mode
         {
             get;
@@ -95,7 +101,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         private List<PointOfInterest> _poiList;
         /// <summary>
-        /// Ma liste de points d'intérêt
+        /// La liste de points d'intérêt
         /// </summary>
         public List<PointOfInterest> PoiList
         {
@@ -103,19 +109,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             set
             {
                 _poiList = value;
-            }
-        }
-
-        /// <summary>
-        /// Le id de mon image
-        /// </summary>
-        public int PictureId
-        {
-            get { return Picture.Id; }
-            set
-            {
-                Picture.Id = value;
-                RaisePropertyChanged("PictureId");
+                RaisePropertyChanged("PoiList");
             }
         }
 
@@ -133,7 +127,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
         /// <summary>
-        /// La description de ma photo
+        /// La description de la photo
         /// </summary>
         public string Description
         {
@@ -158,12 +152,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
         }
 
-        public Trip Trip
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// La date de ma photo
         /// </summary>
@@ -175,14 +163,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                 Picture.Date = value;
                 RaisePropertyChanged("PictureDate");
             }
-        }
-
-        /// <summary>
-        /// Nom du voyage
-        /// </summary>
-        public string TripName
-        {
-            get { return Trip.Name; }
         }
 
         #endregion
@@ -216,18 +196,16 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                     Picture.PointOfInterest = null;
 
                 if (Mode == Mode.add)
-                    AddPictureInDB(Picture);
+                    AddPictureInDB();
                 else if (Mode == Mode.edit)
                     UpdateExistingPicture();
             }
         }
 
-        private void AddPictureInDB(Picture picture)
+        private void AddPictureInDB()
         {
             DataServicePicture dsPicture = new DataServicePicture();
-            picture.Trip = Trip;
-            Trip.Pictures.Add(picture);
-            dsPicture.addPicture(picture);
+            dsPicture.addPicture(Picture);
         }
 
         private void UpdateExistingPicture()

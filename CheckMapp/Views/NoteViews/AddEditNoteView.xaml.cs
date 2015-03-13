@@ -34,16 +34,6 @@ namespace CheckMapp.Views.NoteViews
 
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-        }
-
         /// <summary>
         /// Sauvegarder la note
         /// </summary>
@@ -57,10 +47,7 @@ namespace CheckMapp.Views.NoteViews
             Dispatcher.BeginInvoke(() =>
             {
                 var vm = DataContext as AddEditNoteViewModel;
-                if (vm != null)
-                {
-                    vm.AddEditNoteCommand.Execute(null);
-                }
+                vm.AddEditNoteCommand.Execute(null);
 
                 if (vm.IsFormValid)
                 {
@@ -94,6 +81,6 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
-       
+
     }
 }

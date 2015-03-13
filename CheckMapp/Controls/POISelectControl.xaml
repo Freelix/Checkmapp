@@ -8,7 +8,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
         <Storyboard x:Name="chkHide_Storyboard">
@@ -32,7 +33,7 @@
 
             <toolkit:ListPicker
                     x:Name="poiListPicker"
-                    ItemsSource="{Binding PoiList}"
+                    ItemsSource="{Binding PoiList,Mode=TwoWay}"
                     SelectedItem="{Binding POISelected, Mode=TwoWay}"
                     DisplayMemberPath="Name">
             </toolkit:ListPicker>

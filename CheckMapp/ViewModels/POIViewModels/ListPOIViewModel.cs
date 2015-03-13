@@ -19,15 +19,14 @@ namespace CheckMapp.ViewModels.POIViewModels
         public ListPOIViewModel(Trip trip)
         {
             this.Trip = trip;
-
-            DataServicePoi dsPoi = new DataServicePoi();
-
-            PointOfInterestList = new ObservableCollection<PointOfInterest>
-                (dsPoi.LoadPointOfInterestsFromTrip(this.Trip));
+            PointOfInterestList = new ObservableCollection<PointOfInterest>(Trip.PointsOfInterests);
         }
 
         #region Properties
 
+        /// <summary>
+        /// Le voyage courant
+        /// </summary>
         public Trip Trip
         {
             get;
@@ -35,6 +34,9 @@ namespace CheckMapp.ViewModels.POIViewModels
         }
 
         private ObservableCollection<PointOfInterest> _pointOfInterestList;
+        /// <summary>
+        /// La liste des points d'intérêts
+        /// </summary>
         public ObservableCollection<PointOfInterest> PointOfInterestList
         {
             get { return _pointOfInterestList; }
@@ -45,11 +47,6 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
-        public string TripName
-        {
-            get { return Trip.Name; }
-        }
-
         private ICommand _deletePOIsCommand;
         public ICommand DeletePOIsCommand
         {
@@ -57,7 +54,7 @@ namespace CheckMapp.ViewModels.POIViewModels
             {
                 if (_deletePOIsCommand == null)
                 {
-                    _deletePOIsCommand = new RelayCommand<List<PointOfInterest>>((poiList) => DeletePOIs(poiList));
+                    _deletePOIsCommand = new RelayCommand<List<object>>((poiList) => DeletePOIs(poiList));
                 }
                 return _deletePOIsCommand;
             }
@@ -75,7 +72,6 @@ namespace CheckMapp.ViewModels.POIViewModels
                 }
                 return _deletePOICommand;
             }
-
         }
 
        
@@ -88,24 +84,22 @@ namespace CheckMapp.ViewModels.POIViewModels
         {
             DataServicePoi dsPoi = new DataServicePoi();
             Trip.PointsOfInterests.Remove(poi);
-
+            PointOfInterestList.Remove(poi);
             // For some reasons, Picture table doesn't refresh properly
             // We have to remove each element in the array manually
             DataServicePicture dsPicture = new DataServicePicture();
-            
             foreach (Picture pic in dsPicture.LoadPicturesByPoiId(poi.Id))
-            {
                 Trip.Pictures.Remove(pic);
-            }
 
             dsPoi.DeletePoi(poi);
         }
 
-        public void DeletePOIs(List<PointOfInterest> poiList)
+        public void DeletePOIs(List<object> poiList)
         {
             DataServicePoi dsPoi = new DataServicePoi();
             foreach (PointOfInterest poi in poiList)
             {
+                PointOfInterestList.Remove(poi);
                 Trip.PointsOfInterests.Remove(poi);
                 dsPoi.DeletePoi(poi);
             }

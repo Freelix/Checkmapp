@@ -18,7 +18,7 @@ namespace CheckMapp.ViewModels.TripViewModels
     /// </summary>
     public class TripViewModel : ViewModelBase
     {
-        private Trip _currentTrip;
+        private Trip _trip;
 
         /// <summary>
         /// Initializes a new instance of the TripViewModel class.
@@ -30,11 +30,10 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         public Trip Trip
         {
-            get { return _currentTrip; }
+            get { return _trip; }
             set
             {
-                _currentTrip = value;
-                RaisePropertyChanged("CurrentTrip");
+                _trip = value;
             }
         }
 

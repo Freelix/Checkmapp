@@ -40,9 +40,8 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Note.Trip.Name}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="TitleTextblock" Text="[add/edit note]" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <TextBlock x:Name="idNoteTextBlock" Tag="{Binding NoteId, Mode=TwoWay}" Visibility="Collapsed"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
@@ -58,7 +57,7 @@
                     <myControl:POISelectControl NoneCheck="{Binding NoneCheck,Mode=TwoWay}" x:Name="POIControl" POISelected="{Binding POISelected,Mode=TwoWay}" PoiList="{Binding PoiList}"></myControl:POISelectControl>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.NoteContent, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                <TextBox Height="224" x:Name="messageTextBox" Text="{Binding Message, Mode=TwoWay}"></TextBox>     
+                <TextBox TextWrapping="Wrap" Height="224" x:Name="messageTextBox" Text="{Binding Message, Mode=TwoWay}"></TextBox>     
             </StackPanel>
             </ScrollViewer>
         </Grid>

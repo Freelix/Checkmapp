@@ -16,32 +16,35 @@ namespace CheckMapp.ViewModels.TripViewModels
     /// </summary>
     public class CurrentViewModel : ViewModelBase
     {
-        private Trip _currentTrip;
+        private Trip _trip;
 
         /// <summary>
         /// Initializes a new instance of the CurrentViewModel class.
         /// </summary>
         public CurrentViewModel(Trip trip)
         {
-            CurrentTrip = trip;
+            Trip = trip;
         }
 
         /// <summary>
         /// Le voyage en cours..
         /// </summary>
-        public Trip CurrentTrip
+        public Trip Trip
         {
-            get { return _currentTrip; }
-            set { _currentTrip = value; }
+            get { return _trip; }
+            set { _trip = value; }
         }
 
+        /// <summary>
+        /// Le nombre de jours écoulés
+        /// </summary>
         public int ElapsedDays
         {
             get
             {
-                if (CurrentTrip != null)
+                if (Trip != null)
                 {
-                    TimeSpan elapsed = DateTime.Now.Subtract(CurrentTrip.BeginDate);
+                    TimeSpan elapsed = DateTime.Now.Subtract(Trip.BeginDate);
                     if (elapsed.TotalDays < 0)
                         return 0;
                     return (int)elapsed.TotalDays;
@@ -58,8 +61,8 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get
             {
-                if (CurrentTrip != null)
-                    return String.Format(AppResources.CountNotes, CurrentTrip.Notes.Count);
+                if (Trip != null)
+                    return String.Format(AppResources.CountNotes, Trip.Notes.Count);
                 else
                     return "0";
             }
@@ -72,10 +75,10 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get 
             {
-                if (CurrentTrip != null)
+                if (Trip != null)
                 {
                     DataServicePoi dsPoi = new DataServicePoi();
-                    return String.Format(AppResources.CountPOI, dsPoi.LoadPointOfInterestsFromTrip(CurrentTrip).Count);
+                    return String.Format(AppResources.CountPOI, Trip.PointsOfInterests.Count);
                 }
                 else
                     return "0";
@@ -89,8 +92,8 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             get
             {
-                if (CurrentTrip != null)
-                    return String.Format(AppResources.CountPhotos, CurrentTrip.Pictures.Count);
+                if (Trip != null)
+                    return String.Format(AppResources.CountPhotos, Trip.Pictures.Count);
                 else
                     return "0";
             }

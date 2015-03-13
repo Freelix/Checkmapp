@@ -72,7 +72,7 @@ namespace CheckMapp
         /// <param name="e"></param>
         private void IconButtonEdit_Click(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Trip"] = (CurrentView.DataContext as CurrentViewModel).CurrentTrip;
+            PhoneApplicationService.Current.State["Trip"] = (CurrentView.DataContext as CurrentViewModel).Trip;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
 

@@ -39,9 +39,8 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Picture.Trip.Name}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="TitleTextblock" Text="[add/edit photo]" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <TextBlock x:Name="idNoteTextBlock" Tag="{Binding PictureId, Mode=TwoWay}" Visibility="Collapsed"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
@@ -62,7 +61,7 @@
                     <TextBlock x:Name="DateTextBlock" Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:DatePicker  Name="datePicker"  Value="{Binding PictureDate, Mode=TwoWay}"></toolkit:DatePicker>
 
-                    <myControl:POISelectControl  NoneCheck="{Binding NoneCheck}" x:Name="POIControl" POISelected="{Binding POISelected,Mode=TwoWay}" PoiList="{Binding PoiList}"></myControl:POISelectControl>
+                    <myControl:POISelectControl  NoneCheck="{Binding NoneCheck}" x:Name="POIControl" POISelected="{Binding POISelected,Mode=TwoWay}" PoiList="{Binding PoiList,Mode=TwoWay}"></myControl:POISelectControl>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.Description, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
                     <TextBox Height="300" Text="{Binding Description, Mode=TwoWay}"></TextBox>

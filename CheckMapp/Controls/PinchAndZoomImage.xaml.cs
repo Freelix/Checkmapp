@@ -55,10 +55,17 @@ namespace CheckMapp.Controls
             set
             {
                 SetValue(PictureProperty, value);
-                if (String.IsNullOrEmpty(value.Description))
+
+
+                if (String.IsNullOrEmpty(Picture.Description))
                     txtDesc.Visibility = System.Windows.Visibility.Collapsed;
-                if (value.PointOfInterest == null)
+                else
+                    txtDesc.Visibility = System.Windows.Visibility.Visible;
+
+                if (Picture.PointOfInterest == null)
                     txtPOI.Visibility = System.Windows.Visibility.Collapsed;
+                else
+                    txtPOI.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -68,11 +75,11 @@ namespace CheckMapp.Controls
         /// <summary>
         /// La source de l'image
         /// </summary>
-        public bool? IsTextVisible
+        public bool IsTextVisible
         {
             get
             {
-                return GetValue(IsTextVisibleProperty) as bool?;
+                return (bool)GetValue(IsTextVisibleProperty);
             }
             set
             {
@@ -91,7 +98,6 @@ namespace CheckMapp.Controls
             {
                 _viewportSize = newSize;
                 InitializeImage();
-                
             }
         }
 
@@ -148,11 +154,7 @@ namespace CheckMapp.Controls
             _scale = _coercedScale;
         }
 
-
-        /// <summary> 
-        /// When a new image is opened, set its initial scale. 
-        /// </summary> 
-        void OnImageOpened(object sender, RoutedEventArgs e)
+        private void TestImage_ImageOpened(object sender, RoutedEventArgs e)
         {
             InitializeImage();
         }
@@ -170,10 +172,6 @@ namespace CheckMapp.Controls
             originalSize = _scale;
             ResizeImage(true);
 
-            if (String.IsNullOrEmpty(Picture.Description))
-                txtDesc.Visibility = System.Windows.Visibility.Collapsed;
-            if (Picture.PointOfInterest == null)
-                txtPOI.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public bool IsOrigin
@@ -238,6 +236,7 @@ namespace CheckMapp.Controls
             _coercedScale = Math.Min(MaxScale, Math.Max(_scale, _minScale));
 
         }
+
 
 
     }

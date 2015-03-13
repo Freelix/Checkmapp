@@ -130,7 +130,6 @@
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="KeyGroup\AlphaKeyGroup.cs" />
-    <Compile Include="KeyGroup\TimeKeyGroup.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

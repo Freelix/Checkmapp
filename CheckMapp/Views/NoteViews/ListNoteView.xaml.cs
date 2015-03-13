@@ -31,7 +31,7 @@ namespace CheckMapp.Views.NoteViews
         private void loadData(int poiId)
         {
             Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            this.DataContext = new ListNoteViewModel(currentTrip,poiId);
+            this.DataContext = new ListNoteViewModel(currentTrip, poiId);
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
         }
 
@@ -92,12 +92,8 @@ namespace CheckMapp.Views.NoteViews
                         if (MessageBox.Show(AppResources.ConfirmationDeleteNote, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                         {
                             var vm = DataContext as ListNoteViewModel;
-                            if (vm != null)
-                            {
-                                vm.Trip.Notes.Remove(noteSelected);
-                                vm.DeleteNoteCommand.Execute(noteSelected);
-                                NoteLLS.ItemsSource = vm.GroupedNotes;
-                            }
+                            vm.DeleteNoteCommand.Execute(noteSelected);
+                            NoteLLS.ItemsSource = vm.GroupedNotes;
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
                         }
@@ -168,17 +164,9 @@ namespace CheckMapp.Views.NoteViews
             {
                 var vm = DataContext as ListNoteViewModel;
                 List<Note> noteList = new List<Note>();
-                for (int i = 0; i < NoteLLS.SelectedItems.Count; i++)
-                {
-                    noteList.Add(NoteLLS.SelectedItems[i] as Note);
-                    vm.Trip.Notes.Remove(NoteLLS.SelectedItems[i] as Note);
-                }
 
-                if (vm != null)
-                {
-                    vm.DeleteNotesCommand.Execute(noteList);
-                    NoteLLS.ItemsSource = vm.GroupedNotes;
-                }
+                vm.DeleteNotesCommand.Execute(new List<object>(NoteLLS.SelectedItems as IList<object>));
+                NoteLLS.ItemsSource = vm.GroupedNotes;
 
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.ItemsSource.Count > 0);
             }
@@ -196,7 +184,7 @@ namespace CheckMapp.Views.NoteViews
 
         private void NoteLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(NoteLLS.IsSelectionEnabled)
+            if (NoteLLS.IsSelectionEnabled)
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (NoteLLS.SelectedItems.Count > 0);
         }
     }

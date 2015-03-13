@@ -22,13 +22,12 @@ namespace CheckMapp.Controls
         public static readonly DependencyProperty PoiListProperty =
           DependencyProperty.Register("PoiList", typeof(List<PointOfInterest>), typeof(POISelectControl), null);
 
-        public ObservableCollection<PointOfInterest> PoiList 
+        public List<PointOfInterest> PoiList 
         {
-            get { return GetValue(PoiListProperty) as ObservableCollection<PointOfInterest>; }
+            get { return GetValue(PoiListProperty) as List<PointOfInterest>; }
             set
             {
                 SetValue(PoiListProperty, value);
-                CheckboxState();
             }
         }
 
@@ -73,7 +72,12 @@ namespace CheckMapp.Controls
         public void CheckboxState()
         {
             chkNoPOI.IsEnabled = (PoiList != null && PoiList.Count > 0);
-            chkNoPOI.IsChecked = (PoiList.Count == 0 || POISelected == null);
+            chkNoPOI.IsChecked = (PoiList == null || PoiList.Count == 0 || POISelected == null);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckboxState();
         }
 
     }

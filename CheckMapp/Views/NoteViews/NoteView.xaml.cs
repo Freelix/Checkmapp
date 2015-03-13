@@ -29,10 +29,7 @@ namespace CheckMapp.Views.NoteViews
             {
                 // Call the appropriate function in ViewModel
                 var vm = DataContext as NoteViewModel;
-                if (vm != null)
-                {
-                    vm.DeleteNoteCommand.Execute(null);
-                }
+                vm.DeleteNoteCommand.Execute(null);
 
                 (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
             }

@@ -18,53 +18,47 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         private int _selectedPictureIndex;
         public PhotoViewModel(Picture picture)
         {
-            SelectedPicture = picture;
             this.Trip = picture.Trip;
+            SelectedPictureIndex = Trip.Pictures.OrderBy(x => x.Date).ToList().FindIndex(x => x.Id == picture.Id);
         }
 
         #region Properties
 
-
+        /// <summary>
+        /// Index de la photo en cours
+        /// </summary>
         public int SelectedPictureIndex
         {
             get { return _selectedPictureIndex; }
             set
             {
                 _selectedPictureIndex = value;
+
+                if (_selectedPictureIndex < 0)
+                    _selectedPictureIndex = Trip.Pictures.Count - 1;
+
+                if (_selectedPictureIndex >= Trip.Pictures.Count)
+                    _selectedPictureIndex = 0;
             }
         }
+
+        /// <summary>
+        /// Voyage courant
+        /// </summary>
         public Trip Trip
         {
             get;
             set;
         }
 
-        public List<KeyedList<string, Picture>> GroupedPhotos
-        {
-            get
-            {
-                var groupedPhotos =
-                    from photo in Trip.Pictures.ToList()
-                    orderby photo.Date
-                    group photo by photo.Date.ToString("m") into photosByDay
-                    select new KeyedList<string, Picture>(photosByDay);
-
-                return new List<KeyedList<string, Picture>>(groupedPhotos);
-            }
-        }
-
-        public Picture _picture = null;
-
+        /// <summary>
+        /// L'objet photo courant
+        /// </summary>
         public Picture SelectedPicture
         {
             get
             {
-                return _picture;
-            }
-            set
-            {
-                _picture = value;
-                RaisePropertyChanged("SelectedPicture");
+                return Trip.Pictures.OrderBy(x => x.Date).ToList()[SelectedPictureIndex];
             }
         }
 

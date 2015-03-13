@@ -35,7 +35,7 @@ namespace CheckMapp.Views.PhotoViews
         private void loadData(int poiId)
         {
             Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            this.DataContext = new ListPhotoViewModel(currentTrip,poiId);
+            this.DataContext = new ListPhotoViewModel(currentTrip, poiId);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
@@ -84,7 +84,7 @@ namespace CheckMapp.Views.PhotoViews
         {
             base.OnNavigatedTo(e);
 
-            if ((int) PhoneApplicationService.Current.State["poiId"] > 0)
+            if ((int)PhoneApplicationService.Current.State["poiId"] > 0)
             {
                 int poiId = (int)PhoneApplicationService.Current.State["poiId"];
                 loadData(poiId);
@@ -123,20 +123,15 @@ namespace CheckMapp.Views.PhotoViews
                 switch (menuItem.Name)
                 {
                     case "EditPhoto":
-                            PhoneApplicationService.Current.State["Picture"] = pictureSelected;
-                            PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-                            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
+                        PhoneApplicationService.Current.State["Picture"] = pictureSelected;
+                        PhoneApplicationService.Current.State["Mode"] = Mode.edit;
+                        (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
                         break;
                     case "DeletePhoto":
                         if (MessageBox.Show(AppResources.ConfirmationDeletePicture, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                         {
                             var vm = DataContext as ListPhotoViewModel;
-                            if (vm != null)
-                            {
-                                vm.Trip.Pictures.Remove(pictureSelected);
-                                vm.DeletePictureCommand.Execute(pictureSelected);
-                            }
-
+                            vm.DeletePictureCommand.Execute(pictureSelected);
                             PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
 
                             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
@@ -179,16 +174,7 @@ namespace CheckMapp.Views.PhotoViews
             if (MessageBox.Show(AppResources.ConfirmationDeletePictures, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 var vm = DataContext as ListPhotoViewModel;
-                List<Picture> pictureList = new List<Picture>();
-                for (int i = 0; i < PhotoHubLLS.SelectedItems.Count; i++)
-                {
-                    pictureList.Add(PhotoHubLLS.SelectedItems[i] as Picture);
-                    vm.Trip.Pictures.Remove(PhotoHubLLS.SelectedItems[i] as Picture);
-                }
-
-                if (vm != null)
-                    vm.DeletePicturesCommand.Execute(pictureList);
-
+                vm.DeletePicturesCommand.Execute(new List<object>(PhotoHubLLS.SelectedItems as IList<object>));
                 PhotoHubLLS.ItemsSource = vm.GroupedPhotos;
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
             }

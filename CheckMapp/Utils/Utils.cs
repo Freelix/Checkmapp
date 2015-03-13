@@ -17,42 +17,8 @@ namespace CheckMapp.Utils
 {
     public static class Utility
     {
-        #region Numbers Functions
-
-        public static int StringToNumber(string str)
-        {
-            try
-            {
-                return Convert.ToInt32(str);
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine("Input string is not a sequence of digits. Err: " + e.Message);
-            }
-            catch (OverflowException e)
-            {
-                Console.WriteLine("The number cannot fit in an Int32. Err: " + e.Message);
-            }
-
-            return -1;
-        }
-
-        #endregion
 
         #region Images Functions
-
-
-        public static byte[] ImageToByteArray(string imagePath)
-        {
-            BitmapImage image = new BitmapImage();
-            image.CreateOptions = BitmapCreateOptions.BackgroundCreation;
-            image.UriSource = new Uri(@imagePath, UriKind.Relative);
-            WriteableBitmap wbmp = new WriteableBitmap(image);
-            MemoryStream ms = new MemoryStream();
-            wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
-
-            return ms.ToArray();
-        }
 
         public static BitmapImage ByteArrayToImage(byte[] imageByteArray, bool compress)
         {
@@ -131,6 +97,7 @@ namespace CheckMapp.Utils
 
         #endregion
 
+        #region Map
         public static async Task AddLocation(Microsoft.Phone.Maps.Controls.Map myMap, Microsoft.Phone.Controls.PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e, double latitude, double longitude, bool completeAddress = false, string pinContent = "")
         {
             ReverseGeocodeQuery query;
@@ -176,7 +143,7 @@ namespace CheckMapp.Utils
                     pushpinContent = pinContent;
 
                 MyPushpin.Content = pushpinContent.Trim();
-                if(myTextBox != null)
+                if (myTextBox != null)
                     myTextBox.Text = MyPushpin.Content.ToString();
             }
         }
@@ -242,7 +209,8 @@ namespace CheckMapp.Utils
 
             return Address;
         }
-
+        
+        #endregion
 
         #region XML
 

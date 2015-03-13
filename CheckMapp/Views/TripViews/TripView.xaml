@@ -63,7 +63,6 @@
             
         </Grid>
         
-
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Canvas.ZIndex="100" Grid.Row="1" Margin="12,50,12,0">
             <Grid.Background>
