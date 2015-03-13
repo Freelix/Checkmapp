@@ -103,20 +103,9 @@ namespace CheckMapp.ViewModels.TripViewModels
             set;
         }
 
-        public int TripId
-        {
-            get { return Trip.Id; }
-            set
-            {
-                if (Trip.Id != value)
-                {
-                    Trip.Id = value;
-                    RaisePropertyChanged("TripId");
-                }
-            }
-        }
-
-       
+        /// <summary>
+        /// Nom du voyage
+        /// </summary>
         public string TripName
         {
             get { return Trip.Name; }
@@ -130,6 +119,9 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
+        /// <summary>
+        /// Liste d'amis
+        /// </summary>
         public List<string> FriendList
         {
             get { return _friendList; }
@@ -143,6 +135,9 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
+        /// <summary>
+        /// Date de départ
+        /// </summary>
         public DateTime TripBeginDate
         {
             get { return Trip.BeginDate; }
@@ -152,11 +147,14 @@ namespace CheckMapp.ViewModels.TripViewModels
                 {
                     Trip.BeginDate = value;
                     RaisePropertyChanged("TripBeginDate");
-                   
+
                 }
             }
         }
 
+        /// <summary>
+        /// Date de fin
+        /// </summary>
         public DateTime? TripEndDate
         {
             get { return Trip.EndDate; }
@@ -170,6 +168,9 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
+        /// <summary>
+        /// Nom du départ
+        /// </summary>
         private string _departure;
         public string Departure
         {
@@ -184,7 +185,9 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
-
+        /// <summary>
+        /// Nom de la destination
+        /// </summary>
         private string _destination;
         public string Destination
         {
@@ -200,69 +203,73 @@ namespace CheckMapp.ViewModels.TripViewModels
         }
 
         private double _departureLongitude;
-
-   
+        /// <summary>
+        /// Coordonnées départ longitude
+        /// </summary>
         public double DepartureLongitude
         {
-            get { return _departureLongitude; }
+            get { return Trip.DepartureLongitude; }
             set
             {
-                if (_departureLongitude != value)
+                if (Trip.DepartureLongitude != value)
                 {
-                    _departureLongitude = value;
+                    Trip.DepartureLongitude = value;
                     RaisePropertyChanged("DepartureLongitude");
                 }
             }
         }
 
-        private double _departureLatitude;
-
-    
+        /// <summary>
+        /// Coordonnées départ latitude
+        /// </summary>
         public double DepartureLatitude
         {
-            get { return _departureLatitude; }
+            get { return Trip.DepartureLatitude; }
             set
             {
-                if (_departureLatitude != value)
+                if (Trip.DepartureLatitude != value)
                 {
-                    _departureLatitude = value;
+                    Trip.DepartureLatitude = value;
                     RaisePropertyChanged("DepartureLatitude");
                 }
             }
         }
 
-        private double _destinationLongitude;
-
-      
+        /// <summary>
+        /// Coordonnées destination longitude
+        /// </summary>
         public double DestinationLongitude
         {
-            get { return _destinationLongitude; }
+            get { return Trip.DestinationLongitude; }
             set
             {
-                if (_destinationLongitude != value)
+                if (Trip.DestinationLongitude != value)
                 {
-                    _destinationLongitude = value;
+                    Trip.DestinationLongitude = value;
                     RaisePropertyChanged("DestinationLongitude");
                 }
             }
         }
 
-        private double _destinationLatitude;
-
-
+        /// <summary>
+        /// Coordonnées destination latitude
+        /// </summary>
         public double DestinationLatitude
         {
-            get { return _destinationLatitude; }
+            get { return Trip.DestinationLatitude; }
             set
             {
-                if (_destinationLatitude != value)
+                if (Trip.DestinationLatitude != value)
                 {
-                    _destinationLatitude = value;
+                    Trip.DestinationLatitude = value;
                     RaisePropertyChanged("DestinationLatitude");
                 }
             }
         }
 
+        /// <summary>
+        /// Image principale
+        /// </summary>
         public byte[] MainImage
         {
             get { return Trip.MainPictureData; }
@@ -286,8 +293,8 @@ namespace CheckMapp.ViewModels.TripViewModels
                 Trip.FriendList = Utils.Utility.FriendToString(FriendList);
                 // Adding a Trip
                 if (Mode == Mode.add)
-                {   
-                   AddTripInDB(Trip);
+                {
+                    AddTripInDB();
                 }
                 else if (Mode == Mode.edit)
                 {
@@ -296,10 +303,10 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
-        public void AddTripInDB(Trip trip)
+        public void AddTripInDB()
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
-            dsTrip.addTrip(trip);
+            dsTrip.addTrip(Trip);
         }
 
         public void UpdateExistingTrip()

@@ -39,10 +39,6 @@ namespace CheckMapp.Views.POIViews
             else if (vm.Mode == Mode.edit)
                 TitleTextBox.Text = AppResources.EditPoi.ToLower();
 
-            if (mode == Mode.edit)
-                Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, null, currentPoi.Latitude, currentPoi.Longitude);
-
-            btn_place.IsEnabled = !String.IsNullOrEmpty(PoiTextBox.Text);
             base.OnNavigatedTo(e);
         }
 
@@ -91,42 +87,6 @@ namespace CheckMapp.Views.POIViews
         private void IconCancel_Click(object sender, EventArgs e)
         {
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-        }
-
-        private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-           await Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0, true);
-           MapLayer layer = this.myMap.Layers.FirstOrDefault();
-           (this.DataContext as AddEditPOIViewModel).Latitude = layer[0].GeoCoordinate.Latitude;
-           (this.DataContext as AddEditPOIViewModel).Longitude = layer[0].GeoCoordinate.Longitude;
-        }
-
-        private void btn_place_Click(object sender, RoutedEventArgs e)
-        {
-            AfficherCarte(this.PoiTextBox, this.myMap);
-        }
-
-        private async void AfficherCarte(PhoneTextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
-        {
-            try
-            {
-                var CoordinateList = await MapHelper.getCoordinateAsync(myTextBox.Text);
-
-                // CoordinateList[0] = latitude, CoordinateList[1] = longitude
-                await Utils.Utility.AddLocation(myMap, myTextBox, null, CoordinateList[0], CoordinateList[1], true);
-
-                (this.DataContext as AddEditPOIViewModel).PointOfInterest.Latitude = CoordinateList[0];
-                (this.DataContext as AddEditPOIViewModel).PointOfInterest.Longitude = CoordinateList[1];
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
-            }
-        }
-
-        private void PoiTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            btn_place.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
         }
 
     }

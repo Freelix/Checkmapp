@@ -73,7 +73,7 @@ namespace CheckMapp.Controls
         public void CheckboxState()
         {
             chkNoPOI.IsEnabled = (PoiList != null && PoiList.Count > 0);
-            chkNoPOI.IsChecked = !(PoiList.Count == 0 || POISelected == null);
+            chkNoPOI.IsChecked = (PoiList.Count == 0 || POISelected == null);
         }
 
     }

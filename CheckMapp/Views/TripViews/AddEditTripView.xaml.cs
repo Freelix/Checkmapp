@@ -30,22 +30,6 @@ namespace CheckMapp.Views.TripViews
         {
             InitializeComponent();
 
-            if (!Utils.Utility.checkNetworkConnection())
-            {
-                MessageBox.Show(AppResources.InternetConnection, AppResources.NotConnected, MessageBoxButton.OK);
-                this.DepartureTextBox.IsEnabled = false;
-                this.DestinationTextBox.IsEnabled = false;
-                this.btn_dep.Visibility = Visibility.Collapsed;
-                this.btn_dest.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                this.DepartureTextBox.IsEnabled = true;
-                this.DestinationTextBox.IsEnabled = true;
-                this.btn_dep.Visibility = Visibility.Visible;
-                this.btn_dest.Visibility = Visibility.Visible;
-            }
-
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
             Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new AddEditTripViewModel(currentTrip, mode);
@@ -57,18 +41,7 @@ namespace CheckMapp.Views.TripViews
             else
             {
                 TitleTextblock.Text = AppResources.EditTrip.ToLower();
-                AddLocation_onEdit(currentTrip);
             }
-
-            btn_dep.IsEnabled = !String.IsNullOrEmpty(DepartureTextBox.Text);
-            btn_dest.IsEnabled = !String.IsNullOrEmpty(DestinationTextBox.Text);
-
-        }
-
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -83,7 +56,6 @@ namespace CheckMapp.Views.TripViews
                 (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Save;
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Cancel;
             }
-
         }
 
         /// <summary>
@@ -110,7 +82,6 @@ namespace CheckMapp.Views.TripViews
                     else
                     {
                         vm.AddEditTripCommand.Execute(null);
-
                         if (vm.IsFormValid)
                         {
                             // En appelant directement la page principale on rafraichit celle-ci pour mettre a jour la liste des voyages
@@ -118,8 +89,6 @@ namespace CheckMapp.Views.TripViews
                         }
                     }
                 }
-
-                
             });
         }
 
@@ -149,7 +118,6 @@ namespace CheckMapp.Views.TripViews
 
         private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-
             PhotoChooserTask photoChooserTask = new PhotoChooserTask();
             photoChooserTask.Completed += photoChooserTask_Completed;
             photoChooserTask.ShowCamera = true;
@@ -168,90 +136,11 @@ namespace CheckMapp.Views.TripViews
 
             //La valeur s'enleve pour une raison inconnu encore, alors on doit la réassigner
             PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditTripViewModel).Trip;
-            
-        }
-
-        private async void DepMap_Hold(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            await AddLocation_onHold(this.DepMap, this.DepartureTextBox, e);
-            MapLayer layer = this.DepMap.Layers.FirstOrDefault();
-            (this.DataContext as AddEditTripViewModel).Trip.DepartureLatitude = layer[0].GeoCoordinate.Latitude;
-            (this.DataContext as AddEditTripViewModel).Trip.DepartureLongitude = layer[0].GeoCoordinate.Longitude;
-        }
-
-        private async void DestMap_Hold(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            await AddLocation_onHold(this.DestMap, this.DestinationTextBox, e);
-            MapLayer layer = this.DestMap.Layers.FirstOrDefault();
-            (this.DataContext as AddEditTripViewModel).Trip.DestinationLatitude = layer[0].GeoCoordinate.Latitude;
-            (this.DataContext as AddEditTripViewModel).Trip.DestinationLongitude = layer[0].GeoCoordinate.Longitude;
-          
-        }
-
-        private void btn_dep_Click(object sender, RoutedEventArgs e)
-        {
-            AfficherCarte(this.DepartureTextBox, this.DepMap);
-        }
-
-        private void btn_dest_Click(object sender, RoutedEventArgs e)
-        {
-            AfficherCarte(this.DestinationTextBox, this.DestMap);
-        }
-        
-        private async System.Threading.Tasks.Task AddLocation_onHold(Microsoft.Phone.Maps.Controls.Map myMap, PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e)
-        {
-            await Utils.Utility.AddLocation(myMap, myTextBox, e, 0.0, 0.0);
-        }
-
-        private async void AddLocation_onEdit(Trip currentTrip)
-        {
-            await AddLocation_onEdit(this.DepMap, this.DepartureTextBox, currentTrip.DepartureLatitude, currentTrip.DepartureLongitude);
-            await AddLocation_onEdit(this.DestMap, this.DestinationTextBox, currentTrip.DestinationLatitude, currentTrip.DestinationLongitude);
-        }
-
-        private async System.Threading.Tasks.Task AddLocation_onEdit(Microsoft.Phone.Maps.Controls.Map myMap, PhoneTextBox myTextBox, double latitude, double longitude)
-        {
-            await Utils.Utility.AddLocation(myMap, myTextBox, null, latitude, longitude);
-        }
-          
-        private async void AfficherCarte(PhoneTextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)
-        {
-            try
-            {
-                var CoordinateList = await MapHelper.getCoordinateAsync(myTextBox.Text);
-               
-                // CoordinateList[0] = latitude, CoordinateList[1] = longitude
-                await AddLocation_onEdit(myMap, myTextBox, CoordinateList[0], CoordinateList[1]);
-                if (myMap == this.DepMap)
-                { 
-                    (this.DataContext as AddEditTripViewModel).Trip.DepartureLatitude = CoordinateList[0];
-                    (this.DataContext as AddEditTripViewModel).Trip.DepartureLongitude = CoordinateList[1];
-                }
-                else 
-                {
-                    (this.DataContext as AddEditTripViewModel).Trip.DestinationLatitude = CoordinateList[0];
-                    (this.DataContext as AddEditTripViewModel).Trip.DestinationLongitude = CoordinateList[1];
-                }
-            }
-            catch(Exception)
-            {
-                MessageBox.Show(string.Format(AppResources.InvalideSearch, myTextBox.Text), AppResources.Warning, MessageBoxButton.OK);
-            }
-        }
-
-        private void DepartureTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            btn_dep.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
-        }
-
-        private void DestinationTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            btn_dest.IsEnabled = !String.IsNullOrEmpty((sender as TextBox).Text);
         }
 
         private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var phoneNumberChooserTask = new AddressChooserTask();
+            AddressChooserTask phoneNumberChooserTask = new AddressChooserTask();
             phoneNumberChooserTask.Completed += phoneNumberChooserTask_Completed;
             phoneNumberChooserTask.Show();
         }

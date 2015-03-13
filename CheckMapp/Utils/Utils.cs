@@ -149,7 +149,6 @@ namespace CheckMapp.Utils
 
             if (mapLocation != null)
             {
-
                 MapLayer pinLayout = new MapLayer();
                 Pushpin MyPushpin = new Pushpin();
                 MapOverlay pinOverlay = new MapOverlay();

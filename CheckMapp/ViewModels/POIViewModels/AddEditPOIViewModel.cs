@@ -25,12 +25,13 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// </summary>
         public AddEditPOIViewModel(Trip trip, Mode mode, PointOfInterest poi)
         {
-            this.Trip = trip;
             this.Mode = mode;
 
             if (this.Mode == Mode.add)
             {
                 PointOfInterest = new Model.Tables.PointOfInterest();
+                PointOfInterest.Trip = trip;
+                trip.PointsOfInterests.Add(PointOfInterest);
             }
             else
                 PointOfInterest = poi;
@@ -44,7 +45,7 @@ namespace CheckMapp.ViewModels.POIViewModels
         }
 
         /// <summary>
-        /// Cache/Affiche le voyage courant
+        /// Ajout d'un point d'intérêt
         /// </summary>
         public ICommand AddPOICommand
         {
@@ -63,6 +64,9 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         private PointOfInterest _pointOfInterest;
 
+        /// <summary>
+        /// Le point d'intérêt courant
+        /// </summary>
         public PointOfInterest PointOfInterest
         {
             get
@@ -77,6 +81,9 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         private bool _isFormValid;
 
+        /// <summary>
+        /// Si la form est valid
+        /// </summary>
         public bool IsFormValid
         {
             get { return _isFormValid; }
@@ -86,19 +93,18 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
+        /// <summary>
+        /// Mode édition ou ajout
+        /// </summary>
         public Mode Mode
         {
             get;
             set;
         }
 
-        public Trip Trip { get; set; }
-
-        public string TripName
-        {
-            get { return Trip.Name; }
-        }
-
+        /// <summary>
+        /// Le nom de notre point d'intérêt
+        /// </summary>
         public string PoiName
         {
             get { return PointOfInterest.Name; }
@@ -109,6 +115,9 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
+        /// <summary>
+        /// La localisation en texte
+        /// </summary>
         public string PoiLocation
         {
             get
@@ -122,6 +131,9 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
+        /// <summary>
+        /// La longitude
+        /// </summary>
         public double Latitude
         {
             get { return PointOfInterest.Latitude; }
@@ -131,6 +143,9 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
+        /// <summary>
+        /// La latitude
+        /// </summary>
         public double Longitude
         {
             get { return PointOfInterest.Longitude; }
@@ -154,20 +169,24 @@ namespace CheckMapp.ViewModels.POIViewModels
                 _isFormValid = true;
                 // Adding a poi
                 if (Mode == Mode.add)
-                    AddPoiInDB(PointOfInterest);
+                    AddPoiInDB();
                 else
                     UpdateExistingPOI();
             }
         }
 
-        public void AddPoiInDB(PointOfInterest poi)
+        /// <summary>
+        /// Ajouter le point
+        /// </summary>
+        public void AddPoiInDB()
         {
             DataServicePoi dsPoi = new DataServicePoi();
-            poi.Trip = Trip;
-            Trip.PointsOfInterests.Add(poi);
-            dsPoi.addPoi(poi);
+            dsPoi.addPoi(PointOfInterest);
         }
 
+        /// <summary>
+        /// Mettre à jour le point
+        /// </summary>
         private void UpdateExistingPOI()
         {
             DataServicePoi dsPOI = new DataServicePoi();

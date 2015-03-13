@@ -15,8 +15,9 @@
     xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:maptk="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
-  xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-    Loaded="PhoneApplicationPage_Loaded">
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    Loaded="PhoneApplicationPage_Loaded"
+    xmlns:myControl="clr-namespace:CheckMapp.Controls">
 
     <phone:PhoneApplicationPage.Resources>
 
@@ -63,7 +64,6 @@
                         <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"  Text="{Binding Path=LocalizedResources.ChoosePicture, Source={StaticResource LocalizedStrings}}" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,20,0"></TextBlock>
                     </Grid>
 
-                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <TextBox x:Name="NameTextBox" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
                    
@@ -80,40 +80,11 @@
                                         ItemTemplate="{StaticResource ItemTemplate}"                     
                                         />
 
-                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}" />
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <!--  <TextBox  Width="330" x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></TextBox>-->
-                        <toolkit:PhoneTextBox TextChanged="DepartureTextBox_TextChanged" Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}"  x:Name="DepartureTextBox" Text="{Binding Departure, Mode=TwoWay}"></toolkit:PhoneTextBox>
-                        <Button x:Name="btn_dep" Width="114" Grid.Column="1" Click="btn_dep_Click" >
-                            <Image  Source="/Images/appbar.eye.min.png" Height="28"  />
-                        </Button>
-                    </Grid>
-
-
-                    <Controls:Map Margin="0,0,0,7"   Width="420" Name="DepMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DepMap_Hold">
-                    </Controls:Map>
+                    <myControl:MapSelectControl Height="300" Latitude="{Binding DepartureLatitude,Mode=TwoWay}" PoiLocation="{Binding Departure, Mode=TwoWay}" Longitude="{Binding DepartureLongitude,Mode=TwoWay}"></myControl:MapSelectControl>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripArrival, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <Grid Width="444">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <!--<TextBox Width="330" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}" ></TextBox>-->
-                        <toolkit:PhoneTextBox TextChanged="DestinationTextBox_TextChanged" Hint="{Binding Path=LocalizedResources.DepDest, Source={StaticResource LocalizedStrings}}" x:Name="DestinationTextBox" Text="{Binding Destination, Mode=TwoWay}"></toolkit:PhoneTextBox>
-                        <Button x:Name="btn_dest" Width="114" Grid.Column="1" Click="btn_dest_Click">
-                            <Image Source="/Images/appbar.eye.min.png" Height="28"  />
-                        </Button>
-                    </Grid>
-
-                    <Controls:Map  Width="420" Name="DestMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="DestMap_Hold" >
-                    </Controls:Map>
+                    <myControl:MapSelectControl Height="300"  Latitude="{Binding DestinationLatitude,Mode=TwoWay}" PoiLocation="{Binding Destination, Mode=TwoWay}" Longitude="{Binding DestinationLongitude,Mode=TwoWay}"></myControl:MapSelectControl>
 
                 </StackPanel>
             </ScrollViewer>

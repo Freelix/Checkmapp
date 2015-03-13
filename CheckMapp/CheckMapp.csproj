@@ -106,6 +106,9 @@
     <Compile Include="Controls\LiveTilePicture.xaml.cs">
       <DependentUpon>LiveTilePicture.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MapSelectControl.xaml.cs">
+      <DependentUpon>MapSelectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PinButton.cs" />
     <Compile Include="Controls\PinchAndZoomImage.xaml.cs">
       <DependentUpon>PinchAndZoomImage.xaml</DependentUpon>
@@ -245,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Controls\LiveTilePicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MapSelectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

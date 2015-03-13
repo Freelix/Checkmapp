@@ -21,6 +21,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region Properties
 
+        /// <summary>
+        /// La Note actuelle
+        /// </summary>
         public Note Note
         {
             get { return _note; }
@@ -42,10 +45,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
             }
         }
 
-        public string TripName
-        {
-            get { return Note.Trip.Name; }
-        }
 
         #endregion
 
@@ -69,6 +68,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region DBMethods
 
+        /// <summary>
+        /// Supprimer une note
+        /// </summary>
         public void DeleteNote()
         {
             DataServiceNote dsNote = new DataServiceNote();
