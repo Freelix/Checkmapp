@@ -13,7 +13,8 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
     Loaded="PhoneApplicationPage_Loaded"
-        xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+        xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:myControl="clr-namespace:CheckMapp.Controls">
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="chkHide_Storyboard">
@@ -61,16 +62,7 @@
                     <TextBlock x:Name="DateTextBlock" Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:DatePicker  Name="datePicker"  Value="{Binding PictureDate, Mode=TwoWay}"></toolkit:DatePicker>
 
-                    <TextBlock Text="{Binding Path=LocalizedResources.POITitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-
-                    <CheckBox x:Name="chkNoPOI" Grid.Row="1" Content="{Binding Path=LocalizedResources.NoPoi, Source={StaticResource LocalizedStrings}}" Checked="chkNoPOI_Checked" Unchecked="chkNoPOI_UnChecked" IsChecked="{Binding IsCheckedPoi, Mode=TwoWay}" />
-
-                    <toolkit:ListPicker
-                    x:Name="poiListPicker"
-                    ItemsSource="{Binding PoiList}"
-                    SelectedItem="{Binding POISelected, Mode=TwoWay}"
-                    DisplayMemberPath="Name">
-                    </toolkit:ListPicker>
+                    <myControl:POISelectControl  NoneCheck="{Binding NoneCheck}" x:Name="POIControl" POISelected="{Binding POISelected,Mode=TwoWay}" PoiList="{Binding PoiList}"></myControl:POISelectControl>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.Description, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
                     <TextBox Height="300" Text="{Binding Description, Mode=TwoWay}"></TextBox>

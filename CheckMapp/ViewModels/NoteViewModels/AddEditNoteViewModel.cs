@@ -41,10 +41,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
             {
                 _poiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
 
-                if (_poiList.Count == 0 || Note.PointOfInterest == null)
-                    _isCheckedPoi = true;
-                else
-                    _isCheckedPoi = false;
             }
 
             InitialiseValidator();
@@ -71,16 +67,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         #region Properties
 
-        private bool _isCheckedPoi;
-
-        public bool IsCheckedPoi
-        {
-            get { return _isCheckedPoi; }
-            set
-            {
-                _isCheckedPoi = value;
-            }
-        }
 
         private bool _isFormValid;
 
@@ -121,6 +107,14 @@ namespace CheckMapp.ViewModels.NoteViewModels
                 Note.Id = value;
                 RaisePropertyChanged("NoteId");
             }
+        }
+
+        private bool _noneCheck;
+
+        public bool NoneCheck
+        {
+            get { return _noneCheck; }
+            set { _noneCheck = value; }
         }
 
         /// <summary>
@@ -211,7 +205,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
             {
                 _isFormValid = true;
 
-                if (_isCheckedPoi)
+                if (NoneCheck)
                     Note.PointOfInterest = null;
 
                 if (Mode == Mode.add)

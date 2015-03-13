@@ -14,6 +14,7 @@
     shell:SystemTray.IsVisible="True"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     Loaded="PhoneApplicationPage_Loaded"
+     xmlns:myControl="clr-namespace:CheckMapp.Controls"
     >
     
     <phone:PhoneApplicationPage.Resources>
@@ -54,18 +55,9 @@
                 <TextBlock x:Name="DateTextBlock" Text="{Binding Path=LocalizedResources.NoteDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     <toolkit:DatePicker Name="datePicker"  Value="{Binding NoteDate, Mode=TwoWay}"></toolkit:DatePicker>
 
-                <TextBlock Text="{Binding Path=LocalizedResources.NoteInterestPoint, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <myControl:POISelectControl NoneCheck="{Binding NoneCheck,Mode=TwoWay}" x:Name="POIControl" POISelected="{Binding POISelected,Mode=TwoWay}" PoiList="{Binding PoiList}"></myControl:POISelectControl>
 
-                    <CheckBox x:Name="chkNoPOI" Grid.Row="1" Content="{Binding Path=LocalizedResources.NoPoi, Source={StaticResource LocalizedStrings}}" Checked="chkNoPOI_Checked" Unchecked="chkNoPOI_UnChecked" IsChecked="{Binding IsCheckedPoi, Mode=TwoWay}" />
-
-                    <toolkit:ListPicker
-                    x:Name="poiListPicker"
-                    ItemsSource="{Binding PoiList}"
-                    SelectedItem="{Binding POISelected, Mode=TwoWay}"
-                    DisplayMemberPath="Name">
-                </toolkit:ListPicker>
-                
-                <TextBlock Text="{Binding Path=LocalizedResources.NoteContent, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Text="{Binding Path=LocalizedResources.NoteContent, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 <TextBox Height="224" x:Name="messageTextBox" Text="{Binding Message, Mode=TwoWay}"></TextBox>     
             </StackPanel>
             </ScrollViewer>

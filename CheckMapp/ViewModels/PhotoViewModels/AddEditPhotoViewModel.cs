@@ -40,11 +40,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             if (Trip.PointsOfInterests != null)
             {
                 PoiList = new List<PointOfInterest>(this.Trip.PointsOfInterests);
-
-                if (PoiList.Count == 0 || Picture.PointOfInterest == null)
-                    _isCheckedPoi = true;
-                else
-                    _isCheckedPoi = false;
             }
 
             if (photoArray != null)
@@ -60,17 +55,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         #region Properties
 
-        private bool _isCheckedPoi;
-
-        public bool IsCheckedPoi
-        {
-            get { return _isCheckedPoi; }
-            set
-            {
-                _isCheckedPoi = value;
-            }
-        }
-
         private bool _isFormValid;
 
         public bool IsFormValid
@@ -81,6 +65,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                 _isFormValid = value;
             }
         }
+
+        private bool _noneCheck;
+
+        public bool NoneCheck
+        {
+            get { return _noneCheck; }
+            set { _noneCheck = value; }
+        }
+       
 
         /// <summary>
         /// Ma photo
@@ -219,7 +212,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 _isFormValid = true;
 
-                if (_isCheckedPoi)
+                if (NoneCheck)
                     Picture.PointOfInterest = null;
 
                 if (Mode == Mode.add)

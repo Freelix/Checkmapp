@@ -1,0 +1,64 @@
+﻿Setup of tombstonehelper:
+
+In App.xaml.vb:
+
+
+    - Locate the Application_Activated event handler
+    - Add the folowwing line:
+        TombstoneHelper.Application_Activated(sender, e);
+    
+In each of your pages (or if you have a base class from which all your pages derive):
+
+    // C#
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+    	base.OnNavigatedTo(e);
+    	TombstoneHelper.page_OnNavigatedTo(this, e);
+    }
+    
+    protected override void OnNavigatedFrom(Navigation.NavigationEventArgs e)
+    {
+    	base.OnNavigatedFrom(e);
+    	TombstoneHelper.page_OnNavigatedFrom(this, e);
+    }
+
+
+    ' VB.NET
+    Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
+        MyBase.OnNavigatedTo(e)
+        TombstoneHelper.page_OnNavigatedTo(Me, e)
+    End Sub
+    
+    Protected Overrides Sub OnNavigatedFrom(e As Navigation.NavigationEventArgs)
+        MyBase.OnNavigatedFrom(e)
+        TombstoneHelper.page_OnNavigatedFrom(Me, e)
+    End Sub
+    
+    
+In your ViewModels:
+
+    // c#
+    [Tombstone]
+    [Tombstone()]
+    public SomeClass MyObject {
+	   get { return _myobject; }
+    	set {
+		  _myobject = value;
+		  RaisePropertyChanged("MyObject");
+	   }
+	}
+	
+	' VB.NET
+	Private _myobject As SomeClass
+    <Tombstone()> _
+    Public Property MyObject() As SomeClass
+        Get
+            Return _myobject
+        End Get
+        Set(ByVal value As SomeClass)
+            _myobject = value
+            RaisePropertyChanged("MyObject")
+        End Set
+    End Property
+}
+

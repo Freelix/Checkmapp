@@ -32,14 +32,13 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         /// <summary>
-        /// Si la map doit s'afficher (point d'intéret)
+        /// Si le point d'intérêt s'affiche
         /// </summary>
         public bool IsVisible
         {
             get
             {
-                //note has point dintéret
-                return false;
+                return (Note.PointOfInterest != null);
             }
         }
 
