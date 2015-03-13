@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -472,6 +473,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.fr.xlf</DependentUpon>
       <culture>fr</culture>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <SubType>Designer</SubType>

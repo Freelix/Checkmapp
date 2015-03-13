@@ -10,6 +10,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+    xmlns:my="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
@@ -23,40 +25,50 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"  Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <Controls:Map Margin="0,0,0,7"   Width="420" Name="statsMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light">
+            </Controls:Map>
         </StackPanel>
        
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
 
-        <phone:Panorama HorizontalAlignment="Left" Margin="0,10,0,-3" Title="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top">
-            <phone:PanoramaItem CacheMode="{x:Null}" Header="{Binding Path=LocalizedResources.MyNotes, Source={StaticResource LocalizedStrings}}">
-                    <phone:PanoramaItem.RenderTransform>
-                        <TranslateTransform/>
-                    </phone:PanoramaItem.RenderTransform>
-                <StackPanel>
-                    <TextBlock x:Name="NoteToday" Margin="0,30,0,30" Text="{Binding TripNoteToday}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock x:Name="NoteWeek"  Margin="0,30,0,30" Text="{Binding TripNoteWeek}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock x:Name="NoteMonth"   Margin="0,30,0,30" Text="{Binding TripNoteMonth}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock x:Name="NoteAllTime"   Margin="0,30,0,30" Text="{Binding TripNoteAllTime}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+        <Grid Grid.Row="1"  Grid.RowSpan="2" >
+        <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="70"  Source="/Images/appbar.clipboard.variant.png"></Image>
+                        <TextBlock x:Name="NoteToday" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripNoteToday}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Height="70"  Source="/Images/appbar.clipboard.variant.png"></Image>
+                        <TextBlock x:Name="NoteAllTime"  VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripNoteAllTime}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="70"  Source="/Images/feature.camera.png"></Image>
+                        <TextBlock x:Name="PictureToday" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripPictureToday}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="70"  Source="/Images/feature.camera.png"></Image>
+                        <TextBlock x:Name="PictureAllTime" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripPictureAllTime}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Height="70"  Source="/Images/appbar.flag.wavy.png"></Image>
+                        <TextBlock x:Name="TripBeginDate" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripBeginDate}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="EndStack" Orientation="Horizontal">
+                        <Image Height="70"  Source="/Images/appbar.flag.wavy.png"></Image>
+                        <TextBlock x:Name="TripEndDate" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripEndDate}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+                    
                 </StackPanel>
-               
-            </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" Header="{Binding Path=LocalizedResources.MyPhoto, Source={StaticResource LocalizedStrings}}">
-                    <phone:PanoramaItem.RenderTransform>
-                        <TranslateTransform/>
-                    </phone:PanoramaItem.RenderTransform>
-                <StackPanel>
-                    <TextBlock x:Name="PictureToday" Margin="0,30,0,30" Text="{Binding TripPictureToday}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock x:Name="PictureWeek"  Margin="0,30,0,30" Text="{Binding TripPictureWeek}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock x:Name="PictureMonth"   Margin="0,30,0,30" Text="{Binding TripPictureMonth}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock x:Name="PictureAllTime"   Margin="0,30,0,30" Text="{Binding TripPictureAllTime}"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                </StackPanel>
-            </phone:PanoramaItem>
-            </phone:Panorama>
-            <!--    <StackPanel Margin="12,17,0,28">
-                <TextBlock Text="{Binding TripNoteWeek}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" />
-            </StackPanel>--> 
-       
+            </ScrollViewer>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

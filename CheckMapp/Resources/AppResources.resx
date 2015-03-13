@@ -442,19 +442,13 @@ Alexandre Roy</value>
     <value>Place</value>
   </data>
   <data name="NoteAllTime" xml:space="preserve">
-    <value>All note taken in this trip : {0}</value>
+    <value>{0} note(s) in this trip</value>
   </data>
   <data name="PictureAllTime" xml:space="preserve">
-    <value>All picture taken in this trip : {0}</value>
-  </data>
-  <data name="PictureMonth" xml:space="preserve">
-    <value>Picture taken this last 31 days : {0}</value>
+    <value>{0} picture(s) in this trip</value>
   </data>
   <data name="PictureToday" xml:space="preserve">
-    <value>Picture taken today : {0}</value>
-  </data>
-  <data name="PictureWeek" xml:space="preserve">
-    <value>Picture taken this last 7 days : {0}</value>
+    <value>{0} picture(s) today</value>
   </data>
   <data name="DefaultPoi" xml:space="preserve">
     <value>No POI selected</value>
@@ -467,6 +461,18 @@ Alexandre Roy</value>
   </data>
   <data name="NoPoi" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="NoteToday" xml:space="preserve">
+    <value>{0} note(s) today</value>
+  </data>
+  <data name="TripBeginDate" xml:space="preserve">
+    <value>Begin date : {0}</value>
+  </data>
+  <data name="TripEndDate" xml:space="preserve">
+    <value>End date : {0}</value>
+  </data>
+  <data name="YourPosition" xml:space="preserve">
+    <value>your position</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Loading...</value>

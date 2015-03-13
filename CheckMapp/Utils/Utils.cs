@@ -131,7 +131,7 @@ namespace CheckMapp.Utils
 
         #endregion
 
-        public static async Task AddLocation(Microsoft.Phone.Maps.Controls.Map myMap, Microsoft.Phone.Controls.PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e, double latitude, double longitude, bool completeAddress = false)
+        public static async Task AddLocation(Microsoft.Phone.Maps.Controls.Map myMap, Microsoft.Phone.Controls.PhoneTextBox myTextBox, System.Windows.Input.GestureEventArgs e, double latitude, double longitude, bool completeAddress = false, string pinContent = "")
         {
             ReverseGeocodeQuery query;
             List<MapLocation> mapLocations;
@@ -173,9 +173,12 @@ namespace CheckMapp.Utils
                 else
                     pushpinContent = getCompleteAddress(mapLocation);
 
-                MyPushpin.Content = pushpinContent.Trim();
+                if (!string.IsNullOrEmpty(pinContent))
+                    pushpinContent = pinContent;
 
-                myTextBox.Text = MyPushpin.Content.ToString();
+                MyPushpin.Content = pushpinContent.Trim();
+                if(myTextBox != null)
+                    myTextBox.Text = MyPushpin.Content.ToString();
             }
         }
 
