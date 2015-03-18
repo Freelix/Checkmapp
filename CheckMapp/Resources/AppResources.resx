@@ -480,4 +480,7 @@ Alexandre Roy</value>
   <data name="IamHere" xml:space="preserve">
     <value>I am at : {0}</value>
   </data>
+  <data name="LocationError" xml:space="preserve">
+    <value>location is disabled in phone settings</value>
+  </data>
 </root>

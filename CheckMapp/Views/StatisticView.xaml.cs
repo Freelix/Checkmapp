@@ -57,10 +57,10 @@ namespace CheckMapp.Views
                 var bounds = new LocationRectangle(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude, geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
                 statsMap.SetView(bounds);
             }
-            catch (UnauthorizedAccessException)
+            catch (Exception)
             {
                 // the app does not have the right capability or the location master switch is off 
-                MessageBox.Show("location is disabled in phone settings.");
+                MessageBox.Show(AppResources.LocationError);
             }
         }
     }

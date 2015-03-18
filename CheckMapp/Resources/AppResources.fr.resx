@@ -482,4 +482,7 @@ Alexandre Roy</value>
   <data name="IamHere" xml:space="preserve">
     <value>Je suis à : {0}</value>
   </data>
+  <data name="LocationError" xml:space="preserve">
+    <value>position est désactivée dans les paramètres de votre téléphone</value>
+  </data>
 </root>
