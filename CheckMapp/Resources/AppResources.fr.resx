@@ -499,4 +499,7 @@ Alexandre Roy</value>
   <data name="RestartApp" xml:space="preserve">
     <value>Un redémarrage est nécessaire</value>
   </data>
+  <data name="LocationError" xml:space="preserve">
+    <value>position est désactivée dans les paramètres de votre téléphone</value>
+  </data>
 </root>

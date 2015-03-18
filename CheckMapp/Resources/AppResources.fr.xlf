@@ -406,6 +406,11 @@
         <trans-unit id="Resx/ConfirmationImport" translate="yes" xml:space="preserve">
           <source>Are you sure you want to import these data? (This will replace your current data)</source>
           <target state="translated">Êtes-vous sûr de vouloir importer ces données? (Cela va remplacer ceux actuels)</target>
+ </trans-unit>
+        <trans-unit id="Resx/LocationError" translate="yes" xml:space="preserve">
+          <source>location is disabled in phone settings</source>
+          <target state="translated">position est désactivée dans les paramètres de votre téléphone</target>
+
         </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>

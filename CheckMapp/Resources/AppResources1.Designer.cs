@@ -722,6 +722,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à location is disabled in phone settings.
+        /// </summary>
+        public static string LocationError {
+            get {
+                return ResourceManager.GetString("LocationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Map.
         /// </summary>
         public static string Map {

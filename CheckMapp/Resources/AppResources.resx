@@ -497,5 +497,8 @@ Alexandre Roy</value>
   </data>
   <data name="DBFileName" xml:space="preserve">
     <value>Checkmapp.sdf</value>
+    </data>
+  <data name="LocationError" xml:space="preserve">
+    <value>location is disabled in phone settings</value>
   </data>
 </root>
