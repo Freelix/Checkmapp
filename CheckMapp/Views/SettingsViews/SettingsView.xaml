@@ -14,7 +14,7 @@
     shell:SystemTray.IsVisible="True"
     xmlns:facebookControls="clr-namespace:Facebook.Client.Controls;assembly=Facebook.Client"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    Loaded="PhoneApplicationPage_Loaded">
+    >
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -26,9 +26,9 @@
         <!--Pivot Control-->
         <phone:Pivot Grid.Row="0" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
-            <phone:PivotItem Header="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem Margin="0,0,0,10" Header="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
                 <Grid x:Name="ContentPanelParameters" Grid.Row="1" >
-                    <ScrollViewer>
+                    <ScrollViewer  >
                         <StackPanel Grid.Row="0" Margin="12,17,0,28">
                             <TextBlock Text="{Binding Path=LocalizedResources.WifiOnly, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <toolkit:ToggleSwitch IsChecked="{Binding WifiOnly}" Checked="WifiOnlySwitch_Checked" Unchecked="WifiOnlySwitch_Unchecked" />
@@ -45,6 +45,10 @@
 
                             <Button Click="BtnClearHistory_Click" Content="{Binding Path=LocalizedResources.ClearHistory, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
 
+                            <TextBlock Text="{Binding Path=LocalizedResources.DataManagement, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
+                            <Button x:Name="btnImport" Click="btnImport_Click" Content="{Binding Path=LocalizedResources.Import, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
+                            <Button x:Name="btnExport" Click="btnExport_Click" Content="{Binding Path=LocalizedResources.Export, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
+
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -58,7 +62,7 @@
                             <Image Source="/Assets/logo.png" Width="120" HorizontalAlignment="Left" Margin="0,0,0,0" Height="120"/>
                             <TextBlock Text="{Binding Path=LocalizedResources.AboutUs, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"/>
                             <TextBlock Text="{Binding AppVersion}"  Style="{StaticResource PhoneTextSmallStyle}"/>
-                            <Button Click="BtnRateApp_Click" Content="{Binding Path=LocalizedResources.RateApp, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
+                            <Button Margin="0,15,0,0" Click="BtnRateApp_Click" Content="{Binding Path=LocalizedResources.RateApp, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

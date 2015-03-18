@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.Resources;
 using CheckMapp.ViewModels.SettingsViewModels;
+using System.IO.IsolatedStorage;
+using Microsoft.Phone.Tasks;
 
 namespace CheckMapp.Views.SettingsViews
 {
@@ -21,33 +23,6 @@ namespace CheckMapp.Views.SettingsViews
         }
 
         #region Buttons
-
-        private void IconSave_Click(object sender, EventArgs e)
-        {
-            this.Focus();
-            var vm = DataContext as SettingsViewModel;
-
-            // wait till the next UI thread tick so that the binding gets updated
-            Dispatcher.BeginInvoke(() =>
-            {
-                if (vm != null)
-                {
-                    vm.EditSettingsCommand.Execute(null);
-                }
-
-                (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-            });
-        }
-
-        private void IconCancel_Click(object sender, EventArgs e)
-        {
-            (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
-        }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void BtnClearHistory_Click(object sender, EventArgs e)
         {
@@ -65,19 +40,30 @@ namespace CheckMapp.Views.SettingsViews
         }
 
 
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show(AppResources.ConfirmationImport, AppResources.Warning, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                Utils.Utility.ImportBD();
+
+                MessageBox.Show(AppResources.RestartApp, AppResources.Warning, MessageBoxButton.OK);
+                IsolatedStorageSettings.ApplicationSettings["ReplaceDB"] = true;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+                Application.Current.Terminate();
+            }
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            Utils.Utility.ExportDB();
+        }
+
+
         private void BtnRateApp_Click(object sender, EventArgs e)
         {
             this.Focus();
-
-            // wait till the next UI thread tick so that the binding gets updated
-            Dispatcher.BeginInvoke(() =>
-            {
-                var vm = DataContext as SettingsViewModel;
-                if (vm != null)
-                {
-                    vm.RateAppCommand.Execute(null);
-                }
-            });
+            MarketplaceReviewTask marketplaceReviewTask = new MarketplaceReviewTask();
+            marketplaceReviewTask.Show();
         }
 
         #endregion
@@ -108,6 +94,7 @@ namespace CheckMapp.Views.SettingsViews
         {
             this.DataContext = new SettingsViewModel();
         }
+
 
      
 

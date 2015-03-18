@@ -36,7 +36,6 @@ namespace CheckMapp.Views
             this.DataContext = new StatisticViewModel(currentTrip);
             loadLocation();
 
-
            
         }
 

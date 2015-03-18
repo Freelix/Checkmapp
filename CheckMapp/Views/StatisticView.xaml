@@ -23,10 +23,10 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel  >
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"  Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <Controls:Map Margin="0,0,0,7"   Width="420" Name="statsMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light">
+            <TextBlock Margin="0,0,0,10" Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"   Style="{StaticResource PhoneTextTitle1Style}"/>
+            <Controls:Map Margin="0,0,0,10"  Name="statsMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light">
             </Controls:Map>
         </StackPanel>
        
@@ -36,33 +36,34 @@
         <Grid Grid.Row="1"  Grid.RowSpan="2" >
         <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="70"  Source="/Images/appbar.clipboard.variant.png"></Image>
-                        <TextBlock x:Name="NoteToday" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripNoteToday}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    </StackPanel>
-                    
+
                     <StackPanel Orientation="Horizontal" >
                         <Image Height="70"  Source="/Images/appbar.clipboard.variant.png"></Image>
                         <TextBlock x:Name="NoteAllTime"  VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripNoteAllTime}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="70"  Source="/Images/feature.camera.png"></Image>
-                        <TextBlock x:Name="PictureToday" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripPictureToday}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <Image Height="70"  Source="/Images/appbar.calendar.day.png"></Image>
+                        <TextBlock x:Name="NoteToday" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripNoteToday}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </StackPanel>
-                    
+                    <Line X1="0" X2="1" Stretch="Fill" Stroke="White" StrokeThickness="1" />
                     <StackPanel Orientation="Horizontal">
                         <Image Height="70"  Source="/Images/feature.camera.png"></Image>
                         <TextBlock x:Name="PictureAllTime" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripPictureAllTime}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </StackPanel>
-
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="70"  Source="/Images/appbar.calendar.day.png"></Image>
+                        <TextBlock x:Name="PictureToday" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripPictureToday}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+                    <Line X1="0" X2="1" Stretch="Fill"  Stroke="White" StrokeThickness="1" />
                     <StackPanel Orientation="Horizontal" >
-                        <Image Height="70"  Source="/Images/appbar.flag.wavy.png"></Image>
+                        <Image Height="70"  Source="/Images/appbar.plane.rotated.45.png"></Image>
                         <TextBlock x:Name="TripBeginDate" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripBeginDate}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </StackPanel>
 
                     <StackPanel x:Name="EndStack" Orientation="Horizontal">
-                        <Image Height="70"  Source="/Images/appbar.flag.wavy.png"></Image>
+                        <Image Height="70"  Source="/Images/appbar.return.png"></Image>
                         <TextBlock x:Name="TripEndDate" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripEndDate}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </StackPanel>
                     

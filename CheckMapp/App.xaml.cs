@@ -15,6 +15,8 @@ using CheckMapp.Model;
 using CheckMapp.Model.Tables;
 using System.Linq;
 using CheckMapp.Model.DataService;
+using System.IO.IsolatedStorage;
+using System.IO;
 
 namespace CheckMapp
 {
@@ -27,7 +29,7 @@ namespace CheckMapp
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         // Specify the local database connection string.
-        private static string DBConnectionString = "Data Source=isostore:/Checkmapp.sdf";
+        public static string DBConnectionString = "Data Source=isostore:/" + AppResources.DBFileName;
 
         public static DatabaseDataContext db = new DatabaseDataContext(App.DBConnectionString);
 
@@ -35,7 +37,7 @@ namespace CheckMapp
         /// Constructor for the Application object.
         /// </summary>
         public App()
-        {            
+        {
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -59,7 +61,7 @@ namespace CheckMapp
 
                 // Enable non-production analysis visualization mode,
                 // which shows areas of a page that are handed off to GPU with a colored overlay.
-               // Application.Current.Host.Settings.EnableCacheVisualization = true;
+                // Application.Current.Host.Settings.EnableCacheVisualization = true;
 
                 // Prevent the screen from turning off while under the debugger by disabling
                 // the application's idle detection.
@@ -68,14 +70,32 @@ namespace CheckMapp
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            // Create the database if it does not exist.
-            using (DatabaseDataContext db = new DatabaseDataContext(DBConnectionString))
+
+            //Si c'est un redemarrage suite a l'importation
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("ReplaceDB") &&
+                (bool)IsolatedStorageSettings.ApplicationSettings["ReplaceDB"] == true)
             {
-                if (db.DatabaseExists() == false)
+                // Obtain the virtual store for the application.
+                IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+                //Replace database
+                if (iso.FileExists(AppResources.DBFileName))
+                    iso.DeleteFile(AppResources.DBFileName);
+                if (iso.FileExists("/shared/transfers/" + AppResources.DBFileName))
+                    iso.MoveFile("/shared/transfers/" + AppResources.DBFileName, AppResources.DBFileName);
+                IsolatedStorageSettings.ApplicationSettings["ReplaceDB"] = false;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+            else
+            {
+                // Create the database if it does not exist.
+                using (DatabaseDataContext db = new DatabaseDataContext(DBConnectionString))
                 {
-                    // Create the local database.
-                    db.CreateDatabase();
-                    db.SubmitChanges();
+                    if (db.DatabaseExists() == false)
+                    {
+                        // Create the local database.
+                        db.CreateDatabase();
+                        db.SubmitChanges();
+                    }
                 }
             }
 
@@ -93,6 +113,8 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
 
         }
+
+
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
@@ -117,6 +139,7 @@ namespace CheckMapp
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             ViewModelLocator.Cleanup();
+            
         }
 
         // Code to execute if a navigation fails

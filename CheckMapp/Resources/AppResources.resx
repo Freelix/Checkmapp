@@ -354,10 +354,10 @@
     <value>select</value>
   </data>
   <data name="ConfirmDeletePOI" xml:space="preserve">
-    <value>Are you sure you want to delete this point of interest?</value>
+    <value>Are you sure you want to delete this point of interest? (The notes and pictures with this point of interest will also be deleted)</value>
   </data>
   <data name="ConfirmDeletePOIs" xml:space="preserve">
-    <value>Are you sure you want to delete theses point of interests?</value>
+    <value>Are you sure you want to delete theses point of interests? (The notes and pictures with these points of interest will also be deleted)</value>
   </data>
   <data name="MyPoi" xml:space="preserve">
     <value>point of interests</value>
@@ -479,5 +479,23 @@ Alexandre Roy</value>
   </data>
   <data name="IamHere" xml:space="preserve">
     <value>I am at : {0}</value>
+  </data>
+  <data name="ConfirmationImport" xml:space="preserve">
+    <value>Are you sure you want to import these data? (This will replace your current data)</value>
+  </data>
+  <data name="DataManagement" xml:space="preserve">
+    <value>Data Management</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export data</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import data</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>You will have to restart the application</value>
+  </data>
+  <data name="DBFileName" xml:space="preserve">
+    <value>Checkmapp.sdf</value>
   </data>
 </root>

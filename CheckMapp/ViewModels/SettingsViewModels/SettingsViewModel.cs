@@ -86,6 +86,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _wifiOnly; }
             set
             {
+                WifiOnlyStorageProperty.Value = _wifiOnly;
                 _wifiOnly = value;
                 RaisePropertyChanged("WifiOnly");
             }
@@ -98,6 +99,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _autoSync; }
             set
             {
+                AutoSyncStorageProperty.Value = _autoSync;
                 _autoSync = value;
                 RaisePropertyChanged("AutoSync");
             }
@@ -110,6 +112,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _languageIndex; }
             set
             {
+                UpdateLanguage();
                 _languageIndex = value;
                 RaisePropertyChanged("LanguageIndex");
             }
@@ -131,20 +134,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         #region Buttons Command
 
-        private ICommand _editSettingsCommand;
-        public ICommand EditSettingsCommand
-        {
-            get
-            {
-                if (_editSettingsCommand == null)
-                {
-                    _editSettingsCommand = new RelayCommand(() => EditSettings());
-                }
-                return _editSettingsCommand;
-            }
-
-        }
-
         private ICommand _clearHistoryCommand;
         public ICommand ClearHistoryCommand
         {
@@ -159,32 +148,10 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         }
 
-
-        private ICommand _rateAppCommand;
-        public ICommand RateAppCommand
-        {
-            get
-            {
-                if (_rateAppCommand == null)
-                {
-                    _rateAppCommand = new RelayCommand(() => RateApp());
-                }
-                return _rateAppCommand;
-            }
-
-        }
-
         #endregion
 
 
         #region Storage Methods
-
-        private void EditSettings()
-        {
-            WifiOnlyStorageProperty.Value = _wifiOnly;
-            AutoSyncStorageProperty.Value = _autoSync;
-            UpdateLanguage();
-        }
 
         /// <summary>
         /// Update the Language if it was not the same
@@ -207,10 +174,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         }
 
         
-        private void RateApp()
-        {
-
-        }
+       
 
         #endregion
     }

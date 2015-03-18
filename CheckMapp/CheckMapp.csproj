@@ -14,8 +14,7 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion>
-    </SilverlightVersion>
+    <SilverlightVersion></SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -355,6 +354,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -392,6 +392,7 @@
     <Content Include="Images\AddTripPin.png" />
     <Content Include="Images\appbar.addclipboard.variant.png" />
     <Content Include="Images\appbar.addflag.png" />
+    <Content Include="Images\appbar.calendar.day.png" />
     <Content Include="Images\appbar.clipboard.variant.png" />
     <Content Include="Images\appbar.delete.png" />
     <Content Include="Images\appbar.eye.min.png" />
@@ -402,6 +403,8 @@
     <Content Include="Images\appbar.graph.line.up.png" />
     <Content Include="Images\appbar.list.check.png" />
     <Content Include="Images\appbar.location.png" />
+    <Content Include="Images\appbar.plane.rotated.45.png" />
+    <Content Include="Images\appbar.return.png" />
     <Content Include="Images\appbar.social.sharethis.png" />
     <Content Include="Images\cancel.png" />
     <Content Include="Images\check.png" />
@@ -434,12 +437,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="Coding4Fun.Toolkit.Net">
-      <HintPath>..\packages\Coding4Fun.Toolkit.Net.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Coding4Fun.Toolkit.Storage">
-      <HintPath>..\packages\Coding4Fun.Toolkit.Storage.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Storage.dll</HintPath>
-    </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.5.0.0\lib\portable-win+net40+sl50+wp80+wpa81\FluentValidation.dll</HintPath>
     </Reference>
@@ -450,6 +447,12 @@
     <Reference Include="GalaSoft.MvvmLight.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live">
+      <HintPath>..\packages\LiveSDK.5.6.1\lib\WindowsPhone81\Microsoft.Live.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live.Controls">
+      <HintPath>..\packages\LiveSDK.5.6.1\lib\WindowsPhone81\Microsoft.Live.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">

@@ -263,6 +263,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to import these data? (This will replace your current data).
+        /// </summary>
+        public static string ConfirmationImport {
+            get {
+                return ResourceManager.GetString("ConfirmationImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm.
         /// </summary>
         public static string ConfirmButton {
@@ -272,7 +281,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this point of interest?.
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this point of interest? (The notes and pictures with this point of interest will also be deleted).
         /// </summary>
         public static string ConfirmDeletePOI {
             get {
@@ -281,7 +290,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete theses point of interests?.
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to delete theses point of interests? (The notes and pictures with these points of interest will also be deleted).
         /// </summary>
         public static string ConfirmDeletePOIs {
             get {
@@ -353,6 +362,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Data Management.
+        /// </summary>
+        public static string DataManagement {
+            get {
+                return ResourceManager.GetString("DataManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Date :.
         /// </summary>
         public static string Date {
@@ -367,6 +385,15 @@ namespace CheckMapp.Resources {
         public static string Day {
             get {
                 return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Checkmapp.sdf.
+        /// </summary>
+        public static string DBFileName {
+            get {
+                return ResourceManager.GetString("DBFileName", resourceCulture);
             }
         }
         
@@ -524,6 +551,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export data.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Finish the trip.
         /// </summary>
         public static string FinishTrip {
@@ -547,6 +583,15 @@ namespace CheckMapp.Resources {
         public static string IamHere {
             get {
                 return ResourceManager.GetString("IamHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Import data.
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
             }
         }
         
@@ -898,6 +943,15 @@ namespace CheckMapp.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You will have to restart the application.
+        /// </summary>
+        public static string RestartApp {
+            get {
+                return ResourceManager.GetString("RestartApp", resourceCulture);
             }
         }
         

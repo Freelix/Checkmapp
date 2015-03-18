@@ -16,6 +16,9 @@
      xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     Loaded="PhoneApplicationPage_Loaded">
 
+    <phone:PhoneApplicationPage.Resources>
+        <SolidColorBrush x:Key="TransparentBlack" Color="Black" Opacity="0.4" />
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" >
@@ -26,45 +29,23 @@
         </Grid.RowDefinitions>
 
 
-        <Grid  Height="200" >
+        <Grid  Height="240" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <myControl:LiveTilePicture SourceImage="{Binding Trip.MainPictureData, Converter={StaticResource ByteToImageConverter}}" Grid.RowSpan="2" Name="livetileImage" />
-        
-            <!-- Manière vraiment dégeulasse de faire du texte Outlined-->
-            <TextBlock Margin="10" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="{Binding ElementName=BackgroundText,Path=Text}" FontSize="40"  Grid.RowSpan="2" Grid.Row="0"
-                   Foreground="Black"  RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform TranslateX="1" TranslateY="1"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Margin="10" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="{Binding ElementName=BackgroundText,Path=Text}" Grid.RowSpan="2" Grid.Row="0" FontSize="40" 
-                   Foreground="Black"  RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform TranslateX="-1" TranslateY="1"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Margin="10" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="{Binding ElementName=BackgroundText,Path=Text}" Grid.RowSpan="2" Grid.Row="0" FontSize="40" 
-                   Foreground="Black"  RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform TranslateX="-1" TranslateY="-1"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Margin="10" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="{Binding ElementName=BackgroundText,Path=Text}" Grid.RowSpan="2" Grid.Row="0" FontSize="40" 
-                   Foreground="Black"  RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform TranslateX="1" TranslateY="-1"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock TextWrapping="Wrap" Margin="10" FontSize="40" x:Name="BackgroundText" VerticalAlignment="Bottom" Grid.RowSpan="2" Grid.Row="0"  Text="{Binding Trip.Name}"  >
-            </TextBlock>
-            
+            <myControl:LiveTilePicture SourceImage="{Binding Trip.MainPictureData, Converter={StaticResource ByteToImageConverter}}" Grid.RowSpan="2" Name="livetileImage" >
+            </myControl:LiveTilePicture>
+
+            <StackPanel Background="{StaticResource TransparentBlack}" Grid.RowSpan="2" Grid.Row="0" VerticalAlignment="Bottom"  >
+                <TextBlock Margin="10" TextWrapping="Wrap"  FontSize="40" x:Name="BackgroundText" Text="{Binding Trip.Name}"  >
+                </TextBlock>
+            </StackPanel>
+
         </Grid>
-        
+
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Canvas.ZIndex="100" Grid.Row="1" Margin="12,50,12,0">
+        <Grid x:Name="ContentPanel" Canvas.ZIndex="100" Grid.Row="1" Margin="12,20,12,0">
             <Grid.Background>
                 <ImageBrush AlignmentY="Bottom"   Opacity="0.2" Stretch="Uniform" ImageSource="/Images/rose2.png"/>
             </Grid.Background>
@@ -73,26 +54,26 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="0,20,0,0" Width="200">
+            <StackPanel Margin="0,20,0,0" >
                 <c4f:RoundButton x:Name="btnPOI" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.flag.wavy.png" Click="btnPOI_Click"/>
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding POITitle}"></TextBlock>
             </StackPanel>
 
-            <StackPanel Margin="0,20,0,0" Grid.Column="1" Width="200">
+            <StackPanel Margin="0,20,0,0" Grid.Column="1" >
                 <c4f:RoundButton x:Name="btnStats" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.graph.line.up.png" Click="btnStats_Click"/>
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"></TextBlock>
             </StackPanel>
 
-            <StackPanel Margin="0,40,0,0" Grid.Row="1" Width="200">
+            <StackPanel Margin="0,40,0,0" Grid.Row="1" >
                 <c4f:RoundButton x:Name="btnPhoto" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/feature.camera.png" Click="btnPhoto_Click" />
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding PhotoTitle}"></TextBlock>
             </StackPanel>
 
-            <StackPanel Margin="0,40,0,0" Grid.Column="1" Grid.Row="1" Width="200">
+            <StackPanel Margin="0,40,0,0" Grid.Column="1" Grid.Row="1" >
                 <c4f:RoundButton x:Name="btnNote" ButtonWidth="150" ButtonHeight="150" ImageSource="/Images/appbar.clipboard.variant.png" Click="btnNote_Click" />
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding NoteTitle}"></TextBlock>
             </StackPanel>
@@ -104,9 +85,9 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-                <shell:ApplicationBarIconButton  x:Name="IconButtonAddMedia" Click="IconButtonAddMedia_Click"  IconUri="/Images/feature.addcamera.png" Text="[add picture]"/>
-                <shell:ApplicationBarIconButton  x:Name="IconButtonAddNotes" Click="IconButtonAddNotes_Click"  IconUri="/Images/appbar.addclipboard.variant.png" Text="[add note]"/>
-                <shell:ApplicationBarIconButton  x:Name="IconButtonAddPOI"  Click="IconButtonAddPOI_Click" IconUri="/Images/appbar.addflag.png" Text="[add poi]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconButtonAddMedia" Click="IconButtonAddMedia_Click"  IconUri="/Images/feature.addcamera.png" Text="[add picture]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconButtonAddNotes" Click="IconButtonAddNotes_Click"  IconUri="/Images/appbar.addclipboard.variant.png" Text="[add note]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconButtonAddPOI"  Click="IconButtonAddPOI_Click" IconUri="/Images/appbar.addflag.png" Text="[add poi]"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem x:Name="EditTrip"  Click="EditTrip_Click" Text="[edit]"></shell:ApplicationBarMenuItem>
                 <shell:ApplicationBarMenuItem x:Name="DeleteTrip" Click="DeleteTrip_Click"  Text="[delete]"></shell:ApplicationBarMenuItem>

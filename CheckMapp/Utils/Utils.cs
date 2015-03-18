@@ -12,6 +12,13 @@ using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using System.Windows;
 using System.Device.Location;
+using Microsoft.Live;
+using Windows.Storage;
+using System.Runtime.Serialization;
+using CheckMapp.Resources;
+using System.IO.IsolatedStorage;
+using CheckMapp.Model;
+using Microsoft.Phone.Data.Linq;
 
 namespace CheckMapp.Utils
 {
@@ -209,7 +216,7 @@ namespace CheckMapp.Utils
 
             return Address;
         }
-        
+
         #endregion
 
         #region XML
@@ -257,5 +264,167 @@ namespace CheckMapp.Utils
         }
 
         #endregion friend list
+
+        #region OneDrive
+        private static LiveConnectClient _liveClient = null;
+        public static LiveConnectClient LiveClient
+        {
+            get
+            {
+                if (_liveClient == null)
+                {
+                    LogClient();
+                }
+                return _liveClient;
+            }
+            set
+            {
+                _liveClient = value;
+            }
+        }
+
+        private async static void LogClient()
+        {
+            //  create OneDrive auth client
+            var authClient = new LiveAuthClient("000000004814E746");
+
+            //  ask for both read and write access to the OneDrive
+            LiveLoginResult result = await authClient.LoginAsync(new string[] { "wl.skydrive", "wl.skydrive_update" });
+
+            //  if login successful 
+            if (result.Status == LiveConnectSessionStatus.Connected)
+            {
+                //  create a OneDrive client
+                LiveClient = new LiveConnectClient(result.Session);
+            }
+        }
+
+        /// <summary>
+        /// Uploader notre base de données sur OneDrive
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public async static Task<int> ExportDB()
+        {
+            try
+            {
+                IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+                iso.CopyFile(AppResources.DBFileName, "/shared/transfers/" + AppResources.DBFileName);
+
+                //  create a folder
+                string folderID = await GetFolderID("checkmapp");
+
+                if (string.IsNullOrEmpty(folderID))
+                {
+                    //  return error
+                    return 0;
+                }
+
+                //  upload local file to OneDrive
+                await LiveClient.BackgroundUploadAsync(folderID, new Uri("/shared/transfers/" + AppResources.DBFileName, UriKind.RelativeOrAbsolute), OverwriteOption.Overwrite);
+
+                return 1;
+            }
+            catch
+            {
+            }
+            //  return error
+            return 0;
+        }
+
+        /// <summary>
+        /// Downloader la BD a partir de OneDrive
+        /// </summary>
+        /// <returns></returns>
+        public async static Task<int> ImportBD()
+        {
+            try
+            {
+                string fileID = string.Empty;
+
+                //  get folder ID
+                string folderID = await GetFolderID("checkmapp");
+
+                if (string.IsNullOrEmpty(folderID))
+                {
+                    return 0; // doesnt exists
+                }
+
+                //  get list of files in this folder
+                LiveOperationResult loResults = await LiveClient.GetAsync(folderID + "/files");
+                List<object> folder = loResults.Result["data"] as List<object>;
+
+                //  search for our file 
+                foreach (object fileDetails in folder)
+                {
+                    IDictionary<string, object> file = fileDetails as IDictionary<string, object>;
+                    if (string.Compare(file["name"].ToString(), AppResources.DBFileName, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        //  found our file
+                        fileID = file["id"].ToString();
+                        break;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(fileID))
+                {
+                    //  file doesnt exists
+                    return 0;
+                }
+
+                //  download file from OneDrive
+                await LiveClient.DownloadAsync(fileID + "/content");
+
+                return 1;
+
+            }
+            catch
+            {
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Obtient le dossier dans Onedrive
+        /// </summary>
+        /// <param name="folderName"></param>
+        /// <returns></returns>
+        public async static Task<string> GetFolderID(string folderName)
+        {
+            try
+            {
+                string queryString = "me/skydrive/files?filter=folders";
+                //  get all folders
+                LiveOperationResult loResults = await LiveClient.GetAsync(queryString);
+                dynamic folders = loResults.Result;
+
+                foreach (dynamic folder in folders.data)
+                {
+                    if (string.Compare(folder.name, folderName, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        //  found our folder
+                        return folder.id;
+                    }
+                }
+
+                //  folder not found
+
+                //  create folder
+                Dictionary<string, object> folderDetails = new Dictionary<string, object>();
+                folderDetails.Add("name", folderName);
+                loResults = await LiveClient.PostAsync("me/skydrive", folderDetails);
+                folders = loResults.Result;
+
+                // return folder id
+                return folders.id;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+       
+        #endregion
     }
 }
