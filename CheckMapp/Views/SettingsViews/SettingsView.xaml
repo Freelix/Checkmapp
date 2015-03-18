@@ -43,8 +43,6 @@
                                 SelectedIndex="{Binding LanguageIndex, Mode=TwoWay}">
                             </toolkit:ListPicker>
 
-                            <Button Click="BtnClearHistory_Click" Content="{Binding Path=LocalizedResources.ClearHistory, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
-
                             <TextBlock Text="{Binding Path=LocalizedResources.DataManagement, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <Button x:Name="btnImport" Click="btnImport_Click" Content="{Binding Path=LocalizedResources.Import, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
                             <Button x:Name="btnExport" Click="btnExport_Click" Content="{Binding Path=LocalizedResources.Export, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>

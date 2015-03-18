@@ -65,6 +65,19 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         }
 
+        private ICommand _cancelNoteCommand;
+        public ICommand CancelNoteCommand
+        {
+            get
+            {
+                if (_cancelNoteCommand == null)
+                {
+                    _cancelNoteCommand = new RelayCommand(() => CancelNote());
+                }
+                return _cancelNoteCommand;
+            }
+        }
+
         #region Properties
 
 
@@ -193,6 +206,15 @@ namespace CheckMapp.ViewModels.NoteViewModels
                     AddNoteInDB();
                 else if (Mode == Mode.edit)
                     UpdateExistingNote();
+            }
+        }
+
+        public void CancelNote()
+        {
+            if (Mode == ViewModels.Mode.add)
+            {
+                Note.Trip.Notes.Remove(Note);
+                Note.Trip = null;
             }
         }
 

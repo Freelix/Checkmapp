@@ -500,6 +500,7 @@ Alexandre Roy</value>
     <value>Un redémarrage est nécessaire</value>
   </data>
   <data name="LocationError" xml:space="preserve">
-    <value>position est désactivée dans les paramètres de votre téléphone</value>
+    <value>La localisation de votre position est désactivée dans les paramètres de votre téléphone.</value>
+    <comment></comment>
   </data>
 </root>

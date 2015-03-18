@@ -86,6 +86,9 @@ namespace CheckMapp.Views.POIViews
         /// <param name="e"></param>
         private void IconCancel_Click(object sender, EventArgs e)
         {
+            var vm = DataContext as AddEditPOIViewModel;
+            vm.CancelPOICommand.Execute(null);
+
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 

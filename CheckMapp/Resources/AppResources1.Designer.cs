@@ -722,7 +722,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à location is disabled in phone settings.
+        ///   Recherche une chaîne localisée semblable à Your location is disable in your phone settings..
         /// </summary>
         public static string LocationError {
             get {

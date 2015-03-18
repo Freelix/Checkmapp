@@ -64,6 +64,9 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         private void IconCancel_Click(object sender, EventArgs e)
         {
+            var vm = DataContext as AddEditNoteViewModel;
+            vm.CancelNoteCommand.Execute(null);
+
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 

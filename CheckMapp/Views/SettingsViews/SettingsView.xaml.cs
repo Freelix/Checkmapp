@@ -24,21 +24,6 @@ namespace CheckMapp.Views.SettingsViews
 
         #region Buttons
 
-        private void BtnClearHistory_Click(object sender, EventArgs e)
-        {
-            this.Focus();
-
-            // wait till the next UI thread tick so that the binding gets updated
-            Dispatcher.BeginInvoke(() =>
-            {
-                var vm = DataContext as SettingsViewModel;
-                if (vm != null)
-                {
-                    vm.ClearHistoryCommand.Execute(null);
-                }
-            });
-        }
-
 
         private void btnImport_Click(object sender, RoutedEventArgs e)
         {

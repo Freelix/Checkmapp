@@ -60,6 +60,19 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         }
 
+        private ICommand _cancelPOICommand;
+        public ICommand CancelPOICommand
+        {
+            get
+            {
+                if (_cancelPOICommand == null)
+                {
+                    _cancelPOICommand = new RelayCommand(() => CancelPOI());
+                }
+                return _cancelPOICommand;
+            }
+        }
+
         #region Properties
 
         private PointOfInterest _pointOfInterest;
@@ -172,6 +185,15 @@ namespace CheckMapp.ViewModels.POIViewModels
                     AddPoiInDB();
                 else
                     UpdateExistingPOI();
+            }
+        }
+
+        public void CancelPOI()
+        {
+            if (Mode == ViewModels.Mode.add)
+            {
+                PointOfInterest.Trip.PointsOfInterests.Remove(PointOfInterest);
+                PointOfInterest.Trip = null;
             }
         }
 

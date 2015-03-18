@@ -40,19 +40,27 @@ namespace CheckMapp.ViewModels
             get { return Trip.Name; }
         }
 
-         public string TripBeginDate
+        public string TripBeginDate
         {
-            get { return String.Format(AppResources.TripBeginDate, Trip.BeginDate.ToString()); }
+            get { return String.Format(AppResources.TripBeginDate, Trip.BeginDate.ToShortDateString()); }
         }
 
         public string TripEndDate
         {
-            get { return String.Format(AppResources.TripEndDate, Trip.EndDate.ToString()); }
+            get
+            {
+                if (Trip.EndDate != null)
+                {
+                    return String.Format(AppResources.TripEndDate, Trip.EndDate.Value.ToShortDateString());
+                }
+                else
+                    return null;
+            }
         }
 
         public string TripNoteToday
         {
-            get { return String.Format(AppResources.NoteToday, Trip.Notes.Where(x => x.Date.Date == DateTime.Today).Count()); }                        
+            get { return String.Format(AppResources.NoteToday, Trip.Notes.Where(x => x.Date.Date == DateTime.Today).Count()); }
         }
 
         public string TripNoteAllTime

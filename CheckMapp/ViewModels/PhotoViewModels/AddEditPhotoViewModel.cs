@@ -181,6 +181,20 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         }
 
+
+        private ICommand _cancelPhotoCommand;
+        public ICommand CancelPhotoCommand
+        {
+            get
+            {
+                if (_cancelPhotoCommand == null)
+                {
+                    _cancelPhotoCommand = new RelayCommand(() => CancelPhoto());
+                }
+                return _cancelPhotoCommand;
+            }
+        }
+
         #region DBMethods
         /// <summary>
         /// Ajout ou modification d'une photo
@@ -199,6 +213,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                     AddPictureInDB();
                 else if (Mode == Mode.edit)
                     UpdateExistingPicture();
+            }
+        }
+
+        public void CancelPhoto()
+        {
+            if (Mode == ViewModels.Mode.add)
+            {
+                Picture.Trip.Pictures.Remove(Picture);
+                Picture.Trip = null;
             }
         }
 

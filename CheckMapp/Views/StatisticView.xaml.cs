@@ -20,9 +20,7 @@ namespace CheckMapp.Views
         Trip currentTrip;
         public StatisticView()
         {
-            
             InitializeComponent();
-            
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -59,7 +57,7 @@ namespace CheckMapp.Views
             catch (Exception)
             {
                 // the app does not have the right capability or the location master switch is off 
-                MessageBox.Show(AppResources.LocationError);
+                MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
             }
         }
     }

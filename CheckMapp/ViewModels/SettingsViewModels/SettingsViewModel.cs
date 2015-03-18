@@ -134,20 +134,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         #region Buttons Command
 
-        private ICommand _clearHistoryCommand;
-        public ICommand ClearHistoryCommand
-        {
-            get
-            {
-                if (_clearHistoryCommand == null)
-                {
-                    _clearHistoryCommand = new RelayCommand(() => ClearHistory());
-                }
-                return _clearHistoryCommand;
-            }
-
-        }
-
         #endregion
 
 
@@ -168,13 +154,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
 
         #region Buttons Methods
 
-        private void ClearHistory()
-        {
-
-        }
-
-        
-       
 
         #endregion
     }

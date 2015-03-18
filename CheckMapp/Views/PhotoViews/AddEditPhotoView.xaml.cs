@@ -74,6 +74,9 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconCancel_Click(object sender, EventArgs e)
         {
+            var vm = DataContext as AddEditPhotoViewModel;
+            vm.CancelPhotoCommand.Execute(null);
+
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 
