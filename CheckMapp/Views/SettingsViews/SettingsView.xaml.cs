@@ -25,22 +25,29 @@ namespace CheckMapp.Views.SettingsViews
         #region Buttons
 
 
-        private void btnImport_Click(object sender, RoutedEventArgs e)
+        private async void btnImport_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show(AppResources.ConfirmationImport, AppResources.Warning, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Utils.Utility.ImportBD();
-
-                MessageBox.Show(AppResources.RestartApp, AppResources.Warning, MessageBoxButton.OK);
-                IsolatedStorageSettings.ApplicationSettings["ReplaceDB"] = true;
-                IsolatedStorageSettings.ApplicationSettings.Save();
-                Application.Current.Terminate();
+                int import = await Utils.Utility.ImportBD();
+                if (import == 0)
+                {
+                    MessageBox.Show(AppResources.FileNotFound, AppResources.Warning, MessageBoxButton.OK);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(AppResources.RestartApp, AppResources.Warning, MessageBoxButton.OK);
+                    IsolatedStorageSettings.ApplicationSettings["ReplaceDB"] = true;
+                    IsolatedStorageSettings.ApplicationSettings.Save();
+                    Application.Current.Terminate();
+                }
             }
         }
 
-        private void btnExport_Click(object sender, RoutedEventArgs e)
+        private async void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            Utils.Utility.ExportDB();
+            int export = await Utils.Utility.ExportDB();
         }
 
 

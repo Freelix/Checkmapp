@@ -21,6 +21,8 @@ using Microsoft.Phone.Maps.Services;
 using Microsoft.Phone.Maps.Controls;
 using System.Threading.Tasks;
 using Microsoft.Phone.UserData;
+using Windows.ApplicationModel.Appointments;
+using Windows.Storage;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -66,9 +68,9 @@ namespace CheckMapp.Views.TripViews
         private void IconSave_Click(object sender, EventArgs e)
         {
             this.Focus();
+                var vm = DataContext as AddEditTripViewModel;
             Dispatcher.BeginInvoke(() =>
             {
-                var vm = DataContext as AddEditTripViewModel;
                 if (vm != null)
                 {
                     if (vm.Trip.MainPictureData == null)
@@ -90,6 +92,19 @@ namespace CheckMapp.Views.TripViews
                     }
                 }
             });
+
+            if (vm.Mode == Mode.add && MessageBox.Show(AppResources.AppCalendar, AppResources.ConfirmButton, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                SaveAppointmentTask appointment = new SaveAppointmentTask();
+                appointment.Subject = vm.TripName;
+                appointment.StartTime = vm.TripBeginDate;
+                appointment.EndTime = null;
+                appointment.Location = selectDest.PoiTextBox.Text;
+                appointment.IsAllDayEvent = false;
+                appointment.Reminder = Reminder.None;
+                appointment.Show();
+            }
+
         }
 
         void logo_ImageOpened(object sender, RoutedEventArgs e)
@@ -131,7 +146,7 @@ namespace CheckMapp.Views.TripViews
             if (e.TaskResult == TaskResult.OK)
             {
                 (this.DataContext as AddEditTripViewModel).MainImage = Utils.Utility.ReadFully(e.ChosenPhoto);
-                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditTripViewModel).MainImage,false);
+                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditTripViewModel).MainImage, false);
             }
 
             //La valeur s'enleve pour une raison inconnu encore, alors on doit la réassigner

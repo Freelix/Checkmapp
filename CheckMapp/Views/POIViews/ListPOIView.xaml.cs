@@ -17,6 +17,7 @@ using System.Device.Location;
 using System.Collections;
 using CheckMapp.ViewModels;
 using Microsoft.Phone.Tasks;
+using Windows.Devices.Geolocation;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -45,7 +46,7 @@ namespace CheckMapp.Views.POIViews
             obj.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
         }
 
-        private void ContextMenu_Click(object sender, RoutedEventArgs e)
+        private async void ContextMenu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
             if (menuItem != null && ((sender as MenuItem).DataContext is PointOfInterest))
@@ -53,6 +54,30 @@ namespace CheckMapp.Views.POIViews
                 PointOfInterest poiSelected = (sender as MenuItem).DataContext as PointOfInterest;
                 switch (menuItem.Name)
                 {
+                    case "POIGet":
+                        try
+                        {
+                            (this.DataContext as ListPOIViewModel).Loading = true;
+                            BingMapsDirectionsTask bingMap = new BingMapsDirectionsTask();
+                            // Get my current location.
+                            Geolocator myGeolocator = new Geolocator();
+                            Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
+                            Geocoordinate myGeocoordinate = myGeoposition.Coordinate;
+                            bingMap.Start = new LabeledMapLocation();
+                            bingMap.End = new LabeledMapLocation();
+                            bingMap.Start.Label = AppResources.YourPosition;
+                            bingMap.Start.Location = new GeoCoordinate(myGeocoordinate.Latitude, myGeocoordinate.Longitude);
+                            bingMap.End.Location = poiSelected.Coordinate;
+                            bingMap.End.Label = poiSelected.Name;
+                            bingMap.Show();
+                            (this.DataContext as ListPOIViewModel).Loading = false;
+                        }
+                        catch(Exception)
+                        {
+                            // the app does not have the right capability or the location master switch is off 
+                            MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
+                        }
+                        break;
                     case "POIShare":
                         ShareStatusTask status = new ShareStatusTask();
                         status.Status = String.Format(AppResources.IamHere, poiSelected.Name);

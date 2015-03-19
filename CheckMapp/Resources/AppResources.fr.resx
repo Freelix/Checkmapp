@@ -503,4 +503,13 @@ Alexandre Roy</value>
     <value>La localisation de votre position est désactivée dans les paramètres de votre téléphone.</value>
     <comment></comment>
   </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Aucun fichier valide n'a été trouvé dans le dossier Checkmapp de votre OneDrive.</value>
+  </data>
+  <data name="GetToPOI" xml:space="preserve">
+    <value>s'y rendre...</value>
+  </data>
+  <data name="AppCalendar" xml:space="preserve">
+    <value>Voulez-vous ajouter ce voyage à votre calendrier?</value>
+  </data>
 </root>

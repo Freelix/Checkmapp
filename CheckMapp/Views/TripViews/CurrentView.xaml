@@ -16,42 +16,42 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-
-
         <StackPanel Orientation="Horizontal">
-            <Border BorderBrush="White" BorderThickness="5,5,5,15">
-                <Image VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="170" Source="{Binding Trip.MainPictureData,Converter={StaticResource ByteToImageConverter}}"></Image>
-            </Border>
             <StackPanel>
-                <TextBlock Margin="15,-10,0,0"  x:Name="textblockVertical"  VerticalAlignment="Top" Text="{Binding Trip.Name}"
+                <Border BorderBrush="White" Height="175" Width="175" VerticalAlignment="Top" BorderThickness="5,5,5,20">
+                    <Image VerticalAlignment="Top" HorizontalAlignment="Left" Height="170" Width="170" Source="{Binding Trip.MainPictureData,Converter={StaticResource ByteToImageConverter}}"></Image>
+                </Border>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Margin="10,-10,0,0"  x:Name="textblockVertical"  VerticalAlignment="Top" Text="{Binding Trip.Name}"
          Foreground="White" FontSize="40"  Width="240"   TextWrapping="Wrap"   >
                 </TextBlock>
-                <TextBlock  TextWrapping="Wrap" Text="{Binding Trip.BeginDate, Converter={StaticResource DateConverter}}" Margin="0,15,0,0" Height="74" Width="208"></TextBlock>
             </StackPanel>
         </StackPanel>
-
-        <StackPanel Margin="0,30,0,0"  Orientation="Horizontal" Grid.Row="1">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image VerticalAlignment="Center" Height="80" Width="80" Source="/Images/feature.camera.png"></Image>
-                    <Border VerticalAlignment="Center" Height="25" Width="2" Background="White"></Border>
-                    <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="{Binding CountPhotos}"></TextBlock>
+        <ScrollViewer Margin="-5,10,0,0"   Grid.Row="1">
+            <StackPanel  Orientation="Horizontal">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image VerticalAlignment="Center" Height="80" Width="80" Source="/Images/feature.camera.png"></Image>
+                        <Border VerticalAlignment="Center" Height="25" Width="2" Background="White"></Border>
+                        <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="{Binding CountPhotos}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="80" Width="80" Source="/Images/appbar.clipboard.variant.png"></Image>
+                        <Border Height="25" Width="2" Background="White"></Border>
+                        <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="{Binding CountNotes}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="80" Width="80" Source="/Images/appbar.flag.wavy.png"></Image>
+                        <Border Height="25" Width="2" Background="White"></Border>
+                        <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="{Binding CountPOI}"></TextBlock>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Height="80" Width="80" Source="/Images/appbar.clipboard.variant.png"></Image>
-                    <Border Height="25" Width="2" Background="White"></Border>
-                    <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="{Binding CountNotes}"></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Height="80" Width="80" Source="/Images/appbar.flag.wavy.png"></Image>
-                    <Border Height="25" Width="2" Background="White"></Border>
-                    <TextBlock Margin="20,0,0,0" VerticalAlignment="Center" Text="{Binding CountPOI}"></TextBlock>
+                <StackPanel Margin="60,0,0,0" VerticalAlignment="Top" >
+                    <TextBlock  HorizontalAlignment="Center" FontSize="40" Text="{Binding Path=LocalizedResources.Day, Source={StaticResource LocalizedStrings}}"></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" FontSize="90" Text="{Binding ElapsedDays}" ></TextBlock>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Margin="50,0,0,40" VerticalAlignment="Center" >
-                <TextBlock  HorizontalAlignment="Center" FontSize="40" Text="{Binding Path=LocalizedResources.Day, Source={StaticResource LocalizedStrings}}"></TextBlock>
-                <TextBlock  HorizontalAlignment="Center" FontSize="90" Text="{Binding ElapsedDays}" ></TextBlock>
-            </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

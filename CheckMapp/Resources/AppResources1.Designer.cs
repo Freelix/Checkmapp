@@ -164,6 +164,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to add this trip in your calendar?.
+        /// </summary>
+        public static string AppCalendar {
+            get {
+                return ResourceManager.GetString("AppCalendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à checkmapp.
         /// </summary>
         public static string ApplicationTitle {
@@ -560,11 +569,29 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à No valid file has been found in folder Checkmapp in your OneDrive..
+        /// </summary>
+        public static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Finish the trip.
         /// </summary>
         public static string FinishTrip {
             get {
                 return ResourceManager.GetString("FinishTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à getting there....
+        /// </summary>
+        public static string GetToPOI {
+            get {
+                return ResourceManager.GetString("GetToPOI", resourceCulture);
             }
         }
         

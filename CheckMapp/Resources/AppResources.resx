@@ -501,4 +501,13 @@ Alexandre Roy</value>
   <data name="LocationError" xml:space="preserve">
     <value>Your location is disable in your phone settings.</value>
   </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>No valid file has been found in folder Checkmapp in your OneDrive.</value>
+  </data>
+  <data name="GetToPOI" xml:space="preserve">
+    <value>getting there...</value>
+  </data>
+  <data name="AppCalendar" xml:space="preserve">
+    <value>Do you want to add this trip in your calendar?</value>
+  </data>
 </root>

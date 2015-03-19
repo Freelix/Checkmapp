@@ -47,6 +47,18 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
+        private bool _loading = false;
+
+        public bool Loading
+        {
+            get { return _loading; }
+            set
+            {
+                _loading = value;
+                RaisePropertyChanged("Loading");
+            }
+        }
+
         private ICommand _deletePOIsCommand;
         public ICommand DeletePOIsCommand
         {
