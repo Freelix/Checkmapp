@@ -15,6 +15,7 @@ namespace CheckMapp.Model.Tables
         private int _id;
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+        [DataMember]
         public int Id
         {
             get { return _id; }
@@ -33,6 +34,7 @@ namespace CheckMapp.Model.Tables
         private int? _pointOfInterestId;
         private EntityRef<PointOfInterest> _pointOfInterest = new EntityRef<PointOfInterest>();
         [Association(Storage = "_pointOfInterest", ThisKey = "_pointOfInterestId", OtherKey = "Id", IsForeignKey = true)]
+        [DataMember]
         public PointOfInterest PointOfInterest
         {
             get { return _pointOfInterest.Entity; }
@@ -53,6 +55,7 @@ namespace CheckMapp.Model.Tables
         private DateTime _date = new DateTime();
 
         [Column]
+        [DataMember]
         public DateTime Date
         {
             get { return _date; }
@@ -70,6 +73,7 @@ namespace CheckMapp.Model.Tables
         private string _description;
 
         [Column]
+        [DataMember]
         public string Description
         {
             get { return _description; }
@@ -87,6 +91,7 @@ namespace CheckMapp.Model.Tables
         private byte[] _pictureData;
 
         [Column (DbType = "image", UpdateCheck = UpdateCheck.Never)]
+        [DataMember]
         public byte[] PictureData
         {
             get { return _pictureData; }
@@ -105,6 +110,7 @@ namespace CheckMapp.Model.Tables
         private int? _tripId;
         private EntityRef<Trip> _trip = new EntityRef<Trip>();
         [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
+        [DataMember]
         public Trip Trip
         {
             get { return _trip.Entity; }

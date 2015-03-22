@@ -10,6 +10,7 @@ using System.Windows;
 using CheckMapp.Model.DataService;
 using FluentValidation;
 using CheckMapp.Utils.Validations;
+using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
@@ -27,11 +28,10 @@ namespace CheckMapp.ViewModels.POIViewModels
         {
             this.Mode = mode;
 
-            if (this.Mode == Mode.add)
+            if (this.Mode == Mode.add && !Utility.IsTombstoned())
             {
                 PointOfInterest = new Model.Tables.PointOfInterest();
                 PointOfInterest.Trip = trip;
-                trip.PointsOfInterests.Add(PointOfInterest);
             }
             else
                 PointOfInterest = poi;
@@ -202,6 +202,10 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// </summary>
         public void AddPoiInDB()
         {
+            // Workaround explained in AddEditNoteViewModel
+            PointOfInterest.Trip.PointsOfInterests.Add(PointOfInterest);
+            PointOfInterest.Trip = Utility.GetAssociatedTrip(PointOfInterest.Trip.Id);
+
             DataServicePoi dsPoi = new DataServicePoi();
             dsPoi.addPoi(PointOfInterest);
         }

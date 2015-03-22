@@ -42,6 +42,13 @@ namespace CheckMapp.Views.POIViews
             base.OnNavigatedTo(e);
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            // Save the note instance to retrieve when a tombstone occured
+            AddEditPOIViewModel vm = DataContext as AddEditPOIViewModel;
+            PhoneApplicationService.Current.State["Poi"] = vm.PointOfInterest;
+        }
+
         /// <summary>
         /// On assigne les titres des boutons au démarrage
         /// </summary>
