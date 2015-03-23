@@ -39,7 +39,14 @@
                 </Grid.RowDefinitions>
                 <StackPanel>
                     <TextBlock Text="{Binding Path=LocalizedResources.NoteName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.ExamplePointInterest, Source={StaticResource LocalizedStrings}}" x:Name="txtBoxName" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <toolkit:PhoneTextBox  Hint="{Binding Path=LocalizedResources.ExamplePointInterest, Source={StaticResource LocalizedStrings}}" x:Name="txtBoxName" Text="{Binding PoiName, Mode=TwoWay}"></toolkit:PhoneTextBox>
+                        <Image Tap="Image_Tap" Grid.Column="1" Source="{Binding PointOfInterest.Type, Converter={StaticResource POITypeConverter}}" Height="80"  />
+                    </Grid>
                     <TextBlock Text="{Binding Path=LocalizedResources.PlacePOI, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                 </StackPanel>
                 <myControl:MapSelectControl Grid.Row="1" Latitude="{Binding Latitude,Mode=TwoWay}" PoiLocation="{Binding PoiLocation,Mode=TwoWay}" Longitude="{Binding Longitude,Mode=TwoWay}"></myControl:MapSelectControl>

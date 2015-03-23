@@ -227,6 +227,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Coffee.
+        /// </summary>
+        public static string Coffee {
+            get {
+                return ResourceManager.GetString("Coffee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Are you sure you want to delete this note?.
         /// </summary>
         public static string ConfirmationDeleteNote {
@@ -776,6 +785,24 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Monument.
+        /// </summary>
+        public static string Monument {
+            get {
+                return ResourceManager.GetString("Monument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Museum.
+        /// </summary>
+        public static string Musee {
+            get {
+                return ResourceManager.GetString("Musee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à my notes.
         /// </summary>
         public static string MyNotes {
@@ -893,6 +920,24 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Other.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Park.
+        /// </summary>
+        public static string Park {
+            get {
+                return ResourceManager.GetString("Park", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Photos ({0}).
         /// </summary>
         public static string PhotoTripTitle {
@@ -992,6 +1037,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restaurant.
+        /// </summary>
+        public static string Restaurant {
+            get {
+                return ResourceManager.GetString("Restaurant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Exemple de valeur de propriété d&apos;exécution.
         /// </summary>
         public static string SampleProperty {
@@ -1055,6 +1109,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select type.
+        /// </summary>
+        public static string SelectType {
+            get {
+                return ResourceManager.GetString("SelectType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à settings.
         /// </summary>
         public static string Settings {
@@ -1069,6 +1132,15 @@ namespace CheckMapp.Resources {
         public static string Share {
             get {
                 return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Shopping.
+        /// </summary>
+        public static string Shopping {
+            get {
+                return ResourceManager.GetString("Shopping", resourceCulture);
             }
         }
         

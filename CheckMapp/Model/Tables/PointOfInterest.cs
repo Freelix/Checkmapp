@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckMapp.ViewModels;
+using System;
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
@@ -8,15 +9,15 @@ using System.Runtime.Serialization;
 namespace CheckMapp.Model.Tables
 {
     [Table(Name = "PointOfInterest")]
-    [DataContract(IsReference = true)] 
+    [DataContract(IsReference = true)]
     public class PointOfInterest : INotifyPropertyChanged, INotifyPropertyChanging
     {
         #region Constructors
 
         public PointOfInterest()
         {
-           /* _notes = new EntitySet<Note>();
-            _pictures = new EntitySet<Picture>();*/
+            /* _notes = new EntitySet<Note>();
+             _pictures = new EntitySet<Picture>();*/
         }
 
         #endregion
@@ -116,6 +117,22 @@ namespace CheckMapp.Model.Tables
             }
         }
 
+        private POIType _type;
+        [Column]
+        public POIType Type
+        {
+            get { return _type; }
+            set
+            {
+                if (_type != value)
+                {
+                    NotifyPropertyChanging("Type");
+                    _type = value;
+                    NotifyPropertyChanged("Type");
+                }
+            }
+        }
+
         /*private EntitySet<Note> _notes;
 
         [Association(Storage = "_notes", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
@@ -133,22 +150,22 @@ namespace CheckMapp.Model.Tables
             }
         }*/
 
-       /* private EntitySet<Picture> _pictures;
+        /* private EntitySet<Picture> _pictures;
 
-        [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
-        public EntitySet<Picture> Pictures
-        {
-            get { return _pictures; }
-            set
-            {
-                if (_pictures != value)
-                {
-                    NotifyPropertyChanging("Pictures");
-                    _pictures.Assign(value);
-                    NotifyPropertyChanged("Pictures");
-                }
-            }
-        }*/
+         [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
+         public EntitySet<Picture> Pictures
+         {
+             get { return _pictures; }
+             set
+             {
+                 if (_pictures != value)
+                 {
+                     NotifyPropertyChanging("Pictures");
+                     _pictures.Assign(value);
+                     NotifyPropertyChanged("Pictures");
+                 }
+             }
+         }*/
 
         [Column]
         private int? _tripId;

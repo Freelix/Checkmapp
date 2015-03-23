@@ -80,8 +80,8 @@
                                     <toolkit:MenuItem x:Name="DeletePOI" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                                 </toolkit:ContextMenu>
                             </toolkit:ContextMenuService.ContextMenu>
-                            <Image Height="70"  Source="/Images/appbar.flag.listpoi.png"></Image>
-                            <StackPanel Width="400" Margin="0,0,0,0">
+                            <Image Height="80" VerticalAlignment="Bottom"   Source="{Binding Type, Converter={StaticResource POITypeConverter}}"></Image>
+                            <StackPanel Width="400" >
                                 <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding Location}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
                             </StackPanel>

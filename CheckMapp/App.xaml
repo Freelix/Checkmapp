@@ -19,6 +19,8 @@
             
             <sys:Double x:Key="PanoramaItemHeaderFontSize">66</sys:Double>
             <Controls:BooleanToVisibilityConverter x:Key="ConvertBoolean"/>
+            <converter:POITypeImageConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="POITypeConverter"/>
+            <converter:POITypeValueConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="POITypeValueConverter"/>
             <converter:BoldConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="BoldConverter"></converter:BoldConverter>
             <converter:ButtonExtendConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="ButtonExtendConverter"></converter:ButtonExtendConverter>
             <converter:DateConverter xmlns:converter="clr-namespace:CheckMapp.Converter" x:Key="DateConverter"></converter:DateConverter>

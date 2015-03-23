@@ -512,4 +512,22 @@ Alexandre Roy</value>
   <data name="AppCalendar" xml:space="preserve">
     <value>Voulez-vous ajouter ce voyage à votre calendrier?</value>
   </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Magasinage</value>
+  </data>
+  <data name="Park" xml:space="preserve">
+    <value>Parc</value>
+  </data>
+  <data name="Musee" xml:space="preserve">
+    <value>Musée</value>
+  </data>
+  <data name="Coffee" xml:space="preserve">
+    <value>Café</value>
+  </data>
+  <data name="SelectType" xml:space="preserve">
+    <value>Sélectionner le type</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
 </root>

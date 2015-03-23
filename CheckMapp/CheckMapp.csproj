@@ -126,6 +126,8 @@
     <Compile Include="Converter\ByteToImageConverter.cs" />
     <Compile Include="Converter\BoldConverter.cs" />
     <Compile Include="Converter\ButtonExtendConverter.cs" />
+    <Compile Include="Converter\POITypeValueConverter.cs" />
+    <Compile Include="Converter\POITypeImageConverter.cs" />
     <Compile Include="Converter\NoteMessage.cs" />
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Design\DesignDataService.cs" />
@@ -153,6 +155,8 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MapViewModel.cs" />
+    <Compile Include="ViewModels\POIType.cs" />
+    <Compile Include="ViewModels\POIViewModels\SelectTypePOIViewModel.cs" />
     <Compile Include="Views\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
@@ -214,6 +218,9 @@
     </Compile>
     <Compile Include="Views\POIViews\ListPOIView.xaml.cs">
       <DependentUpon>ListPOIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\POIViews\SelectTypePOI.xaml.cs">
+      <DependentUpon>SelectTypePOI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatisticView.xaml.cs">
       <DependentUpon>StatisticView.xaml</DependentUpon>
@@ -311,6 +318,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\POIViews\ListPOIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\POIViews\SelectTypePOI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -419,6 +430,14 @@
     <Content Include="Images\MapPin.png" />
     <Content Include="Images\minus.png" />
     <Content Include="Images\poiLogo.png" />
+    <Content Include="Images\POIType\monument.png" />
+    <Content Include="Images\POIType\other.png" />
+    <Content Include="Images\POIType\bar.png" />
+    <Content Include="Images\POIType\coffee.png" />
+    <Content Include="Images\POIType\musee.png" />
+    <Content Include="Images\POIType\park.png" />
+    <Content Include="Images\POIType\restaurant.png" />
+    <Content Include="Images\POIType\shopping.png" />
     <Content Include="Images\rose.png" />
     <Content Include="Images\rose2.png" />
     <Content Include="Images\save.png" />
@@ -497,6 +516,7 @@
       <LastGenOutput>AppResources.fr.resx</LastGenOutput>
     </XliffResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

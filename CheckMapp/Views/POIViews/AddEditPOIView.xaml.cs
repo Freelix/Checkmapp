@@ -27,18 +27,27 @@ namespace CheckMapp.Views.POIViews
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            PointOfInterest currentPoi = (PointOfInterest)PhoneApplicationService.Current.State["Poi"];
-            this.DataContext = new AddEditPOIViewModel(trip, mode, currentPoi);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                //select type
+                POIType type = (POIType)PhoneApplicationService.Current.State["POIType"];
+                (this.DataContext as AddEditPOIViewModel).PointOfInterest.Type = type;
+            }
+            else
+            {
+                Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+                Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+                PointOfInterest currentPoi = (PointOfInterest)PhoneApplicationService.Current.State["Poi"];
+                this.DataContext = new AddEditPOIViewModel(trip, mode, currentPoi);
 
-            //Assigne le titre de la page
-            AddEditPOIViewModel vm = DataContext as AddEditPOIViewModel;
-            if (vm.Mode == Mode.add)
-                TitleTextBox.Text = AppResources.AddPOI.ToLower();
-            else if (vm.Mode == Mode.edit)
-                TitleTextBox.Text = AppResources.EditPoi.ToLower();
+                //Assigne le titre de la page
+                AddEditPOIViewModel vm = DataContext as AddEditPOIViewModel;
+                if (vm.Mode == Mode.add)
+                    TitleTextBox.Text = AppResources.AddPOI.ToLower();
+                else if (vm.Mode == Mode.edit)
+                    TitleTextBox.Text = AppResources.EditPoi.ToLower();
 
+            }
             base.OnNavigatedTo(e);
         }
 
@@ -76,7 +85,7 @@ namespace CheckMapp.Views.POIViews
                 if (vm.IsFormValid)
                     (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
             });
-            
+
         }
 
         /// <summary>
@@ -90,6 +99,11 @@ namespace CheckMapp.Views.POIViews
             vm.CancelPOICommand.Execute(null);
 
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
+        }
+
+        private void Image_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/SelectTypePOI.xaml", UriKind.Relative));
         }
 
     }

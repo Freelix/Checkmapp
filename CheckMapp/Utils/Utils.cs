@@ -19,6 +19,7 @@ using CheckMapp.Resources;
 using System.IO.IsolatedStorage;
 using CheckMapp.Model;
 using Microsoft.Phone.Data.Linq;
+using CheckMapp.ViewModels;
 
 namespace CheckMapp.Utils
 {
@@ -424,7 +425,17 @@ namespace CheckMapp.Utils
             }
         }
 
-       
+
         #endregion
+
+        public static string ImageSourceFromPOIType(POIType type)
+        {
+            return "/Images/POIType/" + type.ToString().ToLower() + ".png";
+        }
+
+        public static string Display(this POIType type)
+        {
+            return AppResources.ResourceManager.GetString(type.ToString(), AppResources.Culture);
+        }
     }
 }

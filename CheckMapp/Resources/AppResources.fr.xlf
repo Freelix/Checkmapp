@@ -424,6 +424,38 @@
           <source>Do you want to add this trip in your calendar?</source>
           <target state="translated">Voulez-vous ajouter ce voyage à votre calendrier?</target>
         </trans-unit>
+        <trans-unit id="Resx/Shopping" translate="yes" xml:space="preserve">
+          <source>Shopping</source>
+          <target state="translated">Magasinage</target>
+        </trans-unit>
+        <trans-unit id="Resx/SelectType" translate="yes" xml:space="preserve">
+          <source>Select type</source>
+          <target state="translated">Sélectionner le type</target>
+        </trans-unit>
+        <trans-unit id="Resx/Other" translate="yes" xml:space="preserve">
+          <source>Other</source>
+          <target state="translated">Autre</target>
+        </trans-unit>
+        <trans-unit id="Resx/Restaurant" translate="yes" xml:space="preserve">
+          <source>Restaurant</source>
+          <target state="new">Restaurant</target>
+        </trans-unit>
+        <trans-unit id="Resx/Park" translate="yes" xml:space="preserve">
+          <source>Park</source>
+          <target state="translated">Parc</target>
+        </trans-unit>
+        <trans-unit id="Resx/Musee" translate="yes" xml:space="preserve">
+          <source>Museum</source>
+          <target state="translated">Musée</target>
+        </trans-unit>
+        <trans-unit id="Resx/Monument" translate="yes" xml:space="preserve">
+          <source>Monument</source>
+          <target state="new">Monument</target>
+        </trans-unit>
+        <trans-unit id="Resx/Coffee" translate="yes" xml:space="preserve">
+          <source>Coffee</source>
+          <target state="translated">Café</target>
+        </trans-unit>
         <trans-unit id="Resx/DepDest" translate="yes" xml:space="preserve">
           <source>city, (state, province, disctrict), country</source>
           <target state="needs-review-translation">ville, (état, province, disctrict), pays</target>

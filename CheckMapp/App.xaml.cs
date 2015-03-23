@@ -106,6 +106,7 @@ namespace CheckMapp
             else
                 PhoneApplicationService.Current.State["Trip"] = null;
 
+            PhoneApplicationService.Current.State["POIType"] = null;
             PhoneApplicationService.Current.State["Note"] = null;
             PhoneApplicationService.Current.State["Poi"] = null;
             PhoneApplicationService.Current.State["Picture"] = null;
