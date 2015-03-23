@@ -20,6 +20,9 @@ using System.IO.IsolatedStorage;
 using CheckMapp.Model;
 using Microsoft.Phone.Data.Linq;
 using CheckMapp.ViewModels;
+using Microsoft.Phone.Shell;
+using CheckMapp.Model.DataService;
+using CheckMapp.Model.Tables;
 
 namespace CheckMapp.Utils
 {
@@ -437,5 +440,27 @@ namespace CheckMapp.Utils
         {
             return AppResources.ResourceManager.GetString(type.ToString(), AppResources.Culture);
         }
+        #region Tombstone
+
+        public static Boolean IsTombstoned()
+        {
+            bool isTombstoned = false;
+
+            if (PhoneApplicationService.Current.State["ChosenPhoto"] == null)
+            {
+                isTombstoned = (bool)PhoneApplicationService.Current.State["TombstoneMode"];
+                PhoneApplicationService.Current.State["TombstoneMode"] = false;
+            }
+
+            return isTombstoned;
+        }
+
+        public static Trip GetAssociatedTrip(int tripId)
+        {
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            return dsTrip.getTripById(tripId);
+        }
+
+        #endregion
     }
 }

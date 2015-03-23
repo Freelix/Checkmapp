@@ -28,11 +28,10 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             this.Mode = mode;
 
-            if (this.Mode == Mode.add)
+            if (this.Mode == Mode.add && !Utility.IsTombstoned())
             {
                 Picture = new Picture();
                 Picture.Trip = trip;
-                trip.Pictures.Add(Picture);
                 Picture.Date = DateTime.Now;
             }
             else
@@ -220,13 +219,16 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             if (Mode == ViewModels.Mode.add)
             {
-                Picture.Trip.Pictures.Remove(Picture);
                 Picture.Trip = null;
             }
         }
 
         private void AddPictureInDB()
         {
+            // Workaround explained in AddEditNoteViewModel 
+            Picture.Trip.Pictures.Add(Picture);
+            Picture.Trip = Utility.GetAssociatedTrip(Picture.Trip.Id);
+
             DataServicePicture dsPicture = new DataServicePicture();
             dsPicture.addPicture(Picture);
         }

@@ -30,7 +30,7 @@ namespace CheckMapp.Views.PhotoViews
 
             this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
 
-            //On vide la mémoire plus possible
+            //On vide la mémoire le plus possible
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
 
             //Assigne le titre de la page
@@ -45,7 +45,14 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            hubTile.Source.ClearValue(BitmapImage.UriSourceProperty);
+            Uri destination = e.Uri;
+
+            if (!destination.OriginalString.Contains("DatePickerPage.xaml"))
+                hubTile.Source.ClearValue(BitmapImage.UriSourceProperty);
+
+            // Save the note instance to retrieve when a tombstone occured
+            AddEditPhotoViewModel vm = DataContext as AddEditPhotoViewModel;
+            PhoneApplicationService.Current.State["Picture"] = vm.Picture;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -98,11 +105,5 @@ namespace CheckMapp.Views.PhotoViews
 
             PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Picture.Trip;
         }
-
-        #region CheckBox functions
-
-
-
-        #endregion
     }
 }

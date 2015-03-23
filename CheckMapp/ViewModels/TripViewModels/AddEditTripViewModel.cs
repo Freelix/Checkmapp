@@ -41,7 +41,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         {
             this.Mode = mode;
 
-            if (this.Mode == Mode.add)
+            if (this.Mode == Mode.add && !Utility.IsTombstoned())
             {
                 Trip = new Trip();
                 Trip.BeginDate = DateTime.Now;
@@ -49,7 +49,7 @@ namespace CheckMapp.ViewModels.TripViewModels
             else
                 Trip = trip;
 
-            this.FriendList = Utils.Utility.FriendToList(Trip.FriendList);
+            this.FriendList = Utility.FriendToList(Trip.FriendList);
             InitialiseValidator();
         }
 

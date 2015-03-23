@@ -112,7 +112,7 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["Picture"] = null;
             PhoneApplicationService.Current.State["poiId"] = 0;
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
-
+            PhoneApplicationService.Current.State["TombstoneMode"] = false;
         }
 
 
@@ -127,6 +127,7 @@ namespace CheckMapp
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            PhoneApplicationService.Current.State["TombstoneMode"] = true;
         }
 
         // Code to execute when the application is deactivated (sent to background)

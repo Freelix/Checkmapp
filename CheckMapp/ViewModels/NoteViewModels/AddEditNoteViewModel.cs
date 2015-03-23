@@ -14,9 +14,11 @@ using System.Collections.ObjectModel;
 using Utility = CheckMapp.Utils.Utility;
 using FluentValidation;
 using CheckMapp.Utils.Validations;
+using System.Runtime.Serialization;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
+    [DataContract]
     public class AddEditNoteViewModel : ViewModelBase
     {
         private Note _note;
@@ -28,11 +30,10 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             this.Mode = mode;
 
-            if (this.Mode == Mode.add)
+            if (this.Mode == Mode.add && !Utility.IsTombstoned())
             {
                 Note = new Note();
                 Note.Trip = trip;
-                trip.Notes.Add(Note);
                 Note.Date = DateTime.Now;
             }
             else
@@ -83,6 +84,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
 
         private bool _isFormValid;
 
+        [DataMember]
         public bool IsFormValid
         {
             get { return _isFormValid; }
@@ -95,6 +97,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// La note
         /// </summary>
+        [DataMember]
         public Note Note
         {
             get { return _note; }
@@ -103,6 +106,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
                 _note = value;
             }
         }
+
+        [DataMember]
         public Mode Mode
         {
             get;
@@ -113,6 +118,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// Aucun poi sélectionné
         /// </summary>
+        [DataMember]
         public bool NoneCheck
         {
             get { return _noneCheck; }
@@ -122,6 +128,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// Le titre de ma note
         /// </summary>
+        [DataMember]
         public string NoteName
         {
             get { return Note.Title; }
@@ -136,6 +143,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// Liste des points d'intérêts
         /// </summary>
+        [DataMember]
         public List<PointOfInterest> PoiList
         {
             get { return _poiList; }
@@ -149,6 +157,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// Le point d'intérêt
         /// </summary>
+        [DataMember]
         public PointOfInterest POISelected
         {
             get { return Note.PointOfInterest; }
@@ -162,6 +171,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// Le contenu de ma note
         /// </summary>
+        [DataMember]
         public string Message
         {
             get { return Note.Message; }
@@ -175,6 +185,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         /// <summary>
         /// La date de ma note
         /// </summary>
+        [DataMember]
         public DateTime NoteDate
         {
             get { return Note.Date; }
@@ -213,13 +224,23 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             if (Mode == ViewModels.Mode.add)
             {
-                Note.Trip.Notes.Remove(Note);
                 Note.Trip = null;
             }
         }
 
         private void AddNoteInDB()
         {
+            // Workaround to retrieve the REAL associated trip. 
+            // When the app is tombstoned, it creates a copy of the current trip.
+            // So when comes the time to save the note in the database, it saves a new trip
+            // and duplicate all existing notes attached to this new trip !         
+            // The result is an Absolute Mess...
+
+            // Calling the current trip method make sure that we deal with the correct data
+            // and not simply a copy.
+            Note.Trip.Notes.Add(Note);
+            Note.Trip = Utility.GetAssociatedTrip(Note.Trip.Id);
+
             DataServiceNote dsNote = new DataServiceNote();
             dsNote.addNote(Note);
         }

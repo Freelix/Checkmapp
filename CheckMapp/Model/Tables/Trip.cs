@@ -30,6 +30,7 @@ namespace CheckMapp.Model.Tables
         private int _id;
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+        [DataMember]
         public int Id
         {
             get { return _id; }
@@ -47,6 +48,7 @@ namespace CheckMapp.Model.Tables
         private string _name;
 
         [Column]
+        [DataMember]
         public string Name
         {
             get { return _name; }
@@ -65,6 +67,7 @@ namespace CheckMapp.Model.Tables
 
         //exemple: john,felix,roy
         [Column]
+        [DataMember]
         public string FriendList
         {
             get { return _friendList; }
@@ -82,6 +85,7 @@ namespace CheckMapp.Model.Tables
         private DateTime _beginDate;
 
         [Column]
+        [DataMember]
         public DateTime BeginDate
         {
             get { return _beginDate; }
@@ -99,6 +103,7 @@ namespace CheckMapp.Model.Tables
         private DateTime? _endDate;
 
         [Column]
+        [DataMember]
         public DateTime? EndDate
         {
             get { return _endDate; }
@@ -116,6 +121,7 @@ namespace CheckMapp.Model.Tables
         private double _departureLongitude;
       
         [Column]
+        [DataMember]
         public double DepartureLongitude
         {
             get { return _departureLongitude; }
@@ -133,6 +139,7 @@ namespace CheckMapp.Model.Tables
         private double _departureLatitude;
        
         [Column]
+        [DataMember]
         public double DepartureLatitude
         {
             get { return _departureLatitude; }
@@ -150,6 +157,7 @@ namespace CheckMapp.Model.Tables
         private double _destinationLongitude;
 
         [Column]
+        [DataMember]
         public double DestinationLongitude
         {
             get { return _destinationLongitude; }
@@ -167,6 +175,7 @@ namespace CheckMapp.Model.Tables
         private double _destinationLatitude;
 
         [Column]
+        [DataMember]
         public double DestinationLatitude
         {
             get { return _destinationLatitude; }
@@ -184,6 +193,7 @@ namespace CheckMapp.Model.Tables
         private byte[] _mainPictureData;
 
         [Column(DbType = "image", UpdateCheck = UpdateCheck.Never)]
+        [DataMember]
         public byte[] MainPictureData
         {
             get { return _mainPictureData; }
@@ -201,6 +211,7 @@ namespace CheckMapp.Model.Tables
         private EntitySet<Note> _notes = new EntitySet<Note>();
 
         [Association(Storage = "_notes", OtherKey = "_tripId", ThisKey = "Id")]
+        [DataMember]
         public EntitySet<Note> Notes
         {
             get {
@@ -210,6 +221,11 @@ namespace CheckMapp.Model.Tables
             }
             set
             {
+                if (_notes == null)
+                {
+                    _notes = new EntitySet<Note>();
+                }
+
                 if (_notes != value)
                 {
                     NotifyPropertyChanging("Notes");
@@ -222,6 +238,7 @@ namespace CheckMapp.Model.Tables
         private EntitySet<Picture> _pictures = new EntitySet<Picture>();
 
         [Association(Storage = "_pictures", OtherKey = "_tripId", ThisKey = "Id")]
+        [DataMember]
         public EntitySet<Picture> Pictures
         {
             get {
@@ -231,6 +248,11 @@ namespace CheckMapp.Model.Tables
             }
             set
             {
+                if (_pictures == null)
+                {
+                    _pictures = new EntitySet<Picture>();
+                }
+
                 if (_pictures != value)
                 {
                     NotifyPropertyChanging("Pictures");
@@ -243,6 +265,7 @@ namespace CheckMapp.Model.Tables
         private EntitySet<PointOfInterest> _pointsOfInterests = new EntitySet<PointOfInterest>();
 
         [Association(Storage = "_pointsOfInterests", OtherKey = "_tripId", ThisKey = "Id")]
+        [DataMember]
         public EntitySet<PointOfInterest> PointsOfInterests
         {
             get {
@@ -252,6 +275,11 @@ namespace CheckMapp.Model.Tables
             }
             set
             {
+                if (_pointsOfInterests == null)
+                {
+                    _pointsOfInterests = new EntitySet<PointOfInterest>();
+                }
+
                 if (_pointsOfInterests != value)
                 {
                     NotifyPropertyChanging("PointsOfInterests");

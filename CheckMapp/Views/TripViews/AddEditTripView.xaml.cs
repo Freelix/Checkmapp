@@ -190,5 +190,11 @@ namespace CheckMapp.Views.TripViews
                 menu.DataContext = owner.DataContext;
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            // Save the note instance to retrieve when a tombstone occured
+            AddEditTripViewModel vm = DataContext as AddEditTripViewModel;
+            PhoneApplicationService.Current.State["Trip"] = vm.Trip;
+        }
     }
 }

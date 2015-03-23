@@ -27,6 +27,7 @@ namespace CheckMapp.Model.Tables
         private int _id;
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+        [DataMember]
         public int Id
         {
             get { return _id; }
@@ -44,6 +45,7 @@ namespace CheckMapp.Model.Tables
         private string _name;
 
         [Column]
+        [DataMember]
         public string Name
         {
             get { return _name; }
@@ -61,6 +63,7 @@ namespace CheckMapp.Model.Tables
         private string _location;
 
         [Column]
+        [DataMember]
         public string Location
         {
             get { return _location; }
@@ -78,6 +81,7 @@ namespace CheckMapp.Model.Tables
         private double _longitude;
 
         [Column]
+        [DataMember]
         public double Longitude
         {
             get { return _longitude; }
@@ -95,6 +99,7 @@ namespace CheckMapp.Model.Tables
         private double _latitude;
 
         [Column]
+        [DataMember]
         public double Latitude
         {
             get { return _latitude; }
@@ -171,6 +176,7 @@ namespace CheckMapp.Model.Tables
         private int? _tripId;
         private EntityRef<Trip> _trip = new EntityRef<Trip>();
         [Association(Storage = "_trip", ThisKey = "_tripId", OtherKey = "Id", IsForeignKey = true)]
+        [DataMember]
         public Trip Trip
         {
             get { return _trip.Entity; }

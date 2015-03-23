@@ -84,6 +84,11 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
-
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            // Save the note instance to retrieve when a tombstone occured
+            AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
+            PhoneApplicationService.Current.State["Note"] = vm.Note;
+        }
     }
 }
