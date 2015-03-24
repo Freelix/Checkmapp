@@ -578,6 +578,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export in progress....
+        /// </summary>
+        public static string ExportLoading {
+            get {
+                return ResourceManager.GetString("ExportLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No valid file has been found in folder Checkmapp in your OneDrive..
         /// </summary>
         public static string FileNotFound {
@@ -632,11 +641,29 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Import in progress....
+        /// </summary>
+        public static string ImportLoading {
+            get {
+                return ResourceManager.GetString("ImportLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Your internet connection is offline. To access map features you need internet connection or download map with your cellphone..
         /// </summary>
-        public static string InternetConnection {
+        public static string InternetConnectionMap {
             get {
-                return ResourceManager.GetString("InternetConnection", resourceCulture);
+                return ResourceManager.GetString("InternetConnectionMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your internet connection is offline. .
+        /// </summary>
+        public static string InternetConnectionSettings {
+            get {
+                return ResourceManager.GetString("InternetConnectionSettings", resourceCulture);
             }
         }
         

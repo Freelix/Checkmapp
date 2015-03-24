@@ -11,11 +11,15 @@ using CheckMapp.Resources;
 using CheckMapp.ViewModels.SettingsViewModels;
 using System.IO.IsolatedStorage;
 using Microsoft.Phone.Tasks;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.Live;
 
 namespace CheckMapp.Views.SettingsViews
 {
     public partial class SettingsView : PhoneApplicationPage
     {
+        CancellationTokenSource cts;
         public SettingsView()
         {
             InitializeComponent();
@@ -27,9 +31,25 @@ namespace CheckMapp.Views.SettingsViews
 
         private async void btnImport_Click(object sender, RoutedEventArgs e)
         {
+            if (Utils.Utility.checkNetworkConnection() == false)
+            {
+                MessageBox.Show(AppResources.InternetConnectionSettings, AppResources.NotConnected, MessageBoxButton.OK);
+                return;
+            }
             if (MessageBox.Show(AppResources.ConfirmationImport, AppResources.Warning, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                int import = await Utils.Utility.ImportBD();
+                var vm = DataContext as SettingsViewModel;
+                vm.ImportCommand.Execute(null);
+
+                cts = new CancellationTokenSource();
+                Progress<LiveOperationProgress> uploadProgress = new Progress<LiveOperationProgress>(
+        (p) =>
+        {
+            txtProgress.Text = p.ProgressPercentage.ToString("0,0") + "%";
+
+        });
+                int import = await Utils.Utility.ImportBD(cts.Token, uploadProgress);
+                vm.CancelCommand.Execute(null);
                 if (import == 0)
                 {
                     MessageBox.Show(AppResources.FileNotFound, AppResources.Warning, MessageBoxButton.OK);
@@ -47,7 +67,22 @@ namespace CheckMapp.Views.SettingsViews
 
         private async void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            int export = await Utils.Utility.ExportDB();
+            if (Utils.Utility.checkNetworkConnection() == false)
+            {
+                MessageBox.Show(AppResources.InternetConnectionSettings, AppResources.NotConnected, MessageBoxButton.OK);
+                return;
+            }
+            var vm = DataContext as SettingsViewModel;
+            vm.ExportCommand.Execute(null);
+            cts = new CancellationTokenSource();
+            Progress<LiveOperationProgress> uploadProgress = new Progress<LiveOperationProgress>(
+        (p) =>
+        {
+            txtProgress.Text = p.ProgressPercentage.ToString("0,0")+"%";
+                
+        });
+            int export = await Utils.Utility.ExportDB(cts.Token, uploadProgress);
+            vm.CancelCommand.Execute(null);
         }
 
 
@@ -62,16 +97,16 @@ namespace CheckMapp.Views.SettingsViews
 
         #region ToggleSwitch
 
-        private void WifiOnlySwitch_Checked(object sender, RoutedEventArgs e) 
+        private void WifiOnlySwitch_Checked(object sender, RoutedEventArgs e)
         { var vm = DataContext as SettingsViewModel; vm.WifiOnly = true; }
 
-        private void WifiOnlySwitch_Unchecked(object sender, RoutedEventArgs e) 
+        private void WifiOnlySwitch_Unchecked(object sender, RoutedEventArgs e)
         { var vm = DataContext as SettingsViewModel; vm.WifiOnly = false; }
 
-        private void AutoSyncSwitch_Checked(object sender, RoutedEventArgs e) 
+        private void AutoSyncSwitch_Checked(object sender, RoutedEventArgs e)
         { var vm = DataContext as SettingsViewModel; vm.AutoSync = true; }
 
-        private void AutoSyncSwitch_Unchecked(object sender, RoutedEventArgs e) 
+        private void AutoSyncSwitch_Unchecked(object sender, RoutedEventArgs e)
         { var vm = DataContext as SettingsViewModel; vm.AutoSync = false; }
 
         #endregion
@@ -87,9 +122,19 @@ namespace CheckMapp.Views.SettingsViews
             this.DataContext = new SettingsViewModel();
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (cts != null)
+            {
+                cts.Cancel();
+            }
+            var vm = DataContext as SettingsViewModel;
+            vm.CancelCommand.Execute(null);
+        }
 
-     
 
-       
+
+
+
     }
 }

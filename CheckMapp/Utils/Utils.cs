@@ -23,6 +23,7 @@ using CheckMapp.ViewModels;
 using Microsoft.Phone.Shell;
 using CheckMapp.Model.DataService;
 using CheckMapp.Model.Tables;
+using System.Threading;
 
 namespace CheckMapp.Utils
 {
@@ -308,12 +309,12 @@ namespace CheckMapp.Utils
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public async static Task<int> ExportDB()
+        public async static Task<int> ExportDB(CancellationToken ct, Progress<LiveOperationProgress> uploadProgress)
         {
             try
             {
                 IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
-                iso.CopyFile(AppResources.DBFileName, "/shared/transfers/" + AppResources.DBFileName);
+                iso.CopyFile(AppResources.DBFileName, "/shared/transfers/" + AppResources.DBFileName,true);
 
                 //  create a folder
                 string folderID = await GetFolderID("checkmapp");
@@ -325,11 +326,11 @@ namespace CheckMapp.Utils
                 }
 
                 //  upload local file to OneDrive
-                await LiveClient.BackgroundUploadAsync(folderID, new Uri("/shared/transfers/" + AppResources.DBFileName, UriKind.RelativeOrAbsolute), OverwriteOption.Overwrite);
+                await Task.Run(() => LiveClient.BackgroundUploadAsync(folderID, new Uri("/shared/transfers/" + AppResources.DBFileName, UriKind.RelativeOrAbsolute), OverwriteOption.Overwrite, ct, uploadProgress));
 
                 return 1;
             }
-            catch
+            catch(Exception e)
             {
             }
             //  return error
@@ -340,7 +341,7 @@ namespace CheckMapp.Utils
         /// Downloader la BD a partir de OneDrive
         /// </summary>
         /// <returns></returns>
-        public async static Task<int> ImportBD()
+        public async static Task<int> ImportBD(CancellationToken ct, Progress<LiveOperationProgress> uploadProgress)
         {
             try
             {
@@ -377,12 +378,11 @@ namespace CheckMapp.Utils
                 }
 
                 //  download file from OneDrive
-                await LiveClient.DownloadAsync(fileID + "/content");
+                await Task.Run(() => LiveClient.DownloadAsync(fileID + "/content", ct, uploadProgress));
 
                 return 1;
-
             }
-            catch
+            catch (Exception e)
             {
             }
             return 0;

@@ -93,18 +93,6 @@ namespace CheckMapp.Views.TripViews
                 }
             });
 
-            if (vm.Mode == Mode.add && MessageBox.Show(AppResources.AppCalendar, AppResources.ConfirmButton, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-            {
-                SaveAppointmentTask appointment = new SaveAppointmentTask();
-                appointment.Subject = vm.TripName;
-                appointment.StartTime = vm.TripBeginDate;
-                appointment.EndTime = null;
-                appointment.Location = selectDest.PoiTextBox.Text;
-                appointment.IsAllDayEvent = false;
-                appointment.Reminder = Reminder.None;
-                appointment.Show();
-            }
-
         }
 
         void logo_ImageOpened(object sender, RoutedEventArgs e)

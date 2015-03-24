@@ -125,6 +125,7 @@
     <Compile Include="Converter\ByteToImageConverter.cs" />
     <Compile Include="Converter\BoldConverter.cs" />
     <Compile Include="Converter\ButtonExtendConverter.cs" />
+    <Compile Include="Converter\InvertBoolConverter.cs" />
     <Compile Include="Converter\POITypeValueConverter.cs" />
     <Compile Include="Converter\POITypeImageConverter.cs" />
     <Compile Include="Converter\NoteMessage.cs" />

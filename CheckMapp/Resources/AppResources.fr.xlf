@@ -306,10 +306,6 @@
           <source>You have to choose a picture</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez choisir une image</target>
         </trans-unit>
-        <trans-unit id="Resx/InternetConnection" translate="yes" xml:space="preserve">
-          <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
-          <target state="translated">Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</target>
-        </trans-unit>
         <trans-unit id="Resx/NotConnected" translate="yes" xml:space="preserve">
           <source>Internet connection missing</source>
           <target state="needs-review-translation">Connexion internet désactivée</target>
@@ -436,6 +432,18 @@
           <source>Other</source>
           <target state="translated">Autre</target>
         </trans-unit>
+        <trans-unit id="Resx/ImportLoading" translate="yes" xml:space="preserve">
+          <source>Import in progress...</source>
+          <target state="translated">Importation en cours...</target>
+        </trans-unit>
+        <trans-unit id="Resx/InternetConnectionSettings" translate="yes" xml:space="preserve">
+          <source>Your internet connection is offline. </source>
+          <target state="translated">Votre connexion internet est désactivée.</target>
+        </trans-unit>
+        <trans-unit id="Resx/ExportLoading" translate="yes" xml:space="preserve">
+          <source>Export in progress...</source>
+          <target state="translated">Exportation en cours...</target>
+        </trans-unit>
         <trans-unit id="Resx/Restaurant" translate="yes" xml:space="preserve">
           <source>Restaurant</source>
           <target state="new">Restaurant</target>
@@ -460,6 +468,10 @@
           <source>city, (state, province, disctrict), country</source>
           <target state="needs-review-translation">ville, (état, province, disctrict), pays</target>
           </trans-unit>
+        <trans-unit id="Resx/InternetConnectionMap" translate="yes" xml:space="preserve">
+          <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
+          <target state="translated">Votre connexion internet est désactivée. Pour accéder aux fonctionnalités de la carte, vous avez besoin de connexion internet ou de télécharger les cartes au préalable.</target>
+        </trans-unit>
         <trans-unit id="Resx/Error_EmptyName" translate="yes" xml:space="preserve">
           <source>You have to specify a name</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un nom</target>

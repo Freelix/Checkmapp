@@ -420,7 +420,7 @@ Alexandre Roy</value>
   <data name="DepDest" xml:space="preserve">
     <value>city, (state, province, disctrict), country</value>
   </data>
-  <data name="InternetConnection" xml:space="preserve">
+  <data name="InternetConnectionMap" xml:space="preserve">
     <value>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</value>
   </data>
   <data name="NotConnected" xml:space="preserve">
@@ -533,5 +533,14 @@ Alexandre Roy</value>
   </data>
   <data name="Other" xml:space="preserve">
     <value>Other</value>
+  </data>
+  <data name="ExportLoading" xml:space="preserve">
+    <value>Export in progress...</value>
+  </data>
+  <data name="ImportLoading" xml:space="preserve">
+    <value>Import in progress...</value>
+  </data>
+  <data name="InternetConnectionSettings" xml:space="preserve">
+    <value>Your internet connection is offline. </value>
   </data>
 </root>

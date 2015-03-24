@@ -26,7 +26,7 @@
         <!--Pivot Control-->
         <phone:Pivot Grid.Row="0" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
-            <phone:PivotItem Margin="0,0,0,10" Header="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem Margin="0,0,0,30" Header="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
                 <Grid x:Name="ContentPanelParameters" Grid.Row="1" >
                     <ScrollViewer  >
                         <StackPanel Grid.Row="0" Margin="12,17,0,28">
@@ -44,8 +44,19 @@
                             </toolkit:ListPicker>
 
                             <TextBlock Text="{Binding Path=LocalizedResources.DataManagement, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
-                            <Button x:Name="btnImport" Click="btnImport_Click" Content="{Binding Path=LocalizedResources.Import, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
-                            <Button x:Name="btnExport" Click="btnExport_Click" Content="{Binding Path=LocalizedResources.Export, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
+                            <Button Visibility="{Binding IsEnabled, ElementName=btnImport, Converter={StaticResource ConvertBoolean}}" IsEnabled="{Binding Loading, Converter={StaticResource InvertBoolConverter}}" x:Name="btnImport" Click="btnImport_Click" Content="{Binding Path=LocalizedResources.Import, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" />
+                            <Button x:Name="btnExport" Click="btnExport_Click" Visibility="{Binding IsEnabled, ElementName=btnExport, Converter={StaticResource ConvertBoolean}}" IsEnabled="{Binding Loading, Converter={StaticResource InvertBoolConverter}}"  Content="{Binding Path=LocalizedResources.Export, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" />
+                            <Grid  Visibility="{Binding Loading, Converter={StaticResource ConvertBoolean}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"  Text="{Binding ProgressText}"  Style="{StaticResource PhoneTextTitle2Style}"/>
+                                <TextBlock Grid.Column="1" x:Name="txtProgress" Style="{StaticResource PhoneTextTitle2Style}"></TextBlock>
+                            </Grid>
+
+                            <Button x:Name="btnCancel" Click="btnCancel_Click" Visibility="{Binding Loading, Converter={StaticResource ConvertBoolean}}" Content="{Binding Path=LocalizedResources.Cancel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" Command="{Binding ExportCommand}"/>
+
 
                         </StackPanel>
                     </ScrollViewer>

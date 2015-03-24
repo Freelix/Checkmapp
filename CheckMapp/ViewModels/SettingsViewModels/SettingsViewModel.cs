@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using CheckMapp.Utils.Languages;
 using Utility = CheckMapp.Utils.Utility;
+using CheckMapp.Resources;
 
 namespace CheckMapp.ViewModels.SettingsViewModels
 {
@@ -26,6 +27,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         {
             _languagesCode = new List<string>();
             loadData();
+            Loading = false;
         }
 
         private void loadData()
@@ -62,7 +64,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             }
 
             if (index > -1)
-                    LanguageIndex = index;          
+                LanguageIndex = index;
         }
 
         #region Properties
@@ -130,9 +132,79 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             }
         }
 
+        private bool _loading;
+
+        public bool Loading
+        {
+            get { return _loading; }
+            set
+            {
+                _loading = value;
+                RaisePropertyChanged("Loading");
+            }
+        }
+
+
+        private string _progressText;
+
+        public string ProgressText
+        {
+            get { return _progressText; }
+            set
+            {
+                _progressText = value;
+                RaisePropertyChanged("ProgressText");
+            }
+        }
+
         #endregion
 
         #region Buttons Command
+
+        private ICommand _importCommand;
+        public ICommand ImportCommand
+        {
+            get
+            {
+                if (_importCommand == null)
+                {
+                    _importCommand = new RelayCommand(() => Import());
+                }
+                return _importCommand;
+            }
+        }
+
+
+        private ICommand _exportCommand;
+        public ICommand ExportCommand
+        {
+            get
+            {
+                if (_exportCommand == null)
+                {
+                    _exportCommand = new RelayCommand(() => Export());
+                }
+                return _exportCommand;
+            }
+        }
+
+        private ICommand _cancelCommand;
+        public ICommand CancelCommand
+        {
+            get
+            {
+                if (_cancelCommand == null)
+                {
+                    _cancelCommand = new RelayCommand(() => Cancel());
+                }
+                return _cancelCommand;
+            }
+        }
+
+
+        public bool ImportInProgress { get; set; }
+        public bool ExportInProgress { get; set; }
+
 
         #endregion
 
@@ -153,7 +225,28 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         #endregion
 
         #region Buttons Methods
+        private void Export()
+        {
+            this.Loading = true;
+            this.ProgressText = AppResources.ExportLoading;
+            this.ExportInProgress = true;
+        }
 
+
+        private void Import()
+        {
+            this.Loading = true;
+            this.ProgressText = AppResources.ImportLoading;
+            this.ImportInProgress = true;
+        }
+
+        private void Cancel()
+        {
+            this.Loading = false;
+            this.ProgressText = String.Empty;
+            this.ImportInProgress = false;
+            this.ExportInProgress = false;
+        }
 
         #endregion
     }

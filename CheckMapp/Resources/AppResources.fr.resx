@@ -345,9 +345,6 @@
   <data name="Error_EmptyPicture" xml:space="preserve">
     <value>Vous devez choisir une image</value>
   </data>
-  <data name="InternetConnection" xml:space="preserve">
-    <value>Votre connexion internet est désactivée. Si vous voulez avoir accès aux cartes plus détaillées des régions visitées ou de départ, veuillez télécharger les cartes.</value>
-  </data>
   <data name="NotConnected" xml:space="preserve">
     <value>Connexion internet désactivée</value>
   </data>
@@ -529,5 +526,17 @@ Alexandre Roy</value>
   </data>
   <data name="Other" xml:space="preserve">
     <value>Autre</value>
+  </data>
+  <data name="ImportLoading" xml:space="preserve">
+    <value>Importation en cours...</value>
+  </data>
+  <data name="ExportLoading" xml:space="preserve">
+    <value>Exportation en cours...</value>
+  </data>
+  <data name="InternetConnectionSettings" xml:space="preserve">
+    <value>Votre connexion internet est désactivée.</value>
+  </data>
+  <data name="InternetConnectionMap" xml:space="preserve">
+    <value>Votre connexion internet est désactivée. Pour accéder aux fonctionnalités de la carte, vous avez besoin de connexion internet ou de télécharger les cartes au préalable.</value>
   </data>
 </root>
