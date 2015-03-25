@@ -434,6 +434,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete objects too.
+        /// </summary>
+        public static string DeletePOIObject {
+            get {
+                return ResourceManager.GetString("DeletePOIObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à city, (state, province, disctrict), country.
         /// </summary>
         public static string DepDest {
@@ -938,6 +947,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove association with this POI.
+        /// </summary>
+        public static string NullPOIObject {
+            get {
+                return ResourceManager.GetString("NullPOIObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à older trips.
         /// </summary>
         public static string OldTrip {
@@ -997,6 +1015,15 @@ namespace CheckMapp.Resources {
         public static string PlacePOI {
             get {
                 return ResourceManager.GetString("PlacePOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à What do you want to do with the objects (notes, pictures) related to the point of interest?.
+        /// </summary>
+        public static string POIObject {
+            get {
+                return ResourceManager.GetString("POIObject", resourceCulture);
             }
         }
         

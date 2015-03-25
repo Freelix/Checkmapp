@@ -543,4 +543,13 @@ Alexandre Roy</value>
   <data name="InternetConnectionSettings" xml:space="preserve">
     <value>Your internet connection is offline. </value>
   </data>
+  <data name="DeletePOIObject" xml:space="preserve">
+    <value>Delete objects too</value>
+  </data>
+  <data name="NullPOIObject" xml:space="preserve">
+    <value>Remove association with this POI</value>
+  </data>
+  <data name="POIObject" xml:space="preserve">
+    <value>What do you want to do with the objects (notes, pictures) related to the point of interest?</value>
+  </data>
 </root>

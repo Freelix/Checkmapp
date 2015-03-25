@@ -18,6 +18,7 @@ using System.Collections;
 using CheckMapp.ViewModels;
 using Microsoft.Phone.Tasks;
 using Windows.Devices.Geolocation;
+using System.Windows.Media;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -72,7 +73,7 @@ namespace CheckMapp.Views.POIViews
                             bingMap.Show();
                             (this.DataContext as ListPOIViewModel).Loading = false;
                         }
-                        catch(Exception)
+                        catch (Exception)
                         {
                             // the app does not have the right capability or the location master switch is off 
                             MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
@@ -97,17 +98,7 @@ namespace CheckMapp.Views.POIViews
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPoiView.xaml", UriKind.Relative));
                         break;
                     case "DeletePOI":
-                        if (MessageBox.Show(AppResources.ConfirmDeletePOI, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-                        {
-                            var vm = DataContext as ListPOIViewModel;
-                            if (vm != null)
-                            {
-                                vm.DeletePOICommand.Execute(poiSelected);
-                                POILLS.ItemsSource = vm.PointOfInterestList;
-                            }
-
-                            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
-                        }
+                        ConfirmDeletePOI(poiSelected);
                         break;
                 }
             }
@@ -177,13 +168,7 @@ namespace CheckMapp.Views.POIViews
 
         private void IconDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(AppResources.ConfirmDeletePOIs, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-            {
-                var vm = DataContext as ListPOIViewModel;
-                vm.DeletePOIsCommand.Execute(new List<object>(POILLS.SelectedItems as IList<object>));
-                POILLS.ItemsSource = vm.PointOfInterestList;
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
-            }
+            ConfirmDeletePOI(null);
         }
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
@@ -200,6 +185,87 @@ namespace CheckMapp.Views.POIViews
                     poiList.Max((p) => p.Longitude));
                 MyMap.SetView(bounds);
             }
+        }
+
+        /// <summary>
+        /// Message personnalisé pour savoir comment on gere les objets reliés au POI
+        /// </summary>
+        /// <param name="poiSelected"></param>
+        private void ConfirmDeletePOI(PointOfInterest poiSelected)
+        {
+            CheckBox checkBoxDelete = new CheckBox()
+            {
+                Content = AppResources.DeletePOIObject,
+                Margin = new Thickness(0, 14, 0, -2)
+            };
+
+            CheckBox checkBoxNull = new CheckBox()
+            {
+                Content = AppResources.NullPOIObject,
+                Margin = new Thickness(0, 14, 0, -2)
+            };
+
+            checkBoxDelete.Checked += (s1, e1) =>
+            {
+                checkBoxNull.IsChecked = !(s1 as CheckBox).IsChecked;
+            };
+            checkBoxNull.Checked += (s1, e1) =>
+            {
+                checkBoxDelete.IsChecked = !(s1 as CheckBox).IsChecked;
+            };
+
+            checkBoxNull.IsChecked = true;
+            checkBoxDelete.IsChecked = false;
+
+            TiltEffect.SetIsTiltEnabled(checkBoxDelete, true);
+            TiltEffect.SetIsTiltEnabled(checkBoxNull, true);
+
+            StackPanel stack = new StackPanel();
+            stack.Orientation = System.Windows.Controls.Orientation.Vertical;
+            stack.Children.Add(checkBoxDelete);
+            stack.Children.Add(checkBoxNull);
+
+            //Create a new custom message box
+            CustomMessageBox messageBox = new CustomMessageBox()
+            {
+                Caption = AppResources.Warning,
+                Message = AppResources.POIObject,
+                Content = stack,
+                LeftButtonContent = "ok",
+                RightButtonContent = AppResources.Cancel.ToLower(),
+                IsFullScreen = false
+            };
+
+            //Define the dismissed event handler
+            messageBox.Dismissed += (s1, e1) =>
+            {
+                (this.DataContext as ListPOIViewModel).DeletePOIObject = (bool)checkBoxDelete.IsChecked;
+
+                if (e1.Result == CustomMessageBoxResult.LeftButton)
+                {
+                    if (poiSelected != null)
+                    {
+                        var vm = DataContext as ListPOIViewModel;
+                        if (vm != null)
+                        {
+                            vm.DeletePOICommand.Execute(poiSelected);
+                            POILLS.ItemsSource = vm.PointOfInterestList;
+                        }
+                    }
+                    else
+                    {
+                        var vm = DataContext as ListPOIViewModel;
+                        vm.DeletePOIsCommand.Execute(new List<object>(POILLS.SelectedItems as IList<object>));
+                        POILLS.ItemsSource = vm.PointOfInterestList;
+                    }
+
+                    (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
+
+                }
+            };
+
+            //launch the task
+            messageBox.Show();
         }
 
 

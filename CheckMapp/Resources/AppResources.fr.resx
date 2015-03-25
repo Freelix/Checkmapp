@@ -539,4 +539,14 @@ Alexandre Roy</value>
   <data name="InternetConnectionMap" xml:space="preserve">
     <value>Votre connexion internet est désactivée. Pour accéder aux fonctionnalités de la carte, vous avez besoin de connexion internet ou de télécharger les cartes au préalable.</value>
   </data>
+  <data name="POIObject" xml:space="preserve">
+    <value>Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</value>
+    <comment></comment>
+  </data>
+  <data name="NullPOIObject" xml:space="preserve">
+    <value>Enlever le lien avec ce POI</value>
+  </data>
+  <data name="DeletePOIObject" xml:space="preserve">
+    <value>Supprimer aussi les objets</value>
+  </data>
 </root>

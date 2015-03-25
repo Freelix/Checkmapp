@@ -40,8 +40,8 @@ namespace CheckMapp.Model.DataService
 
             if (existing != null)
             {
-                DataServiceCommon dsCommon = new DataServiceCommon();
-                dsCommon.DeletePoiInCascade(poi);
+                //DataServiceCommon dsCommon = new DataServiceCommon();
+                //dsCommon.DeletePoiInCascade(poi);
 
                 db.pointsOfInterests.DeleteOnSubmit(existing);
                 db.SubmitChanges();

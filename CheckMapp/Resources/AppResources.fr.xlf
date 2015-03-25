@@ -440,6 +440,18 @@
           <source>Your internet connection is offline. </source>
           <target state="translated">Votre connexion internet est désactivée.</target>
         </trans-unit>
+        <trans-unit id="Resx/POIObject" translate="yes" xml:space="preserve">
+          <source>What do you want to do with the objects (notes, pictures) related to the point of interest?</source>
+          <target state="needs-review-translation">Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Resx/NullPOIObject" translate="yes" xml:space="preserve">
+          <source>Remove association with this POI</source>
+          <target state="translated">Enlever le lien avec ce POI</target>
+        </trans-unit>
+        <trans-unit id="Resx/DeletePOIObject" translate="yes" xml:space="preserve">
+          <source>Delete objects too</source>
+          <target state="translated">Supprimer aussi les objets</target>
+        </trans-unit>
         <trans-unit id="Resx/ExportLoading" translate="yes" xml:space="preserve">
           <source>Export in progress...</source>
           <target state="translated">Exportation en cours...</target>

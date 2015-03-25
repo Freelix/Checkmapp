@@ -86,7 +86,15 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
         }
 
-       
+        /// <summary>
+        /// Savoir si on supprime les objets reliés au POI ou on les met a null
+        /// </summary>
+        public bool DeletePOIObject
+        {
+            get;
+            set;
+        }
+
         #endregion
 
 
@@ -94,29 +102,52 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         public void DeletePOI(PointOfInterest poi)
         {
+            if (DeletePOIObject)
+            {
+                // For some reasons, Picture table doesn't refresh properly
+                // We have to remove each element in the array manually
+                DataServicePicture dsPicture = new DataServicePicture();
+                foreach (Picture pic in dsPicture.LoadPicturesByPoiId(poi.Id))
+                {
+                    Trip.Pictures.Remove(pic);
+                    dsPicture.DeletePicture(pic);
+                }
+
+                DataServiceNote dsNotes = new DataServiceNote();
+                foreach (Note note in dsNotes.LoadNotesByPoiId(poi.Id))
+                {
+                    Trip.Notes.Remove(note);
+                    dsNotes.DeleteNote(note);
+                }
+            }
+            else
+            {
+                // For some reasons, Picture table doesn't refresh properly
+                // We have to remove each element in the array manually
+                DataServicePicture dsPicture = new DataServicePicture();
+                foreach (Picture pic in dsPicture.LoadPicturesByPoiId(poi.Id))
+                    pic.PointOfInterest = null;
+
+                DataServiceNote dsNotes = new DataServiceNote();
+                foreach (Note note in dsNotes.LoadNotesByPoiId(poi.Id))
+                    note.PointOfInterest = null;
+            }
+
             DataServicePoi dsPoi = new DataServicePoi();
             Trip.PointsOfInterests.Remove(poi);
             PointOfInterestList.Remove(poi);
-            // For some reasons, Picture table doesn't refresh properly
-            // We have to remove each element in the array manually
-            DataServicePicture dsPicture = new DataServicePicture();
-            foreach (Picture pic in dsPicture.LoadPicturesByPoiId(poi.Id))
-                Trip.Pictures.Remove(pic);
 
             dsPoi.DeletePoi(poi);
         }
 
         public void DeletePOIs(List<object> poiList)
         {
-            DataServicePoi dsPoi = new DataServicePoi();
             foreach (PointOfInterest poi in poiList)
             {
-                PointOfInterestList.Remove(poi);
-                Trip.PointsOfInterests.Remove(poi);
-                dsPoi.DeletePoi(poi);
+                DeletePOI(poi);
             }
         }
-     
+
 
         #endregion
     }
