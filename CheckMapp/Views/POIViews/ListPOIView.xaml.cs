@@ -205,9 +205,20 @@ namespace CheckMapp.Views.POIViews
                 Margin = new Thickness(0, 14, 0, -2)
             };
 
+            //Simulation de grouped Checkbox
             checkBoxDelete.Checked += (s1, e1) =>
             {
                 checkBoxNull.IsChecked = !(s1 as CheckBox).IsChecked;
+            };
+            checkBoxDelete.Unchecked += (s1, e1) =>
+            {
+                if (checkBoxNull.IsChecked == checkBoxDelete.IsChecked)
+                    checkBoxDelete.IsChecked = !checkBoxDelete.IsChecked;
+            };
+            checkBoxNull.Unchecked += (s1, e1) =>
+            {
+                if (checkBoxNull.IsChecked == checkBoxDelete.IsChecked)
+                    checkBoxNull.IsChecked = !checkBoxNull.IsChecked;
             };
             checkBoxNull.Checked += (s1, e1) =>
             {
