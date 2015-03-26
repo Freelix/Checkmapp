@@ -552,4 +552,10 @@ Alexandre Roy</value>
   <data name="POIObject" xml:space="preserve">
     <value>What do you want to do with the objects (notes, pictures) related to the point of interest?</value>
   </data>
+  <data name="SetEndDate" xml:space="preserve">
+    <value>Set the end date</value>
+  </data>
+  <data name="ValidatorEndDate" xml:space="preserve">
+    <value>The end date must be greater than the start date and must be lower or equal than the current date.</value>
+  </data>
 </root>

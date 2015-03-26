@@ -13,6 +13,7 @@ namespace CheckMapp.Utils.Validations.Validators
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage(AppResources.Error_EmptyName);
             RuleFor(x => x.DepartureLatitude).SetValidator(new ValidateTripCoordinates());
+            RuleFor(x => x.EndDate).GreaterThanOrEqualTo(x => x.BeginDate.Date).WithMessage(AppResources.ValidatorEndDate).LessThanOrEqualTo(DateTime.Now.Date).WithMessage(AppResources.ValidatorEndDate).Unless(x => x.EndDate == null).WithMessage(AppResources.ValidatorEndDate);
         }
     }
 }

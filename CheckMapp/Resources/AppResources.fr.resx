@@ -549,4 +549,10 @@ Alexandre Roy</value>
   <data name="DeletePOIObject" xml:space="preserve">
     <value>Supprimer aussi les objets</value>
   </data>
+  <data name="SetEndDate" xml:space="preserve">
+    <value>Définir la date de fin</value>
+  </data>
+  <data name="ValidatorEndDate" xml:space="preserve">
+    <value>La date de fin doit être supérieure à la date de début et doit être inférieure ou égale à la date actuelle .</value>
+  </data>
 </root>

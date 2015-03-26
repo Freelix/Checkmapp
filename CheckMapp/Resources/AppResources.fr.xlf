@@ -442,7 +442,16 @@
         </trans-unit>
         <trans-unit id="Resx/POIObject" translate="yes" xml:space="preserve">
           <source>What do you want to do with the objects (notes, pictures) related to the point of interest?</source>
-          <target state="needs-review-translation">Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="needs-review-translation">Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
+        <trans-unit id="Resx/SetEndDate" translate="yes" xml:space="preserve">
+          <source>Set the end date</source>
+          <target state="translated">Définir la date de fin</target>
+        </trans-unit>
+        <trans-unit id="Resx/ValidatorEndDate" translate="yes" xml:space="preserve">
+          <source>The end date must be greater than the start date and must be lower or equal than the current date.</source>
+          <target state="translated">La date de fin doit être supérieure à la date de début et doit être inférieure ou égale à la date actuelle .</target>
         </trans-unit>
         <trans-unit id="Resx/NullPOIObject" translate="yes" xml:space="preserve">
           <source>Remove association with this POI</source>

@@ -1172,6 +1172,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Set the end date.
+        /// </summary>
+        public static string SetEndDate {
+            get {
+                return ResourceManager.GetString("SetEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à settings.
         /// </summary>
         public static string Settings {
@@ -1276,6 +1285,15 @@ namespace CheckMapp.Resources {
         public static string TripEndDate {
             get {
                 return ResourceManager.GetString("TripEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The end date must be greater than the start date and must be lower or equal than the current date..
+        /// </summary>
+        public static string ValidatorEndDate {
+            get {
+                return ResourceManager.GetString("ValidatorEndDate", resourceCulture);
             }
         }
         
