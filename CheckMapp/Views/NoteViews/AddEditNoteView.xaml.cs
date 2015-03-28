@@ -11,6 +11,7 @@ using CheckMapp.ViewModels.NoteViewModels;
 using CheckMapp.Resources;
 using CheckMapp.ViewModels;
 using CheckMapp.Model.Tables;
+using Utility = CheckMapp.Utils.Utility;
 
 namespace CheckMapp.Views.NoteViews
 {
@@ -19,19 +20,7 @@ namespace CheckMapp.Views.NoteViews
         public AddEditNoteView()
         {
             InitializeComponent();
-
-            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            Note currentNote = (Note)PhoneApplicationService.Current.State["Note"];
-            this.DataContext = new AddEditNoteViewModel(trip, currentNote, mode);
-
-            //Assigne le titre de la page
-            AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
-            if (vm.Mode == Mode.add)
-                TitleTextblock.Text = AppResources.AddNote.ToLower();
-            else if (vm.Mode == Mode.edit)
-                TitleTextblock.Text = AppResources.EditNote.ToLower();
-
+            LoadPage();
         }
 
         /// <summary>
@@ -84,11 +73,40 @@ namespace CheckMapp.Views.NoteViews
             }
         }
 
+        private void LoadPage()
+        {
+            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+            Note currentNote = (Note)PhoneApplicationService.Current.State["Note"];
+            AddEditNoteViewModel vm = new AddEditNoteViewModel(trip, currentNote, mode);
+            this.DataContext = vm;
+
+            //Assigne le titre de la page
+            if (vm.Mode == Mode.add)
+                TitleTextblock.Text = AppResources.AddNote.ToLower();
+            else if (vm.Mode == Mode.edit)
+                TitleTextblock.Text = AppResources.EditNote.ToLower();
+        }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             // Save the note instance to retrieve when a tombstone occured
             AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
             PhoneApplicationService.Current.State["Note"] = vm.Note;
+            
+            if (vm.POISelected != null)
+                PhoneApplicationService.Current.State["POISelected"] = vm.POISelected;
+            else if (vm.PoiList.Count > 0)
+                PhoneApplicationService.Current.State["POISelected"] = vm.PoiList[0];
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (Utility.IsTombstoned())
+            {
+                PhoneApplicationService.Current.State["TombstoneMode"] = true;
+                LoadPage();              
+            }
         }
     }
 }

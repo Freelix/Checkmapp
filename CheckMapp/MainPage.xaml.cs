@@ -34,7 +34,15 @@ namespace CheckMapp
 
             this.DataContext = new MainViewModel();
             MainPanorama.SelectionChanged += MainPanorama_SelectionChanged;
-            Trip current = (this.DataContext as MainViewModel).TripActif;
+
+            Trip current = null;
+
+            // Solve a refresh problem when app is returning from Dormant State
+            if (PhoneApplicationService.Current.State["Trip"] != null)
+                current = (Trip) PhoneApplicationService.Current.State["Trip"];
+            else
+                current = (this.DataContext as MainViewModel).TripActif;
+
             PhoneApplicationService.Current.State["Trip"] = current;
             if ((this.DataContext as MainViewModel).IsTripActif)
                 CurrentView.DataContext = new CurrentViewModel(current);

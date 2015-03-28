@@ -113,6 +113,7 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["poiId"] = 0;
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;
+            PhoneApplicationService.Current.State["POISelected"] = null;
         }
 
 
@@ -134,6 +135,7 @@ namespace CheckMapp
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
