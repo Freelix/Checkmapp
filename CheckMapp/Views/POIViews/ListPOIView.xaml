@@ -27,7 +27,7 @@
         <shell:ApplicationBar x:Key="AppBarList" IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton  x:Name="IconMultiSelect"  Click="IconMultiSelect_Click"  IconUri="/Images/appbar.list.check.png" Text="[select]"/>
             <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
-            <shell:ApplicationBarIconButton  x:Name="IconNear"  Click="IconNear_Click"  IconUri="/Images/add.png" Text="[add]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconNear"  Click="IconNear_Click"  IconUri="/Images/appbar.location.checkin.png" Text="[placeNear]"/>
             <!--TODO ajouter bouton pour localiser place near you--> 
         </shell:ApplicationBar>
 

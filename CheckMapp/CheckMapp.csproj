@@ -14,7 +14,8 @@
     <AssemblyName>CheckMapp</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <SilverlightVersion></SilverlightVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>fr</SupportedCultures>
     <XapOutputs>true</XapOutputs>
@@ -423,6 +424,7 @@
     <Content Include="Images\appbar.flag.wavy.png" />
     <Content Include="Images\appbar.graph.line.up.png" />
     <Content Include="Images\appbar.list.check.png" />
+    <Content Include="Images\appbar.location.checkin.png" />
     <Content Include="Images\appbar.location.png" />
     <Content Include="Images\appbar.plane.rotated.45.png" />
     <Content Include="Images\appbar.return.png" />
@@ -523,6 +525,7 @@
     <XliffResource Include="Resources\AppResources.fr.xlf">
       <Generator>XliffResxGenerator</Generator>
       <LastGenOutput>AppResources.fr.resx</LastGenOutput>
+      <SubType>Designer</SubType>
     </XliffResource>
   </ItemGroup>
   <ItemGroup />
