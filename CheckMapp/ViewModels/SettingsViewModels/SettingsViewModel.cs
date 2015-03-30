@@ -134,14 +134,33 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             }
         }
 
+        private string _typeProgress;
+
+        public string TypeProgress
+        {
+            get { return _typeProgress; }
+            set
+            {
+                _typeProgress = value;
+                RaisePropertyChanged("TypeProgress");
+            }
+        }
+
         private string _progressText;
 
         public string ProgressText
         {
-            get { return _progressText; }
+            get { return ProgressPercent.ToString("0,0") + "%"; }
+        }
+
+        private double _progressPercent;
+        public double ProgressPercent
+        {
+            get { return _progressPercent; }
             set
             {
-                _progressText = value;
+                _progressPercent = value;
+                RaisePropertyChanged("ProgressPercent");
                 RaisePropertyChanged("ProgressText");
             }
         }
@@ -220,7 +239,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         private void Export()
         {
             this.Loading = true;
-            this.ProgressText = AppResources.ExportLoading;
+            this.TypeProgress = AppResources.ExportLoading;
             this.ExportInProgress = true;
         }
 
@@ -228,14 +247,14 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         private void Import()
         {
             this.Loading = true;
-            this.ProgressText = AppResources.ImportLoading;
+            this.TypeProgress = AppResources.ImportLoading;
             this.ImportInProgress = true;
         }
 
         private void Cancel()
         {
             this.Loading = false;
-            this.ProgressText = String.Empty;
+            ProgressPercent = 0;
             this.ImportInProgress = false;
             this.ExportInProgress = false;
         }

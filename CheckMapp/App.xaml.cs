@@ -100,10 +100,12 @@ namespace CheckMapp
                 }
             }
 
+          
             //Création des  clés
             DataServiceTrip dsTrip = new DataServiceTrip();
-            if (dsTrip.getCurrentTrip() != null)
-                PhoneApplicationService.Current.State["Trip"] = dsTrip.getCurrentTrip();
+            Trip currentTrip = dsTrip.getCurrentTrip();
+            if (currentTrip != null)
+                PhoneApplicationService.Current.State["Trip"] = currentTrip;
             else
                 PhoneApplicationService.Current.State["Trip"] = null;
 
@@ -115,6 +117,7 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;
             PhoneApplicationService.Current.State["POISelected"] = null;
+
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -136,7 +139,7 @@ namespace CheckMapp
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            
+
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -144,7 +147,7 @@ namespace CheckMapp
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             ViewModelLocator.Cleanup();
-            
+
         }
 
         // Code to execute if a navigation fails

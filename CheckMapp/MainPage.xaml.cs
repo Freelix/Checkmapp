@@ -24,6 +24,7 @@ namespace CheckMapp
         public MainPage()
         {
             InitializeComponent();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,15 +40,44 @@ namespace CheckMapp
 
             // Solve a refresh problem when app is returning from Dormant State
             if (PhoneApplicationService.Current.State["Trip"] != null)
-                current = (Trip) PhoneApplicationService.Current.State["Trip"];
+                current = (Trip)PhoneApplicationService.Current.State["Trip"];
             else
                 current = (this.DataContext as MainViewModel).TripActif;
+
+            CheckUpdateTile(current);
 
             PhoneApplicationService.Current.State["Trip"] = current;
             if ((this.DataContext as MainViewModel).IsTripActif)
                 CurrentView.DataContext = new CurrentViewModel(current);
 
             DashboardView.LoadComponents((this.DataContext as MainViewModel).IsTripActif);
+        }
+
+        /// <summary>
+        /// Met a jour la tuile sur l'écran d'accueil avec les nouvelles infos du voyage en cours
+        /// </summary>
+        /// <param name="current"></param>
+        public void CheckUpdateTile(Trip current)
+        {
+            IconicTileData newTileData = new IconicTileData();
+            newTileData.Title = "Checkmapp";
+            newTileData.IconImage = new Uri(@"Assets/Logo.png", UriKind.Relative);
+            newTileData.SmallIconImage = new Uri(@"Assets/Logo.png", UriKind.Relative);
+            if (current != null)
+            {
+                newTileData.WideContent1 = current.Name;
+                int day = 0;
+                TimeSpan elapsed = DateTime.Now.Subtract(current.BeginDate);
+                if (elapsed.TotalDays > 0)
+                    day = (int)elapsed.TotalDays;
+
+                newTileData.WideContent2 = AppResources.Day + " " + day;
+            }
+
+            //Mise a jour (pour le texte)
+            ShellTile tile = ShellTile.ActiveTiles.FirstOrDefault();
+            if (tile != null)
+                tile.Update(newTileData);
         }
 
         /// <summary>

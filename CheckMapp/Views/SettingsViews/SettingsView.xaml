@@ -43,14 +43,11 @@
                             <TextBlock Text="{Binding Path=LocalizedResources.DataManagement, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <Button Visibility="{Binding IsEnabled, ElementName=btnImport, Converter={StaticResource ConvertBoolean}}" IsEnabled="{Binding Loading, Converter={StaticResource InvertBoolConverter}}" x:Name="btnImport" Click="btnImport_Click" Content="{Binding Path=LocalizedResources.Import, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" />
                             <Button x:Name="btnExport" Click="btnExport_Click" Visibility="{Binding IsEnabled, ElementName=btnExport, Converter={StaticResource ConvertBoolean}}" IsEnabled="{Binding Loading, Converter={StaticResource InvertBoolConverter}}"  Content="{Binding Path=LocalizedResources.Export, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" />
-                            <Grid  Visibility="{Binding Loading, Converter={StaticResource ConvertBoolean}}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0"  Text="{Binding ProgressText}"  Style="{StaticResource PhoneTextTitle2Style}"/>
-                                <TextBlock Grid.Column="1" x:Name="txtProgress" Style="{StaticResource PhoneTextTitle2Style}"></TextBlock>
-                            </Grid>
+                            <StackPanel   Visibility="{Binding Loading, Converter={StaticResource ConvertBoolean}}">
+                                <TextBlock FontSize="15" Text="{Binding TypeProgress,Mode=TwoWay}" Style="{StaticResource PhoneTextNormalStyle}"></TextBlock>
+                                <ProgressBar Margin="0,5,0,5" Minimum="0" Maximum="100"  Value="{Binding ProgressPercent, Mode=TwoWay}" ></ProgressBar>
+                                <TextBlock FontSize="15" Text="{Binding ProgressText,Mode=TwoWay}" Style="{StaticResource PhoneTextNormalStyle}"></TextBlock>
+                            </StackPanel>
 
                             <Button x:Name="btnCancel" Click="btnCancel_Click" Visibility="{Binding Loading, Converter={StaticResource ConvertBoolean}}" Content="{Binding Path=LocalizedResources.Cancel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" Command="{Binding ExportCommand}"/>
 

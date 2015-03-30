@@ -46,7 +46,7 @@ namespace CheckMapp.Views.SettingsViews
                 Progress<LiveOperationProgress> uploadProgress = new Progress<LiveOperationProgress>(
         (p) =>
         {
-            txtProgress.Text = p.ProgressPercentage.ToString("0,0") + "%";
+            vm.ProgressPercent = p.ProgressPercentage;
 
         });
                 int import = await Utility.ImportBD(cts.Token, uploadProgress);
@@ -79,8 +79,8 @@ namespace CheckMapp.Views.SettingsViews
             Progress<LiveOperationProgress> uploadProgress = new Progress<LiveOperationProgress>(
         (p) =>
         {
-            txtProgress.Text = p.ProgressPercentage.ToString("0,0")+"%";
-                
+            vm.ProgressPercent = p.ProgressPercentage;
+
         });
             int export = await Utility.ExportDB(cts.Token, uploadProgress);
             vm.CancelCommand.Execute(null);
