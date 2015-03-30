@@ -13,6 +13,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using FluentValidation;
 using CheckMapp.Utils.Validations;
+using Microsoft.Phone.Shell;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
@@ -28,7 +29,13 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             this.Mode = mode;
 
-            if (this.Mode == Mode.add && !Utility.IsTombstoned())
+            if (Utility.IsTombstoned())
+            {
+                Picture = picture;
+                POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+                PhoneApplicationService.Current.State["POISelected"] = null;
+            }
+            else if (this.Mode == Mode.add)
             {
                 Picture = new Picture();
                 Picture.Trip = trip;

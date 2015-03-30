@@ -15,11 +15,12 @@ using Utility = CheckMapp.Utils.Utility;
 using FluentValidation;
 using CheckMapp.Utils.Validations;
 using System.Runtime.Serialization;
+using Microsoft.Phone.Shell;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
     [DataContract]
-    public class AddEditNoteViewModel : ViewModelBase
+    public class AddEditNoteViewModel
     {
         private Note _note;
 
@@ -30,19 +31,23 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             this.Mode = mode;
 
-            if (this.Mode == Mode.add && !Utility.IsTombstoned())
+            if (Utility.IsTombstoned() )
+            {
+                Note = note;
+                POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+                PhoneApplicationService.Current.State["POISelected"] = null;
+            }
+            else if (this.Mode == Mode.add)
             {
                 Note = new Note();
                 Note.Trip = trip;
                 Note.Date = DateTime.Now;
             }
             else
-                Note = note;
+                Note = note;    
 
             if (trip.PointsOfInterests != null)
-            {
                 _poiList = new List<PointOfInterest>(trip.PointsOfInterests);
-            }
 
             InitialiseValidator();
         }
@@ -252,5 +257,13 @@ namespace CheckMapp.ViewModels.NoteViewModels
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (null != PropertyChanged)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

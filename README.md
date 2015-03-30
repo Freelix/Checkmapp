@@ -1,7 +1,7 @@
 # Checkmapp
 A windows phone application that allows people to manage their pictures, locations and notes from their trips.
 
-##View local databas
+##View local database
 The view our database content, we use 2 programs
 * SQL CQA - An open source project that is light, easy to use and can execute sql queries.
 * ISETool - A simple application used for extracting the local databse on windows phone 8.

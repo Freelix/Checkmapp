@@ -64,7 +64,7 @@
                     <myControl:POISelectControl  NoneCheck="{Binding NoneCheck}" x:Name="POIControl" POISelected="{Binding POISelected,Mode=TwoWay}" PoiList="{Binding PoiList,Mode=TwoWay}"></myControl:POISelectControl>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.Description, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-                    <TextBox Height="300" Text="{Binding Description, Mode=TwoWay}"></TextBox>
+                    <TextBox AcceptsReturn="True" Height="300" Text="{Binding Description, Mode=TwoWay}"></TextBox>
                     
                 </StackPanel>
             </ScrollViewer>

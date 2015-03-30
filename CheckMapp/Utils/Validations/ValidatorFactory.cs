@@ -5,6 +5,7 @@ using FluentValidation;
 using GalaSoft.MvvmLight.Ioc;
 using CheckMapp.Model.Tables;
 using CheckMapp.Utils.Validations.Validators;
+using CheckMapp.Utils.Validations.Validators.CustomValidators;
 
 namespace CheckMapp.Utils.Validations
 {

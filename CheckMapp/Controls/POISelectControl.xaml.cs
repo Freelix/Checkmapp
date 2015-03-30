@@ -64,9 +64,17 @@ namespace CheckMapp.Controls
 
         private void chkNoPOI_UnChecked(object sender, RoutedEventArgs e)
         {
-            chkShow_Storyboard.Begin();
-            poiListPicker.Visibility = Visibility.Visible;
-            poiListPicker.SelectedIndex = 0;
+            try
+            {
+                chkShow_Storyboard.Begin();
+                poiListPicker.Visibility = Visibility.Visible;
+                poiListPicker.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                chkNoPOI.IsEnabled = false;
+                chkNoPOI.IsChecked = true;
+            }
         }
 
         public void CheckboxState()

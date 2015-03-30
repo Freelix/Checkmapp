@@ -561,4 +561,16 @@ Alexandre Roy</value>
   <data name="PlaceNearUsername" xml:space="preserve">
     <value>checkmapp</value>
   </data>
+  <data name="SetEndDate" xml:space="preserve">
+    <value>Set the end date</value>
+  </data>
+  <data name="ValidatorEndDate" xml:space="preserve">
+    <value>The end date must be greater than the start date and must be lower or equal than the current date.</value>
+  </data>
+  <data name="LangRestartApp" xml:space="preserve">
+    <value>You will have to restart the application to change the language.</value>
+  </data>
+  <data name="VisitWebsite" xml:space="preserve">
+    <value>Visit our website</value>
+  </data>
 </root>

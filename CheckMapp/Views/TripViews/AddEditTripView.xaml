@@ -65,10 +65,10 @@
                     </Grid>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripName, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <TextBox x:Name="NameTextBox" MaxLength="30" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
+                    <TextBox x:Name="NameTextBox" MaxLength="40" Text="{Binding TripName, Mode=TwoWay}"></TextBox>
                    
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDate, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <toolkit:DatePicker Name="datePicker"  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
+                    <toolkit:DatePicker IsEnabled="{Binding Trip.IsActif}" Name="datePicker"  Value="{Binding TripBeginDate, Mode=TwoWay}"></toolkit:DatePicker>
 
                     <StackPanel Tap="StackPanel_Tap" Margin="0,15,0,0" Orientation="Horizontal">
                         <c4f:RoundButton ButtonHeight="60" ButtonWidth="60"  x:Name="btnFriend"  ImageSource="/Images/small.add.png" />

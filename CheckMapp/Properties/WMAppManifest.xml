@@ -3,8 +3,9 @@
   <DefaultLanguage xmlns="" code="en-US" />
   <Languages xmlns="">
     <Language code="fr" />
+    <Language code="en-US" />
   </Languages>
-  <App xmlns="" ProductID="{1ec8df13-6ca9-40e9-a465-7931ec2a4ae6}" Title="CheckMapp" RuntimeType="Silverlight" Version="0.1.0.0" Genre="apps.normal" Author="CheckMapp author" Description="Sample description" Publisher="CheckMapp" PublisherID="{5d30f8e1-dc82-40b0-b2c4-027600d8f07e}">
+  <App xmlns="" ProductID="{1ec8df13-6ca9-40e9-a465-7931ec2a4ae6}" Title="CheckMapp" RuntimeType="Silverlight" Version="0.1.0.0" Genre="apps.normal" Author="NamedJohnny" Description="Sample description" Publisher="CheckMapp" PublisherID="{5d30f8e1-dc82-40b0-b2c4-027600d8f07e}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -23,28 +24,22 @@
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="CheckMappToken" TaskName="_default">
-        <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+        <TemplateIconic>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Logo.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>ProjectForTemplates.WP8</Title>
-          <BackContent>
-          </BackContent>
-          <BackBackgroundImageURI>
-          </BackBackgroundImageURI>
-          <BackTitle>
-          </BackTitle>
-          <LargeBackgroundImageURI>
-          </LargeBackgroundImageURI>
-          <LargeBackContent>
-          </LargeBackContent>
-          <LargeBackBackgroundImageURI>
-          </LargeBackBackgroundImageURI>
-          <DeviceLockImageURI>
+          <IconImageURI IsRelative="true" IsResource="false">Assets\Logo.png</IconImageURI>
+          <Title>Checkmapp</Title>
+          <Message>
+          </Message>
+          <BackgroundColor>
+          </BackgroundColor>
+          <HasLarge>True</HasLarge>
+          <LargeContent1></LargeContent1>
+          <LargeContent2></LargeContent2>
+          <LargeContent3></LargeContent3>
+          <DeviceLockImageURI IsRelative="true" IsResource="false">
           </DeviceLockImageURI>
-          <HasLarge>
-          </HasLarge>
-        </TemplateFlip>
+        </TemplateIconic>
       </PrimaryToken>
     </Tokens>
     <ScreenResolutions>

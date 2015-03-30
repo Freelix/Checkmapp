@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Command;
 using CheckMapp.Utils.Languages;
 using Utility = CheckMapp.Utils.Utility;
 using CheckMapp.Resources;
+using System.Windows;
 
 namespace CheckMapp.ViewModels.SettingsViewModels
 {
@@ -43,11 +44,13 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             WifiOnlyStorageProperty = CMSettingsContainer.WifiOnly;
             _wifiOnly = WifiOnlyStorageProperty.Value;
 
-            AutoSyncStorageProperty = CMSettingsContainer.AutoSync;
-            _autoSync = AutoSyncStorageProperty.Value;
-
             LanguageStorageProperty = CMSettingsContainer.Language;
 
+            SetLanguageListPicker();
+        }
+
+        private void SetLanguageListPicker()
+        {
             int index;
 
             if (LanguageStorageProperty.Value != null)
@@ -88,22 +91,9 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _wifiOnly; }
             set
             {
-                WifiOnlyStorageProperty.Value = _wifiOnly;
                 _wifiOnly = value;
+                WifiOnlyStorageProperty.Value = _wifiOnly;
                 RaisePropertyChanged("WifiOnly");
-            }
-        }
-
-        private bool _autoSync;
-
-        public bool AutoSync
-        {
-            get { return _autoSync; }
-            set
-            {
-                AutoSyncStorageProperty.Value = _autoSync;
-                _autoSync = value;
-                RaisePropertyChanged("AutoSync");
             }
         }
 
@@ -114,8 +104,8 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _languageIndex; }
             set
             {
-                UpdateLanguage();
                 _languageIndex = value;
+                UpdateLanguage();
                 RaisePropertyChanged("LanguageIndex");
             }
         }
@@ -144,15 +134,33 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             }
         }
 
+        private string _typeProgress;
+
+        public string TypeProgress
+        {
+            get { return _typeProgress; }
+            set
+            {
+                _typeProgress = value;
+                RaisePropertyChanged("TypeProgress");
+            }
+        }
 
         private string _progressText;
 
         public string ProgressText
         {
-            get { return _progressText; }
+            get { return ProgressPercent.ToString("0,0") + "%"; }
+        }
+
+        private double _progressPercent;
+        public double ProgressPercent
+        {
+            get { return _progressPercent; }
             set
             {
-                _progressText = value;
+                _progressPercent = value;
+                RaisePropertyChanged("ProgressPercent");
                 RaisePropertyChanged("ProgressText");
             }
         }
@@ -219,7 +227,10 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             string newLang = _languagesCode[_languageIndex];
 
             if (!LanguageStorageProperty.Value.Equals(newLang))
-                LocalizationManager.ChangeAppLanguage(newLang);
+            {
+                LanguageStorageProperty.Value = newLang;
+                MessageBox.Show(AppResources.LangRestartApp, "Information", MessageBoxButton.OK);
+            }
         }
 
         #endregion
@@ -228,7 +239,7 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         private void Export()
         {
             this.Loading = true;
-            this.ProgressText = AppResources.ExportLoading;
+            this.TypeProgress = AppResources.ExportLoading;
             this.ExportInProgress = true;
         }
 
@@ -236,14 +247,14 @@ namespace CheckMapp.ViewModels.SettingsViewModels
         private void Import()
         {
             this.Loading = true;
-            this.ProgressText = AppResources.ImportLoading;
+            this.TypeProgress = AppResources.ImportLoading;
             this.ImportInProgress = true;
         }
 
         private void Cancel()
         {
             this.Loading = false;
-            this.ProgressText = String.Empty;
+            ProgressPercent = 0;
             this.ImportInProgress = false;
             this.ExportInProgress = false;
         }

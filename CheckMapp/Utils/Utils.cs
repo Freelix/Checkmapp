@@ -24,6 +24,7 @@ using Microsoft.Phone.Shell;
 using CheckMapp.Model.DataService;
 using CheckMapp.Model.Tables;
 using System.Threading;
+using CheckMapp.Utils.Settings;
 
 namespace CheckMapp.Utils
 {
@@ -89,21 +90,26 @@ namespace CheckMapp.Utils
         }
         #endregion
 
-        #region Internet connection Functions
+        #region Internet Connection Functions
+
         /// <summary>
         /// Vérifie qu'il y est une connexion active
+        /// Vérifie en même temps si on doit uniquement se servir du Wifi
         /// </summary>
         /// <param name=></param>
         /// <returns>true si connecté à un réseaux</returns>
         public static bool checkNetworkConnection()
         {
             var ni = NetworkInterface.NetworkInterfaceType;
-
             bool IsConnected = false;
-            if ((ni == NetworkInterfaceType.Wireless80211) || (ni == NetworkInterfaceType.MobileBroadbandCdma) || (ni == NetworkInterfaceType.MobileBroadbandGsm))
-                IsConnected = true;
-            else if (ni == NetworkInterfaceType.None)
-                IsConnected = false;
+
+            if (GetWifiStorageProperty())
+                IsConnected = IsConnectedOnWifi();
+            else if ((ni == NetworkInterfaceType.Wireless80211) || 
+                (ni == NetworkInterfaceType.MobileBroadbandCdma) || 
+                (ni == NetworkInterfaceType.MobileBroadbandGsm))
+                    IsConnected = true;
+
             return IsConnected;
         }
 
@@ -243,7 +249,7 @@ namespace CheckMapp.Utils
 
         #endregion
 
-        #region friend list
+        #region Friends List
 
         public static List<string> FriendToList(string friends)
         {
@@ -431,6 +437,8 @@ namespace CheckMapp.Utils
 
         #endregion
 
+        #region POIType
+
         public static string ImageSourceFromPOIType(POIType type)
         {
             return "/Images/POIType/" + type.ToString().ToLower() + ".png";
@@ -440,6 +448,9 @@ namespace CheckMapp.Utils
         {
             return AppResources.ResourceManager.GetString(type.ToString(), AppResources.Culture);
         }
+
+        #endregion
+
         #region Tombstone
 
         public static Boolean IsTombstoned()
@@ -459,6 +470,33 @@ namespace CheckMapp.Utils
         {
             DataServiceTrip dsTrip = new DataServiceTrip();
             return dsTrip.getTripById(tripId);
+        }
+
+        #endregion
+
+        #region Settings
+
+        /// <summary>
+        /// Check if we have to use only the wifi
+        /// </summary>
+        /// <returns></returns>
+        public static bool GetWifiStorageProperty()
+        {
+            return CMSettingsContainer.WifiOnly.Value;
+        }
+
+        /// <summary>
+        /// Check if a wifi connection is already established
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsConnectedOnWifi()
+        {
+            var ni = NetworkInterface.NetworkInterfaceType;
+
+            if (ni == NetworkInterfaceType.Wireless80211)
+                return true;
+
+            return false;
         }
 
         #endregion

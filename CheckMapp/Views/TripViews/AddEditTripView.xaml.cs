@@ -31,19 +31,7 @@ namespace CheckMapp.Views.TripViews
         public AddEditTripView()
         {
             InitializeComponent();
-
-            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            this.DataContext = new AddEditTripViewModel(currentTrip, mode);
-
-            //Assigne le titre de la page
-            var vm = this.DataContext as AddEditTripViewModel;
-            if (vm.Mode == Mode.add)
-                TitleTextblock.Text = AppResources.AddTrip.ToLower();
-            else
-            {
-                TitleTextblock.Text = AppResources.EditTrip.ToLower();
-            }
+            LoadPage();
         }
 
         /// <summary>
@@ -178,11 +166,36 @@ namespace CheckMapp.Views.TripViews
                 menu.DataContext = owner.DataContext;
         }
 
+        private void LoadPage()
+        {
+            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            this.DataContext = new AddEditTripViewModel(currentTrip, mode);
+
+            //Assigne le titre de la page
+            var vm = this.DataContext as AddEditTripViewModel;
+            if (vm.Mode == Mode.add)
+                TitleTextblock.Text = AppResources.AddTrip.ToLower();
+            else
+            {
+                TitleTextblock.Text = AppResources.EditTrip.ToLower();
+            }
+        }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             // Save the note instance to retrieve when a tombstone occured
             AddEditTripViewModel vm = DataContext as AddEditTripViewModel;
             PhoneApplicationService.Current.State["Trip"] = vm.Trip;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (Utility.IsTombstoned())
+            {
+                PhoneApplicationService.Current.State["TombstoneMode"] = true;
+                LoadPage();
+            }
         }
     }
 }

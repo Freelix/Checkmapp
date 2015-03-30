@@ -704,6 +704,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You will have to restart the application to change the language..
+        /// </summary>
+        public static string LangRestartApp {
+            get {
+                return ResourceManager.GetString("LangRestartApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -1199,6 +1208,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set the end date.
+        /// </summary>
+        public static string SetEndDate {
+            get {
+                return ResourceManager.GetString("SetEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to settings.
         /// </summary>
         public static string Settings {
@@ -1307,11 +1325,29 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The end date must be greater than the start date and must be lower or equal than the current date..
+        /// </summary>
+        public static string ValidatorEndDate {
+            get {
+                return ResourceManager.GetString("ValidatorEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version number.
         /// </summary>
         public static string VersionNumber {
             get {
                 return ResourceManager.GetString("VersionNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit our website.
+        /// </summary>
+        public static string VisitWebsite {
+            get {
+                return ResourceManager.GetString("VisitWebsite", resourceCulture);
             }
         }
         

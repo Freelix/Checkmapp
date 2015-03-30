@@ -17,6 +17,7 @@ using System.Linq;
 using CheckMapp.Model.DataService;
 using System.IO.IsolatedStorage;
 using System.IO;
+using CheckMapp.Utils.Languages;
 
 namespace CheckMapp
 {
@@ -99,10 +100,12 @@ namespace CheckMapp
                 }
             }
 
+          
             //Création des  clés
             DataServiceTrip dsTrip = new DataServiceTrip();
-            if (dsTrip.getCurrentTrip() != null)
-                PhoneApplicationService.Current.State["Trip"] = dsTrip.getCurrentTrip();
+            Trip currentTrip = dsTrip.getCurrentTrip();
+            if (currentTrip != null)
+                PhoneApplicationService.Current.State["Trip"] = currentTrip;
             else
                 PhoneApplicationService.Current.State["Trip"] = null;
 
@@ -113,14 +116,16 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["poiId"] = 0;
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;
+            PhoneApplicationService.Current.State["POISelected"] = null;
+
         }
-
-
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            // Set the correct language when application is launched
+            LocalizationManager.ChangeAppLanguage(LocalizationManager.GetCurrentAppLang());
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -134,6 +139,7 @@ namespace CheckMapp
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -141,7 +147,7 @@ namespace CheckMapp
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             ViewModelLocator.Cleanup();
-            
+
         }
 
         // Code to execute if a navigation fails

@@ -24,22 +24,13 @@ namespace CheckMapp.Views.PhotoViews
         {
             InitializeComponent();
 
-            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
-
-            this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode, PhoneApplicationService.Current.State["ChosenPhoto"] as byte[]);
-
-            //On vide la mémoire le plus possible
+            byte[] photoSelected = PhoneApplicationService.Current.State["ChosenPhoto"] as byte[];
+            
+            // On vide la mémoire le plus possible
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
+            PhoneApplicationService.Current.State["TombstoneMode"] = false;
 
-            //Assigne le titre de la page
-            var vm = this.DataContext as AddEditPhotoViewModel;
-
-            if (vm.Mode == Mode.add)
-                TitleTextblock.Text = AppResources.AddPicture.ToLower();
-            else if (vm.Mode == Mode.edit)
-                TitleTextblock.Text = AppResources.EditPicture.ToLower();
+            LoadPage(photoSelected);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -53,6 +44,25 @@ namespace CheckMapp.Views.PhotoViews
             // Save the note instance to retrieve when a tombstone occured
             AddEditPhotoViewModel vm = DataContext as AddEditPhotoViewModel;
             PhoneApplicationService.Current.State["Picture"] = vm.Picture;
+
+            if (vm.POISelected != null)
+                PhoneApplicationService.Current.State["POISelected"] = vm.POISelected;
+            else if (vm.PoiList.Count > 0)
+                PhoneApplicationService.Current.State["POISelected"] = vm.PoiList[0];
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            byte[] photoSelected = PhoneApplicationService.Current.State["ChosenPhoto"] as byte[];
+            
+            // On vide la mémoire le plus possible
+            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
+
+            if (Utility.IsTombstoned())
+            {
+                PhoneApplicationService.Current.State["TombstoneMode"] = true;
+                LoadPage(photoSelected);
+            }
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -93,6 +103,23 @@ namespace CheckMapp.Views.PhotoViews
             photoChooserTask.Completed += photoChooserTask_Completed;
             photoChooserTask.ShowCamera = true;
             photoChooserTask.Show();
+        }
+
+        private void LoadPage(byte[] photoSelected)
+        {
+            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
+            Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
+
+            this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode, photoSelected);
+
+            //Assigne le titre de la page
+            var vm = this.DataContext as AddEditPhotoViewModel;
+
+            if (vm.Mode == Mode.add)
+                TitleTextblock.Text = AppResources.AddPicture.ToLower();
+            else if (vm.Mode == Mode.edit)
+                TitleTextblock.Text = AppResources.EditPicture.ToLower();
         }
 
         void photoChooserTask_Completed(object sender, PhotoResult e)

@@ -108,19 +108,6 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         }
 
-        private ICommand _finishTripCommand;
-        public ICommand FinishTripCommand
-        {
-            get
-            {
-                if (_finishTripCommand == null)
-                {
-                    _finishTripCommand = new RelayCommand(() => FinishTrip());
-                }
-                return _finishTripCommand;
-            }
-
-        }
 
         #endregion
 
@@ -132,12 +119,6 @@ namespace CheckMapp.ViewModels.TripViewModels
             dsTrip.DeleteTrip(Trip);
         }
 
-        public void FinishTrip()
-        {
-            DataServiceTrip dsTrip = new DataServiceTrip();
-            Trip.EndDate = DateTime.Now;
-            dsTrip.UpdateTrip(Trip);
-        }
 
         #endregion
 

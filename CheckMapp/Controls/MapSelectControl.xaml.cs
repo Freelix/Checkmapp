@@ -20,7 +20,7 @@ namespace CheckMapp.Controls
         {
             InitializeComponent();
 
-            if (!Utils.Utility.checkNetworkConnection())
+            if (!Utility.checkNetworkConnection())
             {
                 //MessageBox.Show(AppResources.InternetConnection, AppResources.NotConnected, MessageBoxButton.OK);
                 this.PoiTextBox.IsEnabled = false;
@@ -85,7 +85,7 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
 
         private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            await Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0, true);
+            await Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0, true);
             MapLayer layer = this.myMap.Layers.FirstOrDefault();
             Latitude = layer[0].GeoCoordinate.Latitude;
             Longitude = layer[0].GeoCoordinate.Longitude;
@@ -98,7 +98,7 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
                 var CoordinateList = await MapHelper.getCoordinateAsync(myTextBox.Text);
 
                 // CoordinateList[0] = latitude, CoordinateList[1] = longitude
-                await Utils.Utility.AddLocation(myMap, myTextBox, null, CoordinateList[0], CoordinateList[1], true);
+                await Utility.AddLocation(myMap, myTextBox, null, CoordinateList[0], CoordinateList[1], true);
 
                 Latitude = CoordinateList[0];
                 Longitude = CoordinateList[1];
@@ -111,7 +111,7 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Utils.Utility.AddLocation(this.myMap, this.PoiTextBox, null, Latitude, Longitude);
+            Utility.AddLocation(this.myMap, this.PoiTextBox, null, Latitude, Longitude);
             Thread.Sleep(500);
         }
     }

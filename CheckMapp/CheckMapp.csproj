@@ -158,6 +158,7 @@
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\POIType.cs" />
     <Compile Include="ViewModels\POIViewModels\SelectTypePOIViewModel.cs" />
+    <Compile Include="ViewModels\TripViewModels\SelectEndDateViewModel.cs" />
     <Compile Include="Views\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
@@ -231,6 +232,9 @@
     </Compile>
     <Compile Include="Views\SettingsViews\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TripViews\SelectEndDateView.xaml.cs">
+      <DependentUpon>SelectEndDateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TripViews\TripView.xaml.cs">
       <DependentUpon>TripView.xaml</DependentUpon>
@@ -335,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsViews\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TripViews\SelectEndDateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
