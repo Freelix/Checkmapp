@@ -25,6 +25,10 @@ using System.IO;
 using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using System.IO.IsolatedStorage;
 using CheckMapp.KeyGroup;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
+using Windows.ApplicationModel;
+using Microsoft.Xna.Framework.Media;
 
 namespace CheckMapp.Views.PhotoViews
 {
@@ -43,7 +47,7 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            Picture current = PhoneApplicationService.Current.State["Picture"] as Picture;
+            CheckMapp.Model.Tables.Picture current = PhoneApplicationService.Current.State["Picture"] as CheckMapp.Model.Tables.Picture;
             this.DataContext = new PhotoViewModel(current);
             myImage.Picture = (this.DataContext as PhotoViewModel).SelectedPicture;
             base.OnNavigatedTo(e);
@@ -110,27 +114,35 @@ namespace CheckMapp.Views.PhotoViews
 
         #endregion
 
+
+        PhotoChooserTask photoChooser;
+        string currentMediaPath = null;
+
+
+
         private void IconShare_Click(object sender, EventArgs e)
         {
-            //On a besoin d'un filePath donc on l,ajoute a la librarie temporairement
-            //byte[] temp = (this.DataContext as PhotoViewModel).PictureList[(this.DataContext as PhotoViewModel).SelectedPicture].PictureData;
+            // Doc concernant le sharemediatas
+            //http://developer.nokia.com/community/wiki/Sharing_media_on_Windows_Phone_8
+            //Fait a noter picture.trip est a null apres un retour d'une autre app... vérifier avec le code de felix si l'erreur subsiste!
+           /* var bmp = new WriteableBitmap(myImage.LayoutRoot, null);
+            var width = (int)bmp.PixelWidth;
+            var height = (int)bmp.PixelHeight;
+            using (var ms = new MemoryStream(width * height * 4))
+            {
+                bmp.SaveJpeg(ms, width, height, 0, 100);
+                ms.Seek(0, SeekOrigin.Begin);
+                var lib = new MediaLibrary();
+                var picture = lib.SavePicture(string.Format("test.jpg"), ms);
 
-            //using (var ms = new MemoryStream(temp))
-            //{
-            //    ms.Seek(0, SeekOrigin.Begin);
-            //    var lib = new Microsoft.Xna.Framework.Media.MediaLibrary();
-            //    var picture = lib.SavePicture(string.Format("test.jpg"), ms);
+                var task = new ShareMediaTask();
 
-            //    var task = new ShareMediaTask();
+                task.FilePath = picture.GetPath();
 
-            //    task.FilePath = MediaLibraryExtensions.GetPath(picture);
-            //    task.Show();
+                task.Show();
+            }*/
 
-            //    //On le supprime par la suite.
-
-            //}
         }
-
 
 
     }

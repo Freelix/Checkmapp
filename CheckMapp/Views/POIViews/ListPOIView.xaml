@@ -27,6 +27,8 @@
         <shell:ApplicationBar x:Key="AppBarList" IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton  x:Name="IconMultiSelect"  Click="IconMultiSelect_Click"  IconUri="/Images/appbar.list.check.png" Text="[select]"/>
             <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
+            <shell:ApplicationBarIconButton  x:Name="IconNear"  Click="IconNear_Click"  IconUri="/Images/add.png" Text="[add]"/>
+            <!--TODO ajouter bouton pour localiser place near you--> 
         </shell:ApplicationBar>
 
         <shell:ApplicationBar x:Key="AppBarListSelect" IsVisible="True" IsMenuEnabled="True">
@@ -45,10 +47,6 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding Trip.Name}" Style="{StaticResource PhoneTextNormalStyle}"></TextBlock>
             <TextBlock Text="{Binding Path=LocalizedResources.MyPoi, Source={StaticResource LocalizedStrings}}"  Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <StackPanel Grid.Row="1" Grid.RowSpan="2">
             <Controls:Map Loaded="MyMap_Loaded"  Name="MyMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light"  >
                 <my:MapExtensions.Children>
                     <my:MapItemsControl x:Name="MyMapItems">
@@ -60,36 +58,41 @@
                     </my:MapItemsControl>
                 </my:MapExtensions.Children>
             </Controls:Map>
-            
-            <toolkit:LongListMultiSelector x:Name="POILLS" Margin="0,20,0,0" 
-                                        ItemsSource="{Binding PointOfInterestList}"
-                                        LayoutMode="List" 
-                                        SelectionChanged="POILLS_SelectionChanged"
-                                        IsSelectionEnabledChanged="POILLS_IsSelectionEnabledChanged"
-                                            >
-                <toolkit:LongListMultiSelector.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,40,10">
-                            <toolkit:ContextMenuService.ContextMenu >
-                                <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
-                                    <toolkit:MenuItem x:Name="POIGet" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.GetToPOI, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="POIShare" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="POIPictures" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeePhotos, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="POINotes" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeeNotes, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="EditPoi" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
-                                    <toolkit:MenuItem x:Name="DeletePOI" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
-                                </toolkit:ContextMenu>
-                            </toolkit:ContextMenuService.ContextMenu>
-                            <Image Height="80" VerticalAlignment="Bottom"   Source="{Binding Type, Converter={StaticResource POITypeConverter}}"></Image>
-                            <StackPanel Width="400" >
-                                <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding Location}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </toolkit:LongListMultiSelector.ItemTemplate>
-            </toolkit:LongListMultiSelector>
         </StackPanel>
+
+        <!--ContentPanel - placez tout contenu supplémentaire ici-->
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <ScrollViewer>
+                <toolkit:LongListMultiSelector x:Name="POILLS" Margin="0,20,0,0" 
+                                            ItemsSource="{Binding PointOfInterestList}"
+                                            LayoutMode="List" 
+                                            SelectionChanged="POILLS_SelectionChanged"
+                                            IsSelectionEnabledChanged="POILLS_IsSelectionEnabledChanged"
+                                                >
+                    <toolkit:LongListMultiSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,40,10">
+                                <toolkit:ContextMenuService.ContextMenu >
+                                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
+                                        <toolkit:MenuItem x:Name="POIGet" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.GetToPOI, Source={StaticResource LocalizedStrings}}" />
+                                        <toolkit:MenuItem x:Name="POIShare" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
+                                        <toolkit:MenuItem x:Name="POIPictures" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeePhotos, Source={StaticResource LocalizedStrings}}" />
+                                        <toolkit:MenuItem x:Name="POINotes" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeeNotes, Source={StaticResource LocalizedStrings}}" />
+                                        <toolkit:MenuItem x:Name="EditPoi" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" />
+                                        <toolkit:MenuItem x:Name="DeletePOI" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                                <Image Height="80" VerticalAlignment="Bottom"   Source="{Binding Type, Converter={StaticResource POITypeConverter}}"></Image>
+                                <StackPanel Width="400" >
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Location}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:LongListMultiSelector.ItemTemplate>
+                </toolkit:LongListMultiSelector>
+            </ScrollViewer>
+        </Grid>
 
     </Grid>
 

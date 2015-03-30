@@ -19,11 +19,18 @@ using CheckMapp.ViewModels;
 using Microsoft.Phone.Tasks;
 using Windows.Devices.Geolocation;
 using System.Windows.Media;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Runtime.Serialization;
 
 namespace CheckMapp.Views.POIViews
 {
     public partial class ListPOIView : PhoneApplicationPage
     {
+        private string currentLatitude = string.Empty;
+        private string currentLongitude = string.Empty;
+
         public ListPOIView()
         {
             InitializeComponent();
@@ -133,6 +140,29 @@ namespace CheckMapp.Views.POIViews
             base.OnNavigatedTo(e);
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
+            loadLocation();
+        }
+
+        private async void loadLocation()
+        {
+            Geolocator geolocator = new Geolocator();
+            geolocator.DesiredAccuracyInMeters = 50; // maybe 500 if error in this part...
+            geolocator.MovementThreshold = 5;
+            geolocator.ReportInterval = 500;
+
+            try
+            {
+                Geoposition geoposition = await geolocator.GetGeopositionAsync(
+                    maximumAge: TimeSpan.FromMinutes(5),
+                    timeout: TimeSpan.FromSeconds(10));
+                currentLatitude = geoposition.Coordinate.Latitude.ToString();
+                currentLongitude = geoposition.Coordinate.Longitude.ToString();
+            }
+            catch (Exception)
+            {
+                // the app does not have the right capability or the location master switch is off 
+                MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
+            }
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -279,6 +309,148 @@ namespace CheckMapp.Views.POIViews
             messageBox.Show();
         }
 
+
+
+
+
+       
+
+        
+
+        private void startGeoNamesAPICall()
+        {
+            try
+            {
+                HttpWebRequest httpReq = (HttpWebRequest)HttpWebRequest.Create(new Uri(AppResources.PlaceNearURI + "&lat=" + currentLatitude + "&lng=" + currentLongitude + "&username="+AppResources.PlaceNearUsername+"&radius=5&maxRows=10"));
+                httpReq.BeginGetResponse(HTTPWebRequestCallBack, httpReq);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void HTTPWebRequestCallBack(IAsyncResult result)
+        {
+            string strResponse = "";
+
+            try
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+                    try
+                    {
+                        HttpWebRequest httpRequest = (HttpWebRequest)result.AsyncState;
+                        WebResponse response = httpRequest.EndGetResponse(result);
+                        Stream stream = response.GetResponseStream();
+                        StreamReader reader = new StreamReader(stream);
+                        strResponse = reader.ReadToEnd();
+
+                        parseResponseData(strResponse);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void parseResponseData(String aResponse)
+        {
+            CheckMapp.Utils.PlaceNearToMap.PlacesList placesListObj = new CheckMapp.Utils.PlaceNearToMap.PlacesList();
+
+            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(aResponse));
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(placesListObj.GetType());
+            placesListObj = ser.ReadObject(ms) as CheckMapp.Utils.PlaceNearToMap.PlacesList;
+            ms.Close();
+
+            // updating UI
+            if (placesListObj != null)
+            {
+                updateMap(placesListObj);
+            }
+        }
+
+        private void updateMap(CheckMapp.Utils.PlaceNearToMap.PlacesList aWiKIAPIResponse)
+        {
+            int totalRecords = aWiKIAPIResponse.PlaceList.Count();
+            MyMap.Visibility = System.Windows.Visibility.Visible;
+
+            try
+            {
+                ObservableCollection<CheckMapp.Utils.PlaceNearToMap.PlaceNearMap> placeToMapObjs = new ObservableCollection<CheckMapp.Utils.PlaceNearToMap.PlaceNearMap>();
+                for (int index = 0; index < totalRecords; index++)
+                {
+                    placeToMapObjs.Add(new CheckMapp.Utils.PlaceNearToMap.PlaceNearMap()
+                    {
+                        Coordinate = new GeoCoordinate(Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Latitude),
+                                        Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude)),
+                        Info = aWiKIAPIResponse.PlaceList.ElementAt(index).Title,
+                        Summary = aWiKIAPIResponse.PlaceList.ElementAt(index).Summary
+
+                    });
+                }
+
+                foreach (CheckMapp.Utils.PlaceNearToMap.PlaceNearMap PlaceNear in placeToMapObjs)
+                {
+                    MapLayer pinLayout = new MapLayer();
+                    Pushpin MyPushpin = new Pushpin();
+                    MapOverlay pinOverlay = new MapOverlay();
+                    MyMap.Layers.Add(pinLayout);
+
+
+                    MyPushpin.GeoCoordinate = PlaceNear.Coordinate;
+
+                    pinOverlay.Content = MyPushpin;
+                    pinOverlay.GeoCoordinate = PlaceNear.Coordinate;
+                    pinOverlay.PositionOrigin = new Point(0, 1);
+                    pinLayout.Add(pinOverlay);
+
+                    MyPushpin.Content = PlaceNear.Info.Trim();
+
+
+                    MyPushpin.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
+                    MyPushpin.Tap += MyPushpin_Tap;
+                    MyPushpin.Tag = PlaceNear;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        void MyPushpin_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            CheckMapp.Utils.PlaceNearToMap.PlaceNearMap placeNearYou = (CheckMapp.Utils.PlaceNearToMap.PlaceNearMap)(sender as Pushpin).Tag;
+            MessageBoxResult res = MessageBox.Show(placeNearYou.Summary + Environment.NewLine + AppResources.PlaceNearAdd, placeNearYou.Info, MessageBoxButton.OKCancel);
+
+            if (res == MessageBoxResult.OK)
+            {
+                Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+                this.DataContext = new AddEditPOIViewModel(trip, Mode.add, null);
+                (this.DataContext as AddEditPOIViewModel).Latitude = placeNearYou.Coordinate.Latitude;
+                (this.DataContext as AddEditPOIViewModel).Longitude = placeNearYou.Coordinate.Longitude;
+                (this.DataContext as AddEditPOIViewModel).PoiName = placeNearYou.Info;
+
+                PhoneApplicationService.Current.State["Mode"] = Mode.addEdit;
+                PhoneApplicationService.Current.State["Poi"] =(this.DataContext as AddEditPOIViewModel).PointOfInterest;
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
+            }
+
+        }
+
+        private void IconNear_Click(object sender, EventArgs e)
+        {
+            startGeoNamesAPICall();
+        }
+
+        
 
     }
 }

@@ -442,7 +442,19 @@
         </trans-unit>
         <trans-unit id="Resx/POIObject" translate="yes" xml:space="preserve">
           <source>What do you want to do with the objects (notes, pictures) related to the point of interest?</source>
-          <target state="needs-review-translation">Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="needs-review-translation">Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
+        <trans-unit id="Resx/PlaceNearAdd" translate="yes" xml:space="preserve">
+          <source>Do you want to add it to your point of interest?</source>
+          <target state="translated">Voulez-vous l'ajouter à vos points d'intérêt?</target>
+        </trans-unit>
+        <trans-unit id="Resx/PlaceNearURI" translate="yes" xml:space="preserve">
+          <source>http://api.geonames.org/findNearbyWikipediaJSON?</source>
+          <target state="new">http://api.geonames.org/findNearbyWikipediaJSON?</target>
+        </trans-unit>
+        <trans-unit id="Resx/PlaceNearUsername" translate="yes" xml:space="preserve">
+          <source>checkmapp</source>
+          <target state="new">checkmapp</target>
         </trans-unit>
         <trans-unit id="Resx/NullPOIObject" translate="yes" xml:space="preserve">
           <source>Remove association with this POI</source>

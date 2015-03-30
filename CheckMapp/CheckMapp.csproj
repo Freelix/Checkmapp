@@ -154,6 +154,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\PlaceNearToMap.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\POIType.cs" />
     <Compile Include="ViewModels\POIViewModels\SelectTypePOIViewModel.cs" />

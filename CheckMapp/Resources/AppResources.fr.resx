@@ -549,4 +549,7 @@ Alexandre Roy</value>
   <data name="DeletePOIObject" xml:space="preserve">
     <value>Supprimer aussi les objets</value>
   </data>
+  <data name="PlaceNearAdd" xml:space="preserve">
+    <value>Voulez-vous l'ajouter à vos points d'intérêt?</value>
+  </data>
 </root>

@@ -87,6 +87,7 @@ namespace CheckMapp.Views.POIViews
                 if (vm != null)
                 {
                     vm.AddPOICommand.Execute(null);
+                    PhoneApplicationService.Current.State["Poi"] = null;
                 }
 
                 if (vm.IsFormValid)

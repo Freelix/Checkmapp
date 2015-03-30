@@ -552,4 +552,13 @@ Alexandre Roy</value>
   <data name="POIObject" xml:space="preserve">
     <value>What do you want to do with the objects (notes, pictures) related to the point of interest?</value>
   </data>
+  <data name="PlaceNearAdd" xml:space="preserve">
+    <value>Do you want to add it to your point of interest?</value>
+  </data>
+  <data name="PlaceNearURI" xml:space="preserve">
+    <value>http://api.geonames.org/findNearbyWikipediaJSON?</value>
+  </data>
+  <data name="PlaceNearUsername" xml:space="preserve">
+    <value>checkmapp</value>
+  </data>
 </root>

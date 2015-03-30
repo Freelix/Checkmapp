@@ -12,6 +12,7 @@ namespace CheckMapp.ViewModels
     public enum Mode
     {
         add,
-        edit
+        edit,
+        addEdit
     }
 }
