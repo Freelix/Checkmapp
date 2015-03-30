@@ -389,7 +389,7 @@
         </trans-unit>
         <trans-unit id="Resx/DBFileName" translate="yes" xml:space="preserve">
           <source>Checkmapp.sdf</source>
-          <target state="new">Checkmapp.sdf</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Checkmapp.sdf</target>
         </trans-unit>
         <trans-unit id="Resx/Export" translate="yes" xml:space="preserve">
           <source>Export data</source>
@@ -453,6 +453,14 @@
           <source>The end date must be greater than the start date and must be lower or equal than the current date.</source>
           <target state="translated">La date de fin doit être supérieure à la date de début et doit être inférieure ou égale à la date actuelle .</target>
         </trans-unit>
+        <trans-unit id="Resx/VisitWebsite" translate="yes" xml:space="preserve">
+          <source>Visit our website</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Visitez notre site Web</target>
+        </trans-unit>
+        <trans-unit id="Resx/LangRestartApp" translate="yes" xml:space="preserve">
+          <source>You will have to restart the application to change the language.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devrez redémarrer l'application pour changer la langue.</target>
+        </trans-unit>
         <trans-unit id="Resx/NullPOIObject" translate="yes" xml:space="preserve">
           <source>Remove association with this POI</source>
           <target state="translated">Enlever le lien avec ce POI</target>
@@ -467,7 +475,7 @@
         </trans-unit>
         <trans-unit id="Resx/Restaurant" translate="yes" xml:space="preserve">
           <source>Restaurant</source>
-          <target state="new">Restaurant</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Restaurant</target>
         </trans-unit>
         <trans-unit id="Resx/Park" translate="yes" xml:space="preserve">
           <source>Park</source>
@@ -479,7 +487,7 @@
         </trans-unit>
         <trans-unit id="Resx/Monument" translate="yes" xml:space="preserve">
           <source>Monument</source>
-          <target state="new">Monument</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Monument</target>
         </trans-unit>
         <trans-unit id="Resx/Coffee" translate="yes" xml:space="preserve">
           <source>Coffee</source>

@@ -33,9 +33,6 @@
                             <TextBlock Text="{Binding Path=LocalizedResources.WifiOnly, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <toolkit:ToggleSwitch IsChecked="{Binding WifiOnly}" Checked="WifiOnlySwitch_Checked" Unchecked="WifiOnlySwitch_Unchecked" />
 
-                            <TextBlock Text="{Binding Path=LocalizedResources.AutoSync, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
-                            <toolkit:ToggleSwitch IsChecked="{Binding AutoSync}" Checked="AutoSyncSwitch_Checked" Unchecked="AutoSyncSwitch_Unchecked" />
-
                             <TextBlock Text="{Binding Path=LocalizedResources.Language, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <toolkit:ListPicker
                                 x:Name="languageListPicker"
@@ -72,6 +69,7 @@
                             <TextBlock Text="{Binding Path=LocalizedResources.AboutUs, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"/>
                             <TextBlock Text="{Binding AppVersion}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <Button Margin="0,15,0,0" Click="BtnRateApp_Click" Content="{Binding Path=LocalizedResources.RateApp, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
+                            <Button Margin="0,15,0,0" Click="BtnWebsite_Click" Content="{Binding Path=LocalizedResources.VisitWebsite, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

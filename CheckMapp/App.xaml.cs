@@ -17,6 +17,7 @@ using System.Linq;
 using CheckMapp.Model.DataService;
 using System.IO.IsolatedStorage;
 using System.IO;
+using CheckMapp.Utils.Languages;
 
 namespace CheckMapp
 {
@@ -116,12 +117,12 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["POISelected"] = null;
         }
 
-
-
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            // Set the correct language when application is launched
+            LocalizationManager.ChangeAppLanguage(LocalizationManager.GetCurrentAppLang());
         }
 
         // Code to execute when the application is activated (brought to foreground)

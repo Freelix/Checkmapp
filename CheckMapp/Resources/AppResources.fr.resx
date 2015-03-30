@@ -555,4 +555,19 @@ Alexandre Roy</value>
   <data name="ValidatorEndDate" xml:space="preserve">
     <value>La date de fin doit être supérieure à la date de début et doit être inférieure ou égale à la date actuelle .</value>
   </data>
+  <data name="DBFileName" xml:space="preserve">
+    <value>Checkmapp.sdf</value>
+  </data>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="Monument" xml:space="preserve">
+    <value>Monument</value>
+  </data>
+  <data name="VisitWebsite" xml:space="preserve">
+    <value>Visitez notre site Web</value>
+  </data>
+  <data name="LangRestartApp" xml:space="preserve">
+    <value>Vous devrez redémarrer l'application pour changer la langue.</value>
+  </data>
 </root>

@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Command;
 using CheckMapp.Utils.Languages;
 using Utility = CheckMapp.Utils.Utility;
 using CheckMapp.Resources;
+using System.Windows;
 
 namespace CheckMapp.ViewModels.SettingsViewModels
 {
@@ -43,11 +44,13 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             WifiOnlyStorageProperty = CMSettingsContainer.WifiOnly;
             _wifiOnly = WifiOnlyStorageProperty.Value;
 
-            AutoSyncStorageProperty = CMSettingsContainer.AutoSync;
-            _autoSync = AutoSyncStorageProperty.Value;
-
             LanguageStorageProperty = CMSettingsContainer.Language;
 
+            SetLanguageListPicker();
+        }
+
+        private void SetLanguageListPicker()
+        {
             int index;
 
             if (LanguageStorageProperty.Value != null)
@@ -88,22 +91,9 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _wifiOnly; }
             set
             {
-                WifiOnlyStorageProperty.Value = _wifiOnly;
                 _wifiOnly = value;
+                WifiOnlyStorageProperty.Value = _wifiOnly;
                 RaisePropertyChanged("WifiOnly");
-            }
-        }
-
-        private bool _autoSync;
-
-        public bool AutoSync
-        {
-            get { return _autoSync; }
-            set
-            {
-                AutoSyncStorageProperty.Value = _autoSync;
-                _autoSync = value;
-                RaisePropertyChanged("AutoSync");
             }
         }
 
@@ -114,8 +104,8 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             get { return _languageIndex; }
             set
             {
-                UpdateLanguage();
                 _languageIndex = value;
+                UpdateLanguage();
                 RaisePropertyChanged("LanguageIndex");
             }
         }
@@ -143,7 +133,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
                 RaisePropertyChanged("Loading");
             }
         }
-
 
         private string _progressText;
 
@@ -219,7 +208,10 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             string newLang = _languagesCode[_languageIndex];
 
             if (!LanguageStorageProperty.Value.Equals(newLang))
-                LocalizationManager.ChangeAppLanguage(newLang);
+            {
+                LanguageStorageProperty.Value = newLang;
+                MessageBox.Show(AppResources.LangRestartApp, "Information", MessageBoxButton.OK);
+            }
         }
 
         #endregion

@@ -704,6 +704,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à You will have to restart the application to change the language..
+        /// </summary>
+        public static string LangRestartApp {
+            get {
+                return ResourceManager.GetString("LangRestartApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Language.
         /// </summary>
         public static string Language {
@@ -1303,6 +1312,15 @@ namespace CheckMapp.Resources {
         public static string VersionNumber {
             get {
                 return ResourceManager.GetString("VersionNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visit our website.
+        /// </summary>
+        public static string VisitWebsite {
+            get {
+                return ResourceManager.GetString("VisitWebsite", resourceCulture);
             }
         }
         
