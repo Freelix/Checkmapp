@@ -1046,6 +1046,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Places near you.
+        /// </summary>
+        public static string PlaceNearYou {
+            get {
+                return ResourceManager.GetString("PlaceNearYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Place.
         /// </summary>
         public static string PlacePOI {

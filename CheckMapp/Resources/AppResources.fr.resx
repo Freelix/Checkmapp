@@ -573,4 +573,14 @@ Alexandre Roy</value>
   <data name="LangRestartApp" xml:space="preserve">
     <value>Vous devrez redémarrer l'application pour changer la langue.</value>
   </data>
+  <data name="PlaceNearURI" xml:space="preserve">
+    <value>http://API.geonames.org/findNearbyWikipediaJSON?</value>
+  </data>
+  <data name="PlaceNearUsername" xml:space="preserve">
+    <value>checkmapp</value>
+    <comment></comment>
+  </data>
+  <data name="PlaceNearYou" xml:space="preserve">
+    <value>Lieux près de vous</value>
+  </data>
 </root>

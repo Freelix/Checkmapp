@@ -23,6 +23,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Runtime.Serialization;
+using CheckMapp.Utils;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -124,6 +125,7 @@ namespace CheckMapp.Views.POIViews
             {
                 (appbar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Select;
                 (appbar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddPicture;
+                (appbar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.PlaceNearYou;
             }
 
             var appbarSelect = this.Resources["AppBarListSelect"] as ApplicationBar;
@@ -307,15 +309,7 @@ namespace CheckMapp.Views.POIViews
 
             //launch the task
             messageBox.Show();
-        }
-
-
-
-
-
-       
-
-        
+        }     
 
         private void startGeoNamesAPICall()
         {
@@ -447,7 +441,11 @@ namespace CheckMapp.Views.POIViews
 
         private void IconNear_Click(object sender, EventArgs e)
         {
-            startGeoNamesAPICall();
+            if(Utility.checkNetworkConnection())
+                startGeoNamesAPICall();
+            else
+                MessageBox.Show(AppResources.InternetConnectionSettings, AppResources.Warning, MessageBoxButton.OK);
+            
         }
 
         

@@ -573,4 +573,7 @@ Alexandre Roy</value>
   <data name="VisitWebsite" xml:space="preserve">
     <value>Visit our website</value>
   </data>
+  <data name="PlaceNearYou" xml:space="preserve">
+    <value>Places near you</value>
+  </data>
 </root>

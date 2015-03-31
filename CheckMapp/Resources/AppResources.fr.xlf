@@ -451,11 +451,11 @@
         </trans-unit>
         <trans-unit id="Resx/PlaceNearURI" translate="yes" xml:space="preserve">
           <source>http://api.geonames.org/findNearbyWikipediaJSON?</source>
-          <target state="new">http://api.geonames.org/findNearbyWikipediaJSON?</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">http://API.geonames.org/findNearbyWikipediaJSON?</target>
         </trans-unit>
         <trans-unit id="Resx/PlaceNearUsername" translate="yes" xml:space="preserve">
           <source>checkmapp</source>
-          <target state="new">checkmapp</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">checkmapp</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
         <trans-unit id="Resx/SetEndDate" translate="yes" xml:space="preserve">
@@ -469,6 +469,10 @@
         <trans-unit id="Resx/VisitWebsite" translate="yes" xml:space="preserve">
           <source>Visit our website</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Visitez notre site Web</target>
+        </trans-unit>
+        <trans-unit id="Resx/PlaceNearYou" translate="yes" xml:space="preserve">
+          <source>Places near you</source>
+          <target state="translated">Lieux près de vous</target>
         </trans-unit>
         <trans-unit id="Resx/LangRestartApp" translate="yes" xml:space="preserve">
           <source>You will have to restart the application to change the language.</source>
