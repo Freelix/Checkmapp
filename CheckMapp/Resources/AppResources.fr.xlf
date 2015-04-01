@@ -474,6 +474,10 @@
           <source>Places near you</source>
           <target state="translated">Lieux près de vous</target>
         </trans-unit>
+        <trans-unit id="Resx/PlaceNearLocatePhone" translate="yes" xml:space="preserve">
+          <source>Locating your phone...</source>
+          <target state="translated">Localisation de votre téléphone en cours...</target>
+        </trans-unit>
         <trans-unit id="Resx/LangRestartApp" translate="yes" xml:space="preserve">
           <source>You will have to restart the application to change the language.</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devrez redémarrer l'application pour changer la langue.</target>

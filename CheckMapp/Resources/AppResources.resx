@@ -576,4 +576,7 @@ Alexandre Roy</value>
   <data name="PlaceNearYou" xml:space="preserve">
     <value>Places near you</value>
   </data>
+  <data name="PlaceNearLocatePhone" xml:space="preserve">
+    <value>Locating your phone...</value>
+  </data>
 </root>

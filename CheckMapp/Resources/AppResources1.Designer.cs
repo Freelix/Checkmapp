@@ -1028,6 +1028,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locating your phone....
+        /// </summary>
+        public static string PlaceNearLocatePhone {
+            get {
+                return ResourceManager.GetString("PlaceNearLocatePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://api.geonames.org/findNearbyWikipediaJSON?.
         /// </summary>
         public static string PlaceNearURI {

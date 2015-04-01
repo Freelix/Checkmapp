@@ -31,6 +31,7 @@ namespace CheckMapp.Views.POIViews
     {
         private string currentLatitude = string.Empty;
         private string currentLongitude = string.Empty;
+        private bool locationError;
 
         public ListPOIView()
         {
@@ -140,6 +141,7 @@ namespace CheckMapp.Views.POIViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            locationError = false;
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
             loadLocation();
@@ -162,8 +164,7 @@ namespace CheckMapp.Views.POIViews
             }
             catch (Exception)
             {
-                // the app does not have the right capability or the location master switch is off 
-                MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
+                locationError = true;
             }
         }
 
@@ -309,12 +310,13 @@ namespace CheckMapp.Views.POIViews
 
             //launch the task
             messageBox.Show();
-        }     
-
+        }
+        private string URITEST = "";
         private void startGeoNamesAPICall()
         {
             try
             {
+                URITEST = AppResources.PlaceNearURI + "&lat=" + currentLatitude + "&lng=" + currentLongitude + "&username=" + AppResources.PlaceNearUsername + "&radius=5&maxRows=10";
                 HttpWebRequest httpReq = (HttpWebRequest)HttpWebRequest.Create(new Uri(AppResources.PlaceNearURI + "&lat=" + currentLatitude + "&lng=" + currentLongitude + "&username="+AppResources.PlaceNearUsername+"&radius=5&maxRows=10"));
                 httpReq.BeginGetResponse(HTTPWebRequestCallBack, httpReq);
             }
@@ -441,11 +443,27 @@ namespace CheckMapp.Views.POIViews
 
         private void IconNear_Click(object sender, EventArgs e)
         {
-            if(Utility.checkNetworkConnection())
-                startGeoNamesAPICall();
+            if (Utility.checkNetworkConnection())
+            {
+                if(!locationError)
+                {
+                    if(isLocationFind())
+                        startGeoNamesAPICall();
+                    else
+                        MessageBox.Show(AppResources.PlaceNearLocatePhone, AppResources.Loading, MessageBoxButton.OK);
+                }
+                else
+                    // the app does not have the right capability or the location master switch is off 
+                    MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
+            }
             else
                 MessageBox.Show(AppResources.InternetConnectionSettings, AppResources.Warning, MessageBoxButton.OK);
             
+        }
+
+        private bool isLocationFind()
+        {
+            return (!string.IsNullOrEmpty(currentLatitude) && !string.IsNullOrEmpty(currentLongitude));
         }
 
         

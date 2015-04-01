@@ -583,4 +583,7 @@ Alexandre Roy</value>
   <data name="PlaceNearYou" xml:space="preserve">
     <value>Lieux près de vous</value>
   </data>
+  <data name="PlaceNearLocatePhone" xml:space="preserve">
+    <value>Localisation de votre téléphone en cours...</value>
+  </data>
 </root>
