@@ -24,6 +24,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Runtime.Serialization;
 using CheckMapp.Utils;
+using System.Globalization;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -156,11 +157,17 @@ namespace CheckMapp.Views.POIViews
 
             try
             {
+                (this.DataContext as ListPOIViewModel).Loading = true;
+                ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
+                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).IsEnabled = false;
                 Geoposition geoposition = await geolocator.GetGeopositionAsync(
                     maximumAge: TimeSpan.FromMinutes(5),
                     timeout: TimeSpan.FromSeconds(10));
                 currentLatitude = geoposition.Coordinate.Latitude.ToString();
                 currentLongitude = geoposition.Coordinate.Longitude.ToString();
+                (this.DataContext as ListPOIViewModel).Loading = false;
+                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).IsEnabled = true;
+                
             }
             catch (Exception)
             {
@@ -311,13 +318,12 @@ namespace CheckMapp.Views.POIViews
             //launch the task
             messageBox.Show();
         }
-        private string URITEST = "";
+
         private void startGeoNamesAPICall()
         {
             try
             {
-                URITEST = AppResources.PlaceNearURI + "&lat=" + currentLatitude + "&lng=" + currentLongitude + "&username=" + AppResources.PlaceNearUsername + "&radius=5&maxRows=10";
-                HttpWebRequest httpReq = (HttpWebRequest)HttpWebRequest.Create(new Uri(AppResources.PlaceNearURI + "&lat=" + currentLatitude + "&lng=" + currentLongitude + "&username="+AppResources.PlaceNearUsername+"&radius=5&maxRows=10"));
+                HttpWebRequest httpReq = (HttpWebRequest)HttpWebRequest.Create(new Uri(AppResources.PlaceNearURI + "&lat=" + currentLatitude.Replace(",", ".") + "&lng=" + currentLongitude.Replace(",", ".") + "&username=" + AppResources.PlaceNearUsername + "&radius=5&maxRows=10"));
                 httpReq.BeginGetResponse(HTTPWebRequestCallBack, httpReq);
             }
             catch (Exception ex)
@@ -382,10 +388,16 @@ namespace CheckMapp.Views.POIViews
                 ObservableCollection<CheckMapp.Utils.PlaceNearToMap.PlaceNearMap> placeToMapObjs = new ObservableCollection<CheckMapp.Utils.PlaceNearToMap.PlaceNearMap>();
                 for (int index = 0; index < totalRecords; index++)
                 {
+                    // TODO Tester toutes les fucking cultures
+                    // https://msdn.microsoft.com/en-us/library/windows/apps/ff637519%28v=vs.105%29.aspx
+                    // Pour l'instant utiliser ce fr-FR pour le test
+                    CultureInfo ci = new CultureInfo("fr-FR");
+                  
+                    var lng = Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude.Replace(".",","));
                     placeToMapObjs.Add(new CheckMapp.Utils.PlaceNearToMap.PlaceNearMap()
                     {
-                        Coordinate = new GeoCoordinate(Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Latitude),
-                                        Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude)),
+                        Coordinate = new GeoCoordinate(Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Latitude.Replace(".", ","), ci),
+                                        Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude.Replace(".", ","), ci)),
                         Info = aWiKIAPIResponse.PlaceList.ElementAt(index).Title,
                         Summary = aWiKIAPIResponse.PlaceList.ElementAt(index).Summary
 
@@ -449,8 +461,6 @@ namespace CheckMapp.Views.POIViews
                 {
                     if(isLocationFind())
                         startGeoNamesAPICall();
-                    else
-                        MessageBox.Show(AppResources.PlaceNearLocatePhone, AppResources.Loading, MessageBoxButton.OK);
                 }
                 else
                     // the app does not have the right capability or the location master switch is off 

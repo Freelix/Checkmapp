@@ -58,6 +58,7 @@
                     </my:MapItemsControl>
                 </my:MapExtensions.Children>
             </Controls:Map>
+            
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
