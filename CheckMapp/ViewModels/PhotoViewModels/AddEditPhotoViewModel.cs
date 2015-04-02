@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using FluentValidation;
 using CheckMapp.Utils.Validations;
 using Microsoft.Phone.Shell;
+using CheckMapp.Utils.EditableObject;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
@@ -29,7 +30,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             this.Mode = mode;
 
-            if (Utility.IsTombstoned())
+            if (Utility.IsTombstoned() && PhoneApplicationService.Current.State["POISelected"]!=null)
             {
                 Picture = picture;
                 POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
@@ -50,6 +51,9 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             if (photoArray != null)
                 this.ImageSource = photoArray;
 
+            EditableObject = new Caretaker<Picture>(this.Picture);
+            EditableObject.BeginEdit();
+
             InitialiseValidator();
         }
 
@@ -59,6 +63,11 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         }
 
         #region Properties
+
+        /// <summary>
+        /// Mon objet editable, nécessaire pour annuler les changements
+        /// </summary>
+        private Caretaker<Picture> EditableObject { get; set; }
 
         private bool _isFormValid;
         /// <summary>
@@ -219,6 +228,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
                     AddPictureInDB();
                 else if (Mode == Mode.edit)
                     UpdateExistingPicture();
+
+                EditableObject.EndEdit();
             }
         }
 
@@ -228,6 +239,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 Picture.Trip = null;
             }
+
+            EditableObject.CancelEdit();
         }
 
         private void AddPictureInDB()

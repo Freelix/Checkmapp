@@ -359,7 +359,7 @@
         </trans-unit>
         <trans-unit id="Resx/TripEndDate" translate="yes" xml:space="preserve">
           <source>End date : {0}</source>
-          <target state="translated">Fin du voyage :{0}</target></trans-unit>
+          <target state="translated">Fin du voyage : {0}</target></trans-unit>
         <trans-unit id="Resx/YourPosition" translate="yes" xml:space="preserve">
           <source>your position</source>
           <target state="translated">votre position</target>

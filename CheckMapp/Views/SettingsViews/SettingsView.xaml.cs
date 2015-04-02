@@ -56,7 +56,7 @@ namespace CheckMapp.Views.SettingsViews
                     MessageBox.Show(AppResources.FileNotFound, AppResources.Warning, MessageBoxButton.OK);
                     return;
                 }
-                else
+                else if(import == 1)
                 {
                     MessageBox.Show(AppResources.RestartApp, AppResources.Warning, MessageBoxButton.OK);
                     IsolatedStorageSettings.ApplicationSettings["ReplaceDB"] = true;
@@ -98,7 +98,7 @@ namespace CheckMapp.Views.SettingsViews
         {
             // TODO: Change the URL with our real website
             WebBrowserTask webBrowserTask = new WebBrowserTask();
-            webBrowserTask.Uri = new Uri("https://www.google.ca/");
+            webBrowserTask.Uri = new Uri("https://www.checkmapp.com/");
             webBrowserTask.Show();
         }
 

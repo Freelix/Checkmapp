@@ -26,7 +26,16 @@
         <StackPanel  >
             <TextBlock Text="{Binding TripName}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Margin="0,0,0,10" Text="{Binding Path=LocalizedResources.Statistic, Source={StaticResource LocalizedStrings}}"   Style="{StaticResource PhoneTextTitle1Style}"/>
-            <Controls:Map Margin="0,0,0,10"  Name="statsMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light">
+            <Controls:Map Loaded="statsMap_Loaded" Margin="0,0,0,10"  Name="statsMap"  Height="200" LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light">
+                <my:MapExtensions.Children>
+                    <my:MapItemsControl x:Name="MyMapItems">
+                        <my:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <my:Pushpin GeoCoordinate="{Binding Coordinate}" Content="{Binding Name}" />
+                            </DataTemplate>
+                        </my:MapItemsControl.ItemTemplate>
+                    </my:MapItemsControl>
+                </my:MapExtensions.Children>
             </Controls:Map>
         </StackPanel>
        

@@ -12,6 +12,9 @@ using CheckMapp.Model.Tables;
 using Windows.Devices.Geolocation;
 using CheckMapp.Resources;
 using Microsoft.Phone.Maps.Controls;
+using System.Collections.ObjectModel;
+using Microsoft.Phone.Maps.Toolkit;
+using System.Collections;
 
 namespace CheckMapp.Views
 {
@@ -21,6 +24,7 @@ namespace CheckMapp.Views
         public StatisticView()
         {
             InitializeComponent();
+
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -32,32 +36,32 @@ namespace CheckMapp.Views
             else
                 EndStack.Visibility = Visibility.Visible;    
             this.DataContext = new StatisticViewModel(currentTrip);
-            loadLocation();
 
-           
+
+            //Bind les POI a la map
+            ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(statsMap);
+            var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;
+            if (obj.ItemsSource != null)
+            {
+                (obj.ItemsSource as IList).Clear();
+                obj.ItemsSource = null;
+            }
+            obj.ItemsSource = ((this.DataContext as StatisticViewModel).PointOfInterestList);
         }
 
-        private async void loadLocation()
+        private void statsMap_Loaded(object sender, RoutedEventArgs e)
         {
-            Geolocator geolocator = new Geolocator();
-            geolocator.DesiredAccuracyInMeters = 50; // maybe 500 if error in this part...
-            geolocator.MovementThreshold = 5;
-            geolocator.ReportInterval = 500;
+            System.Threading.Thread.Sleep(500);
 
-            try
+            var poiList = (this.DataContext as StatisticViewModel).PointOfInterestList;
+            if (poiList.Count > 0)
             {
-                Geoposition geoposition = await geolocator.GetGeopositionAsync(
-                    maximumAge: TimeSpan.FromMinutes(5),
-                    timeout: TimeSpan.FromSeconds(10));
-
-                await Utils.Utility.AddLocation(statsMap, null, null, geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude, false, AppResources.YourPosition);
-                var bounds = new LocationRectangle(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude, geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                var bounds = new LocationRectangle(
+                    poiList.Max((p) => p.Latitude),
+                    poiList.Min((p) => p.Longitude),
+                    poiList.Min((p) => p.Latitude),
+                    poiList.Max((p) => p.Longitude));
                 statsMap.SetView(bounds);
-            }
-            catch (Exception)
-            {
-                // the app does not have the right capability or the location master switch is off 
-                MessageBox.Show(AppResources.LocationError, AppResources.Warning, MessageBoxButton.OK);
             }
         }
     }

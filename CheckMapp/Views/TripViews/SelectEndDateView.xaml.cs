@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CheckMapp.ViewModels.TripViewModels;
 using CheckMapp.Model.Tables;
+using CheckMapp.Resources;
 
 namespace CheckMapp.Views.TripViews
 {
@@ -22,12 +23,12 @@ namespace CheckMapp.Views.TripViews
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            if (e.NavigationMode != NavigationMode.New)
+            var vm = DataContext as SelectEndDateViewModel;
+            if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Back)
             {
                 // wait till the next UI thread tick so that the binding gets updated
                 Dispatcher.BeginInvoke(() =>
                 {
-                    var vm = DataContext as SelectEndDateViewModel;
                     if (vm != null)
                     {
                         vm.FinishTripCommand.Execute(null);
@@ -41,6 +42,12 @@ namespace CheckMapp.Views.TripViews
 
                 
             }
+            else if(e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
+            {
+                vm.CancelSelectDateCommand.Execute(null);
+            }
+
+            PhoneApplicationService.Current.State["Trip"] = vm.Trip as Trip;
             base.OnNavigatedFrom(e);
         }
 
@@ -65,6 +72,14 @@ namespace CheckMapp.Views.TripViews
             });
 
            
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ApplicationBar.Buttons != null)
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Save;
+            }
         }
     }
 }

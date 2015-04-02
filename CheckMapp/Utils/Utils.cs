@@ -12,7 +12,6 @@ using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using System.Windows;
 using System.Device.Location;
-using Microsoft.Live;
 using Windows.Storage;
 using System.Runtime.Serialization;
 using CheckMapp.Resources;
@@ -25,6 +24,8 @@ using CheckMapp.Model.DataService;
 using CheckMapp.Model.Tables;
 using System.Threading;
 using CheckMapp.Utils.Settings;
+using Microsoft.Live;
+using Microsoft.Phone.BackgroundTransfer;
 
 namespace CheckMapp.Utils
 {
@@ -105,10 +106,10 @@ namespace CheckMapp.Utils
 
             if (GetWifiStorageProperty())
                 IsConnected = IsConnectedOnWifi();
-            else if ((ni == NetworkInterfaceType.Wireless80211) || 
-                (ni == NetworkInterfaceType.MobileBroadbandCdma) || 
+            else if ((ni == NetworkInterfaceType.Wireless80211) ||
+                (ni == NetworkInterfaceType.MobileBroadbandCdma) ||
                 (ni == NetworkInterfaceType.MobileBroadbandGsm))
-                    IsConnected = true;
+                IsConnected = true;
 
             return IsConnected;
         }
@@ -282,10 +283,6 @@ namespace CheckMapp.Utils
         {
             get
             {
-                if (_liveClient == null)
-                {
-                    LogClient();
-                }
                 return _liveClient;
             }
             set
@@ -294,7 +291,7 @@ namespace CheckMapp.Utils
             }
         }
 
-        private async static void LogClient()
+        private async static Task<int> LogClient()
         {
             //  create OneDrive auth client
             var authClient = new LiveAuthClient("000000004814E746");
@@ -307,7 +304,9 @@ namespace CheckMapp.Utils
             {
                 //  create a OneDrive client
                 LiveClient = new LiveConnectClient(result.Session);
+                return 1;
             }
+            return 0;
         }
 
         /// <summary>
@@ -317,30 +316,43 @@ namespace CheckMapp.Utils
         /// <returns></returns>
         public async static Task<int> ExportDB(CancellationToken ct, Progress<LiveOperationProgress> uploadProgress)
         {
+            int log = 0;
+            if (LiveClient == null)
+                log = await LogClient();
+
+            // Prepare for download, make sure there are no previous requests
+            var reqList = BackgroundTransferService.Requests.ToList();
+            foreach (var req in reqList)
+            {
+                if (req.UploadLocation.Equals(new Uri(@"\shared\transfers\" + AppResources.DBFileName, UriKind.Relative))
+                    || req.UploadLocation.Equals(new Uri(@"\shared\transfers\" + AppResources.DBFileName + ".json", UriKind.Relative)))
+                {
+                    BackgroundTransferService.Remove(BackgroundTransferService.Find(req.RequestId));
+                }
+            }
+
+            IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+            iso.CopyFile(AppResources.DBFileName, "/shared/transfers/" + AppResources.DBFileName, true);
+
+            //  create a folder
+            string folderID = await GetFolderID("checkmapp");
+
+            if (string.IsNullOrEmpty(folderID))
+            {
+                //  return error
+                return 0;
+            }
+
+            //  upload local file to OneDrive
+            LiveClient.BackgroundTransferPreferences = BackgroundTransferPreferences.AllowCellularAndBattery;
             try
             {
-                IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
-                iso.CopyFile(AppResources.DBFileName, "/shared/transfers/" + AppResources.DBFileName,true);
-
-                //  create a folder
-                string folderID = await GetFolderID("checkmapp");
-
-                if (string.IsNullOrEmpty(folderID))
-                {
-                    //  return error
-                    return 0;
-                }
-
-                //  upload local file to OneDrive
-                await Task.Run(() => LiveClient.BackgroundUploadAsync(folderID, new Uri("/shared/transfers/" + AppResources.DBFileName, UriKind.RelativeOrAbsolute), OverwriteOption.Overwrite, ct, uploadProgress));
-
-                return 1;
+                await LiveClient.BackgroundUploadAsync(folderID, new Uri("/shared/transfers/" + AppResources.DBFileName, UriKind.RelativeOrAbsolute), OverwriteOption.Overwrite, ct, uploadProgress);
             }
-            catch(Exception e)
+            catch (TaskCanceledException exception)
             {
             }
-            //  return error
-            return 0;
+            return 1;
         }
 
         /// <summary>
@@ -349,49 +361,68 @@ namespace CheckMapp.Utils
         /// <returns></returns>
         public async static Task<int> ImportBD(CancellationToken ct, Progress<LiveOperationProgress> uploadProgress)
         {
+            int log = 0;
+            if (LiveClient == null)
+                log = await LogClient();
+
+            // Prepare for download, make sure there are no previous requests
+            var reqList = BackgroundTransferService.Requests.ToList();
+            foreach (var req in reqList)
+            {
+                if (req.DownloadLocation.Equals(new Uri(@"\shared\transfers\" + AppResources.DBFileName, UriKind.Relative))
+                    || req.DownloadLocation.Equals(new Uri(@"\shared\transfers\" + AppResources.DBFileName + ".json", UriKind.Relative)))
+                {
+                    BackgroundTransferService.Remove(BackgroundTransferService.Find(req.RequestId));
+                }
+            }
+
+            string fileID = string.Empty;
+
+            //  get folder ID
+            string folderID = await GetFolderID("checkmapp");
+
+            if (string.IsNullOrEmpty(folderID))
+            {
+                return 0; // doesnt exists
+            }
+
+            //  get list of files in this folder
+            LiveOperationResult loResults = await LiveClient.GetAsync(folderID + "/files");
+            List<object> folder = loResults.Result["data"] as List<object>;
+
+            //  search for our file 
+            foreach (object fileDetails in folder)
+            {
+                IDictionary<string, object> file = fileDetails as IDictionary<string, object>;
+                if (string.Compare(file["name"].ToString(), AppResources.DBFileName, StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    //  found our file
+                    fileID = file["id"].ToString();
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(fileID))
+            {
+                //  file doesnt exists
+                return 0;
+            }
+
             try
             {
-                string fileID = string.Empty;
-
-                //  get folder ID
-                string folderID = await GetFolderID("checkmapp");
-
-                if (string.IsNullOrEmpty(folderID))
-                {
-                    return 0; // doesnt exists
-                }
-
-                //  get list of files in this folder
-                LiveOperationResult loResults = await LiveClient.GetAsync(folderID + "/files");
-                List<object> folder = loResults.Result["data"] as List<object>;
-
-                //  search for our file 
-                foreach (object fileDetails in folder)
-                {
-                    IDictionary<string, object> file = fileDetails as IDictionary<string, object>;
-                    if (string.Compare(file["name"].ToString(), AppResources.DBFileName, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        //  found our file
-                        fileID = file["id"].ToString();
-                        break;
-                    }
-                }
-
-                if (string.IsNullOrEmpty(fileID))
-                {
-                    //  file doesnt exists
-                    return 0;
-                }
-
                 //  download file from OneDrive
-                await Task.Run(() => LiveClient.DownloadAsync(fileID + "/content", ct, uploadProgress));
-
-                return 1;
+                LiveClient.BackgroundTransferPreferences = BackgroundTransferPreferences.AllowCellularAndBattery;
+                await LiveClient.BackgroundDownloadAsync(fileID + @"/content", new Uri(@"\shared\transfers\" + AppResources.DBFileName, UriKind.RelativeOrAbsolute), ct, uploadProgress);
+            }
+            catch (TaskCanceledException exception)
+            {
+                return 2;
             }
             catch (Exception e)
             {
+                return 0;
             }
-            return 0;
+            return 1;
         }
 
         /// <summary>

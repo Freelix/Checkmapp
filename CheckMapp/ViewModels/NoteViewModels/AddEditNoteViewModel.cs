@@ -16,6 +16,7 @@ using FluentValidation;
 using CheckMapp.Utils.Validations;
 using System.Runtime.Serialization;
 using Microsoft.Phone.Shell;
+using CheckMapp.Utils.EditableObject;
 
 namespace CheckMapp.ViewModels.NoteViewModels
 {
@@ -31,7 +32,7 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             this.Mode = mode;
 
-            if (Utility.IsTombstoned() )
+            if (Utility.IsTombstoned() && PhoneApplicationService.Current.State["POISelected"]!=null)
             {
                 Note = note;
                 POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
@@ -49,6 +50,9 @@ namespace CheckMapp.ViewModels.NoteViewModels
             if (trip.PointsOfInterests != null)
                 _poiList = new List<PointOfInterest>(trip.PointsOfInterests);
 
+            EditableObject = new Caretaker<Note>(this.Note);
+            EditableObject.BeginEdit();
+
             InitialiseValidator();
         }
 
@@ -56,6 +60,11 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             _validator = new ValidatorFactory().GetValidator<Note>();
         }
+
+        /// <summary>
+        /// Mon objet editable, nécessaire pour annuler les changements
+        /// </summary>
+        private Caretaker<Note> EditableObject { get; set; }
 
         private ICommand _addEditNoteCommand;
         public ICommand AddEditNoteCommand
@@ -222,6 +231,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
                     AddNoteInDB();
                 else if (Mode == Mode.edit)
                     UpdateExistingNote();
+
+                EditableObject.EndEdit();
             }
         }
 
@@ -231,6 +242,8 @@ namespace CheckMapp.ViewModels.NoteViewModels
             {
                 Note.Trip = null;
             }
+
+            EditableObject.CancelEdit();
         }
 
         private void AddNoteInDB()
@@ -265,5 +278,6 @@ namespace CheckMapp.ViewModels.NoteViewModels
             if (null != PropertyChanged)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

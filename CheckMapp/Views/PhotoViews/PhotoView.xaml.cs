@@ -55,26 +55,33 @@ namespace CheckMapp.Views.PhotoViews
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
         {
-            if (!myImage.IsOrigin)
-                return;
-
-            var vm = (this.DataContext as PhotoViewModel);
-
-            // User swap towards gauche
-            if (e.HorizontalVelocity > 0)
+            try
             {
-                // Load the next image 
-                vm.SelectedPictureIndex -= 1;
-            }
+                if (!myImage.IsOrigin)
+                    return;
 
-            // User swap towards droit
-            if (e.HorizontalVelocity < 0)
+                var vm = (this.DataContext as PhotoViewModel);
+
+                // User swap towards gauche
+                if (e.HorizontalVelocity > 0)
+                {
+                    // Load the next image 
+                    vm.SelectedPictureIndex -= 1;
+                }
+
+                // User swap towards droit
+                if (e.HorizontalVelocity < 0)
+                {
+                    // Load the previous image
+                    vm.SelectedPictureIndex += 1;
+                }
+
+                myImage.Picture = vm.SelectedPicture;
+            }
+            catch (Exception)
             {
-                // Load the previous image
-                vm.SelectedPictureIndex += 1;
-            }
 
-            myImage.Picture = vm.SelectedPicture;
+            }
         }
 
         void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -113,10 +120,6 @@ namespace CheckMapp.Views.PhotoViews
         }
 
         #endregion
-
-
-        PhotoChooserTask photoChooser;
-        string currentMediaPath = null;
 
 
 
