@@ -25,6 +25,8 @@ using System.Text;
 using System.Runtime.Serialization;
 using CheckMapp.Utils;
 using System.Globalization;
+using System.Threading;
+using System.Reflection;
 
 namespace CheckMapp.Views.POIViews
 {
@@ -33,6 +35,7 @@ namespace CheckMapp.Views.POIViews
         private string currentLatitude = string.Empty;
         private string currentLongitude = string.Empty;
         private bool locationError;
+        HashSet<string> placeNearSet = new HashSet<string>();
 
         public ListPOIView()
         {
@@ -53,8 +56,21 @@ namespace CheckMapp.Views.POIViews
             {
                 (obj.ItemsSource as IList).Clear();
                 obj.ItemsSource = null;
+                while (MyMap.Layers.Count - 1 >= 1)
+                {
+                    MyMap.Layers.RemoveAt(MyMap.Layers.Count - 1);
+                }
+                placeNearSet.Clear();
             }
             obj.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
+
+            foreach (var pushpin in (this.DataContext as ListPOIViewModel).PointOfInterestList)
+            {
+                if (pushpin != null)
+                {
+                    placeNearSet.Add(pushpin.Latitude.ToString() + pushpin.Longitude.ToString());
+                }
+            }
         }
 
         private async void ContextMenu_Click(object sender, RoutedEventArgs e)
@@ -172,6 +188,8 @@ namespace CheckMapp.Views.POIViews
             catch (Exception)
             {
                 locationError = true;
+                (this.DataContext as ListPOIViewModel).Loading = false;
+                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).IsEnabled = true;
             }
         }
 
@@ -306,12 +324,19 @@ namespace CheckMapp.Views.POIViews
                     else
                     {
                         var vm = DataContext as ListPOIViewModel;
+                        var placeToDeleteList = new List<object>(POILLS.SelectedItems as IList<object>);
+                        foreach(PointOfInterest placeToDelete in placeToDeleteList)
+                        {
+                            placeNearSet.Remove(placeToDelete.Latitude.ToString() + placeToDelete.Longitude.ToString());
+                        }  
+
                         vm.DeletePOIsCommand.Execute(new List<object>(POILLS.SelectedItems as IList<object>));
                         POILLS.ItemsSource = vm.PointOfInterestList;
+                        
                     }
-
+                   
                     (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (POILLS.ItemsSource.Count > 0);
-
+                    
                 }
             };
 
@@ -388,16 +413,10 @@ namespace CheckMapp.Views.POIViews
                 ObservableCollection<CheckMapp.Utils.PlaceNearToMap.PlaceNearMap> placeToMapObjs = new ObservableCollection<CheckMapp.Utils.PlaceNearToMap.PlaceNearMap>();
                 for (int index = 0; index < totalRecords; index++)
                 {
-                    // TODO Tester toutes les fucking cultures
-                    // https://msdn.microsoft.com/en-us/library/windows/apps/ff637519%28v=vs.105%29.aspx
-                    // Pour l'instant utiliser ce fr-FR pour le test
-                    CultureInfo ci = new CultureInfo("fr-FR");
-                  
-                    var lng = Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude.Replace(".",","));
                     placeToMapObjs.Add(new CheckMapp.Utils.PlaceNearToMap.PlaceNearMap()
                     {
-                        Coordinate = new GeoCoordinate(Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Latitude.Replace(".", ","), ci),
-                                        Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude.Replace(".", ","), ci)),
+                        Coordinate = new GeoCoordinate(Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Latitude, CultureInfo.InvariantCulture),
+                                        Convert.ToDouble(aWiKIAPIResponse.PlaceList.ElementAt(index).Longitude, CultureInfo.InvariantCulture)),
                         Info = aWiKIAPIResponse.PlaceList.ElementAt(index).Title,
                         Summary = aWiKIAPIResponse.PlaceList.ElementAt(index).Summary
 
@@ -406,25 +425,30 @@ namespace CheckMapp.Views.POIViews
 
                 foreach (CheckMapp.Utils.PlaceNearToMap.PlaceNearMap PlaceNear in placeToMapObjs)
                 {
-                    MapLayer pinLayout = new MapLayer();
-                    Pushpin MyPushpin = new Pushpin();
-                    MapOverlay pinOverlay = new MapOverlay();
-                    MyMap.Layers.Add(pinLayout);
+                  // If the set doesn't contains an element latitude+longitude we can show it trough pushPin nearby the phone location
+                    if (!placeNearSet.Any(x => x.Contains(PlaceNear.Coordinate.Latitude.ToString()+PlaceNear.Coordinate.Longitude.ToString())))
+                    {
+                        MapLayer pinLayout = new MapLayer();
+                        Pushpin MyPushpin = new Pushpin();
+                        MapOverlay pinOverlay = new MapOverlay();
+
+                        MyMap.Layers.Add(pinLayout);
+
+                        MyPushpin.GeoCoordinate = PlaceNear.Coordinate;
+                        placeNearSet.Add(PlaceNear.Coordinate.Latitude.ToString() + PlaceNear.Coordinate.Longitude.ToString());
+
+                        pinOverlay.Content = MyPushpin;
+                        pinOverlay.GeoCoordinate = PlaceNear.Coordinate;
+                        pinOverlay.PositionOrigin = new Point(0, 1);
+                        pinLayout.Add(pinOverlay);
+
+                        MyPushpin.Content = PlaceNear.Info.Trim();
 
 
-                    MyPushpin.GeoCoordinate = PlaceNear.Coordinate;
-
-                    pinOverlay.Content = MyPushpin;
-                    pinOverlay.GeoCoordinate = PlaceNear.Coordinate;
-                    pinOverlay.PositionOrigin = new Point(0, 1);
-                    pinLayout.Add(pinOverlay);
-
-                    MyPushpin.Content = PlaceNear.Info.Trim();
-
-
-                    MyPushpin.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
-                    MyPushpin.Tap += MyPushpin_Tap;
-                    MyPushpin.Tag = PlaceNear;
+                        MyPushpin.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
+                        MyPushpin.Tap += MyPushpin_Tap;
+                        MyPushpin.Tag = PlaceNear;
+                    }
                 }
             }
             catch (Exception)
@@ -436,21 +460,37 @@ namespace CheckMapp.Views.POIViews
         void MyPushpin_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             CheckMapp.Utils.PlaceNearToMap.PlaceNearMap placeNearYou = (CheckMapp.Utils.PlaceNearToMap.PlaceNearMap)(sender as Pushpin).Tag;
-            MessageBoxResult res = MessageBox.Show(placeNearYou.Summary + Environment.NewLine + AppResources.PlaceNearAdd, placeNearYou.Info, MessageBoxButton.OKCancel);
-
-            if (res == MessageBoxResult.OK)
+           
+            //Create a new custom message box
+            CustomMessageBox messageBox = new CustomMessageBox()
             {
-                Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-                this.DataContext = new AddEditPOIViewModel(trip, Mode.add, null);
-                (this.DataContext as AddEditPOIViewModel).Latitude = placeNearYou.Coordinate.Latitude;
-                (this.DataContext as AddEditPOIViewModel).Longitude = placeNearYou.Coordinate.Longitude;
-                (this.DataContext as AddEditPOIViewModel).PoiName = placeNearYou.Info;
+                Caption = placeNearYou.Info,
+                Message = placeNearYou.Summary + Environment.NewLine + AppResources.PlaceNearAdd,
+                LeftButtonContent = AppResources.Add.ToLower(),
+                RightButtonContent = AppResources.Cancel.ToLower(),
+                IsFullScreen = false,
+            };
+          
+            messageBox.Dismissed += (s1, e1) =>
+            {
+                switch (e1.Result)
+                {
+                    case CustomMessageBoxResult.LeftButton:
+                         Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+                         this.DataContext = new AddEditPOIViewModel(trip, Mode.add, null);
+                         (this.DataContext as AddEditPOIViewModel).Latitude = placeNearYou.Coordinate.Latitude;
+                         (this.DataContext as AddEditPOIViewModel).Longitude = placeNearYou.Coordinate.Longitude;
+                         (this.DataContext as AddEditPOIViewModel).PoiName = placeNearYou.Info;
+                         PhoneApplicationService.Current.State["Mode"] = Mode.addEdit;
+                         PhoneApplicationService.Current.State["Poi"] =(this.DataContext as AddEditPOIViewModel).PointOfInterest;
+                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
+                        break;
+                    default:
+                        break;
+                }
+            };
 
-                PhoneApplicationService.Current.State["Mode"] = Mode.addEdit;
-                PhoneApplicationService.Current.State["Poi"] =(this.DataContext as AddEditPOIViewModel).PointOfInterest;
-                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
-            }
-
+            messageBox.Show();
         }
 
         private void IconNear_Click(object sender, EventArgs e)
