@@ -210,6 +210,7 @@ namespace CheckMapp.Views.POIViews
             else
                 ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
 
+            ApplicationBar.IsVisible = true;
             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !POILLS.IsSelectionEnabled;
         }
 
@@ -477,12 +478,14 @@ namespace CheckMapp.Views.POIViews
                 {
                     case CustomMessageBoxResult.LeftButton:
                          Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
-                         this.DataContext = new AddEditPOIViewModel(trip, Mode.add, null);
-                         (this.DataContext as AddEditPOIViewModel).Latitude = placeNearYou.Coordinate.Latitude;
-                         (this.DataContext as AddEditPOIViewModel).Longitude = placeNearYou.Coordinate.Longitude;
-                         (this.DataContext as AddEditPOIViewModel).PoiName = placeNearYou.Info;
+                         PointOfInterest newPOI = new PointOfInterest();
+                         newPOI.Trip = trip;
+                         trip.PointsOfInterests.Add(newPOI);
+                         newPOI.Latitude = placeNearYou.Coordinate.Latitude;
+                         newPOI.Longitude = placeNearYou.Coordinate.Longitude;
+                         newPOI.Name = placeNearYou.Info;
                          PhoneApplicationService.Current.State["Mode"] = Mode.addEdit;
-                         PhoneApplicationService.Current.State["Poi"] =(this.DataContext as AddEditPOIViewModel).PointOfInterest;
+                         PhoneApplicationService.Current.State["Poi"] = newPOI;
                          (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
                         break;
                     default:

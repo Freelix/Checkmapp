@@ -28,7 +28,6 @@
             <shell:ApplicationBarIconButton  x:Name="IconMultiSelect"  Click="IconMultiSelect_Click"  IconUri="/Images/appbar.list.check.png" Text="[select]"/>
             <shell:ApplicationBarIconButton  x:Name="IconAdd"  Click="IconAdd_Click"  IconUri="/Images/add.png" Text="[add]"/>
             <shell:ApplicationBarIconButton  x:Name="IconNear"  Click="IconNear_Click"  IconUri="/Images/appbar.location.checkin.png" Text="[placeNear]"/>
-            <!--TODO ajouter bouton pour localiser place near you--> 
         </shell:ApplicationBar>
 
         <shell:ApplicationBar x:Key="AppBarListSelect" IsVisible="True" IsMenuEnabled="True">
@@ -83,8 +82,8 @@
                                         <toolkit:MenuItem x:Name="DeletePOI" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
-                                <Image Height="80" VerticalAlignment="Bottom"   Source="{Binding Type, Converter={StaticResource POITypeConverter}}"></Image>
-                                <StackPanel Width="400" >
+                                <Image Height="80" VerticalAlignment="Top"  Source="{Binding Type, Converter={StaticResource POITypeConverter}}"></Image>
+                                <StackPanel Width="380" >
                                     <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding Location}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
                                 </StackPanel>
