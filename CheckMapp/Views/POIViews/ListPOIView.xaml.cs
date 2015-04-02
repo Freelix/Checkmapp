@@ -467,7 +467,7 @@ namespace CheckMapp.Views.POIViews
             CustomMessageBox messageBox = new CustomMessageBox()
             {
                 Caption = placeNearYou.Info,
-                Message = placeNearYou.Summary + Environment.NewLine + AppResources.PlaceNearAdd,
+                Message = placeNearYou.Summary + Environment.NewLine + Environment.NewLine + AppResources.PlaceNearAdd,
                 LeftButtonContent = AppResources.Add.ToLower(),
                 RightButtonContent = AppResources.Cancel.ToLower(),
                 IsFullScreen = false,
