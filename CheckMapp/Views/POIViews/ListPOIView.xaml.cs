@@ -318,6 +318,7 @@ namespace CheckMapp.Views.POIViews
                         var vm = DataContext as ListPOIViewModel;
                         if (vm != null)
                         {
+                            placeNearSet.Remove(poiSelected.Latitude.ToString() + poiSelected.Longitude.ToString());
                             vm.DeletePOICommand.Execute(poiSelected);
                             POILLS.ItemsSource = vm.PointOfInterestList;
                         }
