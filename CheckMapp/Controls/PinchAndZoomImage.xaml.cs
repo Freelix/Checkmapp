@@ -15,7 +15,7 @@ namespace CheckMapp.Controls
 {
     public partial class PinchAndZoomImage : UserControl
     {
-        const double MaxScale = 6;
+        const double MaxScale = 2;
 
         double _scale = 1.0;
         double _minScale;
@@ -56,7 +56,6 @@ namespace CheckMapp.Controls
             {
                 SetValue(PictureProperty, value);
 
-
                 if (String.IsNullOrEmpty(Picture.Description))
                     txtDesc.Visibility = System.Windows.Visibility.Collapsed;
                 else
@@ -65,7 +64,14 @@ namespace CheckMapp.Controls
                 if (Picture.PointOfInterest == null)
                     txtPOI.Visibility = System.Windows.Visibility.Collapsed;
                 else
+                {
                     txtPOI.Visibility = System.Windows.Visibility.Visible;
+                    //Problème de binding...
+                    if (txtNamePOI.Text != Picture.PointOfInterest.Name)
+                        txtNamePOI.Text = Picture.PointOfInterest.Name;
+                }
+
+                InitializeImage();
             }
         }
 
@@ -84,6 +90,10 @@ namespace CheckMapp.Controls
             set
             {
                 SetValue(IsTextVisibleProperty, value);
+                if (value)
+                    TestImage.Opacity = 0.5;
+                else
+                    TestImage.Opacity = 1;
             }
         }
 
