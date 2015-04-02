@@ -34,14 +34,17 @@ namespace CheckMapp.Model.DataService
             return new ObservableCollection<PointOfInterest>(listPOI);
         }
 
-        public void DeletePoi(PointOfInterest poi)
+        public void DeletePoi(PointOfInterest poi, bool deleteCascade)
         {
             var existing = db.pointsOfInterests.FirstOrDefault(x => x.Id == poi.Id);
 
             if (existing != null)
             {
-                //DataServiceCommon dsCommon = new DataServiceCommon();
-                //dsCommon.DeletePoiInCascade(poi);
+                if (deleteCascade)
+                {
+                    DataServiceCommon dsCommon = new DataServiceCommon();
+                    dsCommon.DeletePoiInCascade(poi);
+                }
 
                 db.pointsOfInterests.DeleteOnSubmit(existing);
                 db.SubmitChanges();

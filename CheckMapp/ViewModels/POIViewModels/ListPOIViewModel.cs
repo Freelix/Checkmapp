@@ -137,7 +137,7 @@ namespace CheckMapp.ViewModels.POIViewModels
             Trip.PointsOfInterests.Remove(poi);
             PointOfInterestList.Remove(poi);
 
-            dsPoi.DeletePoi(poi);
+            dsPoi.DeletePoi(poi, false);
         }
 
         public void DeletePOIs(List<object> poiList)

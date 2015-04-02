@@ -39,7 +39,7 @@ namespace CheckMapp.Model.DataService
 
             // Removing items
             DeleteNotesAndPictures(noteList, pictureList);
-            DeletePois(poiList);
+            DeletePois(poiList, true);
         }
 
         private void DeleteNotesAndPictures(List<Note> noteList, List<Picture> pictureList)
@@ -57,12 +57,12 @@ namespace CheckMapp.Model.DataService
             }
         }
 
-        private void DeletePois(List<PointOfInterest> poiList)
+        private void DeletePois(List<PointOfInterest> poiList, bool deleteCascade)
         {
             // Delete all POIs associated
             foreach (PointOfInterest poi in poiList)
             {
-                dsPoi.DeletePoi(poi);
+                dsPoi.DeletePoi(poi, deleteCascade);
             }
         }
     }
