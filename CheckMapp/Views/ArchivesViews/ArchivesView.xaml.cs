@@ -31,8 +31,6 @@ namespace CheckMapp.Views.ArchivesViews
                 Trip tripSelected = ((sender as MenuItem).DataContext as Trip);
                 switch (menuItem.Name)
                 {
-                    case "Share":
-                        break;
                     case "Delete":
                         if (MessageBox.Show(AppResources.ConfirmationDeleteTrip, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                         {

@@ -2,6 +2,7 @@
 using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace CheckMapp.ViewModels
@@ -21,7 +22,8 @@ namespace CheckMapp.ViewModels
         /// </summary>
         public StatisticViewModel(Trip currentTrip)
         {
-            _trip = currentTrip;
+            this.Trip = currentTrip;
+            PointOfInterestList = new ObservableCollection<PointOfInterest>(Trip.PointsOfInterests);
         }
 
         #region Properties
@@ -32,6 +34,17 @@ namespace CheckMapp.ViewModels
             set
             {
                 _trip = value;
+            }
+        }
+
+        private ObservableCollection<PointOfInterest> _pointOfInterestList;
+        public ObservableCollection<PointOfInterest> PointOfInterestList
+        {
+            get { return _pointOfInterestList; }
+            set
+            {
+                _pointOfInterestList = value;
+                RaisePropertyChanged("PointOfInterestList");
             }
         }
 

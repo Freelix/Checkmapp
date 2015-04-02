@@ -21,7 +21,6 @@
             <StackPanel Tap="StackPanel_Tap" Margin="0,3,0,0" >
                 <toolkit:ContextMenuService.ContextMenu >
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuTrip" >
-                        <toolkit:MenuItem x:Name="Share" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
                         <toolkit:MenuItem x:Name="Delete" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" />
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>

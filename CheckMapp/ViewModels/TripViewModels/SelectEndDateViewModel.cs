@@ -1,5 +1,6 @@
 ﻿using CheckMapp.Model.DataService;
 using CheckMapp.Model.Tables;
+using CheckMapp.Utils.EditableObject;
 using CheckMapp.Utils.Validations;
 using FluentValidation;
 using GalaSoft.MvvmLight;
@@ -25,7 +26,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         public SelectEndDateViewModel(Trip trip)
         {
             this.Trip = trip;
-            Date = DateTime.Now.Date;
+            Date = DateTime.Now;
             InitialiseValidator();
         }
 
@@ -38,6 +39,10 @@ namespace CheckMapp.ViewModels.TripViewModels
                 _trip = value;
             }
         }
+
+        /// <summary>
+        /// Mon objet editable, nécessaire pour annuler les changements
+        /// </summary>
 
         private ICommand _finishTripCommand;
         public ICommand FinishTripCommand
@@ -53,6 +58,19 @@ namespace CheckMapp.ViewModels.TripViewModels
 
         }
 
+        private ICommand _cancelSelectDateCommand;
+        public ICommand CancelSelectDateCommand
+        {
+            get
+            {
+                if (_cancelSelectDateCommand == null)
+                {
+                    _cancelSelectDateCommand = new RelayCommand(() => CancelSelectDate());
+                }
+                return _cancelSelectDateCommand;
+            }
+        }
+
         private bool _isFormValid;
         public bool IsFormValid
         {
@@ -66,17 +84,20 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Date de fin
         /// </summary>
-        public DateTime Date
+        public DateTime? Date
         {
             get
             {
-                return (DateTime)Trip.EndDate;
+                return Trip.EndDate.GetValueOrDefault();
             }
             set
             {
                 if (Trip.EndDate != value)
                 {
-                    Trip.EndDate = value.Date;
+                    if(value.HasValue)
+                        Trip.EndDate = value.Value.Date;
+                    else
+                        Trip.EndDate = null;
                     RaisePropertyChanged("Date");
                 }
             }
@@ -89,6 +110,10 @@ namespace CheckMapp.ViewModels.TripViewModels
             _validator = new ValidatorFactory().GetValidator<Trip>();
         }
 
+        public void CancelSelectDate()
+        {
+            Date = null;
+        }
 
         public void FinishTrip()
         {
@@ -97,6 +122,7 @@ namespace CheckMapp.ViewModels.TripViewModels
                 _isFormValid = true;
                 DataServiceTrip dsTrip = new DataServiceTrip();
                 dsTrip.UpdateTrip(Trip);
+
             }
         } 
         #endregion
