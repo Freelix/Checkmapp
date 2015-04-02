@@ -154,6 +154,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\EditableObject\Caretaker.cs" />
+    <Compile Include="Utils\EditableObject\Memento.cs" />
     <Compile Include="Utils\PlaceNearToMap.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\POIType.cs" />

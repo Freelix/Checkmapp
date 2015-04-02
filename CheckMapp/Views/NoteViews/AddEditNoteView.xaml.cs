@@ -53,9 +53,6 @@ namespace CheckMapp.Views.NoteViews
         /// <param name="e"></param>
         private void IconCancel_Click(object sender, EventArgs e)
         {
-            var vm = DataContext as AddEditNoteViewModel;
-            vm.CancelNoteCommand.Execute(null);
-
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 
@@ -92,8 +89,13 @@ namespace CheckMapp.Views.NoteViews
         {
             // Save the note instance to retrieve when a tombstone occured
             AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
+
+            //On annule les changeemnts si l'usager fait BACK
+            if (e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
+                vm.CancelNoteCommand.Execute(null);
+
             PhoneApplicationService.Current.State["Note"] = vm.Note;
-            
+
             if (vm.POISelected != null)
                 PhoneApplicationService.Current.State["POISelected"] = vm.POISelected;
             else if (vm.PoiList.Count > 0)
@@ -105,7 +107,7 @@ namespace CheckMapp.Views.NoteViews
             if (Utility.IsTombstoned())
             {
                 PhoneApplicationService.Current.State["TombstoneMode"] = true;
-                LoadPage();              
+                LoadPage();
             }
         }
     }

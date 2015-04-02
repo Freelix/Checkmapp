@@ -36,6 +36,7 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            
             Uri destination = e.Uri;
 
             if (!destination.OriginalString.Contains("DatePickerPage.xaml"))
@@ -43,6 +44,11 @@ namespace CheckMapp.Views.PhotoViews
 
             // Save the note instance to retrieve when a tombstone occured
             AddEditPhotoViewModel vm = DataContext as AddEditPhotoViewModel;
+
+            //On annule les changeemnts si l'usager fait BACK
+            if (e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
+                vm.CancelPhotoCommand.Execute(null);
+
             PhoneApplicationService.Current.State["Picture"] = vm.Picture;
 
             if (vm.POISelected != null)
@@ -91,9 +97,6 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconCancel_Click(object sender, EventArgs e)
         {
-            var vm = DataContext as AddEditPhotoViewModel;
-            vm.CancelPhotoCommand.Execute(null);
-
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 

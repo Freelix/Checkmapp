@@ -61,6 +61,8 @@ namespace CheckMapp
         {
             IconicTileData newTileData = new IconicTileData();
             newTileData.Title = "Checkmapp";
+            newTileData.WideContent1 = String.Empty;
+            newTileData.WideContent2 = String.Empty;
             newTileData.IconImage = new Uri(@"Assets/Logo.png", UriKind.Relative);
             newTileData.SmallIconImage = new Uri(@"Assets/Logo.png", UriKind.Relative);
             if (current != null)

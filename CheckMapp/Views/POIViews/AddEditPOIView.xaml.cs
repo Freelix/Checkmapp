@@ -56,6 +56,11 @@ namespace CheckMapp.Views.POIViews
         {
             // Save the note instance to retrieve when a tombstone occured
             AddEditPOIViewModel vm = DataContext as AddEditPOIViewModel;
+
+            //On annule les changeemnts si l'usager fait BACK
+            if (e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
+                vm.CancelPOICommand.Execute(null);
+
             PhoneApplicationService.Current.State["Poi"] = vm.PointOfInterest;
         }
 
@@ -104,9 +109,6 @@ namespace CheckMapp.Views.POIViews
         /// <param name="e"></param>
         private void IconCancel_Click(object sender, EventArgs e)
         {
-            var vm = DataContext as AddEditPOIViewModel;
-            vm.CancelPOICommand.Execute(null);
-
             (Application.Current.RootVisual as PhoneApplicationFrame).GoBack();
         }
 

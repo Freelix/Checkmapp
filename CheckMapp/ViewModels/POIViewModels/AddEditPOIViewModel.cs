@@ -11,6 +11,7 @@ using CheckMapp.Model.DataService;
 using FluentValidation;
 using CheckMapp.Utils.Validations;
 using Utility = CheckMapp.Utils.Utility;
+using CheckMapp.Utils.EditableObject;
 
 namespace CheckMapp.ViewModels.POIViewModels
 {
@@ -33,10 +34,13 @@ namespace CheckMapp.ViewModels.POIViewModels
                 PointOfInterest = new Model.Tables.PointOfInterest();
                 PointOfInterest.Trip = trip;
             }
-            else if(this.Mode == Mode.addEdit && !Utility.IsTombstoned())
+            else if (this.Mode == Mode.addEdit && !Utility.IsTombstoned())
                 PointOfInterest = poi;
             else
                 PointOfInterest = poi;
+
+            EditableObject = new Caretaker<PointOfInterest>(this.PointOfInterest);
+            EditableObject.BeginEdit();
 
             InitialiseValidator();
         }
@@ -46,6 +50,10 @@ namespace CheckMapp.ViewModels.POIViewModels
             _validator = new ValidatorFactory().GetValidator<PointOfInterest>();
         }
 
+        /// <summary>
+        /// Mon objet editable, nécessaire pour annuler les changements
+        /// </summary>
+        private Caretaker<PointOfInterest> EditableObject { get; set; }
         /// <summary>
         /// Ajout d'un point d'intérêt
         /// </summary>
@@ -185,10 +193,12 @@ namespace CheckMapp.ViewModels.POIViewModels
                 // Adding a poi
                 if (Mode == Mode.add)
                     AddPoiInDB();
-                else if(Mode == Mode.addEdit)
+                else if (Mode == Mode.addEdit)
                     AddPoiInDB();
                 else
                     UpdateExistingPOI();
+
+                EditableObject.EndEdit();
             }
         }
 
@@ -199,6 +209,8 @@ namespace CheckMapp.ViewModels.POIViewModels
                 PointOfInterest.Trip.PointsOfInterests.Remove(PointOfInterest);
                 PointOfInterest.Trip = null;
             }
+
+            EditableObject.CancelEdit();
         }
 
         /// <summary>
