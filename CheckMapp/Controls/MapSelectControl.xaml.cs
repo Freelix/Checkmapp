@@ -86,9 +86,12 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
         private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
             await Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0, true);
-            MapLayer layer = this.myMap.Layers.FirstOrDefault();
-            Latitude = layer[0].GeoCoordinate.Latitude;
-            Longitude = layer[0].GeoCoordinate.Longitude;
+            if (this.myMap.Layers != null && this.myMap.Layers.Count > 0)
+            {
+                MapLayer layer = this.myMap.Layers.FirstOrDefault();
+                Latitude = layer[0].GeoCoordinate.Latitude;
+                Longitude = layer[0].GeoCoordinate.Longitude;
+            }
         }
 
         private async void AfficherCarte(PhoneTextBox myTextBox, Microsoft.Phone.Maps.Controls.Map myMap)

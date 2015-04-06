@@ -133,7 +133,7 @@ namespace CheckMapp.Utils
             mapLocations = (List<MapLocation>)await query.GetMapLocationsAsync();
             mapLocation = mapLocations.FirstOrDefault();
 
-            if (mapLocation != null)
+            if (mapLocation != null && !String.IsNullOrEmpty(mapLocation.Information.Address.Country))
             {
                 MapLayer pinLayout = new MapLayer();
                 Pushpin MyPushpin = new Pushpin();
