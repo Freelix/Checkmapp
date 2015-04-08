@@ -565,7 +565,7 @@ Alexandre Roy</value>
     <value>Set the end date</value>
   </data>
   <data name="ValidatorEndDate" xml:space="preserve">
-    <value>The end date must be greater than the start date and must be lower or equal than the current date.</value>
+    <value>The end date must be greater than the start date.</value>
   </data>
   <data name="LangRestartApp" xml:space="preserve">
     <value>You will have to restart the application to change the language.</value>
@@ -584,5 +584,11 @@ Alexandre Roy</value>
   </data>
   <data name="HoldFinger" xml:space="preserve">
     <value>Hold finger down on map to locate the place</value>
+  </data>
+  <data name="ResultPOI" xml:space="preserve">
+    <value>{0} points of interest found near you.</value>
+  </data>
+  <data name="ValidatorEndDateNow" xml:space="preserve">
+    <value>The end date must be lower or equal than the current date.</value>
   </data>
 </root>

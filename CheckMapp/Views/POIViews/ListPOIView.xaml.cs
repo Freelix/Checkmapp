@@ -35,7 +35,6 @@ namespace CheckMapp.Views.POIViews
         private string currentLatitude = string.Empty;
         private string currentLongitude = string.Empty;
         private bool locationError;
-        HashSet<string> placeNearSet = new HashSet<string>();
 
         public ListPOIView()
         {
@@ -57,20 +56,9 @@ namespace CheckMapp.Views.POIViews
                 (obj.ItemsSource as IList).Clear();
                 obj.ItemsSource = null;
                 while (MyMap.Layers.Count - 1 >= 1)
-                {
                     MyMap.Layers.RemoveAt(MyMap.Layers.Count - 1);
-                }
-                placeNearSet.Clear();
             }
             obj.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
-
-            foreach (var pushpin in (this.DataContext as ListPOIViewModel).PointOfInterestList)
-            {
-                if (pushpin != null)
-                {
-                    placeNearSet.Add(pushpin.Latitude.ToString() + pushpin.Longitude.ToString());
-                }
-            }
         }
 
         private async void ContextMenu_Click(object sender, RoutedEventArgs e)
@@ -318,7 +306,6 @@ namespace CheckMapp.Views.POIViews
                         var vm = DataContext as ListPOIViewModel;
                         if (vm != null)
                         {
-                            placeNearSet.Remove(poiSelected.Latitude.ToString() + poiSelected.Longitude.ToString());
                             vm.DeletePOICommand.Execute(poiSelected);
                             POILLS.ItemsSource = vm.PointOfInterestList;
                         }
@@ -327,10 +314,6 @@ namespace CheckMapp.Views.POIViews
                     {
                         var vm = DataContext as ListPOIViewModel;
                         var placeToDeleteList = new List<object>(POILLS.SelectedItems as IList<object>);
-                        foreach(PointOfInterest placeToDelete in placeToDeleteList)
-                        {
-                            placeNearSet.Remove(placeToDelete.Latitude.ToString() + placeToDelete.Longitude.ToString());
-                        }  
 
                         vm.DeletePOIsCommand.Execute(new List<object>(POILLS.SelectedItems as IList<object>));
                         POILLS.ItemsSource = vm.PointOfInterestList;
@@ -425,10 +408,12 @@ namespace CheckMapp.Views.POIViews
                     });
                 }
 
+                var vm = this.DataContext as ListPOIViewModel;
+                int countPOI = 0;
                 foreach (CheckMapp.Utils.PlaceNearToMap.PlaceNearMap PlaceNear in placeToMapObjs)
                 {
                   // If the set doesn't contains an element latitude+longitude we can show it trough pushPin nearby the phone location
-                    if (!placeNearSet.Any(x => x.Contains(PlaceNear.Coordinate.Latitude.ToString()+PlaceNear.Coordinate.Longitude.ToString())))
+                    if (!vm.PointOfInterestList.Any(x=>x.Latitude == PlaceNear.Coordinate.Latitude && x.Longitude == PlaceNear.Coordinate.Longitude))
                     {
                         MapLayer pinLayout = new MapLayer();
                         Pushpin MyPushpin = new Pushpin();
@@ -437,7 +422,6 @@ namespace CheckMapp.Views.POIViews
                         MyMap.Layers.Add(pinLayout);
 
                         MyPushpin.GeoCoordinate = PlaceNear.Coordinate;
-                        placeNearSet.Add(PlaceNear.Coordinate.Latitude.ToString() + PlaceNear.Coordinate.Longitude.ToString());
 
                         pinOverlay.Content = MyPushpin;
                         pinOverlay.GeoCoordinate = PlaceNear.Coordinate;
@@ -446,16 +430,19 @@ namespace CheckMapp.Views.POIViews
 
                         MyPushpin.Content = PlaceNear.Info.Trim();
 
-
                         MyPushpin.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
                         MyPushpin.Tap += MyPushpin_Tap;
                         MyPushpin.Tag = PlaceNear;
+
+                        countPOI++;
                     }
                 }
-            }
-            catch (Exception)
-            {
 
+                MessageBox.Show(String.Format(AppResources.ResultPOI, countPOI), AppResources.PlaceNearYou, MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+               
             }
         }
 

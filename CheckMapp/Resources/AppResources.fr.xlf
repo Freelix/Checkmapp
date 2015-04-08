@@ -239,7 +239,8 @@
         </trans-unit>
         <trans-unit id="Resx/Statistic" translate="yes" xml:space="preserve">
           <source>Statistics</source>
-          <target state="needs-review-translation">Statistiques</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="needs-review-translation">Statistiques</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
         <trans-unit id="Resx/MyNotes" translate="yes" xml:space="preserve">
           <source>my notes</source>
@@ -463,9 +464,8 @@
           <target state="translated">Définir la date de fin</target>
         </trans-unit>
         <trans-unit id="Resx/ValidatorEndDate" translate="yes" xml:space="preserve">
-          <source>The end date must be greater than the start date and must be lower or equal than the current date.</source>
-          <target state="translated">La date de fin doit être supérieure à la date de début et doit être inférieure ou égale à la date actuelle .</target>
-        </trans-unit>
+          <source>The end date must be greater than the start date.</source>
+          <target state="translated">La date de fin doit être supérieure à la date de début du voyage.</target></trans-unit>
         <trans-unit id="Resx/VisitWebsite" translate="yes" xml:space="preserve">
           <source>Visit our website</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Visitez notre site Web</target>
@@ -485,6 +485,14 @@
         <trans-unit id="Resx/HoldFinger" translate="yes" xml:space="preserve">
           <source>Hold finger down on map to locate the place</source>
           <target state="translated">Tenir le doigt enfoncé sur la carte pour localiser l'endroit</target>
+        </trans-unit>
+        <trans-unit id="Resx/ResultPOI" translate="yes" xml:space="preserve">
+          <source>{0} points of interest found near you.</source>
+          <target state="translated">{0} points d'intérêt trouvés près de vous.</target>
+        </trans-unit>
+        <trans-unit id="Resx/ValidatorEndDateNow" translate="yes" xml:space="preserve">
+          <source>The end date must be lower or equal than the current date.</source>
+          <target state="translated">La date de fin doit être inférieure ou égale à la date actuelle.</target>
         </trans-unit>
         <trans-unit id="Resx/LangRestartApp" translate="yes" xml:space="preserve">
           <source>You will have to restart the application to change the language.</source>

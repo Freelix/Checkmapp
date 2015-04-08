@@ -1172,6 +1172,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0} points of interest found near you..
+        /// </summary>
+        public static string ResultPOI {
+            get {
+                return ResourceManager.GetString("ResultPOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Exemple de valeur de propriété d&apos;exécution.
         /// </summary>
         public static string SampleProperty {
@@ -1361,11 +1370,20 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The end date must be greater than the start date and must be lower or equal than the current date..
+        ///   Recherche une chaîne localisée semblable à The end date must be greater than the start date..
         /// </summary>
         public static string ValidatorEndDate {
             get {
                 return ResourceManager.GetString("ValidatorEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The end date must be lower or equal than the current date..
+        /// </summary>
+        public static string ValidatorEndDateNow {
+            get {
+                return ResourceManager.GetString("ValidatorEndDateNow", resourceCulture);
             }
         }
         

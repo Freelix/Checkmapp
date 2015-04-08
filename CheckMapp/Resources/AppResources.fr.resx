@@ -557,7 +557,7 @@ Alexandre Roy</value>
     <value>Définir la date de fin</value>
   </data>
   <data name="ValidatorEndDate" xml:space="preserve">
-    <value>La date de fin doit être supérieure à la date de début et doit être inférieure ou égale à la date actuelle .</value>
+    <value>La date de fin doit être supérieure à la date de début du voyage.</value>
   </data>
   <data name="DBFileName" xml:space="preserve">
     <value>Checkmapp.sdf</value>
@@ -592,5 +592,11 @@ Alexandre Roy</value>
   </data>
   <data name="HoldFinger" xml:space="preserve">
     <value>Tenir le doigt enfoncé sur la carte pour localiser l'endroit</value>
+  </data>
+  <data name="ResultPOI" xml:space="preserve">
+    <value>{0} points d'intérêt trouvés près de vous.</value>
+  </data>
+  <data name="ValidatorEndDateNow" xml:space="preserve">
+    <value>La date de fin doit être inférieure ou égale à la date actuelle.</value>
   </data>
 </root>
