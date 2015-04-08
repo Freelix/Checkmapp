@@ -34,7 +34,7 @@ namespace CheckMapp.ViewModels.POIViewModels
                 PointOfInterest = new Model.Tables.PointOfInterest();
                 PointOfInterest.Trip = trip;
             }
-            else if (this.Mode == Mode.addEdit && !Utility.IsTombstoned())
+            else if (this.Mode == Mode.addFromExisting && !Utility.IsTombstoned())
                 PointOfInterest = poi;
             else
                 PointOfInterest = poi;
@@ -193,7 +193,7 @@ namespace CheckMapp.ViewModels.POIViewModels
                 // Adding a poi
                 if (Mode == Mode.add)
                     AddPoiInDB();
-                else if (Mode == Mode.addEdit)
+                else if (Mode == Mode.addFromExisting)
                     AddPoiInDB();
                 else
                     UpdateExistingPOI();
@@ -204,7 +204,7 @@ namespace CheckMapp.ViewModels.POIViewModels
 
         public void CancelPOI()
         {
-            if (Mode == ViewModels.Mode.add || Mode == ViewModels.Mode.addEdit)
+            if (Mode == ViewModels.Mode.add || Mode == ViewModels.Mode.addFromExisting)
             {
                 PointOfInterest.Trip.PointsOfInterests.Remove(PointOfInterest);
                 PointOfInterest.Trip = null;

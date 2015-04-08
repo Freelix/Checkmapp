@@ -1262,7 +1262,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à settings.
+        ///   Recherche une chaîne localisée semblable à Settings.
         /// </summary>
         public static string Settings {
             get {

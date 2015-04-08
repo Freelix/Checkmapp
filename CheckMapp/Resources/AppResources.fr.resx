@@ -255,7 +255,8 @@
     <value>Sélectionner une date : </value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>paramètres</value>
+    <value>Paramètres</value>
+    <comment></comment>
   </data>
   <data name="Share" xml:space="preserve">
     <value>partager sur...</value>

@@ -186,8 +186,8 @@
           <target state="translated">Sélectionner une date : </target>
         </trans-unit>
         <trans-unit id="Resx/Settings" translate="yes" xml:space="preserve">
-          <source>settings</source>
-          <target state="needs-review-translation">paramètres</target>
+          <source>Settings</source>
+          <target state="needs-review-translation">Paramètres</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
         <trans-unit id="Resx/Share" translate="yes" xml:space="preserve">
           <source>share on...</source>

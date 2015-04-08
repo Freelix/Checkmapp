@@ -472,7 +472,7 @@ namespace CheckMapp.Views.POIViews
                          newPOI.Latitude = placeNearYou.Coordinate.Latitude;
                          newPOI.Longitude = placeNearYou.Coordinate.Longitude;
                          newPOI.Name = placeNearYou.Info;
-                         PhoneApplicationService.Current.State["Mode"] = Mode.addEdit;
+                         PhoneApplicationService.Current.State["Mode"] = Mode.addFromExisting;
                          PhoneApplicationService.Current.State["Poi"] = newPOI;
                          (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
                         break;

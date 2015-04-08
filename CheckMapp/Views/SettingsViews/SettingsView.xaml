@@ -26,7 +26,7 @@
         <!--Pivot Control-->
         <phone:Pivot Grid.Row="0" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
-            <phone:PivotItem Margin="0,0,0,30" Header="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem x:Name="PivotSettings" Margin="0,0,0,30">
                 <Grid x:Name="ContentPanelParameters" Grid.Row="1" >
                     <ScrollViewer  >
                         <StackPanel Grid.Row="0" Margin="12,17,0,28">

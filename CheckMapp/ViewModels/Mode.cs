@@ -13,6 +13,6 @@ namespace CheckMapp.ViewModels
     {
         add,
         edit,
-        addEdit
+        addFromExisting
     }
 }

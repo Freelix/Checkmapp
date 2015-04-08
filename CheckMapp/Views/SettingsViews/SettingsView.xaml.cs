@@ -25,6 +25,7 @@ namespace CheckMapp.Views.SettingsViews
         {
             InitializeComponent();
             var vm = DataContext as SettingsViewModel;
+            PivotSettings.Header = AppResources.Settings.ToLower();
         }
 
         #region Buttons

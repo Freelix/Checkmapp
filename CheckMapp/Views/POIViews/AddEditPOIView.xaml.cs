@@ -43,7 +43,7 @@ namespace CheckMapp.Views.POIViews
 
                 //Assigne le titre de la page
                 AddEditPOIViewModel vm = DataContext as AddEditPOIViewModel;
-                if (vm.Mode == Mode.add)
+                if (vm.Mode == Mode.add || vm.Mode == Mode.addFromExisting)
                     TitleTextBox.Text = AppResources.AddPOI.ToLower();
                 else if (vm.Mode == Mode.edit)
                     TitleTextBox.Text = AppResources.EditPoi.ToLower();
