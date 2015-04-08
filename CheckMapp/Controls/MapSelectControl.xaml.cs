@@ -25,11 +25,13 @@ namespace CheckMapp.Controls
                 //MessageBox.Show(AppResources.InternetConnection, AppResources.NotConnected, MessageBoxButton.OK);
                 this.PoiTextBox.IsEnabled = false;
                 this.btn_place.Visibility = Visibility.Collapsed;
+                this.BorderInternet.Visibility = Visibility.Visible;
             }
             else
             {
                 this.PoiTextBox.IsEnabled = true;
                 this.btn_place.Visibility = Visibility.Visible;
+                this.BorderInternet.Visibility = Visibility.Collapsed;
             }
 
             btn_place.IsEnabled = !String.IsNullOrEmpty(PoiTextBox.Text);

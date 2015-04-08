@@ -295,6 +295,7 @@
   </data>
   <data name="Statistic" xml:space="preserve">
     <value>Statistiques</value>
+    <comment></comment>
   </data>
   <data name="MyNotes" xml:space="preserve">
     <value>mes notes</value>
@@ -588,5 +589,8 @@ Alexandre Roy</value>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Ajouter</value>
+  </data>
+  <data name="HoldFinger" xml:space="preserve">
+    <value>Tenir le doigt enfoncé sur la carte pour localiser l'endroit</value>
   </data>
 </root>
