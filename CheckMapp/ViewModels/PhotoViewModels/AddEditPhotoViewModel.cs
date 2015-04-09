@@ -30,10 +30,13 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             this.Mode = mode;
 
-            if (Utility.IsTombstoned() && PhoneApplicationService.Current.State["POISelected"]!=null)
+            if (Utility.IsTombstoned())
             {
                 Picture = picture;
-                POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+
+                if (PhoneApplicationService.Current.State["POISelected"] != null)
+                    POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+
                 PhoneApplicationService.Current.State["POISelected"] = null;
             }
             else if (this.Mode == Mode.add)
@@ -245,9 +248,11 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
         private void AddPictureInDB()
         {
-            // Workaround explained in AddEditNoteViewModel 
+            // Workaround explained in AddEditNoteViewModel
+            // Each lines must be there
             Picture.Trip.Pictures.Add(Picture);
             Picture.Trip = Utility.GetAssociatedTrip(Picture.Trip.Id);
+            Picture.Trip.Pictures.Add(Picture);
 
             DataServicePicture dsPicture = new DataServicePicture();
             dsPicture.addPicture(Picture);

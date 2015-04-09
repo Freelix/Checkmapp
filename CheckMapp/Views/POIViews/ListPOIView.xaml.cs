@@ -78,6 +78,9 @@ namespace CheckMapp.Views.POIViews
             MenuItem menuItem = sender as MenuItem;
             if (menuItem != null && ((sender as MenuItem).DataContext is PointOfInterest))
             {
+                // Be sure this option is set to false
+                PhoneApplicationService.Current.State["TombstoneMode"] = false;
+
                 PointOfInterest poiSelected = (sender as MenuItem).DataContext as PointOfInterest;
                 switch (menuItem.Name)
                 {

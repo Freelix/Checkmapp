@@ -32,10 +32,13 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             this.Mode = mode;
 
-            if (Utility.IsTombstoned() && PhoneApplicationService.Current.State["POISelected"]!=null)
+            if (Utility.IsTombstoned())
             {
                 Note = note;
-                POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+
+                if (PhoneApplicationService.Current.State["POISelected"] != null)
+                    POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+
                 PhoneApplicationService.Current.State["POISelected"] = null;
             }
             else if (this.Mode == Mode.add)
