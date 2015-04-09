@@ -104,6 +104,12 @@ namespace CheckMapp.Views.NoteViews
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (PhoneApplicationService.Current.State["POISelected"] != null)
+            {
+                AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
+                vm.POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+                POIControl.chkNoPOI.IsChecked = false;
+            }
             if (Utility.IsTombstoned())
             {
                 PhoneApplicationService.Current.State["TombstoneMode"] = true;

@@ -125,7 +125,6 @@ namespace CheckMapp.Views.NoteViews
             {
                 int poiId = (int)PhoneApplicationService.Current.State["poiId"];
                 loadData(poiId);
-                PhoneApplicationService.Current.State["poiId"] = 0;
             }
             else
                 loadData();

@@ -55,10 +55,22 @@ namespace CheckMapp.Views.POIViews
             {
                 (obj.ItemsSource as IList).Clear();
                 obj.ItemsSource = null;
-                while (MyMap.Layers.Count - 1 >= 1)
-                    MyMap.Layers.RemoveAt(MyMap.Layers.Count - 1);
+                removeTempMapLayer();
             }
             obj.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
+        }
+
+        /// <summary>
+        /// J'ai besoin de ça pour mettre à jour mon ContextMenu lorsque je reviens à un changement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            var menu = (ContextMenu)sender;
+            var owner = (FrameworkElement)menu.Owner;
+            if (owner.DataContext != menu.DataContext)
+                menu.DataContext = owner.DataContext;
         }
 
         private async void ContextMenu_Click(object sender, RoutedEventArgs e)
@@ -100,10 +112,12 @@ namespace CheckMapp.Views.POIViews
                         break;
                     case "POIPictures":
                         PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
+                        PhoneApplicationService.Current.State["POISelected"] = poiSelected;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/ListPhotoView.xaml", UriKind.Relative));
                         break;
                     case "POINotes":
                         PhoneApplicationService.Current.State["poiId"] = poiSelected.Id;
+                        PhoneApplicationService.Current.State["POISelected"] = poiSelected;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/ListNoteView.xaml", UriKind.Relative));
                         break;
                     case "EditPoi":
@@ -407,7 +421,7 @@ namespace CheckMapp.Views.POIViews
 
                     });
                 }
-
+                removeTempMapLayer();
                 var vm = this.DataContext as ListPOIViewModel;
                 int countPOI = 0;
                 foreach (CheckMapp.Utils.PlaceNearToMap.PlaceNearMap PlaceNear in placeToMapObjs)
@@ -505,6 +519,12 @@ namespace CheckMapp.Views.POIViews
         private bool isLocationFind()
         {
             return (!string.IsNullOrEmpty(currentLatitude) && !string.IsNullOrEmpty(currentLongitude));
+        }
+
+        private void removeTempMapLayer()
+        {
+            while (MyMap.Layers.Count - 1 >= 1)
+                    MyMap.Layers.RemoveAt(MyMap.Layers.Count - 1);
         }
 
         

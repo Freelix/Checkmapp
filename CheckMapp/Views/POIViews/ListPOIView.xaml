@@ -73,7 +73,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0,0,40,10">
                                 <toolkit:ContextMenuService.ContextMenu >
-                                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenuNote" >
+                                    <toolkit:ContextMenu Opened="ContextMenu_Opened" IsZoomEnabled="True" x:Name="ContextMenuNote" >
                                         <toolkit:MenuItem x:Name="POIGet" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.GetToPOI, Source={StaticResource LocalizedStrings}}" />
                                         <toolkit:MenuItem x:Name="POIShare" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" />
                                         <toolkit:MenuItem x:Name="POIPictures" Click="ContextMenu_Click" Header="{Binding Path=LocalizedResources.SeePhotos, Source={StaticResource LocalizedStrings}}" />
