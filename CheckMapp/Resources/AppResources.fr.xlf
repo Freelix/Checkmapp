@@ -187,8 +187,8 @@
         </trans-unit>
         <trans-unit id="Resx/Settings" translate="yes" xml:space="preserve">
           <source>Settings</source>
-          <target state="needs-review-translation">Paramètres</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-          </trans-unit>
+          <target state="needs-review-translation">Paramètres</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/Share" translate="yes" xml:space="preserve">
           <source>share on...</source>
           <target state="needs-review-translation">partager sur...</target>
@@ -351,9 +351,9 @@
           <target state="translated">Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</target>
         </trans-unit>
         <trans-unit id="Resx/TravelFriends" translate="yes" xml:space="preserve">
-          <source>Travel Friends</source>
-          <target state="translated">Amis de voyage</target>
- </trans-unit>
+          <source>Trip Friends</source>
+          <target state="needs-review-translation">Amis de voyage</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/NoPoi" translate="yes" xml:space="preserve">
           <source>None</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Aucun</target>
@@ -493,6 +493,10 @@
         <trans-unit id="Resx/ValidatorEndDateNow" translate="yes" xml:space="preserve">
           <source>The end date must be lower or equal than the current date.</source>
           <target state="translated">La date de fin doit être inférieure ou égale à la date actuelle.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BuyApp" translate="yes" xml:space="preserve">
+          <source>Buy Checkmapp without Ads</source>
+          <target state="translated">Acheter Checkmapp sans publicités</target>
         </trans-unit>
         <trans-unit id="Resx/LangRestartApp" translate="yes" xml:space="preserve">
           <source>You will have to restart the application to change the language.</source>

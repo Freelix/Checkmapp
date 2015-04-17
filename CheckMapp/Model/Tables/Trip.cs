@@ -302,6 +302,14 @@ namespace CheckMapp.Model.Tables
             }
         }
 
+        public GeoCoordinate CoordinateDeparture
+        {
+            get
+            {
+                return new GeoCoordinate(DepartureLatitude, DepartureLongitude);
+            }
+        }
+
         #endregion
 
         #region INotifyPropertyChanged Members

@@ -457,7 +457,7 @@ Alexandre Roy</value>
     <value>Are you sure you want to finish this trip? (You will not be able to edit it in the future)</value>
   </data>
   <data name="TravelFriends" xml:space="preserve">
-    <value>Travel Friends</value>
+    <value>Trip Friends</value>
   </data>
   <data name="NoPoi" xml:space="preserve">
     <value>None</value>
@@ -590,5 +590,8 @@ Alexandre Roy</value>
   </data>
   <data name="ValidatorEndDateNow" xml:space="preserve">
     <value>The end date must be lower or equal than the current date.</value>
+  </data>
+  <data name="BuyApp" xml:space="preserve">
+    <value>Buy Checkmapp without Ads</value>
   </data>
 </root>

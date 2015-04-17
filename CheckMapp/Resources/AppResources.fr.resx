@@ -383,6 +383,7 @@
   </data>
   <data name="TravelFriends" xml:space="preserve">
     <value>Amis de voyage</value>
+    <comment></comment>
   </data>
   <data name="NoPoi" xml:space="preserve">
     <value>Aucun</value>
@@ -599,5 +600,8 @@ Alexandre Roy</value>
   </data>
   <data name="ValidatorEndDateNow" xml:space="preserve">
     <value>La date de fin doit être inférieure ou égale à la date actuelle.</value>
+  </data>
+  <data name="BuyApp" xml:space="preserve">
+    <value>Acheter Checkmapp sans publicités</value>
   </data>
 </root>

@@ -200,6 +200,15 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Buy Checkmapp without Ads.
+        /// </summary>
+        public static string BuyApp {
+            get {
+                return ResourceManager.GetString("BuyApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Cancel.
         /// </summary>
         public static string Cancel {
@@ -1343,7 +1352,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Travel Friends.
+        ///   Recherche une chaîne localisée semblable à Trip Friends.
         /// </summary>
         public static string TravelFriends {
             get {

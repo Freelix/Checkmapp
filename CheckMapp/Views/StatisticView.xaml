@@ -75,7 +75,20 @@
                         <Image Height="70"  Source="/Images/appbar.return.png"></Image>
                         <TextBlock x:Name="TripEndDate" VerticalAlignment="Center" Width="400" TextWrapping="Wrap" Text="{Binding TripEndDate}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </StackPanel>
-                    
+                    <Line X1="0" X2="1" Stretch="Fill"  Stroke="White" StrokeThickness="1" />
+
+                    <StackPanel>
+                        <TextBlock  Text="{Binding Path=LocalizedResources.TravelFriends, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <ListBox Name="ListboxTest" ItemsSource="{Binding TripFriends}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <Line X1="0" X2="1" Stretch="Fill"  Stroke="White" StrokeThickness="1" />
+
                 </StackPanel>
             </ScrollViewer>
         </Grid>

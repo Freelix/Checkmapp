@@ -95,6 +95,14 @@ namespace CheckMapp.Views.SettingsViews
             marketplaceReviewTask.Show();
         }
 
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
+        {
+            this.Focus();
+            MarketplaceDetailTask detail = new MarketplaceDetailTask();
+            //contentid
+            detail.Show();
+        }
+
         private void BtnWebsite_Click(object sender, EventArgs e)
         {
             // TODO: Change the URL with our real website
@@ -135,5 +143,7 @@ namespace CheckMapp.Views.SettingsViews
             var vm = DataContext as SettingsViewModel;
             vm.CancelCommand.Execute(null);
         }
+
+      
     }
 }

@@ -113,9 +113,9 @@ namespace CheckMapp.Views.PhotoViews
         {
             if (ApplicationBar.Buttons != null)
             {
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Share;
-                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Edit;
-                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.Delete;
+               // (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Share;
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Edit;
+                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Delete;
             }
         }
 

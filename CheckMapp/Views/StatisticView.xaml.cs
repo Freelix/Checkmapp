@@ -15,6 +15,7 @@ using Microsoft.Phone.Maps.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Maps.Toolkit;
 using System.Collections;
+using System.Windows.Media;
 
 namespace CheckMapp.Views
 {
@@ -47,6 +48,32 @@ namespace CheckMapp.Views
                 obj.ItemsSource = null;
             }
             obj.ItemsSource = ((this.DataContext as StatisticViewModel).PointOfInterestList);
+
+            //Ajout du départ
+            MapLayer layer1 = new MapLayer();
+            Pushpin pushpin1 = new Pushpin();
+            pushpin1.GeoCoordinate = currentTrip.CoordinateDeparture;
+            pushpin1.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
+            pushpin1.Content = AppResources.AddTripDeparture;
+            MapOverlay overlay1 = new MapOverlay();
+            overlay1.Content = pushpin1;
+            overlay1.GeoCoordinate = currentTrip.CoordinateDeparture;
+            overlay1.PositionOrigin = new Point(0, 1);
+            layer1.Add(overlay1);
+            statsMap.Layers.Add(layer1);
+
+            //Ajout de la destination
+            MapLayer layer2 = new MapLayer();
+            Pushpin pushpin2 = new Pushpin();
+            pushpin2.GeoCoordinate = currentTrip.CoordinateDestination;
+            pushpin2.Content = AppResources.AddTripArrival;
+            pushpin2.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
+            MapOverlay overlay2 = new MapOverlay();
+            overlay2.Content = pushpin2;
+            overlay2.GeoCoordinate = currentTrip.CoordinateDestination;
+            overlay2.PositionOrigin = new Point(0, 1);
+            layer2.Add(overlay2);
+            statsMap.Layers.Add(layer2);
         }
 
         private void statsMap_Loaded(object sender, RoutedEventArgs e)

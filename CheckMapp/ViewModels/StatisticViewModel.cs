@@ -24,6 +24,7 @@ namespace CheckMapp.ViewModels
         {
             this.Trip = currentTrip;
             PointOfInterestList = new ObservableCollection<PointOfInterest>(Trip.PointsOfInterests);
+            TripFriends = new ObservableCollection<string>(Utils.Utility.FriendToList(Trip.FriendList));
         }
 
         #region Properties
@@ -34,6 +35,17 @@ namespace CheckMapp.ViewModels
             set
             {
                 _trip = value;
+            }
+        }
+
+        private ObservableCollection<string> _tripFriends;
+        public ObservableCollection<string> TripFriends
+        {
+            get { return _tripFriends; }
+            set
+            {
+                _tripFriends = value;
+                RaisePropertyChanged("TripFriends");
             }
         }
 
