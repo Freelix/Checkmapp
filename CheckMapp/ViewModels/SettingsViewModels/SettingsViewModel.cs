@@ -229,7 +229,8 @@ namespace CheckMapp.ViewModels.SettingsViewModels
             if (!LanguageStorageProperty.Value.Equals(newLang))
             {
                 LanguageStorageProperty.Value = newLang;
-                MessageBox.Show(AppResources.LangRestartApp, "Information", MessageBoxButton.OK);
+                MessageBox.Show(AppResources.RestartApp, "Information", MessageBoxButton.OK);
+                Application.Current.Terminate();
             }
         }
 

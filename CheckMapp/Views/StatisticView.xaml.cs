@@ -62,18 +62,21 @@ namespace CheckMapp.Views
             layer1.Add(overlay1);
             statsMap.Layers.Add(layer1);
 
-            //Ajout de la destination
-            MapLayer layer2 = new MapLayer();
-            Pushpin pushpin2 = new Pushpin();
-            pushpin2.GeoCoordinate = currentTrip.CoordinateDestination;
-            pushpin2.Content = AppResources.AddTripArrival;
-            pushpin2.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
-            MapOverlay overlay2 = new MapOverlay();
-            overlay2.Content = pushpin2;
-            overlay2.GeoCoordinate = currentTrip.CoordinateDestination;
-            overlay2.PositionOrigin = new Point(0, 1);
-            layer2.Add(overlay2);
-            statsMap.Layers.Add(layer2);
+            if (!currentTrip.IsActif)
+            {
+                //Ajout de la destination
+                MapLayer layer2 = new MapLayer();
+                Pushpin pushpin2 = new Pushpin();
+                pushpin2.GeoCoordinate = currentTrip.CoordinateDestination;
+                pushpin2.Content = AppResources.AddTripArrival;
+                pushpin2.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
+                MapOverlay overlay2 = new MapOverlay();
+                overlay2.Content = pushpin2;
+                overlay2.GeoCoordinate = currentTrip.CoordinateDestination;
+                overlay2.PositionOrigin = new Point(0, 1);
+                layer2.Add(overlay2);
+                statsMap.Layers.Add(layer2);
+            }
         }
 
         private void statsMap_Loaded(object sender, RoutedEventArgs e)

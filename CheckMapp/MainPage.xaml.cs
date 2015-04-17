@@ -40,9 +40,9 @@ namespace CheckMapp
 
             // This part is used for the dormant state
             // Without it, the trip will not show the added objects !
-            //if (PhoneApplicationService.Current.State["Trip"] != null)
-            //    current = (Trip)PhoneApplicationService.Current.State["Trip"];
-            //else
+            if (PhoneApplicationService.Current.State["Trip"] != null)
+                current = (Trip)PhoneApplicationService.Current.State["Trip"];
+            else
                 current  = (this.DataContext as MainViewModel).TripActif;
 
             CheckUpdateTile(current);
