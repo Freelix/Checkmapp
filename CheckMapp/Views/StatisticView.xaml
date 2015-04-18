@@ -77,15 +77,18 @@
                     </StackPanel>
                     <Line X1="0" X2="1" Stretch="Fill"  Stroke="White" StrokeThickness="1" />
 
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Image Height="70"  Source="/Images/appbar.group.png"></Image>
+                        <StackPanel>
                         <TextBlock  Text="{Binding Path=LocalizedResources.TravelFriends, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
                         <ListBox Name="ListboxTest" ItemsSource="{Binding TripFriends}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                                    <TextBlock Margin="20,10,0,0" Style="{StaticResource PhoneTextGroupHeaderStyle}" Text="{Binding}" TextWrapping="Wrap"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                        </StackPanel>
                     </StackPanel>
                     <Line X1="0" X2="1" Stretch="Fill"  Stroke="White" StrokeThickness="1" />
 

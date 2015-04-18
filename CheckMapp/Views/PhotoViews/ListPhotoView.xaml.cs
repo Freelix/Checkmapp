@@ -41,23 +41,9 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconAdd_Click(object sender, EventArgs e)
         {
-            PhotoChooserTask photoChooserTask = new PhotoChooserTask();
-            photoChooserTask.Completed += photoChooserTask_Completed;
-            photoChooserTask.ShowCamera = true;
-            photoChooserTask.Show();
-        }
-
-        void photoChooserTask_Completed(object sender, PhotoResult e)
-        {
-            if (e.TaskResult == TaskResult.OK)
-            {
-                PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
-                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip.Id;
-                PhoneApplicationService.Current.State["Mode"] = Mode.add;
-                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
-            }
-            else
-                PhoneApplicationService.Current.State["ChosenPhoto"] = null;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip.Id;
+            PhoneApplicationService.Current.State["Mode"] = Mode.add;
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

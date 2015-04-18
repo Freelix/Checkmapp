@@ -21,7 +21,7 @@ namespace CheckMapp.Views
 {
     public partial class StatisticView : PhoneApplicationPage
     {
-        
+
         public StatisticView()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace CheckMapp.Views
             if (currentTrip.IsActif)
                 EndStack.Visibility = Visibility.Collapsed;
             else
-                EndStack.Visibility = Visibility.Visible;    
+                EndStack.Visibility = Visibility.Visible;
             //Bind les POI a la map
             ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(statsMap);
             var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;
@@ -63,21 +63,18 @@ namespace CheckMapp.Views
             layer1.Add(overlay1);
             statsMap.Layers.Add(layer1);
 
-            if (!currentTrip.IsActif)
-            {
-                //Ajout de la destination
-                MapLayer layer2 = new MapLayer();
-                Pushpin pushpin2 = new Pushpin();
-                pushpin2.GeoCoordinate = currentTrip.CoordinateDestination;
-                pushpin2.Content = AppResources.AddTripArrival;
-                pushpin2.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
-                MapOverlay overlay2 = new MapOverlay();
-                overlay2.Content = pushpin2;
-                overlay2.GeoCoordinate = currentTrip.CoordinateDestination;
-                overlay2.PositionOrigin = new Point(0, 1);
-                layer2.Add(overlay2);
-                statsMap.Layers.Add(layer2);
-            }
+            //Ajout de la destination
+            MapLayer layer2 = new MapLayer();
+            Pushpin pushpin2 = new Pushpin();
+            pushpin2.GeoCoordinate = currentTrip.CoordinateDestination;
+            pushpin2.Content = AppResources.AddTripArrival;
+            pushpin2.Background = new SolidColorBrush(Color.FromArgb(255, 105, 105, 105));
+            MapOverlay overlay2 = new MapOverlay();
+            overlay2.Content = pushpin2;
+            overlay2.GeoCoordinate = currentTrip.CoordinateDestination;
+            overlay2.PositionOrigin = new Point(0, 1);
+            layer2.Add(overlay2);
+            statsMap.Layers.Add(layer2);
         }
 
         private void statsMap_Loaded(object sender, RoutedEventArgs e)

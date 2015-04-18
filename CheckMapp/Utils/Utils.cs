@@ -488,11 +488,6 @@ namespace CheckMapp.Utils
         {
             bool isTombstoned = false;
 
-            if (PhoneApplicationService.Current.State["ChosenPhoto"] == null)
-            {
-                isTombstoned = (bool)PhoneApplicationService.Current.State["TombstoneMode"];
-                PhoneApplicationService.Current.State["TombstoneMode"] = false;
-            }
 
             return isTombstoned;
         }

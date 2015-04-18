@@ -24,13 +24,10 @@ namespace CheckMapp.Views.PhotoViews
         {
             InitializeComponent();
 
-            byte[] photoSelected = PhoneApplicationService.Current.State["ChosenPhoto"] as byte[];
-            
             // On vide la mémoire le plus possible
-            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;
 
-            LoadPage(photoSelected);
+            LoadPage();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -40,7 +37,10 @@ namespace CheckMapp.Views.PhotoViews
             Uri destination = e.Uri;
 
             if (!destination.OriginalString.Contains("DatePickerPage.xaml"))
-                hubTile.Source.ClearValue(BitmapImage.UriSourceProperty);
+            {
+                if(hubTile.Source!=null)
+                    hubTile.Source.ClearValue(BitmapImage.UriSourceProperty);
+            }
 
             // Save the note instance to retrieve when a tombstone occured
             AddEditPhotoViewModel vm = DataContext as AddEditPhotoViewModel;
@@ -59,15 +59,10 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            byte[] photoSelected = PhoneApplicationService.Current.State["ChosenPhoto"] as byte[];
-            
-            // On vide la mémoire le plus possible
-            PhoneApplicationService.Current.State["ChosenPhoto"] = null;
-
             if (Utility.IsTombstoned())
             {
                 PhoneApplicationService.Current.State["TombstoneMode"] = true;
-                LoadPage(photoSelected);
+                LoadPage();
             }
         }
 
@@ -108,13 +103,13 @@ namespace CheckMapp.Views.PhotoViews
             photoChooserTask.Show();
         }
 
-        private void LoadPage(byte[] photoSelected)
+        private void LoadPage()
         {
             int trip = (int)PhoneApplicationService.Current.State["Trip"];
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
             int myPicture = (int)PhoneApplicationService.Current.State["Picture"];
 
-            this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode, photoSelected);
+            this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode);
 
             //Assigne le titre de la page
             var vm = this.DataContext as AddEditPhotoViewModel;

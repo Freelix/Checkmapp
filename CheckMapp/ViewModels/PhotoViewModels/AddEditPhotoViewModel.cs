@@ -15,6 +15,9 @@ using FluentValidation;
 using CheckMapp.Utils.Validations;
 using Microsoft.Phone.Shell;
 using CheckMapp.Utils.EditableObject;
+using System.Windows.Resources;
+using Windows.Storage;
+using System.IO.IsolatedStorage;
 
 namespace CheckMapp.ViewModels.PhotoViewModels
 {
@@ -26,7 +29,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         // Used for validate the form
         private IValidator<Picture> _validator;
 
-        public AddEditPhotoViewModel(int trip, int picture, Mode mode, byte[] photoArray)
+        public AddEditPhotoViewModel(int trip, int picture, Mode mode)
         {
             this.Mode = mode;
 
@@ -51,9 +54,6 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 
             if (Picture.Trip.PointsOfInterests != null)
                 PoiList = new List<PointOfInterest>(Picture.Trip.PointsOfInterests);
-
-            if (photoArray != null)
-                this.ImageSource = photoArray;
 
             EditableObject = new Caretaker<Picture>(this.Picture);
             EditableObject.BeginEdit();
@@ -155,6 +155,20 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             {
                 Picture.Description = value;
                 RaisePropertyChanged("Description");
+            }
+        }
+
+        public string _imagePath = null;
+        public string ImagePath
+        {
+            get
+            {
+                return _imagePath;
+            }
+            set
+            {
+                _imagePath = value;
+                RaisePropertyChanged("ImagePath");
             }
         }
 
