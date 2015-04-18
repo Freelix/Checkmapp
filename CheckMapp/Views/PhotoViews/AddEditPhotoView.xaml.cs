@@ -49,7 +49,7 @@ namespace CheckMapp.Views.PhotoViews
             if (e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
                 vm.CancelPhotoCommand.Execute(null);
 
-            PhoneApplicationService.Current.State["Picture"] = vm.Picture;
+            PhoneApplicationService.Current.State["Picture"] = vm.Picture.Id;
 
             if (vm.POISelected != null)
                 PhoneApplicationService.Current.State["POISelected"] = vm.POISelected;
@@ -110,9 +110,9 @@ namespace CheckMapp.Views.PhotoViews
 
         private void LoadPage(byte[] photoSelected)
         {
-            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int trip = (int)PhoneApplicationService.Current.State["Trip"];
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            Picture myPicture = (Picture)PhoneApplicationService.Current.State["Picture"];
+            int myPicture = (int)PhoneApplicationService.Current.State["Picture"];
 
             this.DataContext = new AddEditPhotoViewModel(trip, myPicture, mode, photoSelected);
 
@@ -133,7 +133,7 @@ namespace CheckMapp.Views.PhotoViews
                 hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditPhotoViewModel).ImageSource, false);
             }
 
-            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Picture.Trip;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Picture.Trip.Id;
         }
     }
 }

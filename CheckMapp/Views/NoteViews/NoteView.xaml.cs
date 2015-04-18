@@ -43,7 +43,7 @@ namespace CheckMapp.Views.NoteViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            Note myNote = (Note)PhoneApplicationService.Current.State["Note"];
+            int myNote = (int)PhoneApplicationService.Current.State["Note"];
             this.DataContext = new NoteViewModel(myNote);
             base.OnNavigatedTo(e);
         }

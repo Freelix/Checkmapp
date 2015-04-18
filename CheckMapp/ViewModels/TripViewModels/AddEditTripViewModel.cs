@@ -37,7 +37,7 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the AddTripViewModel class.
         /// </summary>
-        public AddEditTripViewModel(Trip trip, Mode mode)
+        public AddEditTripViewModel(int trip, Mode mode)
         {
             this.Mode = mode;
 
@@ -47,7 +47,10 @@ namespace CheckMapp.ViewModels.TripViewModels
                 Trip.BeginDate = DateTime.Now;
             }
             else
-                Trip = trip;
+            {
+                DataServiceTrip dsTrip = new DataServiceTrip();
+                this.Trip = dsTrip.getTripById(trip);
+            }
 
             this.FriendList = Utility.FriendToList(Trip.FriendList);
             InitialiseValidator();

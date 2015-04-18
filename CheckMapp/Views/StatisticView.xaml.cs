@@ -21,7 +21,7 @@ namespace CheckMapp.Views
 {
     public partial class StatisticView : PhoneApplicationPage
     {
-        Trip currentTrip;
+        
         public StatisticView()
         {
             InitializeComponent();
@@ -31,14 +31,15 @@ namespace CheckMapp.Views
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTripId = (int)PhoneApplicationService.Current.State["Trip"];
+
+            this.DataContext = new StatisticViewModel(currentTripId);
+
+            Trip currentTrip = (this.DataContext as StatisticViewModel).Trip;
             if (currentTrip.IsActif)
                 EndStack.Visibility = Visibility.Collapsed;
             else
                 EndStack.Visibility = Visibility.Visible;    
-            this.DataContext = new StatisticViewModel(currentTrip);
-
-
             //Bind les POI a la map
             ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(statsMap);
             var obj = children.FirstOrDefault(x => x.GetType() == typeof(MapItemsControl)) as MapItemsControl;

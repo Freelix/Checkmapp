@@ -23,9 +23,10 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the TripViewModel class.
         /// </summary>
-        public TripViewModel(Trip trip)
+        public TripViewModel(int trip)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
         }
 
         public Trip Trip

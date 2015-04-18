@@ -23,9 +23,10 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the SelectEndDateViewModel class.
         /// </summary>
-        public SelectEndDateViewModel(Trip trip)
+        public SelectEndDateViewModel(int trip)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
             Date = DateTime.Now;
             InitialiseValidator();
         }

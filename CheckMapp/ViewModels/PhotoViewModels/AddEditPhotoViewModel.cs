@@ -26,13 +26,13 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         // Used for validate the form
         private IValidator<Picture> _validator;
 
-        public AddEditPhotoViewModel(Trip trip, Picture picture, Mode mode, byte[] photoArray)
+        public AddEditPhotoViewModel(int trip, int picture, Mode mode, byte[] photoArray)
         {
             this.Mode = mode;
 
             if (Utility.IsTombstoned())
             {
-                Picture = picture;
+                Picture = GetPictureInDB(picture);
 
                 if (PhoneApplicationService.Current.State["POISelected"] != null)
                     POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
@@ -42,14 +42,15 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             else if (this.Mode == Mode.add)
             {
                 Picture = new Picture();
-                Picture.Trip = trip;
+                DataServiceTrip dsTrip = new DataServiceTrip();
+                Picture.Trip = dsTrip.getTripById(trip);
                 Picture.Date = DateTime.Now;
             }
             else
-                Picture = picture;
+                Picture = GetPictureInDB(picture);
 
-            if (trip.PointsOfInterests != null)
-                PoiList = new List<PointOfInterest>(trip.PointsOfInterests);
+            if (Picture.Trip.PointsOfInterests != null)
+                PoiList = new List<PointOfInterest>(Picture.Trip.PointsOfInterests);
 
             if (photoArray != null)
                 this.ImageSource = photoArray;
@@ -262,6 +263,12 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         {
             DataServicePicture dsPicture = new DataServicePicture();
             dsPicture.UpdatePicture(Picture);
+        }
+
+        private Picture GetPictureInDB(int pictureId)
+        {
+            DataServicePicture dsPicture = new DataServicePicture();
+            return dsPicture.getPictureById(pictureId);
         }
 
         #endregion

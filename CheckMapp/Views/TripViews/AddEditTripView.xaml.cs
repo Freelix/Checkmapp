@@ -126,7 +126,7 @@ namespace CheckMapp.Views.TripViews
             }
 
             //La valeur s'enleve pour une raison inconnu encore, alors on doit la réassigner
-            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditTripViewModel).Trip;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditTripViewModel).Trip.Id;
         }
 
         private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -169,7 +169,7 @@ namespace CheckMapp.Views.TripViews
         private void LoadPage()
         {
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new AddEditTripViewModel(currentTrip, mode);
 
             //Assigne le titre de la page
@@ -186,7 +186,7 @@ namespace CheckMapp.Views.TripViews
         {
             // Save the note instance to retrieve when a tombstone occured
             AddEditTripViewModel vm = DataContext as AddEditTripViewModel;
-            PhoneApplicationService.Current.State["Trip"] = vm.Trip;
+            PhoneApplicationService.Current.State["Trip"] = vm.Trip.Id;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

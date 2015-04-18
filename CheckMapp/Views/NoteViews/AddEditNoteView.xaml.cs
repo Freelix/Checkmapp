@@ -72,9 +72,9 @@ namespace CheckMapp.Views.NoteViews
 
         private void LoadPage()
         {
-            Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int trip = (int)PhoneApplicationService.Current.State["Trip"];
             Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-            Note currentNote = (Note)PhoneApplicationService.Current.State["Note"];
+            int currentNote = (int)PhoneApplicationService.Current.State["Note"];
             AddEditNoteViewModel vm = new AddEditNoteViewModel(trip, currentNote, mode);
             this.DataContext = vm;
 
@@ -94,7 +94,7 @@ namespace CheckMapp.Views.NoteViews
             if (e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
                 vm.CancelNoteCommand.Execute(null);
 
-            PhoneApplicationService.Current.State["Note"] = vm.Note;
+            PhoneApplicationService.Current.State["Note"] = vm.Note.Id;
 
             if (vm.POISelected != null)
                 PhoneApplicationService.Current.State["POISelected"] = vm.POISelected;

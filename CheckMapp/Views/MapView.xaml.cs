@@ -37,7 +37,7 @@ namespace CheckMapp.Pages
         private void Pushpin_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Trip clickTrip = (sender as Pushpin).DataContext as Trip;
-            PhoneApplicationService.Current.State["Trip"] = clickTrip;
+            PhoneApplicationService.Current.State["Trip"] = clickTrip.Id;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
 

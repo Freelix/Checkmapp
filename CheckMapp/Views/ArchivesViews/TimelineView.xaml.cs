@@ -26,7 +26,7 @@ namespace CheckMapp.Views.ArchivesViews
 
         void timelineControl_UserControlElementTap(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Trip"] = sender as Trip;
+            PhoneApplicationService.Current.State["Trip"] = (sender as Trip).Id;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
     }

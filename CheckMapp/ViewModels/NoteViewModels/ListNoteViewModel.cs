@@ -14,14 +14,16 @@ namespace CheckMapp.ViewModels.NoteViewModels
 {
     public class ListNoteViewModel : ViewModelBase
     {
-        public ListNoteViewModel(Trip trip)
+        public ListNoteViewModel(int trip)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
         }
 
-        public ListNoteViewModel(Trip trip, int poiId)
+        public ListNoteViewModel(int trip, int poiId)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
             this.PoiLoaded = poiId;
         }
 

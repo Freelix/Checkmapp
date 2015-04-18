@@ -1,4 +1,5 @@
-﻿using CheckMapp.Model.Tables;
+﻿using CheckMapp.Model.DataService;
+using CheckMapp.Model.Tables;
 using CheckMapp.Resources;
 using GalaSoft.MvvmLight;
 using System;
@@ -20,9 +21,10 @@ namespace CheckMapp.ViewModels
         /// <summary>
         /// Initializes a new instance of the StatisticViewModel class.
         /// </summary>
-        public StatisticViewModel(Trip currentTrip)
+        public StatisticViewModel(int currentTrip)
         {
-            this.Trip = currentTrip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(currentTrip);
             PointOfInterestList = new ObservableCollection<PointOfInterest>(Trip.PointsOfInterests);
             TripFriends = new ObservableCollection<string>(Utils.Utility.FriendToList(Trip.FriendList));
         }

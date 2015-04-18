@@ -51,7 +51,7 @@ namespace CheckMapp.Views.ArchivesViews
 
         private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            PhoneApplicationService.Current.State["Trip"] = (sender as FrameworkElement).DataContext as Trip;
+            PhoneApplicationService.Current.State["Trip"] = ((sender as FrameworkElement).DataContext as Trip).Id;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
 
            

@@ -21,9 +21,10 @@ namespace CheckMapp.ViewModels.TripViewModels
         /// <summary>
         /// Initializes a new instance of the CurrentViewModel class.
         /// </summary>
-        public CurrentViewModel(Trip trip)
+        public CurrentViewModel(int trip)
         {
-            Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            Trip = dsTrip.getTripById(trip);
         }
 
         /// <summary>

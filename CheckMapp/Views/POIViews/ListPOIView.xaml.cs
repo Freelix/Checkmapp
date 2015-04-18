@@ -44,7 +44,7 @@ namespace CheckMapp.Views.POIViews
 
         private void loadData()
         {
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new ListPOIViewModel(currentTrip);
             POILLS.ItemsSource = (this.DataContext as ListPOIViewModel).PointOfInterestList;
 
@@ -125,7 +125,7 @@ namespace CheckMapp.Views.POIViews
                         break;
                     case "EditPoi":
                         PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-                        PhoneApplicationService.Current.State["Poi"] = poiSelected;
+                        PhoneApplicationService.Current.State["Poi"] = poiSelected.Id;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPoiView.xaml", UriKind.Relative));
                         break;
                     case "DeletePOI":
@@ -482,15 +482,14 @@ namespace CheckMapp.Views.POIViews
                 switch (e1.Result)
                 {
                     case CustomMessageBoxResult.LeftButton:
-                         Trip trip = (Trip)PhoneApplicationService.Current.State["Trip"];
                          PointOfInterest newPOI = new PointOfInterest();
-                         newPOI.Trip = trip;
-                         trip.PointsOfInterests.Add(newPOI);
+                         newPOI.Trip = (this.DataContext as ListPOIViewModel).Trip;
+                         (this.DataContext as ListPOIViewModel).Trip.PointsOfInterests.Add(newPOI);
                          newPOI.Latitude = placeNearYou.Coordinate.Latitude;
                          newPOI.Longitude = placeNearYou.Coordinate.Longitude;
                          newPOI.Name = placeNearYou.Info;
                          PhoneApplicationService.Current.State["Mode"] = Mode.addFromExisting;
-                         PhoneApplicationService.Current.State["Poi"] = newPOI;
+                         PhoneApplicationService.Current.State["Poi"] = newPOI.Id;
                          (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
                         break;
                     default:

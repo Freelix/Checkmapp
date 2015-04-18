@@ -16,9 +16,10 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// <summary>
         /// Initializes a new instance of the POIViewModel class.
         /// </summary>
-        public ListPOIViewModel(Trip trip)
+        public ListPOIViewModel(int trip)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
             PointOfInterestList = new ObservableCollection<PointOfInterest>(Trip.PointsOfInterests);
         }
 

@@ -42,12 +42,12 @@ namespace CheckMapp.Views.PhotoViews
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as PhotoViewModel).Trip;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as PhotoViewModel).Trip.Id;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            CheckMapp.Model.Tables.Picture current = PhoneApplicationService.Current.State["Picture"] as CheckMapp.Model.Tables.Picture;
+            int current = (int)PhoneApplicationService.Current.State["Picture"];
             this.DataContext = new PhotoViewModel(current);
             myImage.Picture = (this.DataContext as PhotoViewModel).SelectedPicture;
             base.OnNavigatedTo(e);
@@ -104,7 +104,7 @@ namespace CheckMapp.Views.PhotoViews
 
         private void IconEdit_Click(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as PhotoViewModel).SelectedPicture;
+            PhoneApplicationService.Current.State["Picture"] = (this.DataContext as PhotoViewModel).SelectedPicture.Id;
             PhoneApplicationService.Current.State["Mode"] = Mode.edit;
             NavigationService.Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
         }

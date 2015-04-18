@@ -27,14 +27,14 @@ namespace CheckMapp.Views.PhotoViews
 
         private void loadData()
         {
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new ListPhotoViewModel(currentTrip);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
 
         private void loadData(int poiId)
         {
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new ListPhotoViewModel(currentTrip, poiId);
             PhotoHubLLS.ItemsSource = (this.DataContext as ListPhotoViewModel).GroupedPhotos;
         }
@@ -52,7 +52,7 @@ namespace CheckMapp.Views.PhotoViews
             if (e.TaskResult == TaskResult.OK)
             {
                 PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
-                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip;
+                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip.Id;
                 PhoneApplicationService.Current.State["Mode"] = Mode.add;
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
             }
@@ -93,8 +93,8 @@ namespace CheckMapp.Views.PhotoViews
             else
                 loadData();
 
-            PhoneApplicationService.Current.State["Picture"] = null;
-            PhoneApplicationService.Current.State["Trip"] = null;
+            PhoneApplicationService.Current.State["Picture"] = 0;
+            PhoneApplicationService.Current.State["Trip"] = 0;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -106,7 +106,7 @@ namespace CheckMapp.Views.PhotoViews
                 e.Cancel = true;
             }
 
-            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip;
+            PhoneApplicationService.Current.State["Trip"] = (this.DataContext as ListPhotoViewModel).Trip.Id;
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace CheckMapp.Views.PhotoViews
                 switch (menuItem.Name)
                 {
                     case "EditPhoto":
-                        PhoneApplicationService.Current.State["Picture"] = pictureSelected;
+                        PhoneApplicationService.Current.State["Picture"] = pictureSelected.Id;
                         PhoneApplicationService.Current.State["Mode"] = Mode.edit;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
                         break;
@@ -187,7 +187,7 @@ namespace CheckMapp.Views.PhotoViews
             if (!PhotoHubLLS.IsSelectionEnabled)
             {
                 Picture itemTapped = (sender as FrameworkElement).DataContext as Picture;
-                PhoneApplicationService.Current.State["Picture"] = itemTapped;
+                PhoneApplicationService.Current.State["Picture"] = itemTapped.Id;
                 NavigationService.Navigate(new Uri("/Views/PhotoViews/PhotoView.xaml", UriKind.Relative));
             }
         }

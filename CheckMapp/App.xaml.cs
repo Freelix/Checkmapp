@@ -105,19 +105,18 @@ namespace CheckMapp
             DataServiceTrip dsTrip = new DataServiceTrip();
             Trip currentTrip = dsTrip.getCurrentTrip();
             if (currentTrip != null)
-                PhoneApplicationService.Current.State["Trip"] = currentTrip;
+                PhoneApplicationService.Current.State["Trip"] = currentTrip.Id;
             else
-                PhoneApplicationService.Current.State["Trip"] = null;
+                PhoneApplicationService.Current.State["Trip"] = 0;
 
             PhoneApplicationService.Current.State["POIType"] = null;
-            PhoneApplicationService.Current.State["Note"] = null;
-            PhoneApplicationService.Current.State["Poi"] = null;
-            PhoneApplicationService.Current.State["Picture"] = null;
+            PhoneApplicationService.Current.State["Note"] = 0;
+            PhoneApplicationService.Current.State["Poi"] = 0;
+            PhoneApplicationService.Current.State["Picture"] = 0;
             PhoneApplicationService.Current.State["poiId"] = 0;
             PhoneApplicationService.Current.State["ChosenPhoto"] = null;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;
             PhoneApplicationService.Current.State["POISelected"] = null;
-
         }
 
         // Code to execute when the application is launching (eg, from Start)

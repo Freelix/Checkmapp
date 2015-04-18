@@ -18,7 +18,7 @@ namespace CheckMapp.Views.TripViews
         public SelectEndDateView()
         {
             InitializeComponent();
-            this.DataContext = new SelectEndDateViewModel((Trip)PhoneApplicationService.Current.State["Trip"]);
+            this.DataContext = new SelectEndDateViewModel((int)PhoneApplicationService.Current.State["Trip"]);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -32,7 +32,7 @@ namespace CheckMapp.Views.TripViews
                     if (vm != null)
                     {
                         vm.FinishTripCommand.Execute(null);
-                        PhoneApplicationService.Current.State["Trip"] = null;
+                        PhoneApplicationService.Current.State["Trip"] = 0;
                     }
                     if (vm.IsFormValid)
                     {
@@ -47,7 +47,7 @@ namespace CheckMapp.Views.TripViews
                 vm.CancelSelectDateCommand.Execute(null);
             }
 
-            PhoneApplicationService.Current.State["Trip"] = vm.Trip as Trip;
+            PhoneApplicationService.Current.State["Trip"] = vm.Trip.Id;
             base.OnNavigatedFrom(e);
         }
 
@@ -62,7 +62,7 @@ namespace CheckMapp.Views.TripViews
                 if (vm != null)
                 {
                     vm.FinishTripCommand.Execute(null);
-                    PhoneApplicationService.Current.State["Trip"] = null;
+                    PhoneApplicationService.Current.State["Trip"] = 0;
                 }
                 if (vm.IsFormValid)
                 {

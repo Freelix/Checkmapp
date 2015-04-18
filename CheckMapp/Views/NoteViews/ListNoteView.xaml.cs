@@ -23,14 +23,14 @@ namespace CheckMapp.Views.NoteViews
 
         private void loadData()
         {
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new ListNoteViewModel(currentTrip);
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
         }
 
         private void loadData(int poiId)
         {
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new ListNoteViewModel(currentTrip, poiId);
             NoteLLS.ItemsSource = (this.DataContext as ListNoteViewModel).GroupedNotes;
         }
@@ -84,7 +84,7 @@ namespace CheckMapp.Views.NoteViews
                 switch (menuItem.Name)
                 {
                     case "EditNote":
-                        PhoneApplicationService.Current.State["Note"] = noteSelected;
+                        PhoneApplicationService.Current.State["Note"] = noteSelected.Id;
                         PhoneApplicationService.Current.State["Mode"] = Mode.edit;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/NoteViews/AddEditNoteView.xaml", UriKind.Relative));
                         break;
@@ -119,7 +119,7 @@ namespace CheckMapp.Views.NoteViews
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            PhoneApplicationService.Current.State["Note"] = null;
+            PhoneApplicationService.Current.State["Note"] = 0;
 
             if ((int)PhoneApplicationService.Current.State["poiId"] > 0)
             {
@@ -152,7 +152,7 @@ namespace CheckMapp.Views.NoteViews
             if (!NoteLLS.IsSelectionEnabled)
             {
                 Note itemTapped = (sender as FrameworkElement).DataContext as Note;
-                PhoneApplicationService.Current.State["Note"] = itemTapped;
+                PhoneApplicationService.Current.State["Note"] = itemTapped.Id;
                 NavigationService.Navigate(new Uri("/Views/NoteViews/NoteView.xaml", UriKind.Relative));
             }
         }

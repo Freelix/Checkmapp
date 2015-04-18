@@ -15,15 +15,17 @@ namespace CheckMapp.ViewModels.PhotoViewModels
 {
     public class ListPhotoViewModel : ViewModelBase
     {
-        public ListPhotoViewModel(Trip trip)
+        public ListPhotoViewModel(int trip)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
             Loading = true;
         }
 
-        public ListPhotoViewModel(Trip trip, int poiId)
+        public ListPhotoViewModel(int trip, int poiId)
         {
-            this.Trip = trip;
+            DataServiceTrip dsTrip = new DataServiceTrip();
+            this.Trip = dsTrip.getTripById(trip);
             this.PoiLoaded = poiId;
             Loading = true;
         }

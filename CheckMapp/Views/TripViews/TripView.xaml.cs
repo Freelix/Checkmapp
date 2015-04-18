@@ -39,7 +39,7 @@ namespace CheckMapp.Views.TripViews
             {
                 PhoneApplicationService.Current.State["Mode"] = Mode.add;
                 PhoneApplicationService.Current.State["ChosenPhoto"] = Utility.ReadFully(e.ChosenPhoto);
-                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as TripViewModel).Trip;
+                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as TripViewModel).Trip.Id;
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/PhotoViews/AddEditPhotoView.xaml", UriKind.Relative));
             }
             else
@@ -102,7 +102,7 @@ namespace CheckMapp.Views.TripViews
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            Trip currentTrip = (Trip)PhoneApplicationService.Current.State["Trip"];
+            int currentTrip = (int)PhoneApplicationService.Current.State["Trip"];
             this.DataContext = new TripViewModel(currentTrip);
             base.OnNavigatedTo(e);
         }
@@ -111,7 +111,7 @@ namespace CheckMapp.Views.TripViews
         {
             if (MessageBox.Show(AppResources.ConfirmFinishTrip, "Confirmation", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as TripViewModel).Trip;
+                PhoneApplicationService.Current.State["Trip"] = (this.DataContext as TripViewModel).Trip.Id;
                 // On doit assigner la date de fin
                 (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/SelectEndDateView.xaml", UriKind.Relative));
             }

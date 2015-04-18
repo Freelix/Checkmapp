@@ -28,13 +28,13 @@ namespace CheckMapp.ViewModels.NoteViewModels
         // Used for validate the form
         private IValidator<Note> _validator;
 
-        public AddEditNoteViewModel(Trip trip, Note note, Mode mode)
+        public AddEditNoteViewModel(int trip, int note, Mode mode)
         {
             this.Mode = mode;
 
             if (Utility.IsTombstoned())
             {
-                Note = note;
+                Note = GetNoteInDB(note);
 
                 if (PhoneApplicationService.Current.State["POISelected"] != null)
                     POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
@@ -44,14 +44,17 @@ namespace CheckMapp.ViewModels.NoteViewModels
             else if (this.Mode == Mode.add)
             {
                 Note = new Note();
-                Note.Trip = trip;
+                DataServiceTrip dsTrip = new DataServiceTrip();
+                Note.Trip = dsTrip.getTripById(trip);
                 Note.Date = DateTime.Now;
             }
             else
-                Note = note;    
+            {
+                Note = GetNoteInDB(note);
+            }
 
-            if (trip.PointsOfInterests != null)
-                _poiList = new List<PointOfInterest>(trip.PointsOfInterests);
+            if (Note.Trip.PointsOfInterests != null)
+                _poiList = new List<PointOfInterest>(Note.Trip.PointsOfInterests);
 
             EditableObject = new Caretaker<Note>(this.Note);
             EditableObject.BeginEdit();
@@ -270,6 +273,12 @@ namespace CheckMapp.ViewModels.NoteViewModels
         {
             DataServiceNote dsNote = new DataServiceNote();
             dsNote.UpdateNote(Note);
+        }
+
+        private Note GetNoteInDB(int noteId)
+        {
+            DataServiceNote dsNote = new DataServiceNote();
+            return dsNote.getNoteById(noteId);
         }
 
         #endregion

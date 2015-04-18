@@ -36,21 +36,21 @@ namespace CheckMapp
             this.DataContext = new MainViewModel();
             MainPanorama.SelectionChanged += MainPanorama_SelectionChanged;
 
-            Trip current = null;
+            int currentTripId = 0;
 
             // This part is used for the dormant state
             // Without it, the trip will not show the added objects !
-            if (PhoneApplicationService.Current.State["Trip"] != null)
-                current = (Trip)PhoneApplicationService.Current.State["Trip"];
+            if ((int)PhoneApplicationService.Current.State["Trip"] != 0)
+                currentTripId = (int)PhoneApplicationService.Current.State["Trip"];
             else
-                current  = (this.DataContext as MainViewModel).TripActif;
+                currentTripId = (this.DataContext as MainViewModel).TripActif.Id;
 
-            CheckUpdateTile(current);
 
-            PhoneApplicationService.Current.State["Trip"] = current;
+            PhoneApplicationService.Current.State["Trip"] = currentTripId;
             if ((this.DataContext as MainViewModel).IsTripActif)
-                CurrentView.DataContext = new CurrentViewModel(current);
+                CurrentView.DataContext = new CurrentViewModel(currentTripId);
 
+            CheckUpdateTile((CurrentView.DataContext as CurrentViewModel).Trip);
             DashboardView.LoadComponents((this.DataContext as MainViewModel).IsTripActif);
         }
 
@@ -113,7 +113,7 @@ namespace CheckMapp
         /// <param name="e"></param>
         private void IconButtonEdit_Click(object sender, EventArgs e)
         {
-            PhoneApplicationService.Current.State["Trip"] = (CurrentView.DataContext as CurrentViewModel).Trip;
+            PhoneApplicationService.Current.State["Trip"] = (CurrentView.DataContext as CurrentViewModel).Trip.Id;
             (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/TripViews/TripView.xaml", UriKind.Relative));
         }
 

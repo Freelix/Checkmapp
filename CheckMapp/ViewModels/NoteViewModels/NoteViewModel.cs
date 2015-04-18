@@ -14,9 +14,10 @@ namespace CheckMapp.ViewModels.NoteViewModels
     {
         private Note _note;
 
-        public NoteViewModel(Note note)
+        public NoteViewModel(int note)
         {
-            this.Note = note;
+            DataServiceNote dsNote = new DataServiceNote();
+            this.Note =  dsNote.getNoteById(note);
         }
 
         #region Properties

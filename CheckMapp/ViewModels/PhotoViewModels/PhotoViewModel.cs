@@ -16,10 +16,11 @@ namespace CheckMapp.ViewModels.PhotoViewModels
     public class PhotoViewModel : ViewModelBase
     {
         private int _selectedPictureIndex;
-        public PhotoViewModel(Picture picture)
+        public PhotoViewModel(int picture)
         {
-            this.Trip = picture.Trip;
-            SelectedPictureIndex = Trip.Pictures.OrderBy(x => x.Date).ToList().FindIndex(x => x.Id == picture.Id);
+            DataServicePicture dsPicture = new DataServicePicture();
+            this.Trip = dsPicture.getPictureById(picture).Trip;
+            SelectedPictureIndex = Trip.Pictures.OrderBy(x => x.Date).ToList().FindIndex(x => x.Id == picture);
         }
 
         #region Properties
@@ -62,7 +63,7 @@ namespace CheckMapp.ViewModels.PhotoViewModels
             }
         }
 
-       
+
         #endregion
 
         #region Buttons
