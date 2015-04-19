@@ -128,6 +128,11 @@ namespace CheckMapp.Model.Tables
             }
         }
 
+        // Version column improves update performance.
+        #pragma warning disable 169
+        [Column(IsVersion = true)]
+        private Binary _version;
+
         #endregion
 
         #region INotifyPropertyChanged Members

@@ -19,7 +19,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
     public class SettingsViewModel : ViewModelBase
     {
         private CMIsolatedStorageProperty<bool> WifiOnlyStorageProperty;
-        private CMIsolatedStorageProperty<bool> AutoSyncStorageProperty;
         private CMIsolatedStorageProperty<string> LanguageStorageProperty;
 
         private List<string> _languagesCode;
@@ -145,8 +144,6 @@ namespace CheckMapp.ViewModels.SettingsViewModels
                 RaisePropertyChanged("TypeProgress");
             }
         }
-
-        private string _progressText;
 
         public string ProgressText
         {

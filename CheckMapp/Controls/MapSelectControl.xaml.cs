@@ -116,6 +116,8 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            // No need to wait for the result, we hide the warning
+            #pragma warning disable 4014
             Utility.AddLocation(this.myMap, this.PoiTextBox, null, Latitude, Longitude);
             Thread.Sleep(500);
         }

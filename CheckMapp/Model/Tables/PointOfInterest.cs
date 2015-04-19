@@ -138,40 +138,6 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        /*private EntitySet<Note> _notes;
-
-        [Association(Storage = "_notes", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
-        public EntitySet<Note> Notes
-        {
-            get { return _notes; }
-            set
-            {
-                if (_notes != value)
-                {
-                    NotifyPropertyChanging("Notes");
-                    _notes.Assign(value);
-                    NotifyPropertyChanged("Notes");
-                }
-            }
-        }*/
-
-        /* private EntitySet<Picture> _pictures;
-
-         [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId", ThisKey = "Id")]
-         public EntitySet<Picture> Pictures
-         {
-             get { return _pictures; }
-             set
-             {
-                 if (_pictures != value)
-                 {
-                     NotifyPropertyChanging("Pictures");
-                     _pictures.Assign(value);
-                     NotifyPropertyChanged("Pictures");
-                 }
-             }
-         }*/
-
         [Column]
         private int? _tripId;
         private EntityRef<Trip> _trip = new EntityRef<Trip>();
@@ -194,24 +160,8 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        /*private EntitySet<Note> _pictures;
-
-        [Association(Storage = "_pictures", OtherKey = "_pointOfInterestId")]
-        public EntitySet<Note> Pictures
-        {
-            get { return _pictures; }
-            set
-            {
-                if (_pictures != value)
-                {
-                    NotifyPropertyChanging("Pictures");
-                    _pictures.Assign(value);
-                    NotifyPropertyChanged("Pictures");
-                }
-            }
-        }*/
-
-        // Version column aids update performance.
+        // Version column improves update performance.
+        #pragma warning disable 169
         [Column(IsVersion = true)]
         private Binary _version;
 

@@ -128,7 +128,8 @@ namespace CheckMapp.Model.Tables
             }
         }
 
-        // Version column aids update performance.
+        // Version column improves update performance.
+        #pragma warning disable 169
         [Column(IsVersion = true)]
         private Binary _version;
 

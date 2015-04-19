@@ -351,6 +351,7 @@ namespace CheckMapp.Utils
             }
             catch (TaskCanceledException exception)
             {
+                Console.WriteLine("Exception occured while uploading file to OneDrive : " + exception.Message);
             }
             return 1;
         }
@@ -416,10 +417,12 @@ namespace CheckMapp.Utils
             }
             catch (TaskCanceledException exception)
             {
+                Console.WriteLine("Exception occured while downloading file from OneDrive : " + exception.Message);
                 return 2;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                Console.WriteLine("Exception occured while downloading file from OneDrive : " + ex.Message);
                 return 0;
             }
             return 1;

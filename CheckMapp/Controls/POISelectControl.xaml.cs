@@ -74,6 +74,7 @@ namespace CheckMapp.Controls
             {
                 chkNoPOI.IsEnabled = false;
                 chkNoPOI.IsChecked = true;
+                Console.WriteLine("Exception occured while unchecking poi, Disabling chkNoPoi : " + ex.Message);
             }
         }
 

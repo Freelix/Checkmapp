@@ -256,7 +256,6 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Paramètres</value>
-    <comment></comment>
   </data>
   <data name="Share" xml:space="preserve">
     <value>partager sur...</value>
@@ -296,7 +295,6 @@
   </data>
   <data name="Statistic" xml:space="preserve">
     <value>Statistiques</value>
-    <comment></comment>
   </data>
   <data name="MyNotes" xml:space="preserve">
     <value>mes notes</value>
@@ -327,7 +325,6 @@
   </data>
   <data name="ConfirmDeletePOIs" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer ces points d'intérêt? (Les notes et les photos avec ces points d'intérêt seront aussi supprimés)</value>
-    <comment></comment>
   </data>
   <data name="MyPoi" xml:space="preserve">
     <value>points d'intérêts</value>
@@ -367,7 +364,6 @@
   </data>
   <data name="NoteAllTime" xml:space="preserve">
     <value>{0} note(s) dans ce voyage</value>
-    <comment></comment>
   </data>
   <data name="PictureToday" xml:space="preserve">
     <value>{0} photo(s) aujourd'hui</value>
@@ -383,7 +379,6 @@
   </data>
   <data name="TravelFriends" xml:space="preserve">
     <value>Amis de voyage</value>
-    <comment></comment>
   </data>
   <data name="NoPoi" xml:space="preserve">
     <value>Aucun</value>
@@ -433,7 +428,6 @@ Alexandre Roy</value>
   </data>
   <data name="ConfirmDeletePOI" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer ce point d'intérêt? (Les notes et les photos avec ce point d'intérêt seront aussi supprimés)</value>
-    <comment></comment>
   </data>
   <data name="ConfirmationDeletePictures" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer ces photos?</value>
@@ -479,7 +473,6 @@ Alexandre Roy</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Chargement...</value>
-    <comment></comment>
   </data>
   <data name="IamHere" xml:space="preserve">
     <value>Je suis à : {0}</value>
@@ -501,7 +494,6 @@ Alexandre Roy</value>
   </data>
   <data name="LocationError" xml:space="preserve">
     <value>La localisation de votre position est désactivée dans les paramètres de votre téléphone.</value>
-    <comment></comment>
   </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>Aucun fichier valide n'a été trouvé dans le dossier Checkmapp de votre OneDrive.</value>
@@ -544,7 +536,6 @@ Alexandre Roy</value>
   </data>
   <data name="POIObject" xml:space="preserve">
     <value>Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</value>
-    <comment></comment>
   </data>
   <data name="NullPOIObject" xml:space="preserve">
     <value>Enlever le lien avec ce POI</value>
@@ -581,7 +572,6 @@ Alexandre Roy</value>
   </data>
   <data name="PlaceNearUsername" xml:space="preserve">
     <value>checkmapp</value>
-    <comment></comment>
   </data>
   <data name="PlaceNearYou" xml:space="preserve">
     <value>Lieux près de vous</value>

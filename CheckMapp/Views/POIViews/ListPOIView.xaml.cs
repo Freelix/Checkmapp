@@ -96,7 +96,7 @@ namespace CheckMapp.Views.POIViews
                             bingMap.Start = new LabeledMapLocation();
                             bingMap.End = new LabeledMapLocation();
                             bingMap.Start.Label = AppResources.YourPosition;
-                            bingMap.Start.Location = new GeoCoordinate(myGeocoordinate.Latitude, myGeocoordinate.Longitude);
+                            bingMap.Start.Location = new GeoCoordinate(myGeocoordinate.Point.Position.Latitude, myGeocoordinate.Point.Position.Longitude);
                             bingMap.End.Location = poiSelected.Coordinate;
                             bingMap.End.Label = poiSelected.Name;
                             bingMap.Show();
@@ -184,8 +184,8 @@ namespace CheckMapp.Views.POIViews
                 Geoposition geoposition = await geolocator.GetGeopositionAsync(
                     maximumAge: TimeSpan.FromMinutes(5),
                     timeout: TimeSpan.FromSeconds(10));
-                currentLatitude = geoposition.Coordinate.Latitude.ToString();
-                currentLongitude = geoposition.Coordinate.Longitude.ToString();
+                currentLatitude = geoposition.Coordinate.Point.Position.Latitude.ToString();
+                currentLongitude = geoposition.Coordinate.Point.Position.Longitude.ToString();
                 (this.DataContext as ListPOIViewModel).Loading = false;
                 (ApplicationBar.Buttons[2] as ApplicationBarIconButton).IsEnabled = true;
                 
@@ -459,7 +459,7 @@ namespace CheckMapp.Views.POIViews
             }
             catch (Exception ex)
             {
-               
+                Console.WriteLine("Exception occured while updating map : " + ex.Message);
             }
         }
 

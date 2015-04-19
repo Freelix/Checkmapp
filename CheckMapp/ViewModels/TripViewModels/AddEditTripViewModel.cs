@@ -205,7 +205,6 @@ namespace CheckMapp.ViewModels.TripViewModels
             }
         }
 
-        private double _departureLongitude;
         /// <summary>
         /// Coordonnées départ longitude
         /// </summary>
