@@ -42,15 +42,17 @@ namespace CheckMapp
             // Without it, the trip will not show the added objects !
             if ((int)PhoneApplicationService.Current.State["Trip"] != 0)
                 currentTripId = (int)PhoneApplicationService.Current.State["Trip"];
-            else
+            else if ((this.DataContext as MainViewModel).TripActif != null)
+            {
                 currentTripId = (this.DataContext as MainViewModel).TripActif.Id;
 
+                PhoneApplicationService.Current.State["Trip"] = currentTripId;
+                if ((this.DataContext as MainViewModel).IsTripActif)
+                    CurrentView.DataContext = new CurrentViewModel(currentTripId);
 
-            PhoneApplicationService.Current.State["Trip"] = currentTripId;
-            if ((this.DataContext as MainViewModel).IsTripActif)
-                CurrentView.DataContext = new CurrentViewModel(currentTripId);
+                CheckUpdateTile((CurrentView.DataContext as CurrentViewModel).Trip);
+            }
 
-            CheckUpdateTile((CurrentView.DataContext as CurrentViewModel).Trip);
             DashboardView.LoadComponents((this.DataContext as MainViewModel).IsTripActif);
         }
 

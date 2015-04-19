@@ -92,8 +92,8 @@ namespace CheckMapp.ViewModels.PhotoViewModels
         public void DeletePicture()
         {
             DataServicePicture dsPicture = new DataServicePicture();
-            this.Trip.Pictures.Remove(this.SelectedPicture);
-            dsPicture.DeletePicture(this.SelectedPicture);
+            dsPicture.DeletePicture(SelectedPicture);
+            Trip.Pictures.Remove(SelectedPicture);
         }
 
 
