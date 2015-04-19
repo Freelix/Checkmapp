@@ -40,9 +40,7 @@ namespace CheckMapp
 
             // This part is used for the dormant state
             // Without it, the trip will not show the added objects !
-            if ((int)PhoneApplicationService.Current.State["Trip"] != 0)
-                currentTripId = (int)PhoneApplicationService.Current.State["Trip"];
-            else if ((this.DataContext as MainViewModel).TripActif != null)
+            if ((this.DataContext as MainViewModel).TripActif != null)
             {
                 currentTripId = (this.DataContext as MainViewModel).TripActif.Id;
 
@@ -52,6 +50,8 @@ namespace CheckMapp
 
                 CheckUpdateTile((CurrentView.DataContext as CurrentViewModel).Trip);
             }
+            else if((int)PhoneApplicationService.Current.State["Trip"] != 0)
+                currentTripId = (int)PhoneApplicationService.Current.State["Trip"];
 
             DashboardView.LoadComponents((this.DataContext as MainViewModel).IsTripActif);
         }

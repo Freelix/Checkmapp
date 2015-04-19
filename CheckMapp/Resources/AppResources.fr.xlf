@@ -91,30 +91,6 @@
           <source>dashboard</source>
           <target state="translated">accueil</target>
         </trans-unit>
-        <trans-unit id="Resx/LastActivities" translate="yes" xml:space="preserve">
-          <source>last activites</source>
-          <target state="translated">actions récentes</target>
-        </trans-unit>
-        <trans-unit id="Resx/LastMonth" translate="yes" xml:space="preserve">
-          <source>Last Month</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Mois dernier</target>
-        </trans-unit>
-        <trans-unit id="Resx/LastSevenDays" translate="yes" xml:space="preserve">
-          <source>Last Seven Days</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Les 7 derniers jours</target>
-        </trans-unit>
-        <trans-unit id="Resx/LastSixMonths" translate="yes" xml:space="preserve">
-          <source>Last Six Months</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Six derniers mois</target>
-        </trans-unit>
-        <trans-unit id="Resx/LastTwoWeeks" translate="yes" xml:space="preserve">
-          <source>Last Two Weeks</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Deux dernières semaines</target>
-        </trans-unit>
-        <trans-unit id="Resx/LastYear" translate="yes" xml:space="preserve">
-          <source>Last Year</source>
-          <target state="needs-review-translation">L'année dernière</target>
-          </trans-unit>
         <trans-unit id="Resx/List" translate="yes" xml:space="preserve">
           <source>list</source>
           <target state="translated">liste</target>
@@ -282,8 +258,8 @@
           <target state="signed-off">Êtes-vous sûr de vouloir supprimer ces points d'intérêt? (Les notes et les photos avec ces points d'intérêt seront aussi supprimés)</target>
           </trans-unit>
         <trans-unit id="Resx/MyPoi" translate="yes" xml:space="preserve">
-          <source>point of interests</source>
-          <target state="needs-review-translation">points d'intérêts</target>
+          <source>points of interest</source>
+          <target state="needs-review-translation">points d'intérêt</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
         <trans-unit id="Resx/Lang_French" translate="yes" xml:space="preserve">
           <source>French</source>
@@ -344,9 +320,8 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Aucun POI sélectionné</target>
         </trans-unit>
         <trans-unit id="Resx/ConfirmFinishTrip" translate="yes" xml:space="preserve">
-          <source>Are you sure you want to finish this trip? (You will not be able to edit it in the future)</source>
-          <target state="translated">Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</target>
-        </trans-unit>
+          <source>Are you sure you want to finish this trip?</source>
+          <target state="signed-off">Êtes-vous certain de vouloir terminer ce voyage?</target></trans-unit>
         <trans-unit id="Resx/TravelFriends" translate="yes" xml:space="preserve">
           <source>Trip Friends</source>
           <target state="signed-off">Amis de voyage</target>
@@ -441,8 +416,8 @@
           <target state="signed-off">Que voulez-vous faire avec les objets (notes, photos) reliés au point d'intérêt?</target>
           </trans-unit>
         <trans-unit id="Resx/PlaceNearAdd" translate="yes" xml:space="preserve">
-          <source>Do you want to add it to your point of interest?</source>
-          <target state="translated">Voulez-vous l'ajouter à vos points d'intérêt?</target>
+          <source>Do you want to add it to your points of interest?</source>
+          <target state="needs-review-translation">Voulez-vous l'ajouter à vos points d'intérêt?</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/PlaceNearURI" translate="yes" xml:space="preserve">
           <source>http://api.geonames.org/findNearbyWikipediaJSON?</source>
@@ -532,9 +507,8 @@
           <target state="needs-review-translation">ville, (état, province, disctrict), pays</target>
           </trans-unit>
         <trans-unit id="Resx/InternetConnectionMap" translate="yes" xml:space="preserve">
-          <source>Your internet connection is offline. To access map features you need internet connection or download map with your cellphone.</source>
-          <target state="translated">Votre connexion internet est désactivée. Pour accéder aux fonctionnalités de la carte, vous avez besoin de connexion internet ou de télécharger les cartes au préalable.</target>
-        </trans-unit>
+          <source>Your internet connection is offline. To access map features you need internet connection or download maps from your cellphone.</source>
+          <target state="signed-off">Votre connexion internet est désactivée. Pour accéder aux fonctionnalités de la carte, vous avez besoin de connexion internet ou de télécharger les cartes au préalable.</target></trans-unit>
         <trans-unit id="Resx/Error_EmptyName" translate="yes" xml:space="preserve">
           <source>You have to specify a name</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Vous devez spécifier un nom</target>
@@ -553,7 +527,7 @@
         </trans-unit>
         <trans-unit id="Resx/ErrorsDetected" translate="yes" xml:space="preserve">
           <source>The following errors occured :</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Les erreurs suivantes s'est produite :</target>
+          <target state="translated">Les erreurs suivantes se sont produites :</target>
         </trans-unit>
         <trans-unit id="Resx/Errors" translate="yes" xml:space="preserve">
           <source>Errors</source>

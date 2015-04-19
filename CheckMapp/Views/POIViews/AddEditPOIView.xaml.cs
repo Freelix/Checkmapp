@@ -38,7 +38,7 @@ namespace CheckMapp.Views.POIViews
             {
                 int trip = (int)PhoneApplicationService.Current.State["Trip"];
                 Mode mode = (Mode)PhoneApplicationService.Current.State["Mode"];
-                int currentPoi = (int)PhoneApplicationService.Current.State["Poi"];
+                PointOfInterest currentPoi = (PointOfInterest)PhoneApplicationService.Current.State["Poi"];
                 this.DataContext = new AddEditPOIViewModel(trip, mode, currentPoi);
 
                 //Assigne le titre de la page
@@ -61,7 +61,7 @@ namespace CheckMapp.Views.POIViews
             if (e.NavigationMode == NavigationMode.Back && !vm.IsFormValid)
                 vm.CancelPOICommand.Execute(null);
 
-            PhoneApplicationService.Current.State["Poi"] = vm.PointOfInterest.Id;
+            PhoneApplicationService.Current.State["Poi"] = vm.PointOfInterest;
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace CheckMapp.Views.POIViews
                 if (vm != null)
                 {
                     vm.AddPOICommand.Execute(null);
-                    PhoneApplicationService.Current.State["Poi"] = 0;
+                    PhoneApplicationService.Current.State["Poi"] = null;
                 }
 
                 if (vm.IsFormValid)

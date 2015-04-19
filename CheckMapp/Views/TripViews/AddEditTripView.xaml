@@ -81,10 +81,10 @@
                                         />
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripDeparture, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}" />
-                    <myControl:MapSelectControl Height="300" Latitude="{Binding DepartureLatitude,Mode=TwoWay}" PoiLocation="{Binding Departure, Mode=TwoWay}" Longitude="{Binding DepartureLongitude,Mode=TwoWay}"></myControl:MapSelectControl>
+                    <myControl:MapSelectControl CompleteAdress="False" Height="350" Latitude="{Binding DepartureLatitude,Mode=TwoWay}" PoiLocation="{Binding Departure, Mode=TwoWay}" Longitude="{Binding DepartureLongitude,Mode=TwoWay}"></myControl:MapSelectControl>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.AddTripArrival, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <myControl:MapSelectControl x:Name="selectDest"  Height="300"  Latitude="{Binding DestinationLatitude,Mode=TwoWay}" PoiLocation="{Binding Destination, Mode=TwoWay}" Longitude="{Binding DestinationLongitude,Mode=TwoWay}"></myControl:MapSelectControl>
+                    <myControl:MapSelectControl CompleteAdress="False"  x:Name="selectDest"  Height="350"  Latitude="{Binding DestinationLatitude,Mode=TwoWay}" PoiLocation="{Binding Destination, Mode=TwoWay}" Longitude="{Binding DestinationLongitude,Mode=TwoWay}"></myControl:MapSelectControl>
 
                 </StackPanel>
             </ScrollViewer>

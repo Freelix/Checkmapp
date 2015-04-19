@@ -111,7 +111,7 @@ namespace CheckMapp
 
             PhoneApplicationService.Current.State["POIType"] = null;
             PhoneApplicationService.Current.State["Note"] = 0;
-            PhoneApplicationService.Current.State["Poi"] = 0;
+            PhoneApplicationService.Current.State["Poi"] = null;
             PhoneApplicationService.Current.State["Picture"] = 0;
             PhoneApplicationService.Current.State["poiId"] = 0;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;

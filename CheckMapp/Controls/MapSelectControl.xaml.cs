@@ -25,16 +25,26 @@ namespace CheckMapp.Controls
                 //MessageBox.Show(AppResources.InternetConnection, AppResources.NotConnected, MessageBoxButton.OK);
                 this.PoiTextBox.IsEnabled = false;
                 this.btn_place.Visibility = Visibility.Collapsed;
-                this.BorderInternet.Visibility = Visibility.Visible;
             }
             else
             {
                 this.PoiTextBox.IsEnabled = true;
                 this.btn_place.Visibility = Visibility.Visible;
-                this.BorderInternet.Visibility = Visibility.Collapsed;
             }
 
             btn_place.IsEnabled = !String.IsNullOrEmpty(PoiTextBox.Text);
+        }
+
+        public static readonly DependencyProperty CompleteAdressProperty =
+     DependencyProperty.Register("CompleteAdress", typeof(bool), typeof(MapSelectControl), null);
+
+        public bool CompleteAdress
+        {
+            get { return (bool)GetValue(CompleteAdressProperty); }
+            set
+            {
+                SetValue(CompleteAdressProperty, value);
+            }
         }
 
         public static readonly DependencyProperty LongitudeProperty =
@@ -87,7 +97,7 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
 
         private async void Map_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            await Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0, true);
+            await Utility.AddLocation(this.myMap, this.PoiTextBox, e, 0.0, 0.0, CompleteAdress);
             if (this.myMap.Layers != null && this.myMap.Layers.Count > 0)
             {
                 MapLayer layer = this.myMap.Layers.FirstOrDefault();
@@ -103,7 +113,7 @@ DependencyProperty.Register("PoiLocation", typeof(string), typeof(MapSelectContr
                 var CoordinateList = await MapHelper.getCoordinateAsync(myTextBox.Text);
 
                 // CoordinateList[0] = latitude, CoordinateList[1] = longitude
-                await Utility.AddLocation(myMap, myTextBox, null, CoordinateList[0], CoordinateList[1], true);
+                await Utility.AddLocation(myMap, myTextBox, null, CoordinateList[0], CoordinateList[1], CompleteAdress);
 
                 Latitude = CoordinateList[0];
                 Longitude = CoordinateList[1];

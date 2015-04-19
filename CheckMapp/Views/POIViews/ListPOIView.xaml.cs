@@ -125,7 +125,7 @@ namespace CheckMapp.Views.POIViews
                         break;
                     case "EditPoi":
                         PhoneApplicationService.Current.State["Mode"] = Mode.edit;
-                        PhoneApplicationService.Current.State["Poi"] = poiSelected.Id;
+                        PhoneApplicationService.Current.State["Poi"] = poiSelected;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPoiView.xaml", UriKind.Relative));
                         break;
                     case "DeletePOI":
@@ -489,7 +489,7 @@ namespace CheckMapp.Views.POIViews
                          newPOI.Longitude = placeNearYou.Coordinate.Longitude;
                          newPOI.Name = placeNearYou.Info;
                          PhoneApplicationService.Current.State["Mode"] = Mode.addFromExisting;
-                         PhoneApplicationService.Current.State["Poi"] = newPOI.Id;
+                         PhoneApplicationService.Current.State["Poi"] = newPOI;
                          (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/Views/POIViews/AddEditPOIView.xaml", UriKind.Relative));
                         break;
                     default:

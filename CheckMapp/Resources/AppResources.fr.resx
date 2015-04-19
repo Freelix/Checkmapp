@@ -191,24 +191,6 @@
   <data name="Home" xml:space="preserve">
     <value>accueil</value>
   </data>
-  <data name="LastActivities" xml:space="preserve">
-    <value>actions récentes</value>
-  </data>
-  <data name="LastMonth" xml:space="preserve">
-    <value>Mois dernier</value>
-  </data>
-  <data name="LastSevenDays" xml:space="preserve">
-    <value>Les 7 derniers jours</value>
-  </data>
-  <data name="LastSixMonths" xml:space="preserve">
-    <value>Six derniers mois</value>
-  </data>
-  <data name="LastTwoWeeks" xml:space="preserve">
-    <value>Deux dernières semaines</value>
-  </data>
-  <data name="LastYear" xml:space="preserve">
-    <value>L'année dernière</value>
-  </data>
   <data name="List" xml:space="preserve">
     <value>liste</value>
   </data>
@@ -327,7 +309,8 @@
     <value>Êtes-vous sûr de vouloir supprimer ces points d'intérêt? (Les notes et les photos avec ces points d'intérêt seront aussi supprimés)</value>
   </data>
   <data name="MyPoi" xml:space="preserve">
-    <value>points d'intérêts</value>
+    <value>points d'intérêt</value>
+    <comment></comment>
   </data>
   <data name="Lang_French" xml:space="preserve">
     <value>Français</value>
@@ -375,7 +358,7 @@
     <value>Aucun POI sélectionné</value>
   </data>
   <data name="ConfirmFinishTrip" xml:space="preserve">
-    <value>Êtes-vous certain de vouloir terminer ce voyage? (Vous ne serez plus en mesure de le modifier par la suite)</value>
+    <value>Êtes-vous certain de vouloir terminer ce voyage?</value>
   </data>
   <data name="TravelFriends" xml:space="preserve">
     <value>Amis de voyage</value>
@@ -399,7 +382,7 @@
     <value>Vous devez spécifier un départ et une destination</value>
   </data>
   <data name="ErrorsDetected" xml:space="preserve">
-    <value>Les erreurs suivantes s'est produite :</value>
+    <value>Les erreurs suivantes se sont produites :</value>
   </data>
   <data name="Errors" xml:space="preserve">
     <value>Erreurs</value>
@@ -545,6 +528,7 @@ Alexandre Roy</value>
   </data>
   <data name="PlaceNearAdd" xml:space="preserve">
     <value>Voulez-vous l'ajouter à vos points d'intérêt?</value>
+    <comment></comment>
   </data>
   <data name="SetEndDate" xml:space="preserve">
     <value>Définir la date de fin</value>

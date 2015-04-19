@@ -25,7 +25,7 @@ namespace CheckMapp.ViewModels.POIViewModels
         /// <summary>
         /// Initializes a new instance of the AddPOIViewModel class.
         /// </summary>
-        public AddEditPOIViewModel(int trip, Mode mode, int poi)
+        public AddEditPOIViewModel(int trip, Mode mode, PointOfInterest poi)
         {
             this.Mode = mode;
 
@@ -37,11 +37,11 @@ namespace CheckMapp.ViewModels.POIViewModels
             }
             else if (this.Mode == Mode.addFromExisting && !Utility.IsTombstoned())
             {
-                PointOfInterest = GetPOIFromBD(poi) ;
+                PointOfInterest = poi;
             }
             else
             {
-                PointOfInterest = GetPOIFromBD(poi);
+                PointOfInterest = poi;
             }
 
             EditableObject = new Caretaker<PointOfInterest>(this.PointOfInterest);
@@ -238,12 +238,6 @@ namespace CheckMapp.ViewModels.POIViewModels
         {
             DataServicePoi dsPOI = new DataServicePoi();
             dsPOI.UpdatePoi(PointOfInterest);
-        }
-
-        private PointOfInterest GetPOIFromBD(int poiId)
-        {
-            DataServicePoi dsPOI = new DataServicePoi();
-            return dsPOI.getPOIById(poiId);
         }
 
         #endregion

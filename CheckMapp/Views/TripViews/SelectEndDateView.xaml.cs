@@ -36,6 +36,7 @@ namespace CheckMapp.Views.TripViews
                     }
                     if (vm.IsFormValid)
                     {
+                        PhoneApplicationService.Current.State["Trip"] = vm.Trip.Id;
                         (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                     }
                 });

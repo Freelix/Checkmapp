@@ -124,8 +124,9 @@ namespace CheckMapp.Views.PhotoViews
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                (this.DataContext as AddEditPhotoViewModel).ImageSource = Utils.Utility.ReadFully(e.ChosenPhoto);
-                hubTile.Source = Utility.ByteArrayToImage((this.DataContext as AddEditPhotoViewModel).ImageSource, false);
+                BitmapImage img = Utility.ByteArrayToImage(Utils.Utility.ReadFully(e.ChosenPhoto), false);
+                hubTile.Source = img;
+                (this.DataContext as AddEditPhotoViewModel).ImageSource = Utils.Utility.ConvertToBytes(img);
             }
 
             PhoneApplicationService.Current.State["Trip"] = (this.DataContext as AddEditPhotoViewModel).Picture.Trip.Id;

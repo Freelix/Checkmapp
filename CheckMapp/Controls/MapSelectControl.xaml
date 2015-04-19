@@ -32,8 +32,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Border x:Name="BorderInternet" Background="White" >
-                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Black" Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Path=LocalizedResources.HoldFinger, Source={StaticResource LocalizedStrings}}"></TextBlock>
+            <Border x:Name="BorderInternet" Background="Gray" >
+                <TextBlock TextWrapping="Wrap"  HorizontalAlignment="Center" Foreground="White" Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Path=LocalizedResources.HoldFinger, Source={StaticResource LocalizedStrings}}"></TextBlock>
             </Border>
             <Controls:Map Grid.Row="1"  x:Name="myMap"   LandmarksEnabled="False" CartographicMode="Road" PedestrianFeaturesEnabled="False" ColorMode="Light" Hold="Map_Hold"  />
         </Grid>

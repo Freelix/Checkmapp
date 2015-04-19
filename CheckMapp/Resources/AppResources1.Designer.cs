@@ -335,7 +335,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to finish this trip? (You will not be able to edit it in the future).
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to finish this trip?.
         /// </summary>
         public static string ConfirmFinishTrip {
             get {
@@ -686,7 +686,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Your internet connection is offline. To access map features you need internet connection or download map with your cellphone..
+        ///   Recherche une chaîne localisée semblable à Your internet connection is offline. To access map features you need internet connection or download maps from your cellphone..
         /// </summary>
         public static string InternetConnectionMap {
             get {
@@ -745,60 +745,6 @@ namespace CheckMapp.Resources {
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à last activites.
-        /// </summary>
-        public static string LastActivities {
-            get {
-                return ResourceManager.GetString("LastActivities", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Last Month.
-        /// </summary>
-        public static string LastMonth {
-            get {
-                return ResourceManager.GetString("LastMonth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Last Seven Days.
-        /// </summary>
-        public static string LastSevenDays {
-            get {
-                return ResourceManager.GetString("LastSevenDays", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Last Six Months.
-        /// </summary>
-        public static string LastSixMonths {
-            get {
-                return ResourceManager.GetString("LastSixMonths", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Last Two Weeks.
-        /// </summary>
-        public static string LastTwoWeeks {
-            get {
-                return ResourceManager.GetString("LastTwoWeeks", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Last Year.
-        /// </summary>
-        public static string LastYear {
-            get {
-                return ResourceManager.GetString("LastYear", resourceCulture);
             }
         }
         
@@ -893,7 +839,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à point of interests.
+        ///   Recherche une chaîne localisée semblable à points of interest.
         /// </summary>
         public static string MyPoi {
             get {
@@ -1046,7 +992,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you want to add it to your point of interest?.
+        ///   Recherche une chaîne localisée semblable à Do you want to add it to your points of interest?.
         /// </summary>
         public static string PlaceNearAdd {
             get {
