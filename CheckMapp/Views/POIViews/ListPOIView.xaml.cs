@@ -167,6 +167,8 @@ namespace CheckMapp.Views.POIViews
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 loadData();
             loadLocation();
+            PhoneApplicationService.Current.State["POISelected"] = null;
+            PhoneApplicationService.Current.State["poiId"] = 0;
         }
 
         private async void loadLocation()

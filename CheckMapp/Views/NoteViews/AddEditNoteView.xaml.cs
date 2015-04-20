@@ -107,7 +107,7 @@ namespace CheckMapp.Views.NoteViews
             if (PhoneApplicationService.Current.State["POISelected"] != null)
             {
                 AddEditNoteViewModel vm = DataContext as AddEditNoteViewModel;
-                vm.POISelected = (PointOfInterest)PhoneApplicationService.Current.State["POISelected"];
+                vm.POISelected = vm.PoiList.First(x=>x.Id == ((PointOfInterest)PhoneApplicationService.Current.State["POISelected"]).Id);
                 POIControl.chkNoPOI.IsChecked = false;
             }
             if (Utility.IsTombstoned())

@@ -63,7 +63,7 @@ namespace CheckMapp.Views.PhotoViews
             ApplicationBar = this.Resources["AppBarList"] as ApplicationBar;
             (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = (PhotoHubLLS.ItemsSource.Count > 0);
 
-            (this.DataContext as ListPhotoViewModel).Loading = false;
+            
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -74,11 +74,11 @@ namespace CheckMapp.Views.PhotoViews
             {
                 int poiId = (int)PhoneApplicationService.Current.State["poiId"];
                 loadData(poiId);
-                PhoneApplicationService.Current.State["poiId"] = 0;
             }
             else
                 loadData();
 
+            (this.DataContext as ListPhotoViewModel).Loading = false;
             PhoneApplicationService.Current.State["Picture"] = 0;
             PhoneApplicationService.Current.State["Trip"] = 0;
         }

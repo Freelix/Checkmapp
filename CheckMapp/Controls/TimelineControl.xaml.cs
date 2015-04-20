@@ -123,8 +123,7 @@ namespace CheckMapp.Controls
 
                 foreach (int month in monthList)
                 {
-                    DateTimeFormatInfo info = new DateTimeFormatInfo();
-                    string monthStr = info.GetAbbreviatedMonthName(month);
+                    string monthStr = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
                     Border borderMonth = CreateBorder(TypeDate.Mois, monthStr.Substring(0, 3));
                     Canvas.SetLeft(borderMonth, (canvas.Width / 2) - borderMonth.Width / 2);
                     //Si c'est le premier mois, alors plus près du border année

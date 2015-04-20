@@ -48,10 +48,12 @@ namespace CheckMapp
                 if ((this.DataContext as MainViewModel).IsTripActif)
                     CurrentView.DataContext = new CurrentViewModel(currentTripId);
 
-                CheckUpdateTile((CurrentView.DataContext as CurrentViewModel).Trip);
             }
             else if((int)PhoneApplicationService.Current.State["Trip"] != 0)
                 currentTripId = (int)PhoneApplicationService.Current.State["Trip"];
+
+            
+            CheckUpdateTile(CurrentView.DataContext as CurrentViewModel);
 
             DashboardView.LoadComponents((this.DataContext as MainViewModel).IsTripActif);
         }
@@ -60,7 +62,7 @@ namespace CheckMapp
         /// Met a jour la tuile sur l'écran d'accueil avec les nouvelles infos du voyage en cours
         /// </summary>
         /// <param name="current"></param>
-        public void CheckUpdateTile(Trip current)
+        public void CheckUpdateTile(CurrentViewModel current)
         {
             IconicTileData newTileData = new IconicTileData();
             newTileData.Title = "Checkmapp";
@@ -70,9 +72,10 @@ namespace CheckMapp
             newTileData.SmallIconImage = new Uri(@"Assets/Logo.png", UriKind.Relative);
             if (current != null)
             {
-                newTileData.WideContent1 = current.Name;
+                Trip currentTrip = current.Trip;
+                newTileData.WideContent1 = currentTrip.Name;
                 int day = 0;
-                TimeSpan elapsed = DateTime.Now.Subtract(current.BeginDate);
+                TimeSpan elapsed = DateTime.Now.Subtract(currentTrip.BeginDate);
                 if (elapsed.TotalDays > 0)
                     day = (int)elapsed.TotalDays;
 

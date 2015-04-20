@@ -21,7 +21,6 @@
 
     <phone:PhoneApplicationPage.Resources>
 
-
         <DataTemplate x:Key="ItemTemplate">
             <StackPanel>
                 <toolkit:ContextMenuService.ContextMenu>

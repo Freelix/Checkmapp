@@ -59,6 +59,12 @@ namespace CheckMapp.Views.PhotoViews
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (PhoneApplicationService.Current.State["POISelected"] != null)
+            {
+                AddEditPhotoViewModel vm = DataContext as AddEditPhotoViewModel;
+                vm.POISelected = vm.PoiList.First(x => x.Id == ((PointOfInterest)PhoneApplicationService.Current.State["POISelected"]).Id);
+                POIControl.chkNoPOI.IsChecked = false;
+            }
             if (Utility.IsTombstoned())
             {
                 PhoneApplicationService.Current.State["TombstoneMode"] = true;
