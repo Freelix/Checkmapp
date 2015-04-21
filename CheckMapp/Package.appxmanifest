@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="9b60b977-144f-49a9-8802-89836fc6e561" Publisher="CN=John-William" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="1ec8df13-6ca9-40e9-a465-7931ec2a4ae6" PhonePublisherId="5d30f8e1-dc82-40b0-b2c4-027600d8f07e" />
+  <Identity Name="8867NamedJohnny.CheckmappDEBUG" Publisher="CN=John-William" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="f4c51a4a-35ef-4e72-a5c5-f9c8d0a4ebbd" PhonePublisherId="9FC9E25B-B48D-47A6-998F-80247A87760A" />
   <Properties>
-    <DisplayName>CheckMapp</DisplayName>
+    <DisplayName>Checkmapp</DisplayName>
     <PublisherDisplayName>John-William</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

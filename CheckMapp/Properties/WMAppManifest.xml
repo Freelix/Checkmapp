@@ -5,7 +5,7 @@
     <Language code="fr" />
     <Language code="en-US" />
   </Languages>
-  <App xmlns="" ProductID="{1ec8df13-6ca9-40e9-a465-7931ec2a4ae6}" Title="CheckMapp" RuntimeType="Silverlight" Version="0.1.0.0" Genre="apps.normal" Author="NamedJohnny" Description="Sample description" Publisher="CheckMapp" PublisherID="{5d30f8e1-dc82-40b0-b2c4-027600d8f07e}">
+  <App xmlns="" ProductID="{f4c51a4a-35ef-4e72-a5c5-f9c8d0a4ebbd}" Title="Checkmapp" RuntimeType="Silverlight" Version="0.1.0.0" Genre="apps.normal" Author="NamedJohnny" Description="Checkmapp is an application that let you manage all your trips." Publisher="Checkmapp" PublisherID="{9FC9E25B-B48D-47A6-998F-80247A87760A}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -34,9 +34,12 @@
           <BackgroundColor>
           </BackgroundColor>
           <HasLarge>True</HasLarge>
-          <LargeContent1></LargeContent1>
-          <LargeContent2></LargeContent2>
-          <LargeContent3></LargeContent3>
+          <LargeContent1>
+          </LargeContent1>
+          <LargeContent2>
+          </LargeContent2>
+          <LargeContent3>
+          </LargeContent3>
           <DeviceLockImageURI IsRelative="true" IsResource="false">
           </DeviceLockImageURI>
         </TemplateIconic>

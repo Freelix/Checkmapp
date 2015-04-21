@@ -67,7 +67,6 @@
                             <TextBlock Text="{Binding AppVersion}"  Style="{StaticResource PhoneTextSmallStyle}"/>
                             <Button Margin="0,15,0,0" Click="BtnRateApp_Click" Content="{Binding Path=LocalizedResources.RateApp, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
                             <Button  Click="BtnWebsite_Click" Content="{Binding Path=LocalizedResources.VisitWebsite, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
-                            <Button  Name="btnBuy" Click="btnBuy_Click" Content="{Binding Path=LocalizedResources.BuyApp, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
