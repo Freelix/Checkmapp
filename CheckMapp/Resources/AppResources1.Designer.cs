@@ -70,7 +70,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Checkmapp is an application to keep an history of all your trips around the world. So you can keep the best memories and share them with our friends.
+        ///   Recherche une chaîne localisée semblable à Checkmapp is an application that let you manage all your trips around the world. You can save notes, pictures, and points of interest. That way, you can keep the best memories of your travels and share them with your friends.
         ///
         ///John-William Forcier
         ///Félix Baril

@@ -396,11 +396,12 @@
     <value>Mises à jour disponibles</value>
   </data>
   <data name="AboutUs" xml:space="preserve">
-    <value>Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. On peut donc garder de meilleurs souvenirs et les partager à nos proches.
+    <value>Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. Vous pouvez créer des notes, des photos et des points d'intérêt. De cette façon, vous pouvez garder de meilleurs souvenirs de vos aventures et les partager à vos proches.
 
 John-William Forcier
 Félix Baril
 Alexandre Roy</value>
+    <comment></comment>
   </data>
   <data name="AutoSync" xml:space="preserve">
     <value>Synchronisation automatique de données</value>
@@ -575,7 +576,6 @@ Alexandre Roy</value>
   </data>
   <data name="BuyApp" xml:space="preserve">
     <value>N'oubliez pas d'acheter la version complète! (Jours restants : {0})</value>
-    <comment></comment>
   </data>
   <data name="ContinueTrial" xml:space="preserve">
     <value>Continuer la version d'essai</value>

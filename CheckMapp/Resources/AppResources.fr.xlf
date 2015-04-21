@@ -462,7 +462,7 @@
         </trans-unit>
         <trans-unit id="Resx/BuyApp" translate="yes" xml:space="preserve">
           <source>Do not forget to buy the full version! (Days remaining : {0})</source>
-          <target state="needs-review-translation">N'oubliez pas d'acheter la version complète! (Jours restants : {0})</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
+          <target state="signed-off">N'oubliez pas d'acheter la version complète! (Jours restants : {0})</target></trans-unit>
         <trans-unit id="Resx/ContinueTrial" translate="yes" xml:space="preserve">
           <source>Continue Trial</source>
           <target state="translated">Continuer la version d'essai</target>
@@ -555,16 +555,16 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Mises à jour disponibles</target>
         </trans-unit>
         <trans-unit id="Resx/AboutUs" translate="yes" xml:space="preserve">
-          <source>Checkmapp is an application to keep an history of all your trips around the world. So you can keep the best memories and share them with our friends.
+          <source>Checkmapp is an application that let you manage all your trips around the world. You can save notes, pictures, and points of interest. That way, you can keep the best memories of your travels and share them with your friends.
 
 John-William Forcier
 Félix Baril
 Alexandre Roy</source>
-          <target state="needs-review-translation">Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. On peut donc garder de meilleurs souvenirs et les partager à nos proches.
+          <target state="needs-review-translation">Checkmapp est une application permettant de garder l'historique de ces voyages à travers le monde. Vous pouvez créer des notes, des photos et des points d'intérêt. De cette façon, vous pouvez garder de meilleurs souvenirs de vos aventures et les partager à vos proches.
 
 John-William Forcier
 Félix Baril
-Alexandre Roy</target>
+Alexandre Roy</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
           </trans-unit>
         <trans-unit id="Resx/AutoSync" translate="yes" xml:space="preserve">
           <source>Auto sync the data</source>
