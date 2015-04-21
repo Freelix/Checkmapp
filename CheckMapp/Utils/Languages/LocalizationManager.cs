@@ -66,7 +66,8 @@ namespace CheckMapp.Utils.Languages
                 // Can not switch to not supported language
                 if (!GetAllLanguagesCode().Contains(lang)) return;
 
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(GetAllLanguagesCode().First(x=>x.Contains(lang)));
+                Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
                 LocalizedStrings.LocalizedStringsResource.UpdateLanguage();
 
                 // saving new language

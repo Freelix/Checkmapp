@@ -555,7 +555,7 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Mises à jour disponibles</target>
         </trans-unit>
         <trans-unit id="Resx/AboutUs" translate="yes" xml:space="preserve">
-          <source>Checkmapp is an application that let you manage all your trips around the world. You can save notes, pictures, and points of interest. That way, you can keep the best memories of your travels and share them with your friends.
+          <source>Checkmapp is an application that let you manage all your trips around the world. You can save notes, pictures and points of interest. That way, you can keep the best memories of your travels and share them with your friends.
 
 John-William Forcier
 Félix Baril

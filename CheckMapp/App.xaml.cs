@@ -51,10 +51,12 @@ namespace CheckMapp
 
             // Phone-specific initialization
             InitializePhoneApplication();
-
-            // Language display initialization
+            
+            // Set the correct language when application is launched
             InitializeLanguage();
 
+
+            
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
             {
@@ -126,9 +128,6 @@ namespace CheckMapp
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            // Set the correct language when application is launched
-            LocalizationManager.ChangeAppLanguage(LocalizationManager.GetCurrentAppLang());
-
             this.CheckTrialState();
         }
 
@@ -286,6 +285,13 @@ namespace CheckMapp
             if (phoneApplicationInitialized)
                 return;
 
+            string lang = LocalizationManager.GetCurrentAppLang();
+            if (LocalizationManager.GetCurrentAppLang() == "en")
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            else if (LocalizationManager.GetCurrentAppLang() == "fr")
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
             RootFrame = new PhoneApplicationFrame();
@@ -380,7 +386,7 @@ namespace CheckMapp
                 FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
                 RootFrame.FlowDirection = flow;
 
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
+                //Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             }
             catch
             {
