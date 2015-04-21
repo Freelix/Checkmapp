@@ -91,8 +91,10 @@ namespace CheckMapp.Views.SettingsViews
         private void BtnRateApp_Click(object sender, EventArgs e)
         {
             this.Focus();
-            MarketplaceReviewTask marketplaceReviewTask = new MarketplaceReviewTask();
-            marketplaceReviewTask.Show();
+            MarketplaceDetailTask marketplaceDetailTask = new MarketplaceDetailTask();
+            marketplaceDetailTask.ContentType = MarketplaceContentType.Applications;
+            marketplaceDetailTask.ContentIdentifier = "f4c51a4a-35ef-4e72-a5c5-f9c8d0a4ebbd";
+            marketplaceDetailTask.Show();
         }
 
         private void BtnWebsite_Click(object sender, EventArgs e)

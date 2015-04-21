@@ -18,6 +18,8 @@ using CheckMapp.Model.DataService;
 using System.IO.IsolatedStorage;
 using System.IO;
 using CheckMapp.Utils.Languages;
+using System.Windows.Controls.Primitives;
+using CheckMapp.Controls;
 
 namespace CheckMapp
 {
@@ -34,6 +36,8 @@ namespace CheckMapp
 
         public static DatabaseDataContext db = new DatabaseDataContext(App.DBConnectionString);
 
+        private static TimeSpan TrialPeriodLength = TimeSpan.FromDays(30);
+        private const string FirstLauchDateKey = "FirstLaunchDate";
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -100,7 +104,7 @@ namespace CheckMapp
                 }
             }
 
-          
+
             //Création des  clés
             DataServiceTrip dsTrip = new DataServiceTrip();
             Trip currentTrip = dsTrip.getCurrentTrip();
@@ -124,12 +128,15 @@ namespace CheckMapp
         {
             // Set the correct language when application is launched
             LocalizationManager.ChangeAppLanguage(LocalizationManager.GetCurrentAppLang());
+
+            this.CheckTrialState();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            this.CheckTrialState();
             PhoneApplicationService.Current.State["TombstoneMode"] = true;
         }
 
@@ -146,6 +153,106 @@ namespace CheckMapp
         {
             ViewModelLocator.Cleanup();
 
+        }
+
+        // Use static property for caching and easy access to the trial state
+        public static bool IsTrial
+        {
+            get;
+            // setting the IsTrial property from outside is not allowed
+            private set;
+        }
+
+        public static bool IsTrialOver
+        {
+            get;
+            private set;
+        }
+
+        public static int DaysRemaining
+        {
+            get;
+            private set;
+        }
+
+        private void DetermineIsTrial()
+        {
+#if TRIAL
+    // return true if debugging with trial enabled (DebugTrial configuration is active)
+    IsTrial = true;
+#else
+            var license = new Microsoft.Phone.Marketplace.LicenseInformation();
+            IsTrial = license.IsTrial();
+#endif
+        }
+
+        private void CheckTrialState()
+        {
+            // refresh the value of the IsTrial property 
+            this.DetermineIsTrial();
+
+            if (!IsTrial)
+            {
+                // do not execute further if app is full version
+                return;
+            }
+
+            this.CheckTrialPeriodExpired();
+        }
+
+        private void CheckTrialPeriodExpired()
+        {
+            // when the application is activated
+            // show message to buy the full version if trial period has expired
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+            DateTime firstLauchDate;
+            if (settings.TryGetValue<DateTime>(FirstLauchDateKey, out firstLauchDate))
+            {
+                TimeSpan timeSinceFirstLauch = DateTime.UtcNow.Subtract(firstLauchDate);
+                if (timeSinceFirstLauch > TrialPeriodLength)
+                    IsTrialOver = true;
+                else
+                {
+                    TimeSpan elapsed = TrialPeriodLength.Subtract(timeSinceFirstLauch);
+                    if(elapsed!=null)
+                        DaysRemaining = (int)elapsed.TotalDays + 1;
+                    IsTrialOver = false;
+                }
+
+                // subscribe to the Navigated event in order to show the popup
+                // over the page after it has loaded
+                RootFrame.Navigated += new NavigatedEventHandler(RootFrame_Navigated);
+            }
+            else
+            {
+                // if a value cannot be found for the first launch date
+                // save the current date and time 
+                settings.Add(FirstLauchDateKey, DateTime.UtcNow);
+                settings.Save();
+            }
+        }
+
+        void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            // remove the Navigated event handler as it is no longer necessary
+            RootFrame.Navigated -= new NavigatedEventHandler(RootFrame_Navigated);
+
+            Popup popup = new Popup();
+            BuyNowUserControl content = new BuyNowUserControl(popup);
+            content.DaysRemaining = DaysRemaining;
+            content.IsTrialFinish = IsTrialOver;
+            // set the width of the popup to the width of the screen
+            content.Width = System.Windows.Application.Current.Host.Content.ActualWidth;
+            popup.Child = content;
+            popup.VerticalOffset = 300;
+            popup.IsOpen = true;
+            popup.Closed += popup_Closed;
+        }
+
+        void popup_Closed(object sender, EventArgs e)
+        {
+            if (IsTrialOver)
+                Application.Current.Terminate();
         }
 
         // Code to execute if a navigation fails

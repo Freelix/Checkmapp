@@ -310,7 +310,6 @@
   </data>
   <data name="MyPoi" xml:space="preserve">
     <value>points d'intérêt</value>
-    <comment></comment>
   </data>
   <data name="Lang_French" xml:space="preserve">
     <value>Français</value>
@@ -528,7 +527,6 @@ Alexandre Roy</value>
   </data>
   <data name="PlaceNearAdd" xml:space="preserve">
     <value>Voulez-vous l'ajouter à vos points d'intérêt?</value>
-    <comment></comment>
   </data>
   <data name="SetEndDate" xml:space="preserve">
     <value>Définir la date de fin</value>
@@ -576,6 +574,16 @@ Alexandre Roy</value>
     <value>La date de fin doit être inférieure ou égale à la date actuelle.</value>
   </data>
   <data name="BuyApp" xml:space="preserve">
-    <value>Acheter Checkmapp sans publicités</value>
+    <value>N'oubliez pas d'acheter la version complète! (Jours restants : {0})</value>
+    <comment></comment>
+  </data>
+  <data name="ContinueTrial" xml:space="preserve">
+    <value>Continuer la version d'essai</value>
+  </data>
+  <data name="BuyNow" xml:space="preserve">
+    <value>Acheter maintenant</value>
+  </data>
+  <data name="TrialOver" xml:space="preserve">
+    <value>Votre version d'essai est terminé.</value>
   </data>
 </root>

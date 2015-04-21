@@ -259,8 +259,7 @@
           </trans-unit>
         <trans-unit id="Resx/MyPoi" translate="yes" xml:space="preserve">
           <source>points of interest</source>
-          <target state="needs-review-translation">points d'intérêt</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-          </trans-unit>
+          <target state="signed-off">points d'intérêt</target></trans-unit>
         <trans-unit id="Resx/Lang_French" translate="yes" xml:space="preserve">
           <source>French</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Français</target>
@@ -417,8 +416,7 @@
           </trans-unit>
         <trans-unit id="Resx/PlaceNearAdd" translate="yes" xml:space="preserve">
           <source>Do you want to add it to your points of interest?</source>
-          <target state="needs-review-translation">Voulez-vous l'ajouter à vos points d'intérêt?</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="signed-off">Voulez-vous l'ajouter à vos points d'intérêt?</target></trans-unit>
         <trans-unit id="Resx/PlaceNearURI" translate="yes" xml:space="preserve">
           <source>http://api.geonames.org/findNearbyWikipediaJSON?</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">http://API.geonames.org/findNearbyWikipediaJSON?</target>
@@ -463,8 +461,19 @@
           <target state="translated">La date de fin doit être inférieure ou égale à la date actuelle.</target>
         </trans-unit>
         <trans-unit id="Resx/BuyApp" translate="yes" xml:space="preserve">
-          <source>Buy Checkmapp without Ads</source>
-          <target state="translated">Acheter Checkmapp sans publicités</target>
+          <source>Do not forget to buy the full version! (Days remaining : {0})</source>
+          <target state="needs-review-translation">N'oubliez pas d'acheter la version complète! (Jours restants : {0})</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
+        <trans-unit id="Resx/ContinueTrial" translate="yes" xml:space="preserve">
+          <source>Continue Trial</source>
+          <target state="translated">Continuer la version d'essai</target>
+        </trans-unit>
+        <trans-unit id="Resx/TrialOver" translate="yes" xml:space="preserve">
+          <source>Your trial is over.</source>
+          <target state="translated">Votre version d'essai est terminé.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BuyNow" translate="yes" xml:space="preserve">
+          <source>Buy Now</source>
+          <target state="translated">Acheter maintenant</target>
         </trans-unit>
         <trans-unit id="Resx/LangRestartApp" translate="yes" xml:space="preserve">
           <source>You will have to restart the application to change the language.</source>

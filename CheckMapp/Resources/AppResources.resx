@@ -574,6 +574,15 @@ Alexandre Roy</value>
     <value>The end date must be lower or equal than the current date.</value>
   </data>
   <data name="BuyApp" xml:space="preserve">
-    <value>Buy Checkmapp without Ads</value>
+    <value>Do not forget to buy the full version! (Days remaining : {0})</value>
+  </data>
+  <data name="BuyNow" xml:space="preserve">
+    <value>Buy Now</value>
+  </data>
+  <data name="ContinueTrial" xml:space="preserve">
+    <value>Continue Trial</value>
+  </data>
+  <data name="TrialOver" xml:space="preserve">
+    <value>Your trial is over.</value>
   </data>
 </root>

@@ -200,11 +200,20 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Buy Checkmapp without Ads.
+        ///   Recherche une chaîne localisée semblable à Do not forget to buy the full version! (Days remaining : {0}).
         /// </summary>
         public static string BuyApp {
             get {
                 return ResourceManager.GetString("BuyApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Buy Now.
+        /// </summary>
+        public static string BuyNow {
+            get {
+                return ResourceManager.GetString("BuyNow", resourceCulture);
             }
         }
         
@@ -349,6 +358,15 @@ namespace CheckMapp.Resources {
         public static string ConfirmNewTrip {
             get {
                 return ResourceManager.GetString("ConfirmNewTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Continue Trial.
+        /// </summary>
+        public static string ContinueTrial {
+            get {
+                return ResourceManager.GetString("ContinueTrial", resourceCulture);
             }
         }
         
@@ -1303,6 +1321,15 @@ namespace CheckMapp.Resources {
         public static string TravelFriends {
             get {
                 return ResourceManager.GetString("TravelFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your trial is over..
+        /// </summary>
+        public static string TrialOver {
+            get {
+                return ResourceManager.GetString("TrialOver", resourceCulture);
             }
         }
         
