@@ -467,7 +467,8 @@ Alexandre Roy</value>
     <value>Exporter les données</value>
   </data>
   <data name="DataManagement" xml:space="preserve">
-    <value>Gestion des données</value>
+    <value>Gestion des données (sauvegardes)</value>
+    <comment></comment>
   </data>
   <data name="ConfirmationImport" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir importer ces données? (Cela va remplacer ceux actuels)</value>

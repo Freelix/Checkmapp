@@ -416,7 +416,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Data Management.
+        ///   Recherche une chaîne localisée semblable à Data Management (backups).
         /// </summary>
         public static string DataManagement {
             get {

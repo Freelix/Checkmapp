@@ -466,7 +466,7 @@ Alexandre Roy</value>
     <value>Are you sure you want to import these data? (This will replace your current data)</value>
   </data>
   <data name="DataManagement" xml:space="preserve">
-    <value>Data Management</value>
+    <value>Data Management (backups)</value>
   </data>
   <data name="Export" xml:space="preserve">
     <value>Export data</value>

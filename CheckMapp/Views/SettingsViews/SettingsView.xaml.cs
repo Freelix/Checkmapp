@@ -26,6 +26,15 @@ namespace CheckMapp.Views.SettingsViews
             InitializeComponent();
             var vm = DataContext as SettingsViewModel;
             PivotSettings.Header = AppResources.Settings.ToLower();
+
+            //Seulement avec la version complète
+            if (App.IsTrial)
+            {
+                btnImport.IsEnabled = false;
+                btnExport.IsEnabled = false;
+                btnImport.Visibility = System.Windows.Visibility.Visible;
+                btnExport.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         #region Buttons
