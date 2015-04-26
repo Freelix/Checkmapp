@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="fr" />
   </Languages>
-  <App xmlns="" ProductID="{f4c51a4a-35ef-4e72-a5c5-f9c8d0a4ebbd}" Title="Checkmapp" RuntimeType="Silverlight" Version="1.0.2.0" Genre="apps.normal" Author="NamedJohnny" Description="Checkmapp is an application that let you manage all your trips." Publisher="Checkmapp" PublisherID="{9FC9E25B-B48D-47A6-998F-80247A87760A}">
+  <App xmlns="" ProductID="{f4c51a4a-35ef-4e72-a5c5-f9c8d0a4ebbd}" Title="Checkmapp" RuntimeType="Silverlight" Version="1.0.2.1" Genre="apps.normal" Author="NamedJohnny" Description="Checkmapp is an application that let you manage all your trips." Publisher="Checkmapp" PublisherID="{9FC9E25B-B48D-47A6-998F-80247A87760A}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
