@@ -92,7 +92,7 @@ namespace CheckMapp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à New note.
+        ///   Recherche une chaîne localisée semblable à Add note.
         /// </summary>
         public static string AddNote {
             get {

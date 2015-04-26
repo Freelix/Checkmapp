@@ -144,10 +144,11 @@
     <value>Date du voyage</value>
   </data>
   <data name="AddTripArrival" xml:space="preserve">
-    <value>Lieu d'arrivé</value>
+    <value>Lieu d'arrivée</value>
   </data>
   <data name="AddNote" xml:space="preserve">
-    <value>Nouvelle note</value>
+    <value>ajouter une note</value>
+    <comment></comment>
   </data>
   <data name="AllTime" xml:space="preserve">
     <value>Tous les temps</value>

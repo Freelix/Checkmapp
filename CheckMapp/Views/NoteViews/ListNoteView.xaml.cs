@@ -57,7 +57,7 @@ namespace CheckMapp.Views.NoteViews
             if (appbar.Buttons != null)
             {
                 (appbar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Select;
-                (appbar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddPicture;
+                (appbar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.AddNote;
             }
 
             var appbarSelect = this.Resources["AppBarListSelect"] as ApplicationBar;

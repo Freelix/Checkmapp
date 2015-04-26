@@ -32,11 +32,11 @@
           </trans-unit>
         <trans-unit id="Resx/AddTripArrival" translate="yes" xml:space="preserve">
           <source>Trip Arrival</source>
-          <target state="translated">Lieu d'arrivé</target>
+          <target state="translated">Lieu d'arrivée</target>
         </trans-unit>
         <trans-unit id="Resx/AddNote" translate="yes" xml:space="preserve">
-          <source>New note</source>
-          <target state="translated">Nouvelle note</target></trans-unit>
+          <source>Add note</source>
+          <target state="needs-review-translation">ajouter une note</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/AllTime" translate="yes" xml:space="preserve">
           <source>All Time</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Tous les temps</target>
@@ -368,8 +368,9 @@
         </trans-unit>
         <trans-unit id="Resx/DataManagement" translate="yes" xml:space="preserve">
           <source>Data Management (backups)</source>
-          <target state="needs-review-translation">Gestion des données (sauvegardes)</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">Gestion des données (sauvegardes)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/ConfirmationImport" translate="yes" xml:space="preserve">
           <source>Are you sure you want to import these data? (This will replace your current data)</source>
           <target state="translated">Êtes-vous sûr de vouloir importer ces données? (Cela va remplacer ceux actuels)</target>
@@ -565,7 +566,8 @@ Alexandre Roy</source>
 John-William Forcier
 Félix Baril
 Alexandre Roy</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/AutoSync" translate="yes" xml:space="preserve">
           <source>Auto sync the data</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Synchronisation automatique de données</target>
