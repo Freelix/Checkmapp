@@ -56,7 +56,6 @@ namespace CheckMapp
             InitializeLanguage();
 
 
-            
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
             {
@@ -122,6 +121,7 @@ namespace CheckMapp
             PhoneApplicationService.Current.State["poiId"] = 0;
             PhoneApplicationService.Current.State["TombstoneMode"] = false;
             PhoneApplicationService.Current.State["POISelected"] = null;
+
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -135,7 +135,7 @@ namespace CheckMapp
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            this.CheckTrialState();
+           
             PhoneApplicationService.Current.State["TombstoneMode"] = true;
         }
 
