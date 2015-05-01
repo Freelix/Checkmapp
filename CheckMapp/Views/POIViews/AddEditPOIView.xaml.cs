@@ -27,8 +27,7 @@ namespace CheckMapp.Views.POIViews
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.NavigationMode == NavigationMode.Back && 
-                !(bool)PhoneApplicationService.Current.State["TombstoneMode"])
+            if (e.NavigationMode == NavigationMode.Back)
             {
                 //select type
                 POIType type = (POIType)PhoneApplicationService.Current.State["POIType"];

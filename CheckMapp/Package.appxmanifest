@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="8867NamedJohnny.Checkmapp" Publisher="CN=9FC9E25B-B48D-47A6-998F-80247A87760A" Version="1.0.2.2" />
+  <Identity Name="8867NamedJohnny.Checkmapp" Publisher="CN=9FC9E25B-B48D-47A6-998F-80247A87760A" Version="1.0.2.3" />
   <mp:PhoneIdentity PhoneProductId="f4c51a4a-35ef-4e72-a5c5-f9c8d0a4ebbd" PhonePublisherId="9FC9E25B-B48D-47A6-998F-80247A87760A" />
   <Properties>
     <DisplayName>Checkmapp</DisplayName>
