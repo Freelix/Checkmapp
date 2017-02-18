@@ -4,10 +4,7 @@ A windows phone application that allows people to manage their pictures, locatio
 ##Description
 Checkmapp is an application that let you manage all your trips around the world. You can save notes, pictures and points of interest. That way, you can keep the best memories of your travels and share them with your friends.
 
-You can also backup your travels on OneDrive in case you decide to change your phone and then import it in Checkmapp again. 
-
-## Website
-[http://checkmapp.com/](http://checkmapp.com/)
+You can also backup your travels on OneDrive in case you decide to change your phone and then import it in Checkmapp again.
 
 # Why Windows Phone??
 I think there is a lack of application on the Windows Store and I want to provide some effort to help the Windows Phone Community.
